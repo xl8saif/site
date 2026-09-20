@@ -79,6 +79,15 @@ const linkedinPosts = [
   }
 ];
 
+const facebookPosts = [
+  {
+    date: "Latest update",
+    title: "Saif Ullah — Facebook Update",
+    excerpt: "Recent professional and language-related updates, including translation, localization, language technology and cultural preservation work.",
+    link: "https://www.facebook.com/share/p/1DZCDTed6U/"
+  }
+];
+
 const clients = [
   ["LEVEL INFINITE", "Game Localization"],
   ["iFLYTEK", "AI & Language Technology"],
@@ -221,6 +230,28 @@ function App() {
               {linkedinPosts.map((post) => (
                 <article className="linkedin-post-card" key={post.title}>
                   <div className="linkedin-post-top"><img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" /><span>{post.date}</span></div>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <a href={post.link} target="_blank" rel="noreferrer">Open post ↗</a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="facebook-posts-section" aria-labelledby="facebook-posts-heading">
+          <div className="container">
+            <div className="facebook-posts-heading">
+              <div>
+                <p className="section-label">LATEST FACEBOOK ACTIVITY</p>
+                <h2 id="facebook-posts-heading">Recent posts & professional updates.</h2>
+              </div>
+              <a className="facebook-all-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View Facebook ↗</a>
+            </div>
+            <div className="facebook-posts-grid">
+              {facebookPosts.map((post) => (
+                <article className="facebook-post-card" key={post.title}>
+                  <div className="facebook-post-top"><img src="/site/icons/facebook.svg" alt="" aria-hidden="true" /><span>{post.date}</span></div>
                   <h3>{post.title}</h3>
                   <p>{post.excerpt}</p>
                   <a href={post.link} target="_blank" rel="noreferrer">Open post ↗</a>
