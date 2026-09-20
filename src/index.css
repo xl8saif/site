@@ -301,11 +301,18 @@
 .social-activity-card{
   min-width:0;
   padding:20px;
-  border:1px solid rgba(20,28,40,.08);
+  border:1px solid rgba(255,255,255,.75);
   border-radius:22px;
-  background:rgba(255,255,255,.62);
-  box-shadow:0 14px 40px rgba(30,40,60,.05);
+  box-shadow:0 14px 40px rgba(30,40,60,.08),inset 0 1px rgba(255,255,255,.7);
   backdrop-filter:blur(14px);
+}
+.social-activity-card.linkedin-activity-brand{
+  background:linear-gradient(145deg,rgba(0,119,181,.14),rgba(207,237,251,.58));
+  border-color:rgba(0,119,181,.24);
+}
+.social-activity-card.facebook-activity-brand{
+  background:linear-gradient(145deg,rgba(24,119,242,.14),rgba(226,239,255,.62));
+  border-color:rgba(24,119,242,.24);
 }
 .activity-card-heading{
   display:flex;
@@ -430,6 +437,12 @@
   .social-activity-card{
     padding:16px;
     border-radius:18px;
+  }
+  .social-activity-card.linkedin-activity-brand{
+    background:linear-gradient(145deg,rgba(0,119,181,.12),rgba(207,237,251,.5));
+  }
+  .social-activity-card.facebook-activity-brand{
+    background:linear-gradient(145deg,rgba(24,119,242,.12),rgba(226,239,255,.54));
   }
   .activity-card-heading{padding-bottom:12px}
   .activity-post{padding-top:15px}
