@@ -277,12 +277,15 @@ function App() {
                     </div>
                   </a>
                   <div className="facebook-card-stats">
-                    <span>Like</span>
-                    <span>Comment</span>
-                    <span>Share</span>
+                    <div className="facebook-card-reactions" aria-label="Facebook reactions">
+                      <span className="facebook-reaction-like" aria-hidden="true">♥</span>
+                      <span className="facebook-reaction-heart" aria-hidden="true">♥</span>
+                      <span>124</span>
+                    </div>
+                    <span>18 comments · 4 shares</span>
                   </div>
                   <div className="facebook-card-actions">
-                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span> Like</a>
+                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
                     <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
                     <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
                   </div>
