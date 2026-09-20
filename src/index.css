@@ -221,3 +221,45 @@
 .facebook-reaction-like,.facebook-reaction-heart{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:9px;line-height:1;color:#fff}
 .facebook-reaction-like{background:#2e89ff}
 .facebook-reaction-heart{background:#f33e58;margin-left:-5px}
+
+/* LinkedIn + Facebook side-by-side activity cards */
+.social-activity-section{padding:42px 0 46px;background:rgba(255,255,255,.24);border-top:1px solid rgba(20,28,40,.06);border-bottom:1px solid rgba(20,28,40,.06)}
+.social-activity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.linkedin-activity-card,.facebook-activity-card{min-width:0}
+.linkedin-activity-card{padding:0}
+.linkedin-activity-card .linkedin-posts-heading,.facebook-activity-card .facebook-posts-heading{margin-bottom:18px}
+.linkedin-activity-card .linkedin-posts-heading h2,.facebook-activity-card .facebook-posts-heading h2{font-size:clamp(24px,2.5vw,32px)}
+.linkedin-activity-card .linkedin-engagement,.facebook-activity-card .facebook-engagement{margin-bottom:16px}
+.linkedin-activity-card .linkedin-posts-grid,.facebook-activity-card .facebook-posts-grid{grid-template-columns:1fr}
+.linkedin-facebook-style-card,.facebook-activity-card .facebook-post-card{max-width:none}
+.linkedin-facebook-style-card{padding:18px 18px 12px;border-radius:18px;background:rgba(255,255,255,.82);box-shadow:0 16px 42px rgba(30,40,60,.07)}
+.social-card-header{display:flex;align-items:center;gap:11px;min-height:44px}
+.social-card-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid rgba(20,28,40,.08)}
+.social-card-identity{display:flex;flex-direction:column;gap:3px;min-width:0}
+.social-card-identity strong{font-size:14px;line-height:1.2}
+.social-card-identity span{font-size:10px;color:#687080}
+.social-card-menu{margin-left:auto;color:#7b8491;font-size:14px;letter-spacing:2px}
+.social-card-copy{margin:15px 2px 13px;color:#313b49;font-size:13px;line-height:1.65}
+.social-card-preview{display:grid;grid-template-columns:120px minmax(0,1fr);min-height:100px;border:1px solid rgba(20,28,40,.09);border-radius:12px;overflow:hidden;background:rgba(247,248,250,.92);text-decoration:none}
+.social-card-preview-image{position:relative;min-height:100px;overflow:hidden}
+.social-card-preview-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.65) contrast(1.02)}
+.social-card-preview-image span{position:absolute;left:8px;bottom:7px;padding:4px 5px;border-radius:5px;background:rgba(27,38,53,.78);color:#fff;font-family:var(--mono);font-size:7px;letter-spacing:.08em}
+.social-card-preview-body{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:11px 12px}
+.social-card-preview-body small{font-size:8px;color:#8a94a3;text-transform:uppercase;letter-spacing:.08em}
+.social-card-preview-body strong{font-size:12px;line-height:1.3;color:var(--ink)}
+.social-card-preview-body span{font-size:9px;color:#687080}
+.social-card-stats{display:flex;justify-content:space-between;padding:9px 2px 6px;color:#8a94a3;font-size:9px}
+.social-card-actions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(20,28,40,.07)}
+.social-card-actions a{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 5px;color:#596171;font-size:10px;font-weight:700;text-decoration:none;border-radius:8px;transition:.2s}
+.social-card-actions a:hover,.social-card-actions a:focus-visible{background:rgba(43,108,176,.06);color:var(--blue);outline:none}
+.social-card-actions span{font-size:12px}
+.facebook-activity-card .facebook-post-card{padding:18px 18px 12px}
+@media(max-width:900px){
+  .social-activity-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .social-activity-section{padding:38px 0 40px}
+  .linkedin-activity-card .linkedin-posts-heading,.facebook-activity-card .facebook-posts-heading{gap:14px}
+  .social-card-preview{grid-template-columns:105px minmax(0,1fr)}
+  .linkedin-facebook-style-card,.facebook-activity-card .facebook-post-card{padding:15px 14px 10px}
+}
