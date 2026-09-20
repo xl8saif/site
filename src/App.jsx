@@ -212,86 +212,84 @@ function App() {
           </div>
         </section>
 
-        <section className="linkedin-posts-section" aria-labelledby="linkedin-posts-heading">
-          <div className="container">
-            <div className="linkedin-posts-heading">
-              <div>
-                <p className="section-label">LATEST LINKEDIN ACTIVITY</p>
-                <h2 id="linkedin-posts-heading">Recent posts & professional updates.</h2>
+        <section className="social-activity-section" aria-label="Latest LinkedIn and Facebook activity">
+          <div className="container social-activity-grid">
+            <article className="linkedin-activity-card">
+              <div className="linkedin-posts-heading">
+                <div>
+                  <p className="section-label">LATEST LINKEDIN ACTIVITY</p>
+                  <h2>Recent posts & professional updates.</h2>
+                </div>
+                <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
               </div>
-              <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
-            </div>
-            <div className="linkedin-engagement">
-              <a className="engagement-button" href="https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on LinkedIn</a>
-              <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow on LinkedIn</a>
-              <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Saif Ullah — Translator & Localization Expert", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
-            </div>
-            <div className="linkedin-posts-grid">
-              {linkedinPosts.map((post) => (
-                <article className="linkedin-post-card" key={post.title}>
-                  <div className="linkedin-post-top"><img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" /><span>{post.date}</span></div>
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <a href={post.link} target="_blank" rel="noreferrer">Open post ↗</a>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+              <div className="linkedin-engagement">
+                <a className="engagement-button" href="https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like</a>
+                <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow</a>
+                <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Saif Ullah — Translator & Localization Expert", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
+              </div>
+              <div className="linkedin-posts-grid">
+                {linkedinPosts.map((post) => (
+                  <article className="linkedin-post-card linkedin-facebook-style-card" key={post.title}>
+                    <div className="social-card-header">
+                      <img className="social-card-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
+                      <div className="social-card-identity"><strong>Saif Ullah</strong><span>{post.date} · Public</span></div>
+                      <span className="social-card-menu" aria-hidden="true">•••</span>
+                    </div>
+                    <p className="social-card-copy">{post.excerpt}</p>
+                    <a className="social-card-preview" href={post.link} target="_blank" rel="noreferrer">
+                      <div className="social-card-preview-image"><img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} /><span>LINKEDIN</span></div>
+                      <div className="social-card-preview-body"><small>linkedin.com</small><strong>{post.title}</strong><span>View the original post on LinkedIn ↗</span></div>
+                    </a>
+                    <div className="social-card-stats"><span>Like</span><span>Comment</span><span>Share</span></div>
+                    <div className="social-card-actions">
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </article>
 
-        <section className="facebook-posts-section" aria-labelledby="facebook-posts-heading">
-          <div className="container">
-            <div className="facebook-posts-heading">
-              <div>
-                <p className="section-label">LATEST FACEBOOK ACTIVITY</p>
-                <h2 id="facebook-posts-heading">Recent posts & professional updates.</h2>
+            <article className="facebook-activity-card">
+              <div className="facebook-posts-heading">
+                <div>
+                  <p className="section-label">LATEST FACEBOOK ACTIVITY</p>
+                  <h2>Recent posts & professional updates.</h2>
+                </div>
+                <a className="facebook-all-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View Facebook ↗</a>
               </div>
-              <a className="facebook-all-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View Facebook ↗</a>
-            </div>
-            <div className="facebook-engagement">
-              <a className="facebook-engagement-button" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on Facebook</a>
-              <a className="facebook-engagement-button" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow on Facebook</a>
-              <a className="facebook-engagement-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F" target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span>Share</a>
-            </div>
-            <div className="facebook-posts-grid">
-              {facebookPosts.map((post) => (
-                <article className="facebook-post-card" key={post.title}>
-                  <div className="facebook-card-header">
-                    <img className="facebook-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
-                    <div className="facebook-card-identity">
-                      <strong>Saif Ullah</strong>
-                      <span>{post.date} · <span aria-label="Public">●</span> Public</span>
+              <div className="facebook-engagement">
+                <a className="facebook-engagement-button" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like</a>
+                <a className="facebook-engagement-button" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow</a>
+                <a className="facebook-engagement-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F" target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span>Share</a>
+              </div>
+              <div className="facebook-posts-grid">
+                {facebookPosts.map((post) => (
+                  <article className="facebook-post-card" key={post.title}>
+                    <div className="facebook-card-header">
+                      <img className="facebook-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
+                      <div className="facebook-card-identity"><strong>Saif Ullah</strong><span>{post.date} · <span aria-label="Public">●</span> Public</span></div>
+                      <span className="facebook-card-menu" aria-hidden="true">•••</span>
                     </div>
-                    <span className="facebook-card-menu" aria-hidden="true">•••</span>
-                  </div>
-                  <p className="facebook-card-copy">{post.excerpt}</p>
-                  <a className="facebook-card-preview" href={post.link} target="_blank" rel="noreferrer" aria-label="Open Saif Ullah Facebook post">
-                    <div className="facebook-card-preview-image">
-                      <img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} />
-                      <span>FACEBOOK</span>
+                    <p className="facebook-card-copy">{post.excerpt}</p>
+                    <a className="facebook-card-preview" href={post.link} target="_blank" rel="noreferrer">
+                      <div className="facebook-card-preview-image"><img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} /><span>FACEBOOK</span></div>
+                      <div className="facebook-card-preview-body"><small>facebook.com</small><strong>{post.title}</strong><span>View the original post on Facebook ↗</span></div>
+                    </a>
+                    <div className="facebook-card-stats">
+                      <div className="facebook-card-reactions" aria-label="Facebook reactions"><span className="facebook-reaction-like" aria-hidden="true">♥</span><span className="facebook-reaction-heart" aria-hidden="true">♥</span><span>124</span></div>
+                      <span>18 comments · 4 shares</span>
                     </div>
-                    <div className="facebook-card-preview-body">
-                      <small>facebook.com</small>
-                      <strong>{post.title}</strong>
-                      <span>View the original post on Facebook ↗</span>
+                    <div className="facebook-card-actions">
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
+                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
                     </div>
-                  </a>
-                  <div className="facebook-card-stats">
-                    <div className="facebook-card-reactions" aria-label="Facebook reactions">
-                      <span className="facebook-reaction-like" aria-hidden="true">♥</span>
-                      <span className="facebook-reaction-heart" aria-hidden="true">♥</span>
-                      <span>124</span>
-                    </div>
-                    <span>18 comments · 4 shares</span>
-                  </div>
-                  <div className="facebook-card-actions">
-                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
-                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
-                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            </article>
           </div>
         </section>
 
