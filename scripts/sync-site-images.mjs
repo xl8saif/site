@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 const images = [
   {
-    "url": "https://images.unsplash.com/photo-1662667465161-d853dfa901ea?auto=format&fit=crop&w=1200&q=82",
+    "url": "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=1200&q=82",
     "id": "1519817650390-64a93db511aa",
     "file": "01-1519817650390-64a93db511aa.jpg"
   },
