@@ -120,6 +120,23 @@ function App() {
           </div>
         </section>
 
+        <section className="clients-section" aria-labelledby="clients-heading">
+          <div className="container">
+            <p className="section-label">SELECTED CLIENTS & COLLABORATIONS</p>
+            <h2 id="clients-heading">Trusted across language, technology, media and public-sector work.</h2>
+          </div>
+          <div className="clients-marquee" aria-label="Selected clients and collaborations">
+            <div className="clients-track">
+              {[["LEVEL INFINITE","Game Localization"],["iFLYTEK","AI & Language Technology"],["PRODUCTIVE PLAYHOUSE","Language Data"],["MINISTRY OF HAJJ & UMRAH","Government Localization"],["MULTI LANGUAGES","Certified Translation"],["AL WASEEM","Translation Services"],["LEVEL INFINITE","Game Localization"],["iFLYTEK","AI & Language Technology"],["PRODUCTIVE PLAYHOUSE","Language Data"],["MINISTRY OF HAJJ & UMRAH","Government Localization"],["MULTI LANGUAGES","Certified Translation"],["AL WASEEM","Translation Services"]].map(([name, type], i) => (
+                <div className="client-logo" key={name + i}>
+                  <span className="client-mark">{name === "LEVEL INFINITE" ? "∞" : name === "iFLYTEK" ? "iF" : name === "PRODUCTIVE PLAYHOUSE" ? "P" : name === "MINISTRY OF HAJJ & UMRAH" ? "م" : name === "MULTI LANGUAGES" ? "ML" : "AW"}</span>
+                  <span><strong>{name}</strong><small>{type}</small></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="home" className="hero-section">
           <div className="container hero-grid">
             <div className="hero-content glass-panel">
@@ -189,10 +206,10 @@ function App() {
             <p className="section-label">04 — SELECTED WORK</p>
             <div className="section-heading"><h2>Projects that define my work.</h2></div>
             <div className="projects-grid">
-              <article className="project-card project-featured"><span className="project-number">01</span><p>LANGUAGE PRESERVATION</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>Digital documentation, Unicode language data, multilingual resources and AI-assisted preservation for Indus Kohistani.</p></article>
-              <article className="project-card"><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
-              <article className="project-card"><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
-              <article className="project-card"><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
+              <article className="project-card project-featured"><img className="project-image" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=82" alt="Writing and translation workspace" loading="lazy" /><span className="project-number">01</span><p>LANGUAGE PRESERVATION</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>Digital documentation, Unicode language data, multilingual resources and AI-assisted preservation for Indus Kohistani.</p></article>
+              <article className="project-card"><img className="project-image" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=82" alt="Digital work and localization workspace" loading="lazy" /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
+              <article className="project-card"><img className="project-image" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=82" alt="Gaming and interactive media" loading="lazy" /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
+              <article className="project-card"><img className="project-image" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=82" alt="Digital language documentation and research" loading="lazy" /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
             </div>
           </div>
         </section>
