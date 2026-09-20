@@ -212,84 +212,69 @@ function App() {
           </div>
         </section>
 
-        <section className="social-activity-section" aria-label="Latest LinkedIn and Facebook activity">
-          <div className="container social-activity-grid">
-            <article className="linkedin-activity-card">
-              <div className="linkedin-posts-heading">
-                <div>
-                  <p className="section-label">LATEST LINKEDIN ACTIVITY</p>
-                  <h2>Recent posts & professional updates.</h2>
-                </div>
-                <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
+        <section className="social-activity-section" aria-labelledby="activity-heading">
+          <div className="container">
+            <div className="activity-section-heading">
+              <div>
+                <p className="section-label">LATEST ACTIVITY</p>
+                <h2 id="activity-heading">Selected updates from LinkedIn & Facebook.</h2>
               </div>
-              <div className="linkedin-engagement">
-                <a className="engagement-button" href="https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like</a>
-                <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow</a>
-                <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Saif Ullah — Translator & Localization Expert", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
-              </div>
-              <div className="linkedin-posts-grid">
-                {linkedinPosts.map((post) => (
-                  <article className="linkedin-post-card linkedin-facebook-style-card" key={post.title}>
-                    <div className="social-card-header">
-                      <img className="social-card-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
-                      <div className="social-card-identity"><strong>Saif Ullah</strong><span>{post.date} · Public</span></div>
-                      <span className="social-card-menu" aria-hidden="true">•••</span>
-                    </div>
-                    <p className="social-card-copy">{post.excerpt}</p>
-                    <a className="social-card-preview" href={post.link} target="_blank" rel="noreferrer">
-                      <div className="social-card-preview-image"><img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} /><span>LINKEDIN</span></div>
-                      <div className="social-card-preview-body"><small>linkedin.com</small><strong>{post.title}</strong><span>View the original post on LinkedIn ↗</span></div>
-                    </a>
-                    <div className="social-card-stats"><span>Like</span><span>Comment</span><span>Share</span></div>
-                    <div className="social-card-actions">
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
+              <p>Two recent posts, presented as part of the same visual system as the rest of the site.</p>
+            </div>
 
-            <article className="facebook-activity-card">
-              <div className="facebook-posts-heading">
-                <div>
-                  <p className="section-label">LATEST FACEBOOK ACTIVITY</p>
-                  <h2>Recent posts & professional updates.</h2>
+            <div className="social-activity-grid">
+              <article className="social-activity-card">
+                <div className="activity-card-heading">
+                  <div className="activity-brand">
+                    <img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" />
+                    <span>LinkedIn</span>
+                  </div>
+                  <a href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View profile ↗</a>
                 </div>
-                <a className="facebook-all-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View Facebook ↗</a>
-              </div>
-              <div className="facebook-engagement">
-                <a className="facebook-engagement-button" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like</a>
-                <a className="facebook-engagement-button" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow</a>
-                <a className="facebook-engagement-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F" target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span>Share</a>
-              </div>
-              <div className="facebook-posts-grid">
-                {facebookPosts.map((post) => (
-                  <article className="facebook-post-card" key={post.title}>
-                    <div className="facebook-card-header">
-                      <img className="facebook-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
-                      <div className="facebook-card-identity"><strong>Saif Ullah</strong><span>{post.date} · <span aria-label="Public">●</span> Public</span></div>
-                      <span className="facebook-card-menu" aria-hidden="true">•••</span>
+                <div className="activity-post">
+                  <div className="activity-post-header">
+                    <img className="activity-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
+                    <div>
+                      <strong>Saif Ullah</strong>
+                      <span>1 month ago · Public</span>
                     </div>
-                    <p className="facebook-card-copy">{post.excerpt}</p>
-                    <a className="facebook-card-preview" href={post.link} target="_blank" rel="noreferrer">
-                      <div className="facebook-card-preview-image"><img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} /><span>FACEBOOK</span></div>
-                      <div className="facebook-card-preview-body"><small>facebook.com</small><strong>{post.title}</strong><span>View the original post on Facebook ↗</span></div>
-                    </a>
-                    <div className="facebook-card-stats">
-                      <div className="facebook-card-reactions" aria-label="Facebook reactions"><span className="facebook-reaction-like" aria-hidden="true">♥</span><span className="facebook-reaction-heart" aria-hidden="true">♥</span><span>124</span></div>
-                      <span>18 comments · 4 shares</span>
+                  </div>
+                  <p className="activity-post-copy">A long-term language-preservation project focused on documenting Indus-Kohistani, building multilingual resources, developing open datasets and creating a written future for an endangered language.</p>
+                  <div className="activity-post-topic">
+                    <span>LANGUAGE PRESERVATION</span>
+                    <strong>Documenting Indus Kohistani</strong>
+                    <small>Research · Digital preservation · Language technology</small>
+                  </div>
+                  <a className="activity-post-link" href="https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/" target="_blank" rel="noreferrer">Read the LinkedIn post ↗</a>
+                </div>
+              </article>
+
+              <article className="social-activity-card">
+                <div className="activity-card-heading">
+                  <div className="activity-brand">
+                    <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
+                    <span>Facebook</span>
+                  </div>
+                  <a href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View profile ↗</a>
+                </div>
+                <div className="activity-post">
+                  <div className="activity-post-header">
+                    <img className="activity-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
+                    <div>
+                      <strong>Saif Ullah</strong>
+                      <span>Latest update · Public</span>
                     </div>
-                    <div className="facebook-card-actions">
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♡</span> Like</a>
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
-                      <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </article>
+                  </div>
+                  <p className="activity-post-copy">Recent professional and language-related work across translation, localization, language technology and cultural preservation.</p>
+                  <div className="activity-post-topic">
+                    <span>PROFESSIONAL UPDATE</span>
+                    <strong>Translation · Localization · Language Technology</strong>
+                    <small>Professional work · Multilingual services · Cultural preservation</small>
+                  </div>
+                  <a className="activity-post-link" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer">Read the Facebook post ↗</a>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
