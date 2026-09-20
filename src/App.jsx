@@ -264,7 +264,7 @@ function App() {
                     <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
                     <span>Facebook</span>
                   </div>
-                  <a href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View profile ↗</a>
+                  <a href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer">View Facebook update ↗</a>
                 </div>
                 <div className="activity-post">
                   <div className="activity-post-header">
@@ -308,8 +308,8 @@ function App() {
           <div className="container hero-grid">
             <div className="hero-content glass-panel">
               <p className="eyebrow">TRANSLATOR · LOCALIZATION · LANGUAGE TECHNOLOGY</p>
-              <h1>Language connects<span>people, cultures and ideas.</span></h1>
-              <p className="hero-description">Saif Ullah is a multilingual translator and localization expert working across Arabic, Urdu, Persian, English, Indus Kohistani and Shina, with a focus on language technology and digital preservation.</p>
+              <h1>Saif Ullah — Translator &amp; Localization Specialist<span>Language connects people, cultures and ideas.</span></h1>
+              <p className="hero-description">Saif Ullah is a multilingual translator and localization specialist based in Gilgit, Pakistan, working across Arabic, Urdu, Persian, English, Indus-Kohistani and Shina, with a focus on game localization, LQA, MTPE, language technology and digital preservation.</p>
               <div className="hero-actions">
                 <button className="button button-primary" onClick={() => scrollToSection("projects")}>Explore my work</button>
                 <button className="button button-secondary" onClick={() => scrollToSection("contact")}>Get in touch</button>
@@ -317,7 +317,7 @@ function App() {
             </div>
             <div className="hero-profile">
               <div className="profile-frame glass-panel">
-                <img className="profile-image" src={`${import.meta.env.BASE_URL}images/saif-ullah.jpg`} alt="Saif Ullah" loading="eager" onError={handleImageError} />
+                <img className="profile-image" src={`${import.meta.env.BASE_URL}images/saif-ullah.jpg`} alt="Portrait of Saif Ullah, translator and localization specialist" loading="eager" onError={handleImageError} />
               </div>
               <div className="profile-caption glass-panel"><strong>Saif Ullah</strong><span>Translator & Localization Expert</span></div>
             </div>
@@ -389,7 +389,7 @@ function App() {
             <p className="section-label">04 — SELECTED WORK</p>
             <div className="section-heading"><h2>Projects that define my work.</h2></div>
             <div className="projects-grid">
-              <article className="project-card project-featured"><img className="project-image" src={imageUrl("1455390582262-044cdead277a")} alt="Indus Kohistani digital documentation and research workspace" loading="lazy" onError={handleImageError} /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
+              <article className="project-card project-featured"><img className="project-image" src={imageUrl("1455390582262-044cdead277a")} alt="Indus-Kohistani digital documentation and research workspace" loading="lazy" onError={handleImageError} /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
               <article className="project-card"><img className="project-image" src={imageUrl("1499750310107-5fef28a66643")} alt="Digital work and localization workspace" loading="lazy" onError={handleImageError} /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
               <article className="project-card"><img className="project-image" src={imageUrl("1542751371-adc38448a05e")} alt="Gaming and interactive media" loading="lazy" onError={handleImageError} /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
               <article className="project-card"><img className="project-image" src={imageUrl("1516321318423-f06f85e504b3")} alt="Digital language documentation and research" loading="lazy" onError={handleImageError} /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
@@ -438,7 +438,7 @@ function App() {
               <a href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer">ProZ</a>
               <a href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer">Upwork</a>
               <a href="https://wa.me/923100989830" target="_blank" rel="noreferrer">WhatsApp</a>
-              <a href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer">Facebook update</a>
             </div>
           </div>
         </section>
