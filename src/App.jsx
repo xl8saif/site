@@ -27,19 +27,12 @@ const localImageFiles = {
   "1461749280684-dccba630e2f6": "24-1461749280684-dccba630e2f6.jpg"
 };
 const imageUrl = (id) => localImageFiles[id] ? `/site/images/${localImageFiles[id]}` : `/site/images/saif-ullah.jpg`;
+const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1662667465161-d853dfa901ea?auto=format&fit=crop&w=1200&q=82";
 const handleImageError = (event) => {
   const img = event.currentTarget;
   if (img.dataset.fallback) return;
-
-  const localSrc = img.getAttribute("src") || "";
-  const match = localSrc.match(/\/(?:site\/)?images\/\d+-([0-9a-f-]+)\.jpg(?:\?.*)?$/i);
-
   img.dataset.fallback = "1";
-  if (match) {
-    img.src = `https://images.unsplash.com/photo-${match[1]}?auto=format&fit=crop&w=1200&q=82`;
-  } else {
-    img.src = `${import.meta.env.BASE_URL}images/saif-ullah.jpg`;
-  }
+  img.src = FALLBACK_IMAGE_URL;
 };
 
 const navigation = [
