@@ -433,6 +433,43 @@ function App() {
             </div>
           </div>
         </section>
+
+        <section id="keyboards" className="keyboard-downloads-section" aria-labelledby="keyboards-heading">
+          <div className="container">
+            <div className="keyboard-downloads-heading">
+              <div>
+                <p className="section-label">WINDOWS KEYBOARDS</p>
+                <h2 id="keyboards-heading">Language tools for everyday typing and digital preservation.</h2>
+              </div>
+              <p>Free Windows PC keyboard layouts developed for practical multilingual use.</p>
+            </div>
+            <div className="keyboard-downloads-grid">
+              <article className="keyboard-download-card keyboard-ik-card">
+                <div className="keyboard-card-top">
+                  <span className="keyboard-card-label">INDUS-KOHISTANI</span>
+                  <span className="keyboard-card-platform">WINDOWS PC</span>
+                </div>
+                <div className="keyboard-card-icon" aria-hidden="true">ک</div>
+                <h3>Indus-Kohistani Windows PC Keyboard</h3>
+                <p>Keyboard layout developed to support Indus-Kohistani typing and digital language preservation.</p>
+                <div className="keyboard-card-credit">Developed by <strong>Mr. Hussain Ahmad Faizy</strong></div>
+                <a className="keyboard-download-button keyboard-download-button-ik" href="https://drive.google.com/uc?export=download&amp;id=11rMn9Vn25DNhszk5sBh5n8f6IuwkJkU9" target="_blank" rel="noreferrer">Download for Windows ↗</a>
+              </article>
+
+              <article className="keyboard-download-card keyboard-urdu-card">
+                <div className="keyboard-card-top">
+                  <span className="keyboard-card-label">URDU</span>
+                  <span className="keyboard-card-platform">WINDOWS PC</span>
+                </div>
+                <div className="keyboard-card-icon" aria-hidden="true">ا</div>
+                <h3>Urdu Windows PC Keyboard</h3>
+                <p>Windows keyboard layout developed for practical Urdu typing and multilingual work at Waraq Enterprises.</p>
+                <div className="keyboard-card-credit">Developed by <strong>Saif Ullah Jailani · Waraq Enterprises</strong></div>
+                <a className="keyboard-download-button keyboard-download-button-urdu" href="https://drive.google.com/uc?export=download&amp;id=1NL_SjDOh42GRiaD3GJWfVABQZUrnGU0M" target="_blank" rel="noreferrer">Download for Windows ↗</a>
+              </article>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="site-footer">
