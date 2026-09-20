@@ -27,7 +27,6 @@ jobs:
           node-version: 20
           cache: npm
 
-
       - name: Install dependencies
         run: npm ci
 
@@ -36,6 +35,16 @@ jobs:
 
       - name: Build Vite portfolio
         run: npm run build
+
+      - name: Verify search-engine files in Pages artifact
+        run: |
+          test -s dist/sitemap.xml
+          test -s dist/sitemap.txt
+          test -s dist/robots.txt
+          grep -F '<loc>https://xl8saif.github.io/site/</loc>' dist/sitemap.xml
+          grep -Fx 'https://xl8saif.github.io/site/' dist/sitemap.txt
+          grep -F 'Sitemap: https://xl8saif.github.io/site/sitemap.xml' dist/robots.txt
+          echo "Verified sitemap.xml, sitemap.txt, and robots.txt are present in the Pages artifact."
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
