@@ -124,19 +124,19 @@ function App() {
             <h2 id="social-links-heading">Professional & Social Links</h2>
             <div className="social-links-row">
               <a className="social-link" href="https://wa.me/923100989830" target="_blank" rel="noreferrer" aria-label="WhatsApp — Message me">
-                <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="" aria-hidden="true" />
+                <img src="/site/icons/whatsapp.svg" alt="" aria-hidden="true" />
                 <span><small>WHATSAPP</small><strong>Message me ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn — xl8-saif">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linkedin.svg" alt="" aria-hidden="true" />
+                <img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" />
                 <span><small>LINKEDIN</small><strong>xl8-saif ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer" aria-label="Upwork — Freelance profile">
-                <img src="https://cdn.simpleicons.org/upwork/14A800" alt="" aria-hidden="true" />
+                <img src="/site/icons/upwork.svg" alt="" aria-hidden="true" />
                 <span><small>UPWORK</small><strong>Freelance profile ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer" aria-label="Facebook — Professional profile">
-                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="" aria-hidden="true" />
+                <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
                 <span><small>FACEBOOK</small><strong>Professional profile ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ.com — Translator profile">
