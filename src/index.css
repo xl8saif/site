@@ -447,10 +447,14 @@
 .site-footer-project{color:rgba(255,255,255,.78);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase}
 .site-footer-copy strong{color:#fff;font-size:12px;line-height:1.4}
 .site-footer-copy>span:last-child{color:rgba(255,255,255,.5);font-size:10px;line-height:1.5}
-.site-footer-brands{display:flex;align-items:center;gap:18px;flex:0 0 auto}
-.site-footer-brands{padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.92);box-shadow:inset 0 1px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.12)}
-.site-footer-brands img{display:block;width:auto;height:38px;max-width:145px;object-fit:contain;opacity:1}
-.site-footer-brands img:last-child{max-width:135px}
+.site-footer-brands{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.site-footer-brand{display:flex;align-items:center;justify-content:center;min-width:150px;height:64px;padding:9px 16px;border-radius:15px;border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px rgba(255,255,255,.22),0 10px 26px rgba(0,0,0,.16);overflow:hidden}
+.site-footer-brand-waraq{background:linear-gradient(135deg,#102b46,#1f4d70)}
+.site-footer-brand-cloudtrans{background:linear-gradient(135deg,#dceeff,#b9ddf7)}
+.site-footer-brand img{display:block;width:auto;height:42px;max-width:138px;object-fit:contain;opacity:1}
+.site-footer-brand-cloudtrans img{max-width:130px}
+.site-footer-brand-waraq img{filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}
+
 @media(max-width:620px){
   .site-footer{padding:24px 0}
   .site-footer-inner{align-items:flex-start;flex-direction:column;gap:20px}
