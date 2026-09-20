@@ -443,8 +443,12 @@ function App() {
             <span>Waraq Enterprises, KIU Road, Court Area, Konodass, Gilgit, Pakistan - 15100</span>
           </div>
           <div className="site-footer-brands" aria-label="Waraq Enterprises and CloudTrans">
-            <img src="/site/images/waraq-logo.png" alt="Waraq Enterprises" />
-            <img src="/site/images/CloudTrans-Logo - Copy.PNG" alt="CloudTrans" />
+            <div className="site-footer-brand site-footer-brand-waraq">
+              <img src="/site/images/waraq-logo.png" alt="Waraq Enterprises" />
+            </div>
+            <div className="site-footer-brand site-footer-brand-cloudtrans">
+              <img src="/site/images/CloudTrans-Logo - Copy.PNG" alt="CloudTrans" />
+            </div>
           </div>
         </div>
       </footer>
