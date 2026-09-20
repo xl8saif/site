@@ -23,6 +23,27 @@ const languages = [
   ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", "/site/images/10-1524231757912-21f4fe3a7200.jpg"],
 ];
 
+const linkedinPosts = [
+  {
+    date: "1 week ago",
+    title: "Open to New Localization Opportunities",
+    excerpt: "Open to new opportunities in Game Localization, Arabic Localization, LQA, Translation, MTPE and multilingual localization, with experience across Arabic, Urdu, Persian, English, Indus Kohistani and Shina.",
+    link: "https://www.linkedin.com/in/xl8saif/"
+  },
+  {
+    date: "1 month ago",
+    title: "Preserving Indus Kohistani",
+    excerpt: "A long-term language-preservation project focused on documentation, multilingual resources, open datasets and creating a written future for an endangered language.",
+    link: "https://www.linkedin.com/in/xl8saif/"
+  },
+  {
+    date: "4 months ago",
+    title: "Linguistic Validation — Why Translation Alone Isn't Enough",
+    excerpt: "A practical look at linguistic validation in healthcare and life sciences, including forward translation, back translation, expert review, cognitive debriefing and harmonization.",
+    link: "https://www.linkedin.com/in/xl8saif/"
+  }
+];
+
 const clients = [
   ["LEVEL INFINITE", "Game Localization"],
   ["iFLYTEK", "AI & Language Technology"],
@@ -143,6 +164,28 @@ function App() {
                 <span className="proz-icon" aria-hidden="true">P</span>
                 <span><small>PROZ.COM</small><strong>Translator profile ↗</strong></span>
               </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="linkedin-posts-section" aria-labelledby="linkedin-posts-heading">
+          <div className="container">
+            <div className="linkedin-posts-heading">
+              <div>
+                <p className="section-label">LATEST LINKEDIN ACTIVITY</p>
+                <h2 id="linkedin-posts-heading">Recent posts & professional updates.</h2>
+              </div>
+              <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
+            </div>
+            <div className="linkedin-posts-grid">
+              {linkedinPosts.map((post) => (
+                <article className="linkedin-post-card" key={post.title}>
+                  <div className="linkedin-post-top"><img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" /><span>{post.date}</span></div>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <a href={post.link} target="_blank" rel="noreferrer">Open post ↗</a>
+                </article>
+              ))}
             </div>
           </div>
         </section>
