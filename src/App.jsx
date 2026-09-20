@@ -435,7 +435,19 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer"><div className="container"><span>© {new Date().getFullYear()} Saif Ullah</span><span>Translation · Localization · Language Technology</span></div></footer>
+      <footer className="site-footer">
+        <div className="container site-footer-inner">
+          <div className="site-footer-copy">
+            <span className="site-footer-project">A project of Waraq Enterprises, Gilgit</span>
+            <strong>Developed &amp; Vibe Coded by: Saif Ullah Jailani</strong>
+            <span>Waraq Enterprises, KIU Road, Court Area, Konodass, Gilgit, Pakistan - 15100</span>
+          </div>
+          <div className="site-footer-brands" aria-label="Waraq Enterprises and CloudTrans">
+            <img src="/site/images/waraq-logo.png" alt="Waraq Enterprises" />
+            <img src="/site/images/CloudTrans-Logo - Copy.PNG" alt="CloudTrans" />
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
