@@ -2,7 +2,7 @@
 
 A production-ready static website for Saif Ullah, a multilingual translator, localization expert and language preservation specialist.
 
-**Live URL:** https://xl8saif.github.io/
+**Live URL:** https://xl8saif.github.io/site
 
 ---
 
