@@ -487,6 +487,14 @@
 .keyboard-download-card{min-width:0;padding:21px;border:1px solid rgba(255,255,255,.78);border-radius:22px;box-shadow:0 14px 40px rgba(30,40,60,.08),inset 0 1px rgba(255,255,255,.7);backdrop-filter:blur(14px);display:flex;flex-direction:column}
 .keyboard-ik-card{background-image:linear-gradient(145deg,rgba(18,39,55,.38),rgba(223,235,242,.76)),url("/site/images/keyboard-IK.jpg");background-size:cover;background-position:center;background-repeat:no-repeat;border-color:rgba(67,102,126,.3)}
 .keyboard-urdu-card{background-image:linear-gradient(145deg,rgba(24,58,92,.34),rgba(226,239,255,.78)),url("/site/images/keyboard-IK.jpg");background-size:cover;background-position:center;background-repeat:no-repeat;border-color:rgba(45,108,176,.3)}
+/* Soften keyboard photography without affecting card content */
+.keyboard-ik-card,.keyboard-urdu-card{
+  background-image:
+    linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.88)),
+    linear-gradient(145deg,rgba(18,39,55,.16),rgba(223,235,242,.42)),
+    url("/site/images/keyboard-IK.jpg");
+}
+
 .keyboard-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:1px solid rgba(20,28,40,.07)}
 .keyboard-card-label,.keyboard-card-platform{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
 .keyboard-card-label{color:#596779;font-weight:700}.keyboard-card-platform{color:#8a94a3}
