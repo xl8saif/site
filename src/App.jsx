@@ -42,6 +42,7 @@ const navigation = [
   { label: "Experience", id: "experience" },
   { label: "Projects", id: "projects" },
   { label: "Languages", id: "languages" },
+  { label: "Keyboards", id: "keyboards" },
   { label: "Contact", id: "contact" },
 ];
 
