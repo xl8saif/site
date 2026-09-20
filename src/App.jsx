@@ -32,7 +32,7 @@ const handleImageError = (event) => {
   if (img.dataset.fallback) return;
 
   const localSrc = img.getAttribute("src") || "";
-  const match = localSrc.match(/(?:^|\\/)\\d+-([0-9a-f-]+)\\.jpg(?:\\?.*)?$/i);
+  const match = localSrc.match(/\\/\\d+-([0-9a-f-]+)\\.jpg(?:\\?.*)?$/i);
 
   img.dataset.fallback = "1";
   if (match) {
