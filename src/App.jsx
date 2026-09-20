@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const imageUrl = (id, width = 1200, quality = 82) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=${quality}`;
+
 const navigation = [
   { label: "Home", id: "home" },
   { label: "About", id: "about" },
