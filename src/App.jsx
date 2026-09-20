@@ -223,7 +223,7 @@ function App() {
             </div>
 
             <div className="social-activity-grid">
-              <article className="social-activity-card">
+              <article className="social-activity-card linkedin-activity-brand">
                 <div className="activity-card-heading">
                   <div className="activity-brand">
                     <img src="/site/icons/linkedin.svg" alt="" aria-hidden="true" />
@@ -249,7 +249,7 @@ function App() {
                 </div>
               </article>
 
-              <article className="social-activity-card">
+              <article className="social-activity-card facebook-activity-brand">
                 <div className="activity-card-heading">
                   <div className="activity-brand">
                     <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
