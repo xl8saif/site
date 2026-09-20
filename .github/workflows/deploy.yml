@@ -9,87 +9,42 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Repair static asset references
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-          s = s.replace('./images/', './public/images/')
-          replacements = {
-              'https://www.sta.gov.sa/favicon.ico': './public/images/saudi-tourism-authority-seeklogo.png',
-              'https://www.productiveplayhouse.com/favicon.ico': './public/images/productiveplayhouselogo.jpg',
-              'https://www.pubgmobile.com/favicon.ico': './public/images/Pubg-Mobile-Logo.png',
-          }
-          for old, new in replacements.items(): s = s.replace(old, new)
-          fix_css = '''
-          <style id="uploaded-logo-fix">
-          .logo-card:before,.logo-card .mark{content:none!important;display:none!important}
-          .logo-card img{display:block!important;width:76px!important;height:76px!important;flex:0 0 76px!important;min-width:76px!important;object-fit:contain!important;object-position:center!important;border-radius:12px!important;background:#fff!important;padding:8px!important;box-sizing:border-box!important;filter:none!important;mix-blend-mode:normal!important;opacity:1!important;visibility:visible!important;box-shadow:0 3px 12px rgba(0,0,0,.16)!important}
-          .logo-card{min-height:112px!important}
-          @media(max-width:700px){.logo-card img{width:56px!important;height:56px!important;flex-basis:56px!important;min-width:56px!important;padding:6px!important}.logo-card{min-height:92px!important}}
-          </style>
-          '''
-          if 'id="uploaded-logo-fix"' not in s: s = s.replace('</head>', fix_css + '</head>', 1)
-          p.write_text(s, encoding='utf-8')
-          PY
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Polish Arabic localization terminology
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('script.js')
-          s = p.read_text(encoding='utf-8')
-          replacements = {
-              "مترجم · مفسّر · خبير توطين": "مترجم · مترجم شفهي · خبير توطين",
-              "للمواقف التي تستحق الدقة.": "للمهام التي تتطلب دقةً لغويةً وسياقيةً.",
-              "بيانات اللغة وحفظها": "البيانات اللغوية وحفظ اللغات",
-              "التفريغ والتوثيق اللغوي وإعداد مجموعات البيانات والحفظ الرقمي المرتكز على المجتمع.": "التفريغ والتوثيق اللغوي وإعداد مجموعات البيانات والحفظ الرقمي للغات، بالتعاون مع المجتمعات المحلية.",
-              "الترجمة النصية والمحتوى": "الترجمة النصية والمحتوى الرقمي",
-              "ترجمة نصوص متعددة اللغات، وتفريغ المحتوى، وإنتاج محتوى رقمي دقيق ثقافياً للمنصات العامة والخاصة.": "إعداد ترجمات نصية متعددة اللغات، وتفريغ المحتوى، وصياغة محتوى رقمي دقيق ثقافياً للمنصات العامة والخاصة.",
-              "وزارة الحج والعمرة السعودية": "وزارة الحج والعمرة",
-              "أعمال ترجمة وتوطين واسعة النطاق من الإنجليزية والعربية إلى الأردية والفارسية، بإجمالي يقارب 500,000 كلمة.": "مشروع ترجمة وتوطين واسع النطاق من الإنجليزية والعربية إلى الأردية والفارسية، بإجمالي يقارب 500,000 كلمة.",
-              "التحقق من أكثر من 1,500 فيديو على YouTube باللغة الشيناوية ضمن أعمال البيانات اللغوية وتقنيات الكلام.": "التحقق من أكثر من 1,500 فيديو على YouTube باللغة الشينا ضمن أعمال البيانات اللغوية وتقنيات الكلام.",
-              "كتاب اللغة الإندوس-كوهيستانية للصف الأول": "كتاب اللغة الإندوس-كوهستانية للصف الأول",
-              "المساهمة في أعمال حفظ اللغة والتعليم دعماً لمجتمع لغوي مهدد بالاندثار.": "المساهمة في أعمال حفظ اللغة والتعليم دعماً لمجتمع لغوي مهدد بالانقراض.",
-              "شريك مؤسس لمبادرة بحثية وتنموية ثقافية تركز على التوثيق والحفظ والوصول الرقمي.": "شريك مؤسس لمبادرة بحثية وثقافية تركز على التوثيق والحفظ الرقمي وإتاحة المعرفة.",
-              "أعمال توطين تشمل لغة اللاعبين والمصطلحات والتكييف الملائم ثقافياً.": "أعمال توطين تشمل نصوص اللاعبين والمصطلحات والتكييف الثقافي الملائم.",
-              "لديك تحدٍ لغوي يستحق الحل؟": "هل لديك تحدٍ لغوي يحتاج إلى حل؟",
-              "أرسل زوج اللغات ونطاق العمل والموعد النهائي والسياق.": "أرسل زوج اللغات، ونطاق العمل، والموعد النهائي، والسياق.",
-              "التواصل المباشر متاح عبر البريد الإلكتروني أو WhatsApp أو منصتك المهنية المفضلة.": "يمكنك التواصل مباشرةً عبر البريد الإلكتروني أو WhatsApp أو منصتك المهنية المفضلة.",
-              "الملف المستقل ↗": "ملفي على Upwork ↗",
-              "الملف المهني ↗": "ملفي المهني ↗",
-              "ملف المترجم ↗": "ملفي على ProZ ↗",
-              "ناقش مشروعاً ↗": "ناقش مشروعًا ↗",
-          }
-          for old, new in replacements.items(): s = s.replace(old, new)
-          p.write_text(s, encoding='utf-8')
-          PY
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+      - name: Build Vite portfolio
+        run: npm run build
 
-      - name: Upload static site
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./dist
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
