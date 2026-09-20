@@ -91,6 +91,35 @@ function App() {
       </header>
 
       <main>
+        <section className="social-links-section" aria-labelledby="social-links-heading">
+          <div className="container social-links-container">
+            <p className="section-label">CONNECT WITH ME</p>
+            <h2 id="social-links-heading">Professional & Social Links</h2>
+            <div className="social-links-row">
+              <a className="social-link" href="https://wa.me/923100989830" target="_blank" rel="noreferrer" aria-label="WhatsApp — Message me">
+                <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="" aria-hidden="true" />
+                <span><small>WHATSAPP</small><strong>Message me ↗</strong></span>
+              </a>
+              <a className="social-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn — xl8-saif">
+                <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="" aria-hidden="true" />
+                <span><small>LINKEDIN</small><strong>xl8-saif ↗</strong></span>
+              </a>
+              <a className="social-link" href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer" aria-label="Upwork — Freelance profile">
+                <img src="https://cdn.simpleicons.org/upwork/14A800" alt="" aria-hidden="true" />
+                <span><small>UPWORK</small><strong>Freelance profile ↗</strong></span>
+              </a>
+              <a className="social-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer" aria-label="Facebook — Professional profile">
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="" aria-hidden="true" />
+                <span><small>FACEBOOK</small><strong>Professional profile ↗</strong></span>
+              </a>
+              <a className="social-link" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ.com — Translator profile">
+                <span className="proz-icon" aria-hidden="true">P</span>
+                <span><small>PROZ.COM</small><strong>Translator profile ↗</strong></span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section id="home" className="hero-section">
           <div className="container hero-grid">
             <div className="hero-content glass-panel">
