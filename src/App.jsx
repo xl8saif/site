@@ -13,16 +13,16 @@ const navigation = [
 ];
 
 const languages = [
-  ["العربية", "Arabic", "ara", "ar", "Native", "Arabic", "/site/images/01-1519817650390-64a93db511aa.jpg"],
-  ["اردو", "Urdu", "urd", "ur", "Native / Expert", "اردو", "/site/images/02-1594736797933-d0501ba2fe65.jpg"],
-  ["انڈس کوہستانی", "Indus-Kohistani", "mvy", "—", "Native fluency", "انڈس کوہستانی", "/site/images/03-1500534623283-312aade485b7.jpg"],
-  ["English", "English", "eng", "en", "Fluent", "English", "/site/images/04-1521587760476-6c12a4b040da.jpg"],
-  ["فارسی", "Persian", "fas", "fa", "Advanced", "فارسی", "/site/images/05-1564399579883-451a5d44ec08.jpg"],
-  ["شینا", "Shina", "scl", "—", "Advanced", "شینا", "/site/images/06-1519681393784-d120267933ba.jpg"],
-  ["پښتو", "Pashto", "pus", "ps", "Professional", "پښتو", "/site/images/07-1518005020951-eccb494ad742.jpg"],
-  ["ਪੰਜਾਬੀ", "Punjabi", "pan", "pa", "Professional", "ਪੰਜਾਬੀ", "/site/images/08-1532012197267-da84d127e765.jpg"],
-  ["گوجری", "Gujri", "gju", "—", "Working", "گوجری", "/site/images/09-1519682337058-a94d519337bc.jpg"],
-  ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", "/site/images/10-1524231757912-21f4fe3a7200.jpg"],
+  ["العربية", "Arabic", "ara", "ar", "Native", "Arabic", imageUrl("1519817650390-64a93db511aa")],
+  ["اردو", "Urdu", "urd", "ur", "Native / Expert", "اردو", imageUrl("1594736797933-d0501ba2fe65")],
+  ["انڈس کوہستانی", "Indus-Kohistani", "mvy", "—", "Native fluency", "انڈس کوہستانی", imageUrl("1500534623283-312aade485b7")],
+  ["English", "English", "eng", "en", "Fluent", "English", imageUrl("1521587760476-6c12a4b040da")],
+  ["فارسی", "Persian", "fas", "fa", "Advanced", "فارسی", imageUrl("1564399579883-451a5d44ec08")],
+  ["شینا", "Shina", "scl", "—", "Advanced", "شینا", imageUrl("1519681393784-d120267933ba")],
+  ["پښتو", "Pashto", "pus", "ps", "Professional", "پښتو", imageUrl("1518005020951-eccb494ad742")],
+  ["ਪੰਜਾਬੀ", "Punjabi", "pan", "pa", "Professional", "ਪੰਜਾਬੀ", imageUrl("1532012197267-da84d127e765")],
+  ["گوجری", "Gujri", "gju", "—", "Working", "گوجری", imageUrl("1519682337058-a94d519337bc")],
+  ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", imageUrl("1524231757912-21f4fe3a7200")],
 ];
 
 const linkedinPosts = [
@@ -251,21 +251,21 @@ function App() {
             <p className="section-label">02 — EXPERTISE</p>
             <div className="section-heading"><h2>What I do</h2><p>Language services, localization, language technology and AI-assisted digital product development.</p></div>
             <div className="expertise-grid">{[
-  ["Translation", "/site/images/11-1455390582262-044cdead277a.jpg"],
-  ["Interpretation", "/site/images/12-1589254065878-42c9da997008.jpg"],
-  ["Localization", "/site/images/13-1499750310107-5fef28a66643.jpg"],
-  ["Game Localization", "/site/images/14-1542751371-adc38448a05e.jpg"],
-  ["LQA & Linguistic Testing", "/site/images/15-1553484771-047a44eee27b.jpg"],
-  ["MTPE", "/site/images/16-1551288049-bebda4e38f71.jpg"],
-  ["Subtitling", "/site/images/17-1485846234645-a62644f84728.jpg"],
-  ["Language Documentation", "/site/images/18-1457369804613-52c61a468e7d.jpg"],
-  ["Digital Preservation", "/site/images/19-1524995997946-a1c2e315a42f.jpg"],
-  ["Language Technology", "/site/images/20-1516321318423-f06f85e504b3.jpg"],
-  ["AI & NLP", "/site/images/21-1677442136019-21780ecad995.jpg"],
-  ["Multilingual Content", "/site/images/13-1499750310107-5fef28a66643.jpg"],
-  ["AI-Assisted App Development", "/site/images/22-1551650975-87deedd944c3.jpg"],
-  ["Web & App UI Design", "/site/images/23-1559028012-481c04fa702d.jpg"],
-  ["Software Prototyping", "/site/images/24-1461749280684-dccba630e2f6.jpg"]
+  ["Translation", imageUrl("1455390582262-044cdead277a")],
+  ["Interpretation", imageUrl("1589254065878-42c9da997008")],
+  ["Localization", imageUrl("1499750310107-5fef28a66643")],
+  ["Game Localization", imageUrl("1542751371-adc38448a05e")],
+  ["LQA & Linguistic Testing", imageUrl("1553484771-047a44eee27b")],
+  ["MTPE", imageUrl("1551288049-bebda4e38f71")],
+  ["Subtitling", imageUrl("1485846234645-a62644f84728")],
+  ["Language Documentation", imageUrl("1457369804613-52c61a468e7d")],
+  ["Digital Preservation", imageUrl("1524995997946-a1c2e315a42f")],
+  ["Language Technology", imageUrl("1516321318423-f06f85e504b3")],
+  ["AI & NLP", imageUrl("1677442136019-21780ecad995")],
+  ["Multilingual Content", imageUrl("1499750310107-5fef28a66643")],
+  ["AI-Assisted App Development", imageUrl("1551650975-87deedd944c3")],
+  ["Web & App UI Design", imageUrl("1559028012-481c04fa702d")],
+  ["Software Prototyping", imageUrl("1461749280684-dccba630e2f6")]
 ].map(([item, image],index)=><article className="expertise-card" key={item}><img src={image} alt="" aria-hidden="true" loading="lazy" /><div className="expertise-card-content"><span>{String(index+1).padStart(2,"0")}</span><h3>{item}</h3></div></article>)}</div>
           </div>
         </section>
@@ -299,10 +299,10 @@ function App() {
             <p className="section-label">04 — SELECTED WORK</p>
             <div className="section-heading"><h2>Projects that define my work.</h2></div>
             <div className="projects-grid">
-              <article className="project-card project-featured"><img className="project-image" src="/site/images/25-1455390582262-044cdead277a.jpg" alt="Indus Kohistani digital documentation and research workspace" loading="lazy" /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
-              <article className="project-card"><img className="project-image" src="/site/images/26-1499750310107-5fef28a66643.jpg" alt="Digital work and localization workspace" loading="lazy" /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
-              <article className="project-card"><img className="project-image" src="/site/images/27-1542751371-adc38448a05e.jpg" alt="Gaming and interactive media" loading="lazy" /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
-              <article className="project-card"><img className="project-image" src="/site/images/28-1516321318423-f06f85e504b3.jpg" alt="Digital language documentation and research" loading="lazy" /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
+              <article className="project-card project-featured"><img className="project-image" src=imageUrl("1455390582262-044cdead277a") alt="Indus Kohistani digital documentation and research workspace" loading="lazy" /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1499750310107-5fef28a66643") alt="Digital work and localization workspace" loading="lazy" /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1542751371-adc38448a05e") alt="Gaming and interactive media" loading="lazy" /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1516321318423-f06f85e504b3") alt="Digital language documentation and research" loading="lazy" /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
             </div>
           </div>
         </section>
