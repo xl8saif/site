@@ -178,7 +178,7 @@ function App() {
               <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
             </div>
             <div className="linkedin-engagement">
-              <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on LinkedIn</a>
+              <a className="engagement-button" href="https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on LinkedIn</a>
               <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow on LinkedIn</a>
               <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Saif Ullah — Translator & Localization Expert", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
             </div>
