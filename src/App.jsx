@@ -480,6 +480,13 @@ function App() {
             <strong>Developed &amp; Vibe Coded by: Saif Ullah Jailani</strong>
             <span>Waraq Enterprises, KIU Road, Court Area, Konodass, Gilgit, Pakistan - 15100</span>
           </div>
+          <div className="site-footer-visitors" aria-label="Website visitors">
+            <div className="site-footer-visitors-label">SITE VISITORS</div>
+            <a className="site-footer-visitor-badge" href="https://visitorbadge.io/" target="_blank" rel="noreferrer" aria-label="Website visitor counter">
+              <img src="https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F&label=VISITORS&labelColor=%231b2635&countColor=%232b6cb0" alt="Live website visitor counter" loading="lazy" />
+            </a>
+            <a className="site-footer-country-link" href="https://feed-pulse.com/site/xl8saif.github.io/flags" target="_blank" rel="noreferrer">View visitor countries ↗</a>
+          </div>
           <div className="site-footer-brands" aria-label="Waraq Enterprises and CloudTrans">
             <div className="site-footer-brand site-footer-brand-waraq">
               <img src="/site/images/waraq-logo.png" alt="Waraq Enterprises" />
