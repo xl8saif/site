@@ -184,6 +184,14 @@ function App() {
       </header>
 
       <main>
+        <section className="top-visitor-section" aria-label="Website visitors">
+          <div className="container top-visitor-container">
+            <a href="https://visitorbadge.io/status?path=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F" target="_blank" rel="noreferrer" className="top-visitor-badge" aria-label="Site visitors status">
+              <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F&label=Site%20Visitors&labelColor=%2337d67a&countColor=%232ccce4&style=plastic&labelStyle=upper" alt="Site Visitors" />
+            </a>
+          </div>
+        </section>
+
         <section className="social-links-section" aria-labelledby="social-links-heading">
           <div className="container social-links-container">
             <p className="section-label">CONNECT WITH ME</p>
