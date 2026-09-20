@@ -521,7 +521,7 @@
 @media(max-width:620px){.social-link{min-width:190px;padding:12px 14px}.social-link img,.proz-icon{flex-basis:22px;width:22px;height:22px}}
 
 
-/* Restore readable language names — compact but visible */
-.language-name h3{font-size:13px;line-height:1.15}
+/* Compact desktop language names */
+.language-name h3{font-size:9px;line-height:1.15}
 .language-name small{font-size:7px}
 @media(max-width:620px){.language-name h3{font-size:12px}.language-name small{font-size:6.5px}}
