@@ -23,6 +23,47 @@ const languages = [
   ["Türkçe", "Turkish", "Working", false],
 ];
 
+const clients = [
+  ["LEVEL INFINITE", "Game Localization"],
+  ["iFLYTEK", "AI & Language Technology"],
+  ["PRODUCTIVE PLAYHOUSE", "Language Data & Verification"],
+  ["MINISTRY OF HAJJ & UMRAH", "Government Localization"],
+  ["MULTI LANGUAGES", "Certified Translation"],
+  ["AL WASEEM", "Translation Services"],
+  ["TAGHRID ENTERPRISES", "Translation & Language Services"],
+  ["FLI PAKISTAN", "Translation & Localization"],
+  ["RWS", "Language & Localization Technology"],
+  ["WARAQ ENTERPRISES", "Language Services · Founder / CEO"],
+  ["CLOUDTRANS", "Language Services · Founder"],
+  ["FiKR&CD", "Language Preservation · Co-Founder"],
+  ["PUBG MOBILE", "Game Localization · Urdu"],
+  ["WORLD OF WONDER", "Game Localization · Urdu"],
+  ["INDUS-KOHISTANI DIGITAL PRESERVATION", "Language Preservation Project"],
+  ["SHINA LANGUAGE DOCUMENTATION", "Language Documentation Project"],
+];
+
+const clientMark = (name) => {
+  const marks = {
+    "LEVEL INFINITE": "∞",
+    "iFLYTEK": "iF",
+    "PRODUCTIVE PLAYHOUSE": "P",
+    "MINISTRY OF HAJJ & UMRAH": "م",
+    "MULTI LANGUAGES": "ML",
+    "AL WASEEM": "AW",
+    "TAGHRID ENTERPRISES": "TE",
+    "FLI PAKISTAN": "FLI",
+    "RWS": "RWS",
+    "WARAQ ENTERPRISES": "W",
+    "CLOUDTRANS": "CT",
+    "FiKR&CD": "FiK",
+    "PUBG MOBILE": "P",
+    "WORLD OF WONDER": "WOW",
+    "INDUS-KOHISTANI DIGITAL PRESERVATION": "IK",
+    "SHINA LANGUAGE DOCUMENTATION": "ش",
+  };
+  return marks[name] || name.slice(0, 2);
+};
+
 const experience = [
   {
     period: "2021 — PRESENT",
@@ -127,9 +168,9 @@ function App() {
           </div>
           <div className="clients-marquee" aria-label="Selected clients and collaborations">
             <div className="clients-track">
-              {[["LEVEL INFINITE","Game Localization"],["iFLYTEK","AI & Language Technology"],["PRODUCTIVE PLAYHOUSE","Language Data"],["MINISTRY OF HAJJ & UMRAH","Government Localization"],["MULTI LANGUAGES","Certified Translation"],["AL WASEEM","Translation Services"],["LEVEL INFINITE","Game Localization"],["iFLYTEK","AI & Language Technology"],["PRODUCTIVE PLAYHOUSE","Language Data"],["MINISTRY OF HAJJ & UMRAH","Government Localization"],["MULTI LANGUAGES","Certified Translation"],["AL WASEEM","Translation Services"]].map(([name, type], i) => (
+              {[...clients, ...clients].map(([name, type], i) => (
                 <div className="client-logo" key={name + i}>
-                  <span className="client-mark">{name === "LEVEL INFINITE" ? "∞" : name === "iFLYTEK" ? "iF" : name === "PRODUCTIVE PLAYHOUSE" ? "P" : name === "MINISTRY OF HAJJ & UMRAH" ? "م" : name === "MULTI LANGUAGES" ? "ML" : "AW"}</span>
+                  <span className="client-mark">{clientMark(name)}</span>
                   <span><strong>{name}</strong><small>{type}</small></span>
                 </div>
               ))}
