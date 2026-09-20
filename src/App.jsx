@@ -248,6 +248,11 @@ function App() {
               </div>
               <a className="facebook-all-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer">View Facebook ↗</a>
             </div>
+            <div className="facebook-engagement">
+              <a className="facebook-engagement-button" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on Facebook</a>
+              <a className="facebook-engagement-button" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow on Facebook</a>
+              <a className="facebook-engagement-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxl8saif.github.io%2Fsite%2F" target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span>Share</a>
+            </div>
             <div className="facebook-posts-grid">
               {facebookPosts.map((post) => (
                 <article className="facebook-post-card" key={post.title}>
