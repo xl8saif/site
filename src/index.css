@@ -494,3 +494,13 @@
 .keyboard-download-card h3{margin:0;font-size:22px;line-height:1.2}.keyboard-download-card>p{margin:10px 0 14px;color:#596171;font-size:12.5px;line-height:1.65}.keyboard-card-credit{margin-top:auto;padding-top:13px;color:#687080;font-size:10px;line-height:1.5}.keyboard-card-credit strong{color:var(--ink);font-weight:700}.keyboard-download-button{display:inline-flex;align-items:center;justify-content:center;margin-top:16px;padding:12px 15px;border-radius:12px;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:.2s}.keyboard-download-button:hover{transform:translateY(-2px)}.keyboard-download-button-ik{background:#344f63;color:#fff}.keyboard-download-button-urdu{background:#2d6cb0;color:#fff}
 @media(max-width:900px){.keyboard-downloads-section{padding:48px 0 52px}.keyboard-downloads-heading{align-items:flex-start;flex-direction:column;gap:12px}.keyboard-downloads-heading>p{max-width:520px}.keyboard-downloads-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.keyboard-downloads-section{padding:42px 0 46px}.keyboard-downloads-heading h2{font-size:30px}.keyboard-download-card{padding:17px;border-radius:18px}.keyboard-card-icon{margin:17px 0 12px}.keyboard-download-card h3{font-size:20px}}
+
+/* Visitor counter */
+.site-footer-visitors{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:150px}
+.site-footer-visitors-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.48);text-transform:uppercase}
+.site-footer-visitor-badge{display:flex;align-items:center;justify-content:center;min-height:22px;text-decoration:none}
+.site-footer-visitor-badge img{display:block;width:auto;max-width:150px;height:auto;border:0}
+.site-footer-country-link{color:rgba(255,255,255,.62);font-family:var(--mono);font-size:8px;letter-spacing:.03em;text-decoration:none;white-space:nowrap}
+.site-footer-country-link:hover{color:#fff}
+@media(max-width:900px){.site-footer-visitors{align-items:flex-start}}
+@media(max-width:620px){.site-footer-visitors{align-items:flex-start;min-width:0}.site-footer-visitor-badge img{max-width:145px}}
