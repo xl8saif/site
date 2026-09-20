@@ -1,6 +1,14 @@
 import { useState } from "react";
 
 const imageUrl = (id, width = 1200, quality = 82) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=${quality}`;
+const handleImageError = (event) => {
+  const img = event.currentTarget;
+  const seed = encodeURIComponent(img.alt || "saif-ullah");
+  if (!img.dataset.fallback) {
+    img.dataset.fallback = "1";
+    img.src = `https://picsum.photos/seed/${seed}/1200/800`;
+  }
+};
 
 const navigation = [
   { label: "Home", id: "home" },
@@ -30,13 +38,13 @@ const linkedinPosts = [
     date: "1 week ago",
     title: "Open to New Localization Opportunities",
     excerpt: "Open to new opportunities in Game Localization, Arabic Localization, LQA, Translation, MTPE and multilingual localization, with experience across Arabic, Urdu, Persian, English, Indus Kohistani and Shina.",
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/"
+    link: "https://www.linkedin.com/in/xl8saif/"
   },
   {
     date: "1 month ago",
-    title: "Preserving Indus Kohistani",
+    title: "Documenting Indus Kohistani: Language Preservation Efforts",
     excerpt: "A long-term language-preservation project focused on documentation, multilingual resources, open datasets and creating a written future for an endangered language.",
-    link: "https://www.linkedin.com/in/xl8saif/"
+    link: "https://www.linkedin.com/posts/xl8saif_localization-endangeredlanguages-translation-activity-7485726150388985856-7ZX-"
   },
   {
     date: "4 months ago",
@@ -227,7 +235,7 @@ function App() {
             </div>
             <div className="hero-profile">
               <div className="profile-frame glass-panel">
-                <img className="profile-image" src={`${import.meta.env.BASE_URL}images/saif-ullah.jpg`} alt="Saif Ullah" loading="eager" />
+                <img className="profile-image" src={`${import.meta.env.BASE_URL}images/saif-ullah.jpg`} alt="Saif Ullah" loading="eager" onError={handleImageError} />
               </div>
               <div className="profile-caption glass-panel"><strong>Saif Ullah</strong><span>Translator & Localization Expert</span></div>
             </div>
@@ -266,7 +274,7 @@ function App() {
   ["AI-Assisted App Development", imageUrl("1551650975-87deedd944c3")],
   ["Web & App UI Design", imageUrl("1559028012-481c04fa702d")],
   ["Software Prototyping", imageUrl("1461749280684-dccba630e2f6")]
-].map(([item, image],index)=><article className="expertise-card" key={item}><img src={image} alt="" aria-hidden="true" loading="lazy" /><div className="expertise-card-content"><span>{String(index+1).padStart(2,"0")}</span><h3>{item}</h3></div></article>)}</div>
+].map(([item, image],index)=><article className="expertise-card" key={item}><img src={image} alt="" aria-hidden="true" loading="lazy" onError={handleImageError} /><div className="expertise-card-content"><span>{String(index+1).padStart(2,"0")}</span><h3>{item}</h3></div></article>)}</div>
           </div>
         </section>
 
@@ -299,10 +307,10 @@ function App() {
             <p className="section-label">04 — SELECTED WORK</p>
             <div className="section-heading"><h2>Projects that define my work.</h2></div>
             <div className="projects-grid">
-              <article className="project-card project-featured"><img className="project-image" src=imageUrl("1455390582262-044cdead277a") alt="Indus Kohistani digital documentation and research workspace" loading="lazy" /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
-              <article className="project-card"><img className="project-image" src=imageUrl("1499750310107-5fef28a66643") alt="Digital work and localization workspace" loading="lazy" /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
-              <article className="project-card"><img className="project-image" src=imageUrl("1542751371-adc38448a05e") alt="Gaming and interactive media" loading="lazy" /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
-              <article className="project-card"><img className="project-image" src=imageUrl("1516321318423-f06f85e504b3") alt="Digital language documentation and research" loading="lazy" /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
+              <article className="project-card project-featured"><img className="project-image" src=imageUrl("1455390582262-044cdead277a") alt="Indus Kohistani digital documentation and research workspace" loading="lazy" onError={handleImageError} /><span className="project-number">01</span><p>INDUS-KOHISTANI · FIKR&CD</p><h3>Indus Kohistani Digital Preservation</h3><span className="project-line"/><p>FiKR&CD — Forum for Indus-Kohistani Research & Culture Development — is a community-led initiative focused on documenting, preserving and digitally developing Indus-Kohistani language and cultural heritage.</p><p>Its web portal brings together language resources, research, digital preservation work and cultural documentation in one public-facing platform.</p><a className="project-link" href="https://fikrcd.org/" target="_blank" rel="noreferrer">Visit the FiKR&CD Web Portal ↗</a></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1499750310107-5fef28a66643") alt="Digital work and localization workspace" loading="lazy" onError={handleImageError} /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1542751371-adc38448a05e") alt="Gaming and interactive media" loading="lazy" onError={handleImageError} /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
+              <article className="project-card"><img className="project-image" src=imageUrl("1516321318423-f06f85e504b3") alt="Digital language documentation and research" loading="lazy" onError={handleImageError} /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
             </div>
           </div>
         </section>
@@ -319,7 +327,7 @@ function App() {
             <div className="languages-grid">
               {languages.map(([native, english, iso3, iso1, level, typographicalName, image]) => (
                 <article className="language-item" key={english}>
-                  <img className="language-image" src={image} alt="" aria-hidden="true" loading="lazy" />
+                  <img className="language-image" src={image} alt="" aria-hidden="true" loading="lazy" onError={handleImageError} />
                   <div className="language-overlay" />
                   <div className="language-item-content">
                     <div className="language-name">
