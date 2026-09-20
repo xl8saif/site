@@ -128,7 +128,7 @@ function App() {
                 <span><small>WHATSAPP</small><strong>Message me ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn — xl8-saif">
-                <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="" aria-hidden="true" />
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linkedin.svg" alt="" aria-hidden="true" />
                 <span><small>LINKEDIN</small><strong>xl8-saif ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer" aria-label="Upwork — Freelance profile">
