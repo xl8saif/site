@@ -519,3 +519,9 @@
 .social-link{gap:10px;padding:12px 14px;min-width:180px}
 .social-link strong{font-size:13px}
 @media(max-width:620px){.social-link{min-width:190px;padding:12px 14px}.social-link img,.proz-icon{flex-basis:22px;width:22px;height:22px}}
+
+
+/* Compact language names */
+.language-name h3{font-size:19px;line-height:1.15}
+.language-name small{font-size:9px}
+@media(max-width:620px){.language-name h3{font-size:18px}.language-name small{font-size:8.5px}}
