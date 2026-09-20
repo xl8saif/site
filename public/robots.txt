@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xl8saif.github.io/sitemap.xml
+Sitemap: https://xl8saif.github.io/site/sitemap.xml
