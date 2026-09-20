@@ -29,10 +29,16 @@ const localImageFiles = {
 const imageUrl = (id) => localImageFiles[id] ? `/site/images/${localImageFiles[id]}` : `/site/images/saif-ullah.jpg`;
 const handleImageError = (event) => {
   const img = event.currentTarget;
-  const seed = encodeURIComponent(img.alt || "saif-ullah");
-  if (!img.dataset.fallback) {
-    img.dataset.fallback = "1";
-    img.src = `https://picsum.photos/seed/${seed}/1200/800`;
+  if (img.dataset.fallback) return;
+
+  const localSrc = img.getAttribute("src") || "";
+  const match = localSrc.match(/(?:^|\\/)\\d+-([0-9a-f-]+)\\.jpg(?:\\?.*)?$/i);
+
+  img.dataset.fallback = "1";
+  if (match) {
+    img.src = `https://images.unsplash.com/photo-${match[1]}?auto=format&fit=crop&w=1200&q=82`;
+  } else {
+    img.src = `${import.meta.env.BASE_URL}images/saif-ullah.jpg`;
   }
 };
 
