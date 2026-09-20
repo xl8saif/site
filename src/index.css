@@ -149,3 +149,26 @@
   .linkedin-post-card{padding:15px}
   .site-footer{padding:19px 0}
 }
+
+
+/* Facebook activity section */
+.facebook-posts-section{padding:42px 0 46px;background:rgba(255,255,255,.24);border-bottom:1px solid rgba(20,28,40,.06)}
+.facebook-posts-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}
+.facebook-posts-heading h2{font-size:clamp(28px,3.5vw,42px);margin:0;max-width:760px}
+.facebook-all-link{font-size:12px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.facebook-posts-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.facebook-post-card{max-width:520px;min-height:180px;padding:16px;border:1px solid rgba(20,28,40,.09);border-radius:17px;background:rgba(255,255,255,.68);box-shadow:0 14px 40px rgba(30,40,60,.06);display:flex;flex-direction:column}
+.facebook-post-top{display:flex;align-items:center;gap:9px;margin-bottom:13px;color:#687080;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.facebook-post-top img{width:20px;height:20px}
+.facebook-post-card h3{font-size:18px;line-height:1.25;margin:0 0 11px}
+.facebook-post-card p{font-size:13px;line-height:1.55;color:#596171;margin:0 0 14px}
+.facebook-post-card a{margin-top:auto;font-size:12px;font-weight:600}
+.facebook-post-card a:hover,.facebook-all-link:hover{color:var(--blue)}
+@media(max-width:800px){
+  .facebook-posts-heading{align-items:flex-start;flex-direction:column}
+  .facebook-post-card{max-width:none;min-height:0}
+}
+@media(max-width:620px){
+  .facebook-posts-section{padding:38px 0 40px}
+  .facebook-post-card{padding:15px}
+}
