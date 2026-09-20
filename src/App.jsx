@@ -256,10 +256,36 @@ function App() {
             <div className="facebook-posts-grid">
               {facebookPosts.map((post) => (
                 <article className="facebook-post-card" key={post.title}>
-                  <div className="facebook-post-top"><img src="/site/icons/facebook.svg" alt="" aria-hidden="true" /><span>{post.date}</span></div>
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <a href={post.link} target="_blank" rel="noreferrer">Open post ↗</a>
+                  <div className="facebook-card-header">
+                    <img className="facebook-avatar" src="/site/images/saif-ullah.jpg" alt="Saif Ullah" onError={handleImageError} />
+                    <div className="facebook-card-identity">
+                      <strong>Saif Ullah</strong>
+                      <span>{post.date} · <span aria-label="Public">●</span> Public</span>
+                    </div>
+                    <span className="facebook-card-menu" aria-hidden="true">•••</span>
+                  </div>
+                  <p className="facebook-card-copy">{post.excerpt}</p>
+                  <a className="facebook-card-preview" href={post.link} target="_blank" rel="noreferrer" aria-label="Open Saif Ullah Facebook post">
+                    <div className="facebook-card-preview-image">
+                      <img src="/site/images/saif-ullah.jpg" alt="" onError={handleImageError} />
+                      <span>FACEBOOK</span>
+                    </div>
+                    <div className="facebook-card-preview-body">
+                      <small>facebook.com</small>
+                      <strong>{post.title}</strong>
+                      <span>View the original post on Facebook ↗</span>
+                    </div>
+                  </a>
+                  <div className="facebook-card-stats">
+                    <span>Like</span>
+                    <span>Comment</span>
+                    <span>Share</span>
+                  </div>
+                  <div className="facebook-card-actions">
+                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span> Like</a>
+                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">◌</span> Comment</a>
+                    <a href={post.link} target="_blank" rel="noreferrer"><span aria-hidden="true">↗</span> Share</a>
+                  </div>
                 </article>
               ))}
             </div>
