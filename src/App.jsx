@@ -199,8 +199,24 @@ function App() {
         <section id="expertise" className="content-section section-muted">
           <div className="container">
             <p className="section-label">02 — EXPERTISE</p>
-            <div className="section-heading"><h2>What I do</h2></div>
-            <div className="expertise-grid">{["Translation","Interpretation","Localization","Game Localization","LQA & Linguistic Testing","MTPE","Subtitling","Language Documentation","Digital Preservation","Language Technology","AI & NLP","Multilingual Content"].map((item,index)=><article className="expertise-card" key={item}><span>{String(index+1).padStart(2,"0")}</span><h3>{item}</h3></article>)}</div>
+            <div className="section-heading"><h2>What I do</h2><p>Language services, localization, language technology and AI-assisted digital product development.</p></div>
+            <div className="expertise-grid">{[
+  ["Translation", "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=700&q=78"],
+  ["Interpretation", "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=700&q=78"],
+  ["Localization", "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=78"],
+  ["Game Localization", "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=78"],
+  ["LQA & Linguistic Testing", "https://images.unsplash.com/photo-1553484771-047a44eee27b?auto=format&fit=crop&w=700&q=78"],
+  ["MTPE", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=78"],
+  ["Subtitling", "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=78"],
+  ["Language Documentation", "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=700&q=78"],
+  ["Digital Preservation", "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=700&q=78"],
+  ["Language Technology", "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=78"],
+  ["AI & NLP", "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=78"],
+  ["Multilingual Content", "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=78"],
+  ["AI-Assisted App Development", "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=700&q=78"],
+  ["Web & App UI Design", "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=700&q=78"],
+  ["Software Prototyping", "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&q=78"]
+].map(([item, image],index)=><article className="expertise-card" key={item}><img src={image} alt="" aria-hidden="true" loading="lazy" /><div className="expertise-card-content"><span>{String(index+1).padStart(2,"0")}</span><h3>{item}</h3></div></article>)}</div>
           </div>
         </section>
 
