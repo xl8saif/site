@@ -32,7 +32,7 @@ const handleImageError = (event) => {
   if (img.dataset.fallback) return;
 
   const localSrc = img.getAttribute("src") || "";
-  const match = localSrc.match(/\\/\\d+-([0-9a-f-]+)\\.jpg(?:\\?.*)?$/i);
+  const match = localSrc.match(/\/(?:site\/)?images\/\d+-([0-9a-f-]+)\.jpg(?:\?.*)?$/i);
 
   img.dataset.fallback = "1";
   if (match) {
@@ -76,7 +76,7 @@ const linkedinPosts = [
     date: "1 month ago",
     title: "Documenting Indus Kohistani: Language Preservation Efforts",
     excerpt: "A long-term language-preservation project focused on documentation, multilingual resources, open datasets and creating a written future for an endangered language.",
-    link: "https://www.linkedin.com/posts/xl8saif_localization-endangeredlanguages-translation-activity-7485726150388985856-7ZX-"
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/"
   },
   {
     date: "4 months ago",
