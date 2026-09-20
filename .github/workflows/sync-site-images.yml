@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -28,7 +30,9 @@ jobs:
           git add public/images
           if git diff --cached --quiet; then
             echo "No new image assets."
-          else
-            git commit -m "Bundle site image assets [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "Bundle site image assets [skip ci]"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
