@@ -23,3 +23,10 @@
 .linkedin-post-card p{font-size:13px;line-height:1.65;color:#596171;margin:0 0 18px}
 .linkedin-post-card a{margin-top:auto;font-size:12px;font-weight:600}
 @media(max-width:800px){.linkedin-posts-heading{align-items:flex-start;flex-direction:column}.linkedin-posts-grid{grid-template-columns:1fr}.linkedin-post-card{min-height:0}}
+
+.linkedin-engagement{display:flex;gap:10px;align-items:center;margin:0 0 22px;padding:12px 0;border-top:1px solid rgba(20,28,40,.07);border-bottom:1px solid rgba(20,28,40,.07)}
+.engagement-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(24,34,53,.10);border-radius:999px;padding:9px 15px;background:rgba(255,255,255,.72);color:#4f5a6b;font-size:11px;font-weight:700;letter-spacing:.03em;transition:.22s}
+.engagement-button:hover,.engagement-button:focus-visible{transform:translateY(-2px);border-color:rgba(43,108,176,.28);color:var(--blue);outline:none;box-shadow:0 8px 20px rgba(37,49,67,.08)}
+.engagement-button.is-active{background:var(--ink);border-color:var(--ink);color:#fff}
+.engagement-button span{font-size:14px;line-height:1}
+@media(max-width:620px){.linkedin-engagement{gap:8px;overflow-x:auto}.engagement-button{flex:0 0 auto}}
