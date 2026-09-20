@@ -11,16 +11,16 @@ const navigation = [
 ];
 
 const languages = [
-  ["العربية", "Arabic", "Native", true],
-  ["اردو", "Urdu", "Native / Expert", true],
-  ["انڈس کوہستانی", "Indus-Kohistani", "Native fluency", true],
-  ["English", "English", "Fluent", false],
-  ["فارسی", "Persian", "Advanced", true],
-  ["شینا", "Shina", "Advanced", true],
-  ["پښتو", "Pashto", "Professional", true],
-  ["ਪੰਜਾਬੀ", "Punjabi", "Professional", true],
-  ["گوجری", "Gujri", "Working", true],
-  ["Türkçe", "Turkish", "Working", false],
+  ["العربية", "Arabic", "ara", "ar", "Native", "Arabic", "https://images.unsplash.com/photo-1519817650390-64a93db511aa?auto=format&fit=crop&w=900&q=80"],
+  ["اردو", "Urdu", "urd", "ur", "Native / Expert", "اردو", "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=900&q=80"],
+  ["انڈس کوہستانی", "Indus-Kohistani", "mvy", "—", "Native fluency", "انڈس کوہستانی", "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80"],
+  ["English", "English", "eng", "en", "Fluent", "English", "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80"],
+  ["فارسی", "Persian", "fas", "fa", "Advanced", "فارسی", "https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=900&q=80"],
+  ["شینا", "Shina", "scl", "—", "Advanced", "شینا", "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80"],
+  ["پښتو", "Pashto", "pus", "ps", "Professional", "پښتو", "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80"],
+  ["ਪੰਜਾਬੀ", "Punjabi", "pan", "pa", "Professional", "ਪੰਜਾਬੀ", "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=900&q=80"],
+  ["گوجری", "Gujri", "gju", "—", "Working", "گوجری", "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=80"],
+  ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=900&q=80"],
 ];
 
 const clients = [
@@ -267,14 +267,22 @@ function App() {
               </div>
             </div>
             <div className="languages-grid">
-              {languages.map(([native, english, level, nativeScript]) => (
-                <div className="language-item" key={english}>
-                  <div className="language-name">
-                    <h3 className={nativeScript ? "native-script" : ""}>{native}</h3>
-                    <small>{english}</small>
+              {languages.map(([native, english, iso3, iso1, level, typographicalName, image]) => (
+                <article className="language-item" key={english}>
+                  <img className="language-image" src={image} alt="" aria-hidden="true" loading="lazy" />
+                  <div className="language-overlay" />
+                  <div className="language-item-content">
+                    <div className="language-name">
+                      <h3 className={/[\u0600-\u06FF\u0750-\u077F\u0900-\u097F\u0A00-\u0A7F]/.test(native) ? "native-script" : ""}>{native}</h3>
+                      <small>{english}</small>
+                    </div>
+                    <div className="language-meta">
+                      <span className="language-level">{level}</span>
+                      <span className="language-codes">ISO 639-3 <b>{iso3}</b> · ISO 639-1 <b>{iso1}</b></span>
+                      <span className="language-typography">{typographicalName}</span>
+                    </div>
                   </div>
-                  <span>{level}</span>
-                </div>
+                </article>
               ))}
             </div>
           </div>
