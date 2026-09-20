@@ -461,11 +461,13 @@
 .site-footer-copy strong{color:#fff;font-size:12px;line-height:1.4}
 .site-footer-copy>span:last-child{color:rgba(255,255,255,.5);font-size:10px;line-height:1.5}
 .site-footer-brands{display:flex;align-items:center;gap:12px;flex:0 0 auto}
-.site-footer-brand{display:flex;align-items:center;justify-content:center;width:74px;height:74px;flex:0 0 74px;padding:9px;border-radius:50%;border:0;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.95);overflow:hidden}
-.site-footer-brand-waraq,.site-footer-brand-cloudtrans{background:#fff}
+.site-footer-brand{display:flex;align-items:center;justify-content:center;width:74px;height:74px;flex:0 0 74px;padding:9px;border-radius:50%;border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 26px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.45);overflow:hidden}
+.site-footer-brand-waraq{background:#f3ead8;box-shadow:0 10px 26px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.72)}
+.site-footer-brand-cloudtrans{background:#e5eef7;box-shadow:0 10px 26px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.72)}
 .site-footer-brand img{display:block;width:auto;height:48px;max-width:58px;object-fit:contain;opacity:1}
 .site-footer-brand-cloudtrans img{max-width:56px}
-.site-footer-brand-waraq img{filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.site-footer-brand-waraq img{filter:drop-shadow(0 1px 2px rgba(35,42,50,.14))}
+.site-footer-brand-cloudtrans img{filter:drop-shadow(0 1px 2px rgba(43,108,176,.16))}
 
 @media(max-width:620px){
   .site-footer{padding:24px 0}
