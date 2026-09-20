@@ -504,3 +504,12 @@
 .site-footer-country-link:hover{color:#fff}
 @media(max-width:900px){.site-footer-visitors{align-items:flex-start}}
 @media(max-width:620px){.site-footer-visitors{align-items:flex-start;min-width:0}.site-footer-visitor-badge img{max-width:145px}}
+
+
+/* Top visitor badge */
+.top-visitor-section{padding:92px 0 14px;background:transparent}
+.top-visitor-container{display:flex;justify-content:center}
+.top-visitor-badge{display:inline-flex;align-items:center;justify-content:center;line-height:0;border-radius:7px;transition:transform .2s ease,box-shadow .2s ease}
+.top-visitor-badge:hover,.top-visitor-badge:focus-visible{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,49,67,.10);outline:none}
+.top-visitor-badge img{display:block;width:auto;max-width:100%;height:auto;border:0}
+@media(max-width:620px){.top-visitor-section{padding:86px 0 12px}.top-visitor-badge img{max-width:calc(100vw - 32px)}}
