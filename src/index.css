@@ -476,3 +476,21 @@
   .site-footer-brand img{height:36px;max-width:118px}
   .site-footer-brand-cloudtrans img{max-width:112px}
 }
+
+
+/* Windows keyboard downloads */
+.keyboard-downloads-section{padding:58px 0 62px;background:transparent;border-top:1px solid rgba(20,28,40,.06);border-bottom:1px solid rgba(20,28,40,.06)}
+.keyboard-downloads-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:26px}
+.keyboard-downloads-heading h2{margin:0;max-width:700px;font-size:clamp(28px,3.4vw,42px);line-height:1.08}
+.keyboard-downloads-heading>p{max-width:300px;margin:0 0 2px;color:#687080;font-size:12px;line-height:1.65}
+.keyboard-downloads-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.keyboard-download-card{min-width:0;padding:21px;border:1px solid rgba(255,255,255,.78);border-radius:22px;box-shadow:0 14px 40px rgba(30,40,60,.08),inset 0 1px rgba(255,255,255,.7);backdrop-filter:blur(14px);display:flex;flex-direction:column}
+.keyboard-ik-card{background:linear-gradient(145deg,rgba(67,102,126,.14),rgba(223,235,242,.62));border-color:rgba(67,102,126,.22)}
+.keyboard-urdu-card{background:linear-gradient(145deg,rgba(45,108,176,.14),rgba(226,239,255,.62));border-color:rgba(45,108,176,.22)}
+.keyboard-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:1px solid rgba(20,28,40,.07)}
+.keyboard-card-label,.keyboard-card-platform{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.keyboard-card-label{color:#596779;font-weight:700}.keyboard-card-platform{color:#8a94a3}
+.keyboard-card-icon{width:48px;height:48px;margin:20px 0 14px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.65);border:1px solid rgba(20,28,40,.08);box-shadow:inset 0 1px rgba(255,255,255,.8);font-family:var(--arabic);font-size:25px;color:var(--ink)}
+.keyboard-download-card h3{margin:0;font-size:22px;line-height:1.2}.keyboard-download-card>p{margin:10px 0 14px;color:#596171;font-size:12.5px;line-height:1.65}.keyboard-card-credit{margin-top:auto;padding-top:13px;color:#687080;font-size:10px;line-height:1.5}.keyboard-card-credit strong{color:var(--ink);font-weight:700}.keyboard-download-button{display:inline-flex;align-items:center;justify-content:center;margin-top:16px;padding:12px 15px;border-radius:12px;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:.2s}.keyboard-download-button:hover{transform:translateY(-2px)}.keyboard-download-button-ik{background:#344f63;color:#fff}.keyboard-download-button-urdu{background:#2d6cb0;color:#fff}
+@media(max-width:900px){.keyboard-downloads-section{padding:48px 0 52px}.keyboard-downloads-heading{align-items:flex-start;flex-direction:column;gap:12px}.keyboard-downloads-heading>p{max-width:520px}.keyboard-downloads-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.keyboard-downloads-section{padding:42px 0 46px}.keyboard-downloads-heading h2{font-size:30px}.keyboard-download-card{padding:17px;border-radius:18px}.keyboard-card-icon{margin:17px 0 12px}.keyboard-download-card h3{font-size:20px}}
