@@ -156,7 +156,7 @@ function App() {
                 <img src="/site/icons/upwork.svg" alt="" aria-hidden="true" />
                 <span><small>UPWORK</small><strong>Freelance profile ↗</strong></span>
               </a>
-              <a className="social-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer" aria-label="Facebook — Professional profile">
+              <a className="social-link" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer" aria-label="Facebook — Latest post">
                 <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
                 <span><small>FACEBOOK</small><strong>Latest post ↗</strong></span>
               </a>
