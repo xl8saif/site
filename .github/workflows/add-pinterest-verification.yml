@@ -19,14 +19,17 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+
           p = Path("index.html")
           text = p.read_text(encoding="utf-8")
-          tag = '<meta name="p:domain_verify" content="ad0fe7dfea027cbd84635fcfbce0785c"/>'
+
+          tag = '<meta name="p:domain_verify" content="ad0fe7dfea027cbd84635fcfbce0785c" />'
+
           if tag not in text:
-              marker = '<meta name="referrer" content="strict-origin-when-cross-origin">'
+              marker = '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'
               if marker not in text:
-                  raise SystemExit("Could not find the <head> insertion marker in index.html")
-              text = text.replace(marker, marker + "\n" + tag, 1)
+                  raise SystemExit("Could not find the viewport insertion marker in index.html")
+              text = text.replace(marker, marker + "\n    " + tag, 1)
               p.write_text(text, encoding="utf-8")
           else:
               print("Pinterest verification tag already present")
