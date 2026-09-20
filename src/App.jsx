@@ -111,8 +111,6 @@ const experience = [
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const [followed, setFollowed] = useState(false);
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
@@ -180,9 +178,9 @@ function App() {
               <a className="linkedin-all-link" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">View LinkedIn ↗</a>
             </div>
             <div className="linkedin-engagement">
-              <button className={`engagement-button ${liked ? "is-active" : ""}`} onClick={() => setLiked(!liked)} aria-pressed={liked}><span aria-hidden="true">♥</span>{liked ? "Liked" : "Like"}</button>
-              <button className={`engagement-button ${followed ? "is-active" : ""}`} onClick={() => setFollowed(!followed)} aria-pressed={followed}><span aria-hidden="true">＋</span>{followed ? "Following" : "Follow"}</button>
-              <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Follow Saif Ullah for language, localization and language technology updates.", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
+              <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">♥</span>Like on LinkedIn</a>
+              <a className="engagement-button" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer"><span aria-hidden="true">＋</span>Follow on LinkedIn</a>
+              <button className="engagement-button" onClick={async () => { const shareData = { title: "Saif Ullah — Translator & Localization Expert", text: "Saif Ullah — Translator & Localization Expert", url: "https://xl8saif.github.io/site/" }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(shareData.url); alert("Website link copied to clipboard."); } } catch {} }}><span aria-hidden="true">↗</span>Share</button>
             </div>
             <div className="linkedin-posts-grid">
               {linkedinPosts.map((post) => (
