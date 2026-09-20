@@ -66,20 +66,6 @@ const clientMark = (name) => {
 
 const experience = [
   {
-    period: "2021 — PRESENT",
-    role: "Lower Division Clerk (BPS-11)",
-    organization: "Secretariat of Tourism, Sports, Culture, Archaeology & Museums",
-    location: "Government of Gilgit-Baltistan",
-    description: "Serving in the Government of Gilgit-Baltistan while continuing professional work in multilingual communication, documentation and language-focused projects.",
-  },
-  {
-    period: "28 DEC 2020 — 25 FEB 2021",
-    role: "Naib Qasid (BPS-01)",
-    organization: "Government of Gilgit-Baltistan",
-    location: "Gilgit-Baltistan, Pakistan",
-    description: "Early government service experience within the Gilgit-Baltistan administration, contributing to institutional operations and public-sector work.",
-  },
-  {
     period: "15 NOV 2017 — PRESENT",
     role: "CEO & Language Services Professional",
     organization: "Waraq Enterprises",
@@ -223,7 +209,7 @@ function App() {
             <p className="section-label">03 — EXPERIENCE</p>
             <div className="section-heading">
               <h2>Work across institutions, technology and <em>heritage.</em></h2>
-              <p>A professional journey spanning public service, entrepreneurship, language technology and community-led cultural preservation.</p>
+              <p>A professional journey spanning entrepreneurship, language technology and community-led cultural preservation.</p>
             </div>
             <div className="experience-list">
               {experience.map((item, index) => (
