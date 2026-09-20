@@ -28,7 +28,7 @@ const linkedinPosts = [
     date: "1 week ago",
     title: "Open to New Localization Opportunities",
     excerpt: "Open to new opportunities in Game Localization, Arabic Localization, LQA, Translation, MTPE and multilingual localization, with experience across Arabic, Urdu, Persian, English, Indus Kohistani and Shina.",
-    link: "https://www.linkedin.com/in/xl8saif/"
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/"
   },
   {
     date: "1 month ago",
@@ -158,7 +158,7 @@ function App() {
               </a>
               <a className="social-link" href="https://www.facebook.com/khalid.tasmim" target="_blank" rel="noreferrer" aria-label="Facebook — Professional profile">
                 <img src="/site/icons/facebook.svg" alt="" aria-hidden="true" />
-                <span><small>FACEBOOK</small><strong>Professional profile ↗</strong></span>
+                <span><small>FACEBOOK</small><strong>Latest post ↗</strong></span>
               </a>
               <a className="social-link" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ.com — Translator profile">
                 <span className="proz-icon" aria-hidden="true">P</span>
