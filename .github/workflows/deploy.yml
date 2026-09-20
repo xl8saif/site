@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Materialize local portfolio images
+        run: node scripts/sync-site-images.mjs
+
       - name: Build Vite portfolio
         run: npm run build
 
