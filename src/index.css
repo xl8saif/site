@@ -458,7 +458,8 @@
 @media(max-width:620px){
   .site-footer{padding:24px 0}
   .site-footer-inner{align-items:flex-start;flex-direction:column;gap:20px}
-  .site-footer-brands{gap:14px}
-  .site-footer-brands img{height:36px;max-width:125px}
-  .site-footer-brands img:last-child{max-width:120px}
+  .site-footer-brands{gap:10px}
+  .site-footer-brand{min-width:132px;height:56px;padding:8px 12px;border-radius:13px}
+  .site-footer-brand img{height:36px;max-width:118px}
+  .site-footer-brand-cloudtrans img{max-width:112px}
 }
