@@ -214,3 +214,10 @@
   .facebook-card-preview-body strong{font-size:12px}
   .facebook-card-preview-body span{font-size:9px}
 }
+
+.facebook-card-stats{align-items:center}
+.facebook-card-reactions{display:flex;align-items:center;gap:4px}
+.facebook-card-reactions span:last-child{margin-left:2px}
+.facebook-reaction-like,.facebook-reaction-heart{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:9px;line-height:1;color:#fff}
+.facebook-reaction-like{background:#2e89ff}
+.facebook-reaction-heart{background:#f33e58;margin-left:-5px}
