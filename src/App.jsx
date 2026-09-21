@@ -460,6 +460,7 @@ function App() {
                 </div>
                 <div className="keyboard-card-icon" aria-hidden="true">ک</div>
                 <h3>Indus-Kohistani Windows PC Keyboard</h3>
+                <div className="keyboard-card-arabic" lang="ur">انڈس کوہستانی کیبورڈ برائے وینڈوز</div>
                 <p>Keyboard layout developed to support Indus-Kohistani typing and digital language preservation.</p>
                 <div className="keyboard-card-credit">Developed by <strong>Mr. Hussain Ahmad Faizy</strong></div>
                 <a className="keyboard-download-button keyboard-download-button-ik" href="https://drive.google.com/uc?export=download&amp;id=11rMn9Vn25DNhszk5sBh5n8f6IuwkJkU9" target="_blank" rel="noreferrer">Download for Windows ↗</a>
@@ -472,6 +473,7 @@ function App() {
                 </div>
                 <div className="keyboard-card-icon" aria-hidden="true">ا</div>
                 <h3>Urdu Windows PC Keyboard</h3>
+                <div className="keyboard-card-arabic" lang="ur">ورق اردو کیبورڈ برائے وینڈوز</div>
                 <p>Windows keyboard layout developed for practical Urdu typing and multilingual work at Waraq Enterprises.</p>
                 <div className="keyboard-card-credit">Developed by <strong>Saif Ullah Jailani · Waraq Enterprises</strong></div>
                 <a className="keyboard-download-button keyboard-download-button-urdu" href="https://drive.google.com/uc?export=download&amp;id=1NL_SjDOh42GRiaD3GJWfVABQZUrnGU0M" target="_blank" rel="noreferrer">Download for Windows ↗</a>
