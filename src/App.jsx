@@ -305,6 +305,8 @@ function App() {
         </section>
 
         <section id="home" className="hero-section">
+          <div className="hero-background" aria-hidden="true"><img src={`${import.meta.env.BASE_URL}images/Gemini_Generated_Image_9y0o649y0o649y0o.jpg`} alt="" /></div>
+          <div className="hero-background-overlay" aria-hidden="true" />
           <div className="container hero-grid">
             <div className="hero-content glass-panel">
               <p className="eyebrow">TRANSLATOR · LOCALIZATION · LANGUAGE TECHNOLOGY</p>
