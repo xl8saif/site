@@ -1095,3 +1095,14 @@ body::before{
 .contact-links a:nth-child(4)::before{content:"W"}
 .contact-links a:nth-child(5)::before{content:"f"}
 @media(max-width:620px){.contact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.contact-links a{min-width:0;padding:11px 12px;font-size:10px}}
+
+/* Contact social links — official-style circular icons */
+.contact-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.contact-social{display:inline-flex;align-items:center;gap:10px;padding:9px 15px 9px 9px;border:1px solid rgba(255,255,255,.92);border-radius:999px;background:rgba(255,255,255,.64);box-shadow:0 12px 30px rgba(40,52,70,.09),inset 0 1px #fff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:.25s}
+.contact-social:hover{transform:translateY(-2px);box-shadow:0 17px 34px rgba(40,52,70,.13);border-color:rgba(43,108,176,.25)}
+.contact-social-icon{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:50%;background:#fff;border:1px solid rgba(24,34,53,.10);box-shadow:3px 4px 8px rgba(40,52,70,.15),-2px -2px 6px rgba(255,255,255,.95),inset 1px 1px 2px rgba(255,255,255,.9);overflow:hidden}
+.contact-social-icon img{width:19px;height:19px;object-fit:contain;display:block}
+.contact-social-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink)}
+@media(max-width:620px){.contact-links{gap:9px}.contact-social{padding-right:12px}.contact-social-label{font-size:10px}.contact-social-icon{width:32px;height:32px;flex-basis:32px}}
+/* Prevent fixed header overlap when scrolling to the hero */
+#home{scroll-margin-top:92px}
