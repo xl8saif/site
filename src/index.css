@@ -1052,3 +1052,30 @@ body::before{
 /* CloudTrans header logo */
 .brand-mark{overflow:hidden;padding:4px;background:#fff}
 .brand-mark img{display:block;width:100%;height:100%;object-fit:contain;border-radius:8px}
+
+
+/* CloudTrans logo — circular embossed treatment */
+.brand-mark{
+  width:40px!important;height:40px!important;
+  min-width:40px;border-radius:50%!important;
+  padding:5px!important;
+  display:grid!important;place-items:center;
+  background:linear-gradient(145deg,#f8fafc 0%,#e4e8ed 48%,#d5dbe2 100%)!important;
+  border:1px solid rgba(255,255,255,.98)!important;
+  box-shadow:
+    6px 7px 13px rgba(130,143,158,.48),
+    -5px -5px 11px rgba(255,255,255,.98),
+    inset 2px 2px 4px rgba(255,255,255,.95),
+    inset -2px -2px 4px rgba(153,164,177,.24)!important;
+  overflow:hidden!important;
+}
+.brand-mark img{
+  display:block;width:100%;height:100%;object-fit:contain;
+  border-radius:50%!important;
+  filter:drop-shadow(1px 2px 2px rgba(60,72,88,.22));
+}
+.brand:hover .brand-mark{
+  transform:translateY(-1px);
+  box-shadow:7px 8px 15px rgba(130,143,158,.52),-6px -6px 12px rgba(255,255,255,1),inset 2px 2px 4px rgba(255,255,255,.98),inset -2px -2px 4px rgba(153,164,177,.22)!important;
+}
+@media(max-width:620px){.brand-mark{width:38px!important;height:38px!important;min-width:38px}}
