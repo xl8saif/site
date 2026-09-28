@@ -915,3 +915,12 @@ body::before{
 .language-codes-v2 span{color:var(--neu-ink-3)}
 .language-codes-v2 b{color:var(--neu-blue-deep)}
 @media(max-width:620px){.language-card-v2{box-shadow:9px 10px 22px rgba(163,177,198,.58),-8px -8px 19px rgba(255,255,255,.98)}}
+
+
+/* Portfolio background image — subtle 20% opacity */
+.site-shell::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(238,241,246,.80),rgba(238,241,246,.80)),url("/site/images/Gemini_Generated_Image_9y0o649y0o649y0o.jpg");
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  opacity:1;
+}
