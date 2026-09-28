@@ -1138,3 +1138,35 @@ body::before{
   .contact-social-icon img{width:18px;height:18px}
   .contact-social-label{font-size:9px}
 }
+
+
+/* Final header logo and asset-quality pass */
+.brand{position:relative;min-width:108px}
+.brand-mark{
+  position:absolute!important;
+  left:0;
+  top:50%;
+  width:96px!important;
+  height:96px!important;
+  min-width:96px!important;
+  transform:translateY(-50%)!important;
+  z-index:2;
+  border-radius:50%!important;
+  padding:6px!important;
+}
+.brand-mark img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain;
+  border-radius:50%!important;
+  transform:none!important;
+}
+.brand:hover .brand-mark{transform:translateY(calc(-50% - 1px))!important}
+@media(max-width:900px){
+  .brand{min-width:86px}
+  .brand-mark{width:82px!important;height:82px!important;min-width:82px!important;left:0}
+}
+@media(max-width:620px){
+  .brand{min-width:82px}
+  .brand-mark{width:78px!important;height:78px!important;min-width:78px!important;left:0}
+}
