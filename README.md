@@ -1,10 +1,14 @@
-# Saif Ullah — Professional Portfolio
+# Saif Ullah — Professional Portfolio v2.1
 
-A production-ready static website for Saif Ullah, a multilingual translator, localization expert and language preservation specialist.
+Version 2.1 — a production-ready Vite/React portfolio website for Saif Ullah, a multilingual translator, localization expert and language preservation specialist.
 
 **Live URL:** https://xl8saif.github.io/site
 
 ---
+
+## Version 2.1
+
+The current `main` branch contains the v2.1 Vite/React implementation and its GitHub Pages deployment workflow.
 
 ## File Structure
 
