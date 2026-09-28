@@ -1080,9 +1080,9 @@ body::before{
 }
 @media(max-width:620px){.brand-mark{width:38px!important;height:38px!important;min-width:38px}}
 
-/* Keep the first (hero) section clear of the fixed header */
-.hero-section{padding-top:96px}
-@media(max-width:620px){.hero-section{padding-top:92px}}
+/* Keep the first (hero) section clearly below the fixed header */
+.hero-section{padding-top:128px!important}
+@media(max-width:620px){.hero-section{padding-top:118px!important}}
 
 /* Contact social buttons */
 .contact-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
