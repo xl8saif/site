@@ -992,3 +992,33 @@ body::before{
 .development-skill-list span{color:#596474;background:rgba(255,255,255,.68)}
 @media(max-width:800px){.development-heading{grid-template-columns:1fr;gap:25px}.development-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.development-section{padding:84px 0}.development-heading{margin-bottom:38px}.development-heading h2{font-size:36px}.development-card{min-height:auto;padding:23px;border-radius:21px}.development-card h3{font-size:25px}}
+
+
+/* CV download button */
+.cv-download-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  width:100%;
+  margin-top:14px;
+  padding:11px 15px;
+  border-radius:13px;
+  background:linear-gradient(145deg,#f8f5ec,#e3e6eb);
+  border:1px solid rgba(138,103,45,.20);
+  color:#765722;
+  font-family:var(--mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:5px 5px 11px rgba(163,177,198,.35),-4px -4px 10px rgba(255,255,255,.92);
+  transition:transform .2s ease,box-shadow .2s ease,color .2s ease;
+}
+.cv-download-button:hover{
+  color:#1a5fb4;
+  transform:translateY(-2px);
+  box-shadow:7px 7px 14px rgba(163,177,198,.45),-5px -5px 12px rgba(255,255,255,.98);
+}
+.cv-download-button span{font-size:13px;line-height:1}
