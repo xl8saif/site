@@ -41,6 +41,7 @@ const navigation = [
   { label: "Expertise", id: "expertise" },
   { label: "Experience", id: "experience" },
   { label: "Projects", id: "projects" },
+  { label: "Development", id: "development" },
   { label: "Languages", id: "languages" },
   { label: "Keyboards", id: "keyboards" },
   { label: "Contact", id: "contact" },
@@ -395,6 +396,75 @@ function App() {
               <article className="project-card"><img className="project-image" src={imageUrl("1499750310107-5fef28a66643")} alt="Digital work and localization workspace" loading="lazy" onError={handleImageError} /><span className="project-number">02</span><p>LOCALIZATION</p><h3>Saudi Ministry of Hajj & Umrah</h3><span className="project-line"/><p>Large-scale English and Arabic to Urdu and Persian translation and localization.</p></article>
               <article className="project-card"><img className="project-image" src={imageUrl("1542751371-adc38448a05e")} alt="Gaming and interactive media" loading="lazy" onError={handleImageError} /><span className="project-number">03</span><p>GAME LOCALIZATION</p><h3>PUBG MOBILE / World of Wonder</h3><span className="project-line"/><p>Urdu localization, terminology, LQA and structured game content handling.</p></article>
               <article className="project-card"><img className="project-image" src={imageUrl("1516321318423-f06f85e504b3")} alt="Digital language documentation and research" loading="lazy" onError={handleImageError} /><span className="project-number">04</span><p>LANGUAGE DOCUMENTATION</p><h3>Shina Language Documentation</h3><span className="project-line"/><p>Verification and linguistic documentation of Shina-language media and community content.</p></article>
+            </div>
+          </div>
+        </section>
+
+
+        <section id="development" className="development-section" aria-labelledby="development-heading">
+          <div className="container">
+            <div className="development-heading">
+              <div>
+                <p className="section-label">05 — DIGITAL DEVELOPMENT</p>
+                <h2 id="development-heading">Apps, websites and language tools — built with AI-assisted development.</h2>
+              </div>
+              <p>I design, prototype and build practical digital products that connect language expertise with AI, localization, research and everyday workflows.</p>
+            </div>
+
+            <div className="development-grid">
+              <article className="development-card development-card-featured">
+                <div className="development-card-top"><span>01</span><b>AI · LEGAL TECHNOLOGY</b></div>
+                <div className="development-icon" aria-hidden="true">AI</div>
+                <h3>Waraq Legal AI</h3>
+                <p>Local-first legal research and drafting workspace combining Pakistani case-law data, multilingual workflows and AI-assisted document support.</p>
+                <div className="development-tags"><span>React</span><span>AI / LLM</span><span>Local AI</span><span>Legal Data</span></div>
+                <a href="https://github.com/xl8saif/Waraq-LegalAi" target="_blank" rel="noreferrer">View project on GitHub ↗</a>
+              </article>
+
+              <article className="development-card">
+                <div className="development-card-top"><span>02</span><b>BUSINESS · WEB APP</b></div>
+                <div className="development-icon" aria-hidden="true">W</div>
+                <h3>WEMS</h3>
+                <p>A bilingual management system for Waraq Enterprises, designed around practical business workflows, administration and multilingual UI.</p>
+                <div className="development-tags"><span>Web App</span><span>EN / اردو</span><span>RTL</span><span>Admin</span></div>
+                <a href="https://github.com/xl8saif/wemsapp" target="_blank" rel="noreferrer">View project on GitHub ↗</a>
+              </article>
+
+              <article className="development-card">
+                <div className="development-card-top"><span>03</span><b>LANGUAGE · RESEARCH</b></div>
+                <div className="development-icon" aria-hidden="true">ݜ</div>
+                <h3>FiKR&CD Digital Platform</h3>
+                <p>A bilingual research and preservation platform for Indus-Kohistani language, cultural documentation, datasets and community resources.</p>
+                <div className="development-tags"><span>Research</span><span>Localization</span><span>Datasets</span><span>Preservation</span></div>
+                <a href="https://fikrcd.pages.dev/" target="_blank" rel="noreferrer">Visit the platform ↗</a>
+              </article>
+
+              <article className="development-card">
+                <div className="development-card-top"><span>04</span><b>CONTENT · AUTOMATION</b></div>
+                <div className="development-icon" aria-hidden="true">QR</div>
+                <h3>Quran Reels Maker</h3>
+                <p>A concept and workflow for generating short-form Quran video content, with attention to Arabic text, typography, layouts and repeatable production.</p>
+                <div className="development-tags"><span>Automation</span><span>Arabic UI</span><span>Content</span><span>Design</span></div>
+              </article>
+
+              <article className="development-card">
+                <div className="development-card-top"><span>05</span><b>LANGUAGE TOOLS</b></div>
+                <div className="development-icon" aria-hidden="true">ک</div>
+                <h3>Multilingual Keyboard Tools</h3>
+                <p>Practical Windows keyboard layouts supporting Urdu and Indus-Kohistani typing, digital communication and language preservation.</p>
+                <div className="development-tags"><span>Windows</span><span>Urdu</span><span>Indus-Kohistani</span><span>Input Tools</span></div>
+                <a href="#keyboards">Explore keyboard tools ↗</a>
+              </article>
+
+              <article className="development-card development-skills-card">
+                <div className="development-card-top"><span>SKILLS</span><b>BUILDING WITH AI</b></div>
+                <h3>Development skill set</h3>
+                <div className="development-skill-list">
+                  <span>AI-assisted / vibe coding</span><span>React & Vite</span><span>HTML / CSS / JavaScript</span>
+                  <span>Responsive UI & RTL</span><span>GitHub & Git workflows</span><span>Data & dataset engineering</span>
+                  <span>AI / LLM integration</span><span>Localization-aware product design</span><span>Cloud deployment</span>
+                </div>
+              </article>
             </div>
           </div>
         </section>
