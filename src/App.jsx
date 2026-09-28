@@ -319,11 +319,21 @@ function App() {
             <h2>Let's build better communication across languages.</h2>
             <a className="email-link" href="mailto:xl8.saif@gmail.com">xl8.saif@gmail.com</a>
             <div className="contact-links">
-              <a href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer">ProZ</a>
-              <a href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer">Upwork</a>
-              <a href="https://wa.me/923100989830" target="_blank" rel="noreferrer">WhatsApp</a>
-              <a href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer">Facebook update</a>
+              <a className="contact-social" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <span className="contact-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M6.5 8.2H3.1V21h3.4V8.2ZM4.8 3A2 2 0 1 0 4.8 7 2 2 0 0 0 4.8 3ZM21 13.7c0-3.9-2.1-5.8-5-5.8-2.3 0-3.3 1.3-3.9 2.2V8.2H8.7V21h3.4v-6.3c0-1.7.3-3.4 2.5-3.4 2.2 0 2.2 2 2.2 3.5V21H21v-7.3Z"/></svg></span><span className="contact-social-label">LinkedIn</span>
+              </a>
+              <a className="contact-social" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ">
+                <span className="contact-social-icon" aria-hidden="true"><span style={{fontFamily:"var(--mono)",fontSize:"12px",fontWeight:700,color:"var(--blue)"}}>P</span></span><span className="contact-social-label">ProZ</span>
+              </a>
+              <a className="contact-social" href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer" aria-label="Upwork">
+                <span className="contact-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M17.7 7.1c-1.9 0-3.3 1.2-4.3 3.1l-.6 1.1c-.7-1.5-1.1-3.1-1.2-4.7H8.8c.1 2.3.7 4.5 1.7 6.3-.7 1-1.5 1.5-2.5 1.5-1.3 0-2.1-.8-2.1-2.3V7.1H2.5v5c0 3.4 2 5.5 5.3 5.5 1.9 0 3.5-.8 4.8-2.3l.8-1c1 1.5 2.3 2.3 4.3 2.3 2.5 0 4.5-1.8 4.5-4.8s-1.8-4.7-4.5-4.7Zm0 7c-1 0-1.7-.6-2.3-1.7l.7-1.4c.5-1 1-1.6 1.8-1.6 1 0 1.7.9 1.7 2.3 0 1.5-.8 2.4-1.9 2.4Z"/></svg></span><span className="contact-social-label">Upwork</span>
+              </a>
+              <a className="contact-social" href="https://wa.me/923100989830" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+                <span className="contact-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.9-1.3A9.5 9.5 0 1 0 12 2.5Zm0 17.2a7.7 7.7 0 0 1-3.9-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.7 7.7 0 1 1 12 19.7Zm4.2-5.7c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.6.1l-.7.9c-.2.2-.3.2-.6.1-1.6-.8-2.7-1.8-3.5-3.4-.1-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.6 1 2.8.1.2 1.8 2.9 4.5 4 .6.3 1 .4 1.3.5.5.2 1 .2 1.4.1.4-.1 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1-.1-.2-.3-.3-.5-.4Z"/></svg></span><span className="contact-social-label">WhatsApp</span>
+              </a>
+              <a className="contact-social" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer" aria-label="Facebook update">
+                <span className="contact-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M13.7 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.6 1.7-1.6h1.6V3.6c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v1.9H7.3V13H10v8h3.7Z"/></svg></span><span className="contact-social-label">Facebook</span>
+              </a>
             </div>
           </div>
         </section>
