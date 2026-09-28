@@ -100,7 +100,7 @@ function App() {
       <header className="site-header">
         <div className="container nav-container">
           <button className="brand" onClick={() => scrollToSection("home")}>
-            <span className="brand-mark">SU</span>
+            <span className="brand-mark"><img src={`${import.meta.env.BASE_URL}images/CloudTrans-Logo%20-%20Copy.PNG`} alt="CloudTrans" /></span>
             <span className="brand-name">Saif Ullah</span>
           </button>
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
