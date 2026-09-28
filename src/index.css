@@ -764,16 +764,17 @@ body::before{
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(circle at 8% 15%,rgba(72,137,219,.18),transparent 30%),
-    radial-gradient(circle at 92% 88%,rgba(44,123,229,.12),transparent 28%),
-    linear-gradient(145deg,#162b45 0%,#203d5e 52%,#193451 100%);
-  color:#fff;
+    radial-gradient(circle at 10% 8%,rgba(255,255,255,.92),transparent 31%),
+    radial-gradient(circle at 88% 18%,rgba(196,157,83,.22),transparent 27%),
+    radial-gradient(circle at 78% 88%,rgba(205,214,224,.72),transparent 34%),
+    linear-gradient(145deg,#d9dde2 0%,#f4f2ed 46%,#e5e1d8 72%,#cfd5dc 100%);
+  color:var(--neu-ink);
   padding:112px 0 118px;
 }
 .language-section-v2:before{
   content:"";
   position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(117,105,82,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(117,105,82,.055) 1px,transparent 1px);
   background-size:44px 44px;
   mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 92%);
 }
@@ -794,13 +795,13 @@ body::before{
 }
 .language-lead{
   margin:20px 0 0;max-width:590px;
-  color:rgba(255,255,255,.68);font-size:15px;line-height:1.7;
+  color:#596273;font-size:15px;line-height:1.7;
 }
 .language-summary{
   padding:22px 24px;border-radius:22px;
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.11);
-  box-shadow:inset 1px 1px 4px rgba(255,255,255,.05),0 18px 40px rgba(0,0,0,.16);
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:10px 10px 24px rgba(163,177,198,.52),-8px -8px 20px rgba(255,255,255,.9),inset 1px 1px 0 rgba(255,255,255,.9);
   display:flex;flex-direction:column;
 }
 .language-summary strong{
@@ -818,9 +819,9 @@ body::before{
 }
 .language-card-v2{
   position:relative;min-height:208px;padding:23px 24px 20px;
-  overflow:hidden;border:1px solid rgba(255,255,255,.10);
-  border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.045));
-  box-shadow:10px 12px 28px rgba(0,0,0,.16),inset 1px 1px 3px rgba(255,255,255,.07);
+  overflow:hidden;border:1px solid rgba(255,255,255,.86);
+  border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(229,226,218,.72));
+  box-shadow:12px 12px 28px rgba(143,146,151,.52),-10px -10px 24px rgba(255,255,255,.94),inset 1px 1px 0 rgba(255,255,255,.92);
   transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
 }
 .language-card-v2:after{
@@ -836,12 +837,12 @@ body::before{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
 .language-index{
-  color:rgba(255,255,255,.35);font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  color:rgba(43,52,69,.42);font-family:var(--mono);font-size:9px;letter-spacing:.12em;
 }
 .language-level-v2{
   padding:6px 10px;border-radius:999px;
-  background:rgba(143,192,245,.12);border:1px solid rgba(143,192,245,.18);
-  color:#b9d9f7;font-family:var(--mono);font-size:8px;
+  background:rgba(255,255,255,.68);border:1px solid rgba(173,135,63,.22);
+  color:#8b6b32;font-family:var(--mono);font-size:8px;
   letter-spacing:.08em;text-transform:uppercase;
 }
 .language-script-v2{
@@ -855,14 +856,14 @@ body::before{
   margin:0;color:#fff;font-size:17px;line-height:1.2;font-weight:700;
 }
 .language-name-v2 span{
-  color:rgba(255,255,255,.43);font-family:var(--arabic);font-size:12px;
+  color:var(--neu-ink-3);font-family:var(--arabic);font-size:12px;
 }
 .language-codes-v2{
   display:flex;gap:18px;margin-top:20px;padding-top:12px;
-  border-top:1px solid rgba(255,255,255,.09);
+  border-top:1px solid rgba(163,177,198,.30);
 }
 .language-codes-v2 span{
-  color:rgba(255,255,255,.52);font-family:var(--mono);font-size:8px;
+  color:var(--neu-ink-3);font-family:var(--mono);font-size:8px;
   letter-spacing:.03em;text-transform:uppercase;
 }
 .language-codes-v2 b{color:rgba(255,255,255,.82);font-weight:700}
