@@ -1106,3 +1106,34 @@ body::before{
 @media(max-width:620px){.contact-links{gap:9px}.contact-social{padding-right:12px}.contact-social-label{font-size:10px}.contact-social-icon{width:32px;height:32px;flex-basis:32px}}
 /* Prevent fixed header overlap when scrolling to the hero */
 #home{scroll-margin-top:92px}
+
+/* Final contact brand-logo cleanup — remove duplicate pseudo-icons and use brand colors */
+.contact-links a::before{content:none!important;display:none!important}
+.contact-social{min-width:0;padding:8px 14px 8px 8px;border-radius:999px}
+.contact-social-icon{
+  width:34px;height:34px;flex:0 0 34px;
+  display:grid;place-items:center;border-radius:50%;
+  background:#fff;border:1px solid rgba(24,34,53,.08);
+  box-shadow:3px 4px 8px rgba(40,52,70,.12),-2px -2px 6px rgba(255,255,255,.95);
+}
+.contact-social-icon img{width:20px;height:20px;object-fit:contain;display:block}
+.contact-linkedin .contact-social-icon img{width:21px;height:21px}
+.contact-upwork .contact-social-icon img{width:21px;height:21px}
+.contact-whatsapp .contact-social-icon img{width:21px;height:21px}
+.contact-facebook .contact-social-icon img{width:21px;height:21px}
+.contact-proz-icon{
+  color:#e85b2a;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:-.05em;
+}
+.contact-social-label{color:var(--ink);font-size:10px;font-weight:700}
+.contact-social:hover .contact-social-label{color:var(--ink)}
+@media(max-width:620px){
+  .contact-links{display:flex;grid-template-columns:none;gap:8px}
+  .contact-social{padding:7px 11px 7px 7px}
+  .contact-social-icon{width:31px;height:31px;flex-basis:31px}
+  .contact-social-icon img{width:18px;height:18px}
+  .contact-social-label{font-size:9px}
+}
