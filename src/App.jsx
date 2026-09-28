@@ -138,11 +138,11 @@ function App() {
         <section id="about" className="content-section">
           <div className="container">
             <p className="section-label">01 — ABOUT</p>
-            <div className="section-heading"><h2>Professional language expertise with a cultural mission.</h2><p>I work at the intersection of translation, localization, multilingual communication and language preservation.</p></div>
+            <div className="section-heading"><h2>Professional language expertise with a cultural mission.</h2><p>I work at the intersection of Arabic ↔ Urdu translation, localization, multilingual communication, AI language data, language technology and language preservation.</p></div>
             <div className="about-grid">
-              <div><h3>12+ Years</h3><p>Professional experience across translation, interpretation, localization, LQA and multilingual communication.</p></div>
+              <div><h3>12+ Years</h3><p>Professional experience across Arabic ↔ Urdu translation, interpretation, localization, MTPE, LQA, AI language data and multilingual communication.</p></div>
               <div><h3>10 Working Languages</h3><p>Arabic, Urdu, Indus-Kohistani, English, Persian, Shina, Pashto, Punjabi, Gujri and Turkish.</p></div>
-              <div><h3>Language Preservation</h3><p>Dedicated to documenting and digitally preserving under-resourced and endangered languages.</p></div>
+              <div><h3>Language Preservation</h3><p>Dedicated to documenting and digitally preserving under-resourced languages, with a particular focus on Indus-Kohistani and Shina language technology.</p></div>
             </div>
           </div>
         </section>
