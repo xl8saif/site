@@ -320,7 +320,7 @@ function App() {
             <a className="email-link" href="mailto:xl8.saif@gmail.com">xl8.saif@gmail.com</a>
             <div className="contact-links">
               <a className="contact-social contact-linkedin" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="" /></span><span className="contact-social-label">LinkedIn</span>
+                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linkedin.svg" alt="" /></span><span className="contact-social-label">LinkedIn</span>
               </a>
               <a className="contact-social contact-proz" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ">
                 <span className="contact-social-icon contact-proz-icon" aria-hidden="true">ProZ</span><span className="contact-social-label">ProZ</span>
