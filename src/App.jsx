@@ -322,7 +322,7 @@ function App() {
               <div className="profile-frame glass-panel">
                 <img className="profile-image" src={`${import.meta.env.BASE_URL}images/saif-ullah.jpg`} alt="Portrait of Saif Ullah, translator and localization specialist" loading="eager" onError={handleImageError} />
               </div>
-              <div className="profile-caption glass-panel"><strong>Saif Ullah</strong><span>Translator & Localization Expert</span></div>
+              <div className="profile-caption glass-panel"><strong>Saif Ullah</strong><span>Translator & Localization Expert</span><a className="cv-download-button" href={`${import.meta.env.BASE_URL}images/SAIF%20ULLAH%20CV%202026.docx`} download target="_blank" rel="noreferrer">Download my CV <span aria-hidden="true">↓</span></a></div>
             </div>
           </div>
         </section>
