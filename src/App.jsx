@@ -49,12 +49,12 @@ const navigation = [
 const languages = [
   ["العربية", "Arabic", "ara", "ar", "Native", "Arabic", imageUrl("1519817650390-64a93db511aa")],
   ["اردو", "Urdu", "urd", "ur", "Native / Expert", "اردو", imageUrl("1594736797933-d0501ba2fe65")],
-  ["انڈس کوہستانی", "Indus-Kohistani", "mvy", "—", "Native fluency", "انڈس کوہستانی", imageUrl("1500534623283-312aade485b7")],
+  ["کوستَیں", "Indus-Kohistani", "mvy", "—", "Native fluency", "انڈس کوہستانی", imageUrl("1500534623283-312aade485b7")],
   ["English", "English", "eng", "en", "Fluent", "English", imageUrl("1521587760476-6c12a4b040da")],
   ["فارسی", "Persian", "fas", "fa", "Advanced", "فارسی", imageUrl("1564399579883-451a5d44ec08")],
-  ["شینا", "Shina", "scl", "—", "Advanced", "شینا", imageUrl("1519681393784-d120267933ba")],
+  ["ݜݨیاٗ", "Shina", "scl", "—", "Advanced", "شینا", imageUrl("1519681393784-d120267933ba")],
   ["پښتو", "Pashto", "pus", "ps", "Professional", "پښتو", imageUrl("1518005020951-eccb494ad742")],
-  ["ਪੰਜਾਬੀ", "Punjabi", "pan", "pa", "Professional", "ਪੰਜਾਬੀ", imageUrl("1532012197267-da84d127e765")],
+  ["پنجابی", "Punjabi", "pan", "pa", "Professional", "پنجابی", imageUrl("1532012197267-da84d127e765")],
   ["گوجری", "Gujri", "gju", "—", "Working", "گوجری", imageUrl("1519682337058-a94d519337bc")],
   ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", imageUrl("1524231757912-21f4fe3a7200")],
 ];
