@@ -1079,3 +1079,7 @@ body::before{
   box-shadow:7px 8px 15px rgba(130,143,158,.52),-6px -6px 12px rgba(255,255,255,1),inset 2px 2px 4px rgba(255,255,255,.98),inset -2px -2px 4px rgba(153,164,177,.22)!important;
 }
 @media(max-width:620px){.brand-mark{width:38px!important;height:38px!important;min-width:38px}}
+
+/* Keep the first (hero) section clear of the fixed header */
+.hero-section{padding-top:96px}
+@media(max-width:620px){.hero-section{padding-top:92px}}
