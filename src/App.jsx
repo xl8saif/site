@@ -60,77 +60,6 @@ const languages = [
   ["Türkçe", "Turkish", "tur", "tr", "Working", "Türkçe", imageUrl("1524231757912-21f4fe3a7200")],
 ];
 
-const linkedinPosts = [
-  {
-    date: "1 week ago",
-    title: "Open to New Localization Opportunities",
-    excerpt: "Open to new opportunities in Game Localization, Arabic Localization, LQA, Translation, MTPE and multilingual localization, with experience across Arabic, Urdu, Persian, English, Indus Kohistani and Shina.",
-    link: "https://www.linkedin.com/in/xl8saif/"
-  },
-  {
-    date: "1 month ago",
-    title: "Documenting Indus Kohistani: Language Preservation Efforts",
-    excerpt: "A long-term language-preservation project focused on documentation, multilingual resources, open datasets and creating a written future for an endangered language.",
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7485726150388985856/"
-  },
-  {
-    date: "4 months ago",
-    title: "Linguistic Validation — Why Translation Alone Isn't Enough",
-    excerpt: "A practical look at linguistic validation in healthcare and life sciences, including forward translation, back translation, expert review, cognitive debriefing and harmonization.",
-    link: "https://www.linkedin.com/in/xl8saif/"
-  }
-];
-
-const facebookPosts = [
-  {
-    date: "Latest update",
-    title: "Saif Ullah — Facebook Update",
-    excerpt: "Recent professional and language-related updates, including translation, localization, language technology and cultural preservation work.",
-    link: "https://www.facebook.com/share/p/1DZCDTed6U/"
-  }
-];
-
-const clients = [
-  ["LEVEL INFINITE", "Game Localization"],
-  ["iFLYTEK", "AI & Language Technology"],
-  ["PRODUCTIVE PLAYHOUSE", "Language Data & Verification"],
-  ["MINISTRY OF HAJJ & UMRAH", "Government Localization"],
-  ["MULTI LANGUAGES", "Certified Translation"],
-  ["AL WASEEM", "Translation Services"],
-  ["TAGHRID ENTERPRISES", "Translation & Language Services"],
-  ["FLI PAKISTAN", "Translation & Localization"],
-  ["RWS", "Language & Localization Technology"],
-  ["WARAQ ENTERPRISES", "Language Services · Founder / CEO"],
-  ["CLOUDTRANS", "Language Services · Founder"],
-  ["FiKR&CD", "Language Preservation · Co-Founder"],
-  ["PUBG MOBILE", "Game Localization · Urdu"],
-  ["WORLD OF WONDER", "Game Localization · Urdu"],
-  ["INDUS-KOHISTANI DIGITAL PRESERVATION", "Language Preservation Project"],
-  ["SHINA LANGUAGE DOCUMENTATION", "Language Documentation Project"],
-];
-
-const clientMark = (name) => {
-  const marks = {
-    "LEVEL INFINITE": "∞",
-    "iFLYTEK": "iF",
-    "PRODUCTIVE PLAYHOUSE": "P",
-    "MINISTRY OF HAJJ & UMRAH": "م",
-    "MULTI LANGUAGES": "ML",
-    "AL WASEEM": "AW",
-    "TAGHRID ENTERPRISES": "TE",
-    "FLI PAKISTAN": "FLI",
-    "RWS": "RWS",
-    "WARAQ ENTERPRISES": "W",
-    "CLOUDTRANS": "CT",
-    "FiKR&CD": "FiK",
-    "PUBG MOBILE": "P",
-    "WORLD OF WONDER": "WOW",
-    "INDUS-KOHISTANI DIGITAL PRESERVATION": "IK",
-    "SHINA LANGUAGE DOCUMENTATION": "ش",
-  };
-  return marks[name] || name.slice(0, 2);
-};
-
 const experience = [
   {
     period: "15 NOV 2017 — PRESENT",
@@ -353,7 +282,7 @@ function App() {
           <div className="container">
             <div className="language-intro">
               <div>
-                <p className="section-label">05 / LANGUAGES</p>
+                <p className="section-label">06 / LANGUAGES</p>
                 <h2>Fluency is more than knowing <em>words.</em></h2>
                 <p className="language-lead">It is knowing what they mean to the people who use them.</p>
               </div>
@@ -387,7 +316,7 @@ function App() {
 
         <section id="contact" className="contact-section">
           <div className="container contact-content">
-            <p className="section-label">06 — CONTACT</p>
+            <p className="section-label">07 — CONTACT</p>
             <h2>Let's build better communication across languages.</h2>
             <a className="email-link" href="mailto:xl8.saif@gmail.com">xl8.saif@gmail.com</a>
             <div className="contact-links">
@@ -404,7 +333,7 @@ function App() {
           <div className="container">
             <div className="keyboard-downloads-heading">
               <div>
-                <p className="section-label">WINDOWS KEYBOARDS</p>
+                <p className="section-label">08 — WINDOWS KEYBOARDS</p>
                 <h2 id="keyboards-heading">Language tools for everyday typing and digital preservation.</h2>
               </div>
               <p>Free Windows PC keyboard layouts developed for practical multilingual use.</p>
