@@ -4,6 +4,10 @@ Production portfolio for **Saif Ullah**, a multilingual translator, localization
 
 **Live portfolio:** https://xl8saif.github.io/site/
 
+## Professional focus
+
+Saif Ullah’s work connects **Arabic ↔ Urdu translation** with **multilingual localization, game LQA/MTPE, AI language data, language technology and low-resource language preservation**. The portfolio also documents practical work in Indus-Kohistani and Shina language research and digital preservation.
+
 ## Focus
 
 - Arabic ↔ Urdu ↔ Persian ↔ English translation and localization
