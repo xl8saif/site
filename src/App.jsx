@@ -397,30 +397,35 @@ function App() {
           </div>
         </section>
 
-        <section id="languages" className="content-section section-dark language-section">
+        <section id="languages" className="content-section language-section language-section-v2">
           <div className="container">
-            <p className="section-label">05 / LANGUAGES</p>
-            <div className="language-heading">
+            <div className="language-intro">
               <div>
+                <p className="section-label">05 / LANGUAGES</p>
                 <h2>Fluency is more than knowing <em>words.</em></h2>
-                <p>It is knowing what they mean to the people who use them.</p>
+                <p className="language-lead">It is knowing what they mean to the people who use them.</p>
+              </div>
+              <div className="language-summary">
+                <strong>10</strong>
+                <span>working languages</span>
+                <small>Translation · Localization · Language Technology</small>
               </div>
             </div>
-            <div className="languages-grid">
-              {languages.map(([native, english, iso3, iso1, level, typographicalName, image]) => (
-                <article className="language-item" key={english}>
-                  <img className="language-image" src={image} alt="" aria-hidden="true" loading="lazy" onError={handleImageError} />
-                  <div className="language-overlay" />
-                  <div className="language-item-content">
-                    <div className="language-name">
-                      <h3 className={/[\u0600-\u06FF\u0750-\u077F\u0900-\u097F\u0A00-\u0A7F]/.test(native) ? "native-script" : ""}>{native}</h3>
-                      <small>{english}</small>
-                    </div>
-                    <div className="language-meta">
-                      <span className="language-level">{level}</span>
-                      <span className="language-codes">ISO 639-3 <b>{iso3}</b> · ISO 639-1 <b>{iso1}</b></span>
-                      <span className="language-typography">{typographicalName}</span>
-                    </div>
+            <div className="languages-grid-v2">
+              {languages.map(([native, english, iso3, iso1, level, typographicalName], index) => (
+                <article className="language-card-v2" key={english}>
+                  <div className="language-card-top">
+                    <span className="language-index">0{index + 1}</span>
+                    <span className="language-level-v2">{level}</span>
+                  </div>
+                  <div className="language-script-v2" dir="auto">{native}</div>
+                  <div className="language-name-v2">
+                    <h3>{english}</h3>
+                    <span dir="auto">{typographicalName}</span>
+                  </div>
+                  <div className="language-codes-v2">
+                    <span><b>639-3</b> {iso3}</span>
+                    <span><b>639-1</b> {iso1}</span>
                   </div>
                 </article>
               ))}
