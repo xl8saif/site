@@ -26,8 +26,8 @@ const localImageFiles = {
   "1559028012-481c04fa702d": "23-1559028012-481c04fa702d.jpg",
   "1461749280684-dccba630e2f6": "24-1461749280684-dccba630e2f6.jpg"
 };
-const imageUrl = (id) => localImageFiles[id] ? `/site/images/${localImageFiles[id]}` : `/site/images/saif-ullah.jpg`;
-const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1662667465161-d853dfa901ea?auto=format&fit=crop&w=1200&q=82";
+const imageUrl = (id) => localImageFiles[id] ? `${import.meta.env.BASE_URL}images/${localImageFiles[id]}` : `${import.meta.env.BASE_URL}images/saif-ullah.jpg`;
+const FALLBACK_IMAGE_URL = `${import.meta.env.BASE_URL}images/saif-ullah.jpg`;
 const handleImageError = (event) => {
   const img = event.currentTarget;
   if (img.dataset.fallback) return;
@@ -119,7 +119,7 @@ function App() {
           <div className="container hero-grid">
             <div className="hero-content glass-panel">
               <p className="eyebrow">TRANSLATOR · LOCALIZATION · LANGUAGE TECHNOLOGY</p>
-              <h1>Saif Ullah — Translator &amp; Localization Specialist<span>Language connects people, cultures and ideas.</span></h1>
+              <h1>Saif Ullah — Arabic ↔ Urdu Translator &amp; Localization Specialist<span>Senior Multilingual Linguist · AI Data Specialist · Language Technology</span></h1>
               <p className="hero-description">Saif Ullah is a multilingual translator and localization specialist based in Gilgit, Pakistan, working across Arabic, Urdu, Persian, English, Indus-Kohistani and Shina, with a focus on game localization, LQA, MTPE, language technology and digital preservation.</p>
               <div className="hero-actions">
                 <button className="button button-primary" onClick={() => scrollToSection("projects")}>Explore my work</button>
@@ -141,7 +141,7 @@ function App() {
             <div className="section-heading"><h2>Professional language expertise with a cultural mission.</h2><p>I work at the intersection of translation, localization, multilingual communication and language preservation.</p></div>
             <div className="about-grid">
               <div><h3>12+ Years</h3><p>Professional experience across translation, interpretation, localization, LQA and multilingual communication.</p></div>
-              <div><h3>6 Core Languages</h3><p>Arabic, Urdu, Persian, English, Indus Kohistani and Shina.</p></div>
+              <div><h3>10 Working Languages</h3><p>Arabic, Urdu, Indus-Kohistani, English, Persian, Shina, Pashto, Punjabi, Gujri and Turkish.</p></div>
               <div><h3>Language Preservation</h3><p>Dedicated to documenting and digitally preserving under-resourced and endangered languages.</p></div>
             </div>
           </div>
@@ -319,8 +319,8 @@ function App() {
             <h2>Let's build better communication across languages.</h2>
             <a className="email-link" href="mailto:xl8.saif@gmail.com">xl8.saif@gmail.com</a>
             <div className="contact-links">
-              <a className="contact-social contact-linkedin" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linkedin.svg" alt="" /></span><span className="contact-social-label">LinkedIn</span>
+              <a className="contact-social contact-linkedin" href="https://www.linkedin.com/in/xl8saif/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile @xl8saif">
+                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linkedin.svg" alt="" /></span><span className="contact-social-label">@xl8saif</span>
               </a>
               <a className="contact-social contact-proz" href="https://www.proz.com/profile/3150554" target="_blank" rel="noreferrer" aria-label="ProZ">
                 <span className="contact-social-icon contact-proz-icon" aria-hidden="true">ProZ</span><span className="contact-social-label">ProZ</span>
@@ -328,8 +328,8 @@ function App() {
               <a className="contact-social contact-upwork" href="https://www.upwork.com/freelancers/~011ed3711aa3cf98f4" target="_blank" rel="noreferrer" aria-label="Upwork">
                 <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/upwork/14A800" alt="" /></span><span className="contact-social-label">Upwork</span>
               </a>
-              <a className="contact-social contact-whatsapp" href="https://wa.me/923100989830" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="" /></span><span className="contact-social-label">WhatsApp</span>
+              <a className="contact-social contact-whatsapp" href="https://wa.me/923100989830" target="_blank" rel="noreferrer" aria-label="WhatsApp +92 310 0989830">
+                <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="" /></span><span className="contact-social-label">+92 310 0989830</span>
               </a>
               <a className="contact-social contact-facebook" href="https://www.facebook.com/share/p/1DZCDTed6U/" target="_blank" rel="noreferrer" aria-label="Facebook update">
                 <span className="contact-social-icon" aria-hidden="true"><img src="https://cdn.simpleicons.org/facebook/1877F2" alt="" /></span><span className="contact-social-label">Facebook</span>
@@ -394,10 +394,10 @@ function App() {
           </div>
           <div className="site-footer-brands" aria-label="Waraq Enterprises and CloudTrans">
             <div className="site-footer-brand site-footer-brand-waraq">
-              <img src="/site/images/waraq-logo.png" alt="Waraq Enterprises" />
+              <img src={`${import.meta.env.BASE_URL}images/waraq-logo.png`} alt="Waraq Enterprises" />
             </div>
             <div className="site-footer-brand site-footer-brand-cloudtrans">
-              <img src="/site/images/CloudTrans-Logo - Copy.PNG" alt="CloudTrans" />
+              <img src={`${import.meta.env.BASE_URL}images/CloudTrans-Logo%20-%20Copy.PNG`} alt="CloudTrans" />
             </div>
           </div>
         </div>
