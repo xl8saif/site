@@ -78,7 +78,7 @@ const experience = [
   {
     period: "2024 — PRESENT",
     role: "Co-Founder",
-    organization: "FiKR&CD — Forum for Indus-Kohistani Research & Culture Development",
+    organization: "FiKR&CD — Forum for Indus-Kohistani Research & Cultural Development",
     location: "Gilgit-Baltistan, Pakistan",
     description: "Working on the documentation, preservation and digital development of Indus-Kohistani language and cultural heritage through community-led research and language technology.",
   },
