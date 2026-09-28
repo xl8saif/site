@@ -1076,10 +1076,10 @@ body::before{
   filter:drop-shadow(1px 2px 2px rgba(60,72,88,.22));
 }
 .brand:hover .brand-mark{
-  transform:translateY(-1px);
+  transform:translateY(calc(-50% - 1px))!important;
   box-shadow:7px 8px 15px rgba(130,143,158,.52),-6px -6px 12px rgba(255,255,255,1),inset 2px 2px 4px rgba(255,255,255,.98),inset -2px -2px 4px rgba(153,164,177,.22)!important;
 }
-@media(max-width:620px){.brand-mark{width:250px!important;height:250px!important;min-width:80px}}
+@media(max-width:620px){.brand-mark{width:250px!important;height:250px!important;position:absolute!important;left:18px;top:50%;transform:translateY(-50%)!important;z-index:2;min-width:80px}}
 
 /* Keep the first (hero) section clearly below the fixed header */
 .hero-section{padding-top:128px!important}
