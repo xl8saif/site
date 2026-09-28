@@ -1022,3 +1022,8 @@ body::before{
   box-shadow:7px 7px 14px rgba(163,177,198,.45),-5px -5px 12px rgba(255,255,255,.98);
 }
 .cv-download-button span{font-size:13px;line-height:1}
+
+
+/* CV button — blue with white text */
+.cv-download-button{background:linear-gradient(145deg,#2c7be5,#1a5fb4);border-color:rgba(26,95,180,.42);color:#fff;box-shadow:6px 6px 14px rgba(26,95,180,.34),-4px -4px 10px rgba(255,255,255,.92)}
+.cv-download-button:hover{background:linear-gradient(145deg,#3a8bf0,#1a5fb4);color:#fff;box-shadow:8px 9px 17px rgba(26,95,180,.42),-5px -5px 12px rgba(255,255,255,.98)}
