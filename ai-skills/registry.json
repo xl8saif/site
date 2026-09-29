@@ -67,7 +67,7 @@
       "scripts/evaluate.py"
     ]
   },
-  "version": "1.4.0",
+  "version": "1.5.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
@@ -76,5 +76,10 @@
   "evaluation": {
     "schema": "core/evaluation.schema.json",
     "engine": "core/scripts/evaluate.py"
+  },
+  "runner": {
+    "command": "python ai-skills/run.py all",
+    "path": "ai-skills/run.py",
+    "status": "stable"
   }
 }
