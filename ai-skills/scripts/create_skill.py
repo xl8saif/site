@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = ROOT / "templates" / "skill"
-SKILLS = ROOT / "skills"
+SKILLS = ROOT
 
 
 def slug(value):
@@ -60,8 +60,8 @@ def main():
         "id": skill_id,
         "status": "draft",
         "domain": [],
-        "path": str(Path("skills") / skill_id),
-        "entrypoint": str(Path("skills") / skill_id / "SKILL.md"),
+        "path": skill_id,
+        "entrypoint": str(Path(skill_id) / "SKILL.md"),
         "deterministic_tools": [],
         "protected_work": [],
     })
