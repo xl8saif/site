@@ -19,3 +19,5 @@ jobs:
           python-version: "3.11"
       - name: Validate and evaluate all Skills
         run: python ai-skills/run.py all
+      - name: Run framework smoke test
+        run: python ai-skills/core/scripts/smoke_test.py
