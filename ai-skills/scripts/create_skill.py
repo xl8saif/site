@@ -68,6 +68,12 @@ def main():
     registry_data["version"] = registry_data.get("version", "1.0.0")
     registry.write_text(json.dumps(registry_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    plugin = ROOT / "plugin.json"
+    if plugin.exists():
+        plugin_data = json.loads(plugin.read_text(encoding="utf-8"))
+        plugin_data["version"] = registry_data["version"]
+        plugin.write_text(json.dumps(plugin_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     print(destination)
     print("Registered in ai-skills/registry.json with status=draft.")
 
