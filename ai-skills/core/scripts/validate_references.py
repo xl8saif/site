@@ -56,7 +56,7 @@ def main():
                 errors.append(f"{rid}: reference path escapes references directory")
             else:
                 if not ref_path.is_file():
-                    errors.append(f"{rid}: referenced file does not exist: {ref[\"path\"]}")
+                    errors.append(f"{rid}: referenced file does not exist: {ref.get('path')}")
                 elif ref_path.suffix.lower() == ".json":
                     try:
                         json.loads(ref_path.read_text(encoding="utf-8"))
