@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Framework self-audit
+        run: python ai-skills/core/scripts/self_audit.py
       - name: Validate and evaluate all Skills
         run: python ai-skills/run.py all
       - name: Run framework smoke test
