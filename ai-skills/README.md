@@ -45,6 +45,10 @@ python ai-skills/scripts/create_skill.py <skill-id> "<description>"
 
 The generated Skill contains `SKILL.md`, `references/`, `scripts/`, and `evals/`. Domain-specific rules stay inside the generated Skill; reusable deterministic logic belongs in `core/`.
 
+## Framework self-audit
+
+Run `python ai-skills/core/scripts/self_audit.py` before normal evaluation when making structural changes. It checks registry paths, Skill entrypoints, deterministic tools, eval contracts, reference manifests, plugin synchronization, Python syntax, and production reference retrieval.
+
 ## One-command validation
 
 From the repository root:
@@ -71,7 +75,7 @@ The canonical plugin manifest is `plugin.json`. It exposes both production Skill
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.6.3`.
+The manifest version and registry release are kept in sync. Current release: `1.7.0`.
 
 ## Promotion gate
 
