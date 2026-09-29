@@ -43,3 +43,21 @@ python ai-skills/scripts/create_skill.py <skill-id> "<description>"
 ```
 
 The generated Skill contains `SKILL.md`, `references/`, `scripts/`, and `evals/`. Domain-specific rules stay inside the generated Skill; reusable deterministic logic belongs in `core/`.
+
+## One-command validation
+
+From the repository root:
+
+```bash
+python ai-skills/run.py all
+```
+
+This validates the Skill registry and evaluates every registered Skill. GitHub Actions runs the same command automatically when `ai-skills/` changes.
+
+Individual commands:
+
+```bash
+python ai-skills/run.py list
+python ai-skills/run.py validate
+python ai-skills/run.py evaluate
+```
