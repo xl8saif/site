@@ -23,6 +23,13 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
+    if registry.get("schema_version") != "1.0":
+        errors.append("registry schema_version must be 1.0")
+    if not registry.get("name") or not registry.get("owner"):
+        errors.append("registry requires name and owner")
+    if not isinstance(registry.get("skills"), list):
+        errors.append("registry skills must be an array")
+        return errors
     if registry.get("version") != "1.6.3":
         errors.append("registry version must match release 1.6.3")
     ids = set()
