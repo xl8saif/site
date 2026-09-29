@@ -2,6 +2,9 @@
 
 ## 1.6.3
 
+- Added an end-to-end smoke test covering reference validation, structural QA, retrieval, and the unified runner.
+- Corrected framework path resolution in core reference tooling and production QA wrappers.
+
 - Generalized the promotion gate so research and legal Skills are not forced to maintain translation-specific terminology artifacts.
 
 - Connected production localization QA wrappers to the verified Reference Retrieval Layer.
