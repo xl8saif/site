@@ -93,7 +93,7 @@ def evaluate_skill(item):
 
 def main():
     parser = argparse.ArgumentParser(description="Unified AI Skills runner.")
-    parser.add_argument("command", choices=["list", "validate", "evaluate", "check", "all"])
+    parser.add_argument("command", choices=["list", "validate", "evaluate", "promote-check", "check", "all"])
     parser.add_argument("--skill", help="Run only the named Skill.")
     parser.add_argument("--status", help="Only run Skills with this registry status.")
     args = parser.parse_args()
@@ -122,6 +122,15 @@ def main():
             return 1
         if args.command == "validate":
             return 0
+
+    if args.command == "promote-check":
+        if not args.skill:
+            print("promote-check requires --skill")
+            return 1
+        item = selected[0]
+        gate = ROOT / "scripts" / "promotion_gate.py"
+        result = subprocess.run([sys.executable, str(gate), item["id"]], text=True)
+        return result.returncode
 
     if args.command in {"evaluate", "check", "all"}:
         failures = 0
