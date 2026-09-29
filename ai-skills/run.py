@@ -22,8 +22,8 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
-    if registry.get("version") != "1.6.0":
-        errors.append("registry version must match release 1.6.0")
+    if registry.get("version") != "1.6.1":
+        errors.append("registry version must match release 1.6.1")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
@@ -44,6 +44,42 @@ def validate_registry(registry):
         for tool in item.get("deterministic_tools", []):
             if not (skill_path / tool).exists():
                 errors.append(f"{sid}: missing deterministic tool {tool}")
+    return errors
+
+def validate_plugin(registry):
+    errors = []
+    plugin_path = ROOT / "plugin.json"
+    if not plugin_path.exists():
+        return ["missing plugin.json"]
+    try:
+        plugin = json.loads(plugin_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"plugin.json: invalid JSON: {exc}"]
+    if plugin.get("version") != registry.get("version"):
+        errors.append("plugin version must match registry version")
+    registry_by_path = {
+        item.get("entrypoint"): item
+        for item in skills(registry)
+        if item.get("entrypoint")
+    }
+    plugin_skills = plugin.get("skills", [])
+    if not isinstance(plugin_skills, list):
+        errors.append("plugin skills must be an array")
+        return errors
+    if len(plugin_skills) != len(set(plugin_skills)):
+        errors.append("plugin contains duplicate Skill entries")
+    for ref in plugin_skills:
+        entrypoint = ref[2:] if isinstance(ref, str) and ref.startswith("./") else ref
+        item = registry_by_path.get(entrypoint)
+        if item is None:
+            errors.append(f"plugin references unregistered Skill: {ref}")
+        elif item.get("status") != "production":
+            errors.append(f"plugin references non-production Skill: {ref}")
+    for item in skills(registry):
+        if item.get("status") == "production":
+            expected = "./" + item.get("entrypoint", "")
+            if expected not in plugin_skills:
+                errors.append(f"production Skill missing from plugin: {item.get('id')}")
     return errors
 
 
@@ -77,7 +113,7 @@ def main():
             print(f"{item['id']} [{item.get('status', 'unknown')}]")
         return 0
 
-    errors = validate_registry(registry)
+    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
     if args.command in {"validate", "check", "all"}:
         print(f"REGISTRY {'PASS' if not errors else 'FAIL'}")
         for error in errors:
