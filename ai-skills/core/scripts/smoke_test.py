@@ -48,7 +48,7 @@ def main():
     retriever = ROOT / "core" / "scripts" / "retrieve_references.py"
     result = run(retriever, "pubg-urdu-lqa", "Official", "--limit", "5")
     if result.returncode:
-        failures.append(f"reference retrieval failed\\n{result.stdout}{result.stderr}")
+        failures.append(f"reference retrieval failed\n{result.stdout}{result.stderr}")
     else:
         try:
             payload = json.loads(result.stdout)
@@ -60,12 +60,12 @@ def main():
     # Exercise the unified validation/evaluation path.
     result = run(runner, "all")
     if result.returncode:
-        failures.append(f"unified runner failed\\n{result.stdout}{result.stderr}")
+        failures.append(f"unified runner failed\n{result.stdout}{result.stderr}")
 
     if failures:
         print("SMOKE FAIL")
         for failure in failures:
-            print(f"\\n- {failure}")
+            print(f"\n- {failure}")
         return 1
 
     print("SMOKE PASS")
