@@ -22,6 +22,8 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
+    if registry.get("version") != "1.5.0":
+        errors.append("registry version must match release 1.5.0")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
@@ -35,6 +37,10 @@ def validate_registry(registry):
             elif not (ROOT / value).exists():
                 errors.append(f"{sid}: missing path {value}")
         skill_path = ROOT / item.get("path", "")
+        if item.get("status") == "production" and not (skill_path / "SKILL.md").exists():
+            errors.append(f"{sid}: production Skill missing SKILL.md")
+        if item.get("status") == "production" and not (skill_path / "evals" / "cases.jsonl").exists():
+            errors.append(f"{sid}: production Skill missing evals/cases.jsonl")
         for tool in item.get("deterministic_tools", []):
             if not (skill_path / tool).exists():
                 errors.append(f"{sid}: missing deterministic tool {tool}")
