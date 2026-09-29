@@ -23,8 +23,8 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
-    if registry.get("version") != "1.6.2":
-        errors.append("registry version must match release 1.6.2")
+    if registry.get("version") != "1.6.3":
+        errors.append("registry version must match release 1.6.3")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
@@ -133,7 +133,8 @@ def main():
         return subprocess.run([sys.executable, str(retriever), args.skill, *args.query], text=True).returncode
 
     errors = validate_registry(registry)
-    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
+    plugin_errors = validate_plugin(registry)
+    errors.extend(plugin_errors)
     if args.command in {"validate", "check", "all"}:
         print(f"REGISTRY {'PASS' if not errors else 'FAIL'}")
         for error in errors:
