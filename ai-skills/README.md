@@ -15,6 +15,7 @@ Each skill is self-contained and should expose:
 The current production skill is:
 
 - pubg-urdu-lqa — PUBG MOBILE Urdu translation, MTPE, terminology, and LQA
+- arabic-urdu-localization — Arabic→Urdu localization, MTPE, terminology, and LQA
 
 ## Design principles
 
@@ -69,7 +70,7 @@ The canonical plugin manifest is `plugin.json`. It exposes both production Skill
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept at `1.5.0`.
+The manifest version and registry release are kept in sync.
 
 ## Production gate
 
