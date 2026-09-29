@@ -33,3 +33,13 @@ Capture a repeated workflow → encode rules → add deterministic checks → ad
 ## Registry
 
 See registry.json for machine-readable skill metadata.
+
+## Skill Factory
+
+New Skills should start from `templates/skill/`. The repository includes `scripts/create_skill.py` to generate the standard structure:
+
+```bash
+python ai-skills/scripts/create_skill.py <skill-id> "<description>"
+```
+
+The generated Skill contains `SKILL.md`, `references/`, `scripts/`, and `evals/`. Domain-specific rules stay inside the generated Skill; reusable deterministic logic belongs in `core/`.
