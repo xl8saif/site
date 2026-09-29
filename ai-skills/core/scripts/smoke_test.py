@@ -33,8 +33,8 @@ def main():
         tmp = Path(tmp)
         source = tmp / "source.txt"
         target = tmp / "target.txt"
-        source.write_text("<b>{name}</b>\\n", encoding="utf-8")
-        target.write_text("<b>{name}</b>\\n", encoding="utf-8")
+        source.write_text("<b>{name}</b>\n", encoding="utf-8")
+        target.write_text("<b>{name}</b>\n", encoding="utf-8")
         result = run(checker, "--source", source, "--target", target)
         if result.returncode:
             failures.append("shared structural checker rejected a valid fixture")
