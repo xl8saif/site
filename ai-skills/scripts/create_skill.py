@@ -57,7 +57,7 @@ def main():
 
     registry = ROOT / "registry.json"
     registry_data = json.loads(registry.read_text(encoding="utf-8"))
-    registry_data.setdefault("skills", []).append({
+    if any(item.get("id") == skill_id for item in registry_data.get("skills", [])):\n        raise SystemExit(f"Skill already registered: {skill_id}")\n\n    registry_data.setdefault("skills", []).append({
         "id": skill_id,
         "status": "draft",
         "domain": [],
