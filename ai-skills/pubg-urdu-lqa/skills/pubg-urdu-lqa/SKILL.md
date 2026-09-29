@@ -62,3 +62,15 @@ Keep valid XML/HTML and placeholders in the exact position required by the sourc
 ## Validation principle
 
 Automated checks prove structural properties, not linguistic correctness. A passing script does not override terminology, semantic, or contextual review.
+
+
+## Evaluation and regression
+
+When changing this skill, use the evaluation material in `evals/`.
+
+- `evals/cases.jsonl` contains prior-work reference cases plus explicitly marked synthetic structural fixtures.
+- `scripts/validate_eval_cases.py` validates the evaluation schema and deterministic structural expectations.
+- Do not treat a synthetic fixture as evidence for a linguistic terminology decision.
+- Prefer exact historical cases and user-confirmed terminology decisions when expanding the gold set.
+- When a new production correction is confirmed, add it as a regression case with provenance and a concise rationale.
+- A skill change should be considered a regression risk if it causes a previously correct terminology, meaning, placeholder, tag, or line-break case to fail.
