@@ -25,6 +25,19 @@
         "placeholders",
         "line-breaks"
       ]
+    },
+    {
+      "id": "legal-workflow",
+      "type": "workflow",
+      "title": "Legal translation QA workflow",
+      "status": "verified",
+      "source": "user-confirmed legal translation workflow principles",
+      "tags": [
+        "legal",
+        "qa",
+        "workflow"
+      ],
+      "path": "legal-workflow.json"
     }
   ]
 }
