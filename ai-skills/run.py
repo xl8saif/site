@@ -34,8 +34,9 @@ def validate_registry(registry):
                 errors.append(f"{sid}: missing {key}")
             elif not (ROOT / value).exists():
                 errors.append(f"{sid}: missing path {value}")
+        skill_path = ROOT / item.get("path", "")
         for tool in item.get("deterministic_tools", []):
-            if not (ROOT / item["path"] / tool).exists():
+            if not (skill_path / tool).exists():
                 errors.append(f"{sid}: missing deterministic tool {tool}")
     return errors
 
@@ -43,22 +44,30 @@ def validate_registry(registry):
 def evaluate_skill(item):
     cases = ROOT / item["path"] / "evals" / "cases.jsonl"
     if not cases.exists():
-        return 0, f"{item['id']}: no evals/cases.jsonl"
-    result = subprocess.run(
-        [sys.executable, str(EVALUATOR), str(cases)],
-        text=True,
-    )
+        return 1, f"{item['id']}: missing evals/cases.jsonl"
+    result = subprocess.run([sys.executable, str(EVALUATOR), str(cases)], text=True)
     return result.returncode, f"{item['id']}: evaluator exit={result.returncode}"
 
 
 def main():
     parser = argparse.ArgumentParser(description="Unified AI Skills runner.")
     parser.add_argument("command", choices=["list", "validate", "evaluate", "check", "all"])
+    parser.add_argument("--skill", help="Run only the named Skill.")
+    parser.add_argument("--status", help="Only run Skills with this registry status.")
     args = parser.parse_args()
     registry = load_registry()
 
+    selected = [
+        item for item in skills(registry)
+        if (not args.skill or item.get("id") == args.skill)
+        and (not args.status or item.get("status") == args.status)
+    ]
+    if args.skill and not selected:
+        print(f"Unknown Skill: {args.skill}")
+        return 1
+
     if args.command == "list":
-        for item in skills(registry):
+        for item in selected:
             print(f"{item['id']} [{item.get('status', 'unknown')}]")
         return 0
 
@@ -74,12 +83,12 @@ def main():
 
     if args.command in {"evaluate", "check", "all"}:
         failures = 0
-        for item in skills(registry):
-            code, _ = evaluate_skill(item)
+        for item in selected:
+            code, message = evaluate_skill(item)
+            print(message)
             failures += int(code != 0)
         print(f"SKILL EVALUATION {'PASS' if failures == 0 else 'FAIL'}: {len(selected)} skills")
-        if failures:
-            return 1
+        return 1 if failures else 0
 
     return 0
 
