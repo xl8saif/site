@@ -26,7 +26,7 @@ Each case records:
 
 ## Dataset status
 
-The first version contains a small seed set of verified historical examples. More real LQA cases should be added before using this as a quantitative benchmark.
+The first version contains 11 historical terminology/LQA cases and 3 deterministic structural fixtures for tags, placeholders, and line breaks. More real LQA cases should be added before using this as a quantitative benchmark.
 
 ## Case schema
 
