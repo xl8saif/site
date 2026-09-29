@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[3]
 CORE = ROOT / "core" / "scripts" / "check_localization.py"
 TERMS = Path(__file__).resolve().parents[1] / "references" / "terminology.json"
 PROTECTED = Path(__file__).resolve().parents[1] / "references" / "protected-terms.json"
+RETRIEVER = ROOT / "core" / "scripts" / "retrieve_references.py"
 
 
 def main():
@@ -20,6 +21,11 @@ def main():
     parser.add_argument("--target", required=True)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+
+    retrieval = subprocess.run([sys.executable, str(RETRIEVER), "pubg-urdu-lqa", *args.source.split(), "--limit", "20"], capture_output=True, text=True)
+    if retrieval.returncode != 0:
+        print("REFERENCE RETRIEVAL FAIL")
+        return retrieval.returncode
 
     cmd = [
         sys.executable, str(CORE),
