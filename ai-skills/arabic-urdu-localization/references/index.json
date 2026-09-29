@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "arabic-urdu-localization",
+  "references": [
+    {
+      "id": "ar-ur-terminology",
+      "type": "terminology",
+      "title": "Arabic→Urdu terminology",
+      "status": "verified",
+      "path": "terminology.json",
+      "source": "user-confirmed localization terminology",
+      "tags": ["arabic", "urdu", "translation"]
+    },
+    {
+      "id": "ar-ur-protected-terms",
+      "type": "rule",
+      "title": "Protected technical terms",
+      "status": "verified",
+      "path": "protected-terms.json",
+      "source": "production formatting and terminology rules",
+      "tags": ["protected-terms", "technical"]
+    },
+    {
+      "id": "ar-ur-structural-invariants",
+      "type": "rule",
+      "title": "Structural preservation rules",
+      "status": "verified",
+      "source": "shared localization QA contract",
+      "tags": ["xml", "html", "placeholders", "line-breaks"]
+    }
+  ]
+}
