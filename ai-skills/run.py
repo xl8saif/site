@@ -104,6 +104,7 @@ def main():
     parser.add_argument("command", choices=["list", "validate", "evaluate", "retrieve", "promote-check", "check", "all"])
     parser.add_argument("--skill", help="Run only the named Skill.")
     parser.add_argument("--status", help="Only run Skills with this registry status.")
+    parser.add_argument("query", nargs="*", help="Reference retrieval query.")
     args = parser.parse_args()
     registry = load_registry()
 
@@ -121,7 +122,7 @@ def main():
             print(f"{item['id']} [{item.get('status', 'unknown')}]")
         return 0
 
-    if args.command == "retrieve":\n        if not args.skill:\n            print("retrieve requires --skill")\n            return 1\n        query = input("Reference query: ").strip()\n        if not query:\n            print("Reference query cannot be empty")\n            return 1\n        retriever = ROOT / "core" / "scripts" / "retrieve_references.py"\n        return subprocess.run([sys.executable, str(retriever), args.skill, *query.split()], text=True).returncode\n\n    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
+    if args.command == "retrieve":\n        if not args.skill:\n            print("retrieve requires --skill")\n            return 1\n        if not args.query:\n            print("retrieve requires a query")\n            return 1\n        retriever = ROOT / "core" / "scripts" / "retrieve_references.py"\n        return subprocess.run([sys.executable, str(retriever), args.skill, *args.query], text=True).returncode\n\n    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
     if args.command in {"validate", "check", "all"}:
         print(f"REGISTRY {'PASS' if not errors else 'FAIL'}")
         for error in errors:
