@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.0
+
+- Added a framework-level self-audit for registry paths, Skill entrypoints, deterministic tools, eval contracts, reference manifests, plugin synchronization, Python syntax, and production reference retrieval.
+- Added path-containment and duplicate-ID checks to the audit layer so structural drift is detected before evaluation.
+- Added the self-audit to GitHub Actions before the unified Skill evaluation.
+- Synchronized the registry, runner, and plugin release metadata at 1.7.0.
+
 ## 1.6.3
 
 - Added an end-to-end smoke test covering reference validation, structural QA, retrieval, and the unified runner.
