@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REGISTRY = ROOT / "registry.json"
 EVALUATOR = ROOT / "core" / "scripts" / "evaluate.py"
+REFERENCE_VALIDATOR = ROOT / "core" / "scripts" / "validate_references.py"
 
 
 def load_registry():
@@ -44,6 +45,13 @@ def validate_registry(registry):
         for tool in item.get("deterministic_tools", []):
             if not (skill_path / tool).exists():
                 errors.append(f"{sid}: missing deterministic tool {tool}")
+        reference_index = skill_path / "references" / "index.json"
+        if reference_index.exists():
+            result = subprocess.run([sys.executable, str(REFERENCE_VALIDATOR), sid], capture_output=True, text=True)
+            if result.returncode:
+                errors.append(f"{sid}: invalid reference index")
+        elif item.get("status") == "production":
+            errors.append(f"{sid}: production Skill missing references/index.json")
     return errors
 
 def validate_plugin(registry):
