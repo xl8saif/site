@@ -54,7 +54,7 @@
     },
     {
       "id": "multilingual-translation-mtpe",
-      "status": "draft",
+      "status": "production",
       "domain": [
         "translation",
         "mtpe",
@@ -72,7 +72,7 @@
     },
     {
       "id": "indus-kohistani-research",
-      "status": "draft",
+      "status": "production",
       "domain": [
         "linguistic-research",
         "indus-kohistani",
@@ -91,7 +91,7 @@
     },
     {
       "id": "legal-translation-qa",
-      "status": "draft",
+      "status": "production",
       "domain": [
         "legal",
         "translation",
@@ -129,7 +129,7 @@
       "scripts/self_audit.py"
     ]
   },
-  "version": "1.7.0",
+  "version": "1.8.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
