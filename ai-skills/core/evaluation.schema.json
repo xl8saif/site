@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Localization Evaluation Case",
+  "type":"object",
+  "required":["id","source","expected_target","task","error_type","severity","checks","rationale","provenance"],
+  "properties":{
+    "id":{"type":"string","minLength":1},
+    "source":{"type":"string"},
+    "previous_target":{"type":"string"},
+    "expected_target":{"type":"string"},
+    "task":{"enum":["translation","mtpe","lqa","terminology","structural_qa"]},
+    "error_type":{"type":"string","minLength":1},
+    "severity":{"enum":["critical","major","minor","query"]},
+    "checks":{"type":"array","items":{"type":"string"}},
+    "rationale":{"type":"string","minLength":1},
+    "provenance":{"enum":["prior_conversation","synthetic_fixture"]}
+  },
+  "additionalProperties":false
+}
