@@ -23,8 +23,8 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
-    if registry.get("version") != "1.6.1":
-        errors.append("registry version must match release 1.6.1")
+    if registry.get("version") != "1.6.2":
+        errors.append("registry version must match release 1.6.2")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
@@ -101,7 +101,7 @@ def evaluate_skill(item):
 
 def main():
     parser = argparse.ArgumentParser(description="Unified AI Skills runner.")
-    parser.add_argument("command", choices=["list", "validate", "evaluate", "promote-check", "check", "all"])
+    parser.add_argument("command", choices=["list", "validate", "evaluate", "retrieve", "promote-check", "check", "all"])
     parser.add_argument("--skill", help="Run only the named Skill.")
     parser.add_argument("--status", help="Only run Skills with this registry status.")
     args = parser.parse_args()
@@ -121,7 +121,7 @@ def main():
             print(f"{item['id']} [{item.get('status', 'unknown')}]")
         return 0
 
-    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
+    if args.command == "retrieve":\n        if not args.skill:\n            print("retrieve requires --skill")\n            return 1\n        query = input("Reference query: ").strip()\n        if not query:\n            print("Reference query cannot be empty")\n            return 1\n        retriever = ROOT / "core" / "scripts" / "retrieve_references.py"\n        return subprocess.run([sys.executable, str(retriever), args.skill, *query.split()], text=True).returncode\n\n    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
     if args.command in {"validate", "check", "all"}:
         print(f"REGISTRY {'PASS' if not errors else 'FAIL'}")
         for error in errors:
