@@ -36,7 +36,15 @@
       "structural-invariants",
       "finding-model",
       "evaluation-contract"
+    ],
+    "tools": [
+      "scripts/check_localization.py"
     ]
   },
-  "version": "1.1.0"
+  "version": "1.2.0",
+  "factory": {
+    "template": "templates/skill",
+    "generator": "scripts/create_skill.py",
+    "status": "stable"
+  }
 }
