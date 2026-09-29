@@ -61,6 +61,7 @@ Individual commands:
 python ai-skills/run.py list
 python ai-skills/run.py validate
 python ai-skills/run.py evaluate
+python ai-skills/run.py --skill <skill-id> promote-check
 ```
 
 ## Plugin distribution
@@ -71,6 +72,10 @@ The canonical plugin manifest is `plugin.json`. It exposes both production Skill
 - `arabic-urdu-localization/SKILL.md`
 
 The manifest version and registry release are kept in sync.
+
+## Promotion gate
+
+Draft Skills can be checked before promotion with `promote-check`. The gate verifies required artifacts, evaluation results, and reference maturity. Passing the gate does not silently promote the Skill; human review remains required.
 
 ## Production gate
 
