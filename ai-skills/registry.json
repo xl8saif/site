@@ -6,7 +6,12 @@
     {
       "id": "pubg-urdu-lqa",
       "status": "production",
-      "domain": ["game-localization", "urdu", "lqa", "mtpe"],
+      "domain": [
+        "game-localization",
+        "urdu",
+        "lqa",
+        "mtpe"
+      ],
       "path": "pubg-urdu-lqa",
       "entrypoint": "pubg-urdu-lqa/SKILL.md",
       "deterministic_tools": [
@@ -23,5 +28,15 @@
         "protected product terms"
       ]
     }
-  ]
+  ],
+  "core": {
+    "path": "core",
+    "status": "stable",
+    "contracts": [
+      "structural-invariants",
+      "finding-model",
+      "evaluation-contract"
+    ]
+  },
+  "version": "1.1.0"
 }
