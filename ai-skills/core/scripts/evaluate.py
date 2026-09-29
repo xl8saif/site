@@ -10,6 +10,10 @@ from pathlib import Path
 TAG_RE = re.compile(r"<[^>]+>")
 PLACEHOLDER_RE = re.compile(r"\{[^{}]+\}|\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%")
 REQUIRED = {"id","source","expected_target","task","error_type","severity","checks","rationale","provenance"}
+TASKS = {"translation","mtpe","lqa","terminology","structural_qa"}
+SEVERITIES = {"critical","major","minor","query"}
+PROVENANCE = {"prior_conversation","synthetic_fixture"}
+VALID_CHECKS = {"tags","placeholders","linebreaks"}
 
 
 def parts(text):
@@ -25,6 +29,23 @@ def evaluate(case, line_no):
     missing = REQUIRED - set(case)
     if missing:
         return [f"line {line_no}: missing fields {sorted(missing)}"]
+
+    if not isinstance(case.get("checks"), list) or not all(isinstance(x, str) for x in case["checks"]):
+        errors.append(f"{case.get('id', '<unknown>')}: checks must be a string array")
+    if case.get("task") not in TASKS:
+        errors.append(f"{case.get('id', '<unknown>')}: invalid task")
+    if case.get("severity") not in SEVERITIES:
+        errors.append(f"{case.get('id', '<unknown>')}: invalid severity")
+    if case.get("provenance") not in PROVENANCE:
+        errors.append(f"{case.get('id', '<unknown>')}: invalid provenance")
+    unknown_checks = set(case.get("checks", [])) - VALID_CHECKS
+    if unknown_checks:
+        errors.append(f"{case.get('id', '<unknown>')}: invalid checks {sorted(unknown_checks)}")
+    for field in ("id","source","expected_target","task","error_type","severity","rationale","provenance"):
+        if not isinstance(case.get(field), str):
+            errors.append(f"{case.get('id', '<unknown>')}: {field} must be a string")
+    if errors:
+        return errors
 
     source, target = case["source"], case["expected_target"]
     s, t = parts(source), parts(target)
