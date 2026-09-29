@@ -26,7 +26,7 @@ Each case records:
 
 ## Dataset status
 
-The first version contains 11 historical terminology/LQA cases and 3 deterministic structural fixtures for tags, placeholders, and line breaks. More real LQA cases should be added before using this as a quantitative benchmark.
+The first version contains 13 historical/reference cases and 3 deterministic synthetic structural fixtures for tags, placeholders, and line breaks. The `provenance` field distinguishes prior-work cases from synthetic fixtures. More production cases should be added before treating this as a quantitative benchmark.
 
 ## Case schema
 
@@ -40,7 +40,8 @@ The first version contains 11 historical terminology/LQA cases and 3 determinist
   "error_type": "accuracy",
   "severity": "major",
   "checks": ["meaning", "naturalness"],
-  "rationale": "..."
+  "rationale": "...",
+  "provenance": "prior_conversation"
 }
 ```
 
