@@ -122,7 +122,8 @@ def main():
             print(f"{item['id']} [{item.get('status', 'unknown')}]")
         return 0
 
-    if args.command == "retrieve":\n        if not args.skill:\n            print("retrieve requires --skill")\n            return 1\n        if not args.query:\n            print("retrieve requires a query")\n            return 1\n        retriever = ROOT / "core" / "scripts" / "retrieve_references.py"\n        return subprocess.run([sys.executable, str(retriever), args.skill, *args.query], text=True).returncode\n\n    errors = validate_registry(registry)\n    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
+    if args.command == "retrieve":\n        if not args.skill:\n            print("retrieve requires --skill")\n            return 1\n        if not args.query:\n            print("retrieve requires a query")\n            return 1\n        retriever = ROOT / "core" / "scripts" / "retrieve_references.py"\n        return subprocess.run([sys.executable, str(retriever), args.skill, *args.query], text=True).returncode\n\n    errors = validate_registry(registry)
+    plugin_errors = validate_plugin(registry)\n    errors.extend(plugin_errors)
     if args.command in {"validate", "check", "all"}:
         print(f"REGISTRY {'PASS' if not errors else 'FAIL'}")
         for error in errors:
