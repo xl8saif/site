@@ -46,6 +46,17 @@ python scripts/check_lqa.py --source source.txt --target target.txt
 
 Use --json for machine-readable output.
 
+For batch jobs, create a JSONL manifest with one object per item:
+{"id":"row-001","source":"source text","target":"target text"}
+For file-backed rows, use "@file:relative/path.txt" for source or target. Run:
+python scripts/batch_lqa.py --manifest batch.jsonl --jsonl reports/results.jsonl --report reports/report.md
+
+The batch runner preserves the item ID and manifest line number, aggregates PASS/FAIL results, and produces machine-readable plus Markdown reports. A batch failure means at least one deterministic finding exists.
+
+For regression protection, run:
+python scripts/run_regression.py evals/cases.jsonl
+This validates structural expectations in the gold set and catches accidental replacement of a documented terminology correction.
+
 The engine checks:
 - XML/HTML tag equality
 - placeholder equality
