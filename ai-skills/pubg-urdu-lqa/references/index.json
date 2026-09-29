@@ -12,7 +12,8 @@
         "pubg",
         "urdu",
         "localization"
-      ]
+      ],
+      "path": "terminology.json"
     },
     {
       "id": "pubg-protected-terms",
@@ -23,7 +24,8 @@
       "tags": [
         "protected-terms",
         "qa"
-      ]
+      ],
+      "path": "protected-terms.json"
     },
     {
       "id": "pubg-structural-invariants",
