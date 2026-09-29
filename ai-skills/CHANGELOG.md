@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.3
+
+- Connected production localization QA wrappers to the verified Reference Retrieval Layer.
+- Improved reference query tokenization for multilingual text.
+- Synchronized registry and plugin release metadata.
+
 ## 1.6.2
 
 - Added the structured Reference Layer contract.
