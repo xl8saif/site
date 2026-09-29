@@ -14,6 +14,7 @@ TASKS = {"translation","mtpe","lqa","terminology","structural_qa"}
 SEVERITIES = {"critical","major","minor","query"}
 PROVENANCE = {"prior_conversation","synthetic_fixture"}
 VALID_CHECKS = {"tags","placeholders","linebreaks"}
+ALLOWED_FIELDS = REQUIRED | {"previous_target"}
 
 
 def parts(text):
@@ -27,6 +28,9 @@ def parts(text):
 def evaluate(case, line_no):
     errors = []
     missing = REQUIRED - set(case)
+    extra = set(case) - ALLOWED_FIELDS
+    if extra:
+        return [f"line {line_no}: unexpected fields {sorted(extra)}"]
     if missing:
         return [f"line {line_no}: missing fields {sorted(missing)}"]
 
@@ -39,6 +43,8 @@ def evaluate(case, line_no):
     if case.get("provenance") not in PROVENANCE:
         errors.append(f"{case.get('id', '<unknown>')}: invalid provenance")
     for field in ("id","source","expected_target","task","error_type","severity","rationale","provenance"):
+        if field == "provenance" and not isinstance(case.get(field), str):
+            errors.append(f"{case.get('id', '<unknown>')}: provenance must be a string")
         if not isinstance(case.get(field), str):
             errors.append(f"{case.get('id', '<unknown>')}: {field} must be a string")
     if errors:
