@@ -59,16 +59,22 @@
     "contracts": [
       "structural-invariants",
       "finding-model",
-      "evaluation-contract"
+      "evaluation-contract",
+      "shared-evaluation"
     ],
     "tools": [
-      "scripts/check_localization.py"
+      "scripts/check_localization.py",
+      "scripts/evaluate.py"
     ]
   },
-  "version": "1.3.0",
+  "version": "1.4.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
     "status": "stable"
+  },
+  "evaluation": {
+    "schema": "core/evaluation.schema.json",
+    "engine": "core/scripts/evaluate.py"
   }
 }
