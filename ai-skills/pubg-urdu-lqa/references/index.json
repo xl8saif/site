@@ -8,7 +8,11 @@
       "title": "PUBG Urdu terminology",
       "status": "verified",
       "source": "user-confirmed production terminology",
-      "tags": ["pubg","urdu","localization"]
+      "tags": [
+        "pubg",
+        "urdu",
+        "localization"
+      ]
     },
     {
       "id": "pubg-protected-terms",
@@ -16,7 +20,24 @@
       "title": "Protected product terms",
       "status": "verified",
       "source": "user-confirmed production rules",
-      "tags": ["protected-terms","qa"]
+      "tags": [
+        "protected-terms",
+        "qa"
+      ]
+    },
+    {
+      "id": "pubg-structural-invariants",
+      "type": "rule",
+      "title": "Structural preservation rules",
+      "status": "verified",
+      "source": "user-confirmed production QA rules",
+      "tags": [
+        "structure",
+        "xml",
+        "html",
+        "placeholders",
+        "line-breaks"
+      ]
     }
   ]
 }
