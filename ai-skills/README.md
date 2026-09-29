@@ -71,7 +71,7 @@ The canonical plugin manifest is `plugin.json`. It exposes both production Skill
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync.
+The manifest version and registry release are kept in sync. Current release: `1.6.3`.
 
 ## Promotion gate
 
