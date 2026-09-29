@@ -15,6 +15,11 @@
 - [x] Runtime evaluation-contract validation
 - [x] Duplicate Skill protection
 - [x] One-command documentation
+- [x] Reference Layer schema and validation
+- [x] Verified reference indexes for production Skills
+- [x] Reference file integrity checks
+- [x] Reference Retrieval Layer
+- [x] Promotion gate integration
 
 ## Operational command
 
