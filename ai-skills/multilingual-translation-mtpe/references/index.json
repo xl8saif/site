@@ -25,6 +25,19 @@
         "placeholders",
         "line-breaks"
       ]
+    },
+    {
+      "id": "multilingual-mtpe-workflow",
+      "type": "workflow",
+      "title": "MTPE workflow rules",
+      "status": "verified",
+      "source": "user-confirmed production QA principles",
+      "tags": [
+        "mtpe",
+        "workflow",
+        "quality"
+      ],
+      "path": "mtpe-workflow.json"
     }
   ]
 }
