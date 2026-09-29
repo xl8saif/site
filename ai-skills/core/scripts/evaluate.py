@@ -43,10 +43,10 @@ def evaluate(case, line_no):
     if case.get("provenance") not in PROVENANCE:
         errors.append(f"{case.get('id', '<unknown>')}: invalid provenance")
     for field in ("id","source","expected_target","task","error_type","severity","rationale","provenance"):
-        if field == "provenance" and not isinstance(case.get(field), str):
-            errors.append(f"{case.get('id', '<unknown>')}: provenance must be a string")
         if not isinstance(case.get(field), str):
             errors.append(f"{case.get('id', '<unknown>')}: {field} must be a string")
+    if "previous_target" in case and not isinstance(case["previous_target"], str):
+        errors.append(f"{case.get('id', '<unknown>')}: previous_target must be a string")
     if errors:
         return errors
 
