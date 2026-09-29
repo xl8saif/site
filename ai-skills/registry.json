@@ -120,7 +120,9 @@
     ],
     "tools": [
       "scripts/check_localization.py",
-      "scripts/evaluate.py"
+      "scripts/evaluate.py",
+      "scripts/validate_references.py",
+      "scripts/retrieve_references.py"
     ]
   },
   "version": "1.6.2",
@@ -136,6 +138,15 @@
   "runner": {
     "command": "python ai-skills/run.py all",
     "path": "ai-skills/run.py",
-    "status": "stable"
+    "status": "stable",
+    "commands": [
+      "list",
+      "validate",
+      "evaluate",
+      "retrieve",
+      "promote-check",
+      "check",
+      "all"
+    ]
   }
 }
