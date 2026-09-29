@@ -1,0 +1,40 @@
+{
+  "identity": {
+    "name": "Indus-Kohistani",
+    "iso_639_3": "mvy",
+    "family": "Dardic",
+    "source": "user-confirmed project knowledge"
+  },
+  "dialects": [
+    "Duber-Kandia",
+    "Seo-Patan",
+    "Jijal-Kayal",
+    "Ranolia",
+    "Bankad"
+  ],
+  "orthography": {
+    "letters": [
+      "چھ",
+      "څ",
+      "ݜ",
+      "ړ",
+      "ݨ"
+    ],
+    "note": "Project orthography inventory supplied by the project owner."
+  },
+  "research_principles": [
+    "Do not overwrite raw corpus data.",
+    "Keep source/provenance attached to derived analysis.",
+    "Separate verified entries from draft or unverified analysis.",
+    "Preserve document/source text when producing derived datasets."
+  ],
+  "common_voice_27": {
+    "dataset": "Indus Kohistani (mvy)",
+    "clips": 18485,
+    "duration_hours": 24.6,
+    "speakers": 57,
+    "validated_clips": 16612,
+    "dataset_id": "cmu5v8zn70099o107co6nq44",
+    "license": "CC0"
+  }
+}
