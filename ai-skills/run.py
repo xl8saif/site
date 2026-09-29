@@ -30,8 +30,8 @@ def validate_registry(registry):
     if not isinstance(registry.get("skills"), list):
         errors.append("registry skills must be an array")
         return errors
-    if registry.get("version") != "1.6.3":
-        errors.append("registry version must match release 1.6.3")
+    if registry.get("version") != "1.7.0":
+        errors.append("registry version must match release 1.7.0")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
