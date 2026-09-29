@@ -13,7 +13,8 @@
         "urdu",
         "localization"
       ],
-      "path": "terminology.json"
+      "path": "terminology.json",
+      "notes": "Production terminology decisions: use preferred Urdu forms; rejected forms are QA-detectable."
     },
     {
       "id": "pubg-protected-terms",
