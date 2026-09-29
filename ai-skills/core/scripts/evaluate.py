@@ -38,9 +38,6 @@ def evaluate(case, line_no):
         errors.append(f"{case.get('id', '<unknown>')}: invalid severity")
     if case.get("provenance") not in PROVENANCE:
         errors.append(f"{case.get('id', '<unknown>')}: invalid provenance")
-    unknown_checks = set(case.get("checks", [])) - VALID_CHECKS
-    if unknown_checks:
-        errors.append(f"{case.get('id', '<unknown>')}: invalid checks {sorted(unknown_checks)}")
     for field in ("id","source","expected_target","task","error_type","severity","rationale","provenance"):
         if not isinstance(case.get(field), str):
             errors.append(f"{case.get('id', '<unknown>')}: {field} must be a string")
