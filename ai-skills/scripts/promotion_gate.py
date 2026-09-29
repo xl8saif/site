@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Check whether a draft Skill satisfies the production promotion gate."""
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY = ROOT / "registry.json"
+EVALUATOR = ROOT / "core" / "scripts" / "evaluate.py"
+
+REQUIRED = ("SKILL.md", "evals/cases.jsonl", "references/terminology.json")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("skill_id")
+    args = parser.parse_args()
+
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    item = next((x for x in registry.get("skills", []) if x.get("id") == args.skill_id), None)
+    if item is None:
+        print(f"PROMOTION FAIL: unknown Skill {args.skill_id}")
+        return 1
+
+    skill = ROOT / item["path"]
+    failures = []
+
+    if item.get("status") != "draft":
+        failures.append(f"Skill status is {item.get('status')}, expected draft")
+
+    for rel in REQUIRED:
+        if not (skill / rel).exists():
+            failures.append(f"missing required artifact: {rel}")
+
+    cases = skill / "evals" / "cases.jsonl"
+    if cases.exists():
+        result = subprocess.run([sys.executable, str(EVALUATOR), str(cases)], text=True)
+        if result.returncode:
+            failures.append("evaluation suite failed")
+
+    terminology = skill / "references" / "terminology.json"
+    if terminology.exists():
+        try:
+            data = json.loads(terminology.read_text(encoding="utf-8"))
+            if not isinstance(data, dict) or data.get("_status") == "draft":
+                failures.append("terminology reference is still marked draft")
+        except json.JSONDecodeError:
+            failures.append("terminology reference is invalid JSON")
+
+    if failures:
+        print(f"PROMOTION FAIL: {args.skill_id}")
+        for failure in failures:
+            print(f"- {failure}")
+        return 1
+
+    print(f"PROMOTION READY: {args.skill_id}")
+    print("Human review is still required before changing registry status to production.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
