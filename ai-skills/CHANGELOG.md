@@ -2,6 +2,8 @@
 
 ## 1.6.3
 
+- Generalized the promotion gate so research and legal Skills are not forced to maintain translation-specific terminology artifacts.
+
 - Connected production localization QA wrappers to the verified Reference Retrieval Layer.
 - Improved reference query tokenization for multilingual text.
 - Synchronized registry and plugin release metadata.
