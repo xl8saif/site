@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.json"
 EVALUATOR = ROOT / "core" / "scripts" / "evaluate.py"
 
-REQUIRED = ("SKILL.md", "evals/cases.jsonl", "references/terminology.json")
+REQUIRED = ("SKILL.md", "evals/cases.jsonl", "references/terminology.json", "references/index.json")
 
 
 def main():
@@ -40,6 +40,18 @@ def main():
         result = subprocess.run([sys.executable, str(EVALUATOR), str(cases)], text=True)
         if result.returncode:
             failures.append("evaluation suite failed")
+
+    reference_index = skill / "references" / "index.json"
+    if reference_index.exists():
+        validator = ROOT / "core" / "scripts" / "validate_references.py"
+        result = subprocess.run([sys.executable, str(validator), args.skill_id, "--verified-only"], text=True)
+        if result.returncode:
+            failures.append("reference index validation failed")
+        else:
+            data = json.loads(reference_index.read_text(encoding="utf-8"))
+            verified = [r for r in data.get("references", []) if r.get("status") == "verified"]
+            if not verified:
+                failures.append("reference index has no verified references")
 
     terminology = skill / "references" / "terminology.json"
     if terminology.exists():
