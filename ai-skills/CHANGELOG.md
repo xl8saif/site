@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.2
+
+- Added the structured Reference Layer contract.
+- Added reference-index validation with verified/draft/deprecated states.
+- Integrated reference validation into the unified runner and promotion gate.
+- Indexed verified PUBG structural QA rules.
+
 ## 1.6.1
 
 - Added registry/plugin consistency validation to the unified runner.
