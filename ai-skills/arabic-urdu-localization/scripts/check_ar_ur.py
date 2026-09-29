@@ -6,7 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 CORE = ROOT / "core" / "scripts" / "check_localization.py"
 TERMS = Path(__file__).resolve().parents[1] / "references" / "terminology.json"
 PROTECTED = Path(__file__).resolve().parents[1] / "references" / "protected-terms.json"
