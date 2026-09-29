@@ -124,7 +124,8 @@
       "scripts/check_localization.py",
       "scripts/evaluate.py",
       "scripts/validate_references.py",
-      "scripts/retrieve_references.py"
+      "scripts/retrieve_references.py",
+      "scripts/smoke_test.py"
     ]
   },
   "version": "1.6.3",
