@@ -127,7 +127,7 @@
       "scripts/retrieve_references.py"
     ]
   },
-  "version": "1.6.2",
+  "version": "1.6.3",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
