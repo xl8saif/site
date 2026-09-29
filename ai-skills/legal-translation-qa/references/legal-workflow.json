@@ -1,0 +1,10 @@
+{
+  "workflow": "legal translation and document QA",
+  "rules": [
+    "Preserve source meaning and document structure.",
+    "Treat names, dates, identifiers, citations, clauses, and placeholders as controlled source data.",
+    "Do not silently add, omit, or reinterpret legal content.",
+    "Separate deterministic document QA from substantive legal review.",
+    "Record confirmed recurring corrections as regression cases rather than generalizing from a single uncertain example."
+  ]
+}
