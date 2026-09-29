@@ -1,7 +1,0 @@
-{
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "saif-language-skills",
-  "version": "0.3.0",
-  "description": "Reusable language, localization, and QA workflows developed for Saif Ullah's production work.",
-  "skills": "./skills/"
-}
