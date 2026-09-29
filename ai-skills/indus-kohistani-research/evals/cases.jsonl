@@ -1,0 +1,1 @@
+{"id":"INDUS_KOHISTANI_RESEARCH-001","source":"<source>Example</source>","expected_target":"<target>Example</target>","task":"structural_qa","error_type":"fixture","severity":"query","checks":["tags"],"rationale":"Placeholder draft fixture. Replace with validated domain evidence before production.","provenance":"synthetic_fixture"}
