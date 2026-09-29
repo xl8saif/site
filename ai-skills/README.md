@@ -71,12 +71,12 @@ python ai-skills/run.py retrieve --skill <skill-id> <query>\npython ai-skills/ru
 
 ## Plugin distribution
 
-The canonical plugin manifest is `plugin.json`. It exposes both production Skills:
+The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
 
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.7.0`.
+The manifest version and registry release are kept in sync. Current release: `1.8.0`.
 
 ## Promotion gate
 
