@@ -6,11 +6,13 @@ This directory is the reusable AI Skills platform for Saif Ullah's production wo
 
 1. Generate a Skill from `templates/skill/`.
 2. Register it in `registry.json`.
-3. Add domain references and deterministic tools.
-4. Add regression cases under `evals/cases.jsonl`.
-5. Keep new Skills in `draft` until their contract and regression suite are production-ready.
-6. Promote to `production`.
-7. Run `python ai-skills/run.py all`.
+3. Add domain references and deterministic tools where practical.
+4. Validate the Reference Layer through `references/index.json`.
+5. Retrieve verified references with `python ai-skills/run.py retrieve --skill <skill-id> <query>`.
+6. Add regression cases under `evals/cases.jsonl`.
+7. Keep new Skills in `draft` until their domain evidence and regression suite are production-ready.
+8. Promote to `production` after human review.
+9. Run `python ai-skills/run.py all`.
 
 ## Platform contracts
 
