@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Skill Registry",
+  "type": "object",
+  "required": ["schema_version","name","owner","skills","core","version"],
+  "properties": {
+    "schema_version": {"type":"string"},
+    "name": {"type":"string"},
+    "owner": {"type":"string"},
+    "version": {"type":"string"},
+    "skills": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "required":["id","status","domain","path","entrypoint","deterministic_tools","protected_work"],
+        "properties": {
+          "id":{"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "status":{"enum":["draft","production","deprecated"]},
+          "domain":{"type":"array","items":{"type":"string"}},
+          "path":{"type":"string"},
+          "entrypoint":{"type":"string"},
+          "deterministic_tools":{"type":"array","items":{"type":"string"}},
+          "protected_work":{"type":"array","items":{"type":"string"}}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}
