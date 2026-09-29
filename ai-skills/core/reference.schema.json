@@ -2,24 +2,74 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AI Skill Reference",
   "type": "object",
-  "required": ["schema_version","skill_id","references"],
+  "required": [
+    "schema_version",
+    "skill_id",
+    "references"
+  ],
   "properties": {
-    "schema_version": {"const":"1.0"},
-    "skill_id": {"type":"string"},
+    "schema_version": {
+      "const": "1.0"
+    },
+    "skill_id": {
+      "type": "string"
+    },
     "references": {
-      "type":"array",
+      "type": "array",
       "items": {
-        "type":"object",
-        "required":["id","type","title","status"],
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "title",
+          "status"
+        ],
         "properties": {
-          "id":{"type":"string"},
-          "type":{"enum":["terminology","style","rule","example","source","dataset","workflow"]},
-          "title":{"type":"string"},
-          "status":{"enum":["draft","verified","deprecated"]},
-          "source":{"type":"string"},
-          "notes":{"type":"string"},
-          "tags":{"type":"array","items":{"type":"string"}},
-          "entries":{"type":"array","items":{"type":"object"}}
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "terminology",
+              "style",
+              "rule",
+              "example",
+              "source",
+              "dataset",
+              "workflow"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "verified",
+              "deprecated"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "path": {
+            "type": "string"
+          }
         },
         "additionalProperties": true
       }
