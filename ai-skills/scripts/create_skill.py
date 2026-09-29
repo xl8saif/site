@@ -66,7 +66,7 @@ def main():
         "deterministic_tools": [],
         "protected_work": []
     })
-    registry_data["version"] = "1.4.0"
+    registry_data["version"] = registry_data.get("version", "1.0.0")
     registry.write_text(
         json.dumps(registry_data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8"
