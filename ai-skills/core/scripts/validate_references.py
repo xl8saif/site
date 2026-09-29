@@ -37,6 +37,7 @@ def main():
         errors.append("references must be an array")
         refs = []
 
+    skill_root = ROOT / args.skill_id
     ids = set()
     for ref in refs:
         rid = ref.get("id")
@@ -47,6 +48,20 @@ def main():
             errors.append(f"{rid}: invalid reference type")
         if ref.get("status") not in {"draft","verified","deprecated"}:
             errors.append(f"{rid}: invalid reference status")
+        if "path" in ref:
+            ref_path = skill_root / "references" / ref["path"]
+            try:
+                ref_path.resolve().relative_to((skill_root / "references").resolve())
+            except ValueError:
+                errors.append(f"{rid}: reference path escapes references directory")
+            else:
+                if not ref_path.is_file():
+                    errors.append(f"{rid}: referenced file does not exist: {ref[\"path\"]}")
+                elif ref_path.suffix.lower() == ".json":
+                    try:
+                        json.loads(ref_path.read_text(encoding="utf-8"))
+                    except (OSError, json.JSONDecodeError) as exc:
+                        errors.append(f"{rid}: referenced JSON is invalid: {exc}")
 
     if errors:
         print("REFERENCES FAIL")
