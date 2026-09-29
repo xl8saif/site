@@ -123,7 +123,7 @@
       "scripts/evaluate.py"
     ]
   },
-  "version": "1.6.0",
+  "version": "1.6.1",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
