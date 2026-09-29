@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "name": "saif-language-skills",
+  "owner": "Saif Ullah",
+  "skills": [
+    {
+      "id": "pubg-urdu-lqa",
+      "status": "production",
+      "domain": ["game-localization", "urdu", "lqa", "mtpe"],
+      "path": "pubg-urdu-lqa",
+      "entrypoint": "pubg-urdu-lqa/SKILL.md",
+      "deterministic_tools": [
+        "scripts/check_lqa.py",
+        "scripts/batch_lqa.py",
+        "scripts/validate_eval_cases.py",
+        "scripts/run_regression.py"
+      ],
+      "protected_work": [
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks",
+        "PUBG Urdu terminology",
+        "protected product terms"
+      ]
+    }
+  ]
+}
