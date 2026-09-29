@@ -77,7 +77,7 @@ def main():
         for item in skills(registry):
             code, _ = evaluate_skill(item)
             failures += int(code != 0)
-        print(f"SKILL EVALUATION {'PASS' if failures == 0 else 'FAIL'}: {len(skills(registry))} skills")
+        print(f"SKILL EVALUATION {'PASS' if failures == 0 else 'FAIL'}: {len(selected)} skills")
         if failures:
             return 1
 
