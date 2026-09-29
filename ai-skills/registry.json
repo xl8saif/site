@@ -116,7 +116,9 @@
       "structural-invariants",
       "finding-model",
       "evaluation-contract",
-      "shared-evaluation"
+      "shared-evaluation",
+      "reference-layer",
+      "reference-retrieval"
     ],
     "tools": [
       "scripts/check_localization.py",
