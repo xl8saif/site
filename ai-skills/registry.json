@@ -27,6 +27,30 @@
         "PUBG Urdu terminology",
         "protected product terms"
       ]
+    },
+    {
+      "id": "arabic-urdu-localization",
+      "status": "production",
+      "domain": [
+        "translation",
+        "arabic",
+        "urdu",
+        "mtpe",
+        "lqa"
+      ],
+      "path": "arabic-urdu-localization",
+      "entrypoint": "arabic-urdu-localization/SKILL.md",
+      "deterministic_tools": [
+        "scripts/check_ar_ur.py",
+        "scripts/run_regression.py"
+      ],
+      "protected_work": [
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks",
+        "Arabic→Urdu terminology",
+        "protected technical terms"
+      ]
     }
   ],
   "core": {
@@ -41,7 +65,7 @@
       "scripts/check_localization.py"
     ]
   },
-  "version": "1.2.0",
+  "version": "1.3.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
