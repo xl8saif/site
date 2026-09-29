@@ -36,7 +36,7 @@ def load_entries(skill_id, ref):
 
 def score(ref, entry, query):
     hay = json.dumps({"reference": ref, "entry": entry}, ensure_ascii=False).lower()
-    terms = re.findall(r"\w+", query.lower(), flags=re.UNICODE)
+    terms = [t for t in re.findall(r"\w+", query.lower(), flags=re.UNICODE) if len(t) > 1]
     return sum(1 for t in terms if t in hay)
 
 
