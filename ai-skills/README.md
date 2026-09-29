@@ -6,7 +6,7 @@ Reusable AI skills for Saif Ullah's production translation, localization, lingui
 
 Each skill is self-contained and should expose:
 
-- skills/<skill-name>/SKILL.md — operational instructions
+- <skill-name>/SKILL.md — operational instructions
 - references/ — terminology, style, structural rules, and domain knowledge
 - scripts/ — deterministic validation and data-processing tools
 - evals/ — regression and evaluation cases
@@ -61,7 +61,7 @@ Individual commands:
 python ai-skills/run.py list
 python ai-skills/run.py validate
 python ai-skills/run.py evaluate
-python ai-skills/run.py --skill <skill-id> promote-check
+python ai-skills/run.py retrieve --skill <skill-id> <query>\npython ai-skills/run.py --skill <skill-id> promote-check
 ```
 
 ## Plugin distribution
@@ -85,4 +85,4 @@ A production Skill must have:
 - an `evals/cases.jsonl` regression suite
 - all registry-listed deterministic tools present
 
-These conditions are enforced by the unified runner.
+These conditions are enforced by the unified runner. Production Skills must also expose a valid `references/index.json` with verified references. The Reference Retrieval Layer reads verified reference files and returns relevant entries for the active Skill.
