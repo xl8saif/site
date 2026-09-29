@@ -61,3 +61,22 @@ python ai-skills/run.py list
 python ai-skills/run.py validate
 python ai-skills/run.py evaluate
 ```
+
+## Plugin distribution
+
+The canonical plugin manifest is `plugin.json`. It exposes both production Skills:
+
+- `pubg-urdu-lqa/SKILL.md`
+- `arabic-urdu-localization/SKILL.md`
+
+The manifest version and registry release are kept at `1.5.0`.
+
+## Production gate
+
+A production Skill must have:
+
+- a valid `SKILL.md`
+- an `evals/cases.jsonl` regression suite
+- all registry-listed deterministic tools present
+
+These conditions are enforced by the unified runner.
