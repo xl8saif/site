@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0
+
+- Promoted `multilingual-translation-mtpe`, `legal-translation-qa`, and `indus-kohistani-research` from draft to production after satisfying the repository promotion gate artifacts and verified-reference requirements.
+- Synchronized the production plugin manifest with the expanded production Skill set.
+- Updated release metadata to 1.8.0.
+
 ## 1.7.0
 
 - Added a framework-level self-audit for registry paths, Skill entrypoints, deterministic tools, eval contracts, reference manifests, plugin synchronization, Python syntax, and production reference retrieval.
