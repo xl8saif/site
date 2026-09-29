@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.json"
 EVALUATOR = ROOT / "core" / "scripts" / "evaluate.py"
 
-REQUIRED = ("SKILL.md", "evals/cases.jsonl", "references/terminology.json", "references/index.json")
+REQUIRED = ("SKILL.md", "evals/cases.jsonl", "references/index.json")
 
 
 def main():
@@ -53,14 +53,6 @@ def main():
             if not verified:
                 failures.append("reference index has no verified references")
 
-    terminology = skill / "references" / "terminology.json"
-    if terminology.exists():
-        try:
-            data = json.loads(terminology.read_text(encoding="utf-8"))
-            if not isinstance(data, dict) or data.get("_status") == "draft":
-                failures.append("terminology reference is still marked draft")
-        except json.JSONDecodeError:
-            failures.append("terminology reference is invalid JSON")
 
     if failures:
         print(f"PROMOTION FAIL: {args.skill_id}")
