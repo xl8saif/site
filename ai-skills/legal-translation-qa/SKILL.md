@@ -7,7 +7,7 @@ description: Legal translation and document QA workflows for English↔Urdu lega
 
 ## Status
 
-Draft. Do not treat this Skill as production guidance until its terminology, deterministic checks, and regression suite have been validated.
+Production. This Skill is registered for production use. Apply its documented workflow and verified references; escalate domain-specific uncertainty for human review.
 
 ## Workflow
 
