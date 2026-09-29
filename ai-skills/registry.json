@@ -145,6 +145,7 @@
     "status": "stable",
     "commands": [
       "list",
+      "audit",
       "validate",
       "evaluate",
       "retrieve",
