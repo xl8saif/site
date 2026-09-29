@@ -6,6 +6,7 @@ Usage:
 """
 
 import argparse
+import json
 import re
 from pathlib import Path
 
@@ -54,8 +55,25 @@ def main():
             target.write_text(render(content, skill_id, args.description),
                               encoding="utf-8")
 
+    registry = ROOT / "registry.json"
+    registry_data = json.loads(registry.read_text(encoding="utf-8"))
+    registry_data.setdefault("skills", []).append({
+        "id": skill_id,
+        "status": "draft",
+        "domain": [],
+        "path": skill_id,
+        "entrypoint": f"{skill_id}/SKILL.md",
+        "deterministic_tools": [],
+        "protected_work": []
+    })
+    registry_data["version"] = "1.4.0"
+    registry.write_text(
+        json.dumps(registry_data, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8"
+    )
+
     print(destination)
-    print("Next: add domain references/scripts/evals and register the Skill in ai-skills/registry.json.")
+    print("Registered in ai-skills/registry.json with status=draft.")
 
 
 if __name__ == "__main__":
