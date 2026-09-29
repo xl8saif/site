@@ -56,6 +56,14 @@ def main():
                 encoding="utf-8",
             )
 
+    reference_index = destination / "references" / "index.json"
+    if not reference_index.exists():
+        reference_index.write_text(json.dumps({
+            "schema_version": "1.0",
+            "skill_id": skill_id,
+            "references": []
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     registry_data.setdefault("skills", []).append({
         "id": skill_id,
         "status": "draft",
