@@ -12,14 +12,15 @@ Use this skill for production PUBG MOBILE Urdu localization and LQA. Treat the s
 1. Identify the task: translation, MTPE, LQA, terminology review, or structural QA.
 2. Preserve every XML/HTML tag and placeholder exactly unless the source itself requires a change.
 3. Preserve line-break count, whitespace structure, punctuation structure, and ordering.
-4. Apply the terminology rules in `references/terminology.md`.
-5. Apply the style rules in `references/style-guide.md`.
-6. Apply the structural rules in `references/xml-html-rules.md`.
-7. Before finalizing, run the relevant validation scripts when available:
-   - `check_tags.py`
-   - `check_placeholders.py`
-   - `check_linebreaks.py`
-8. Report only actionable errors when the user asks for QA. Do not rewrite valid text merely for stylistic preference.
+4. Apply the terminology rules in references/terminology.md.
+5. Apply the style rules in references/style-guide.md.
+6. Apply the structural rules in references/xml-html-rules.md.
+7. For repeatable deterministic QA, run scripts/check_lqa.py against Source and Target.
+8. Before finalizing, run the relevant focused validation scripts when available:
+   - check_tags.py
+   - check_placeholders.py
+   - check_linebreaks.py
+9. Report only actionable errors when the user asks for QA. Do not rewrite valid text merely for stylistic preference.
 
 ## Non-negotiable rules
 
@@ -36,6 +37,23 @@ Use this skill for production PUBG MOBILE Urdu localization and LQA. Treat the s
 - Do not translate product names, platform names, Discord, Mission Card, WOW Tokens, or other protected terms unless the terminology reference explicitly says to do so.
 - Do not introduce sacred/holy/god terminology into game concepts where the established terminology avoids it.
 - When the user supplies an existing translation, treat it as the production artifact to review rather than replacing it wholesale.
+
+## Deterministic LQA engine
+
+Use scripts/check_lqa.py when Source and Target are available as UTF-8 text files:
+
+python scripts/check_lqa.py --source source.txt --target target.txt
+
+Use --json for machine-readable output.
+
+The engine checks:
+- XML/HTML tag equality
+- placeholder equality
+- line-break count
+- protected terms
+- established terminology and known rejected alternatives
+
+A deterministic finding is evidence of a concrete issue, not a substitute for semantic/contextual review. The terminology engine intentionally checks known source terms only; it must not invent a target translation for an unseen term.
 
 ## LQA severity
 
@@ -63,13 +81,12 @@ Keep valid XML/HTML and placeholders in the exact position required by the sourc
 
 Automated checks prove structural properties, not linguistic correctness. A passing script does not override terminology, semantic, or contextual review.
 
-
 ## Evaluation and regression
 
-When changing this skill, use the evaluation material in `evals/`.
+When changing this skill, use the evaluation material in evals/.
 
-- `evals/cases.jsonl` contains prior-work reference cases plus explicitly marked synthetic structural fixtures.
-- `scripts/validate_eval_cases.py` validates the evaluation schema and deterministic structural expectations.
+- evals/cases.jsonl contains prior-work reference cases plus explicitly marked synthetic structural fixtures.
+- scripts/validate_eval_cases.py validates the evaluation schema and deterministic structural expectations.
 - Do not treat a synthetic fixture as evidence for a linguistic terminology decision.
 - Prefer exact historical cases and user-confirmed terminology decisions when expanding the gold set.
 - When a new production correction is confirmed, add it as a regression case with provenance and a concise rationale.
