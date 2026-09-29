@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "indus-kohistani-research",
+  "references": [
+    {
+      "id": "ik-research-knowledge",
+      "type": "dataset",
+      "title": "Indus-Kohistani research knowledge",
+      "status": "draft",
+      "source": "Reserved for verified FiKR&CD research data",
+      "tags": [
+        "indus-kohistani",
+        "dardic",
+        "language-data"
+      ]
+    },
+    {
+      "id": "ik-data-integrity",
+      "type": "rule",
+      "title": "Research data integrity",
+      "status": "verified",
+      "source": "platform data-preservation principle",
+      "tags": [
+        "data-integrity",
+        "research"
+      ]
+    }
+  ]
+}
