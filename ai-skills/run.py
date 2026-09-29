@@ -22,8 +22,8 @@ def skills(registry):
 
 def validate_registry(registry):
     errors = []
-    if registry.get("version") != "1.5.0":
-        errors.append("registry version must match release 1.5.0")
+    if registry.get("version") != "1.6.0":
+        errors.append("registry version must match release 1.6.0")
     ids = set()
     for item in skills(registry):
         sid = item.get("id")
