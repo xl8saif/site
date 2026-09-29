@@ -43,6 +43,24 @@ def structural_findings(source, target):
     return findings
 
 
+def load_reference_rules(index_path):
+    index = json.loads(Path(index_path).read_text(encoding="utf-8"))
+    base = Path(index_path).parent
+    terminology, protected = {}, set()
+    for ref in index.get("references", []):
+        if ref.get("status") != "verified" or not ref.get("path"):
+            continue
+        path = base / ref["path"]
+        if not path.is_file():
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if ref.get("type") == "terminology" and isinstance(data, dict):
+            terminology.update({k: v for k, v in data.items() if not k.startswith("_")})
+        elif "protected-terms" in ref.get("tags", []) and isinstance(data, list):
+            protected.update(data)
+    return terminology, protected
+
+
 def run(source, target, terminology=None, protected=None):
     findings = structural_findings(source, target)
     terminology = terminology or {}
@@ -99,6 +117,7 @@ def main():
     parser.add_argument("--target", required=True)
     parser.add_argument("--terminology", help="JSON file containing source-term rules.")
     parser.add_argument("--protected", help="JSON file containing protected terms.")
+    parser.add_argument("--reference-index", help="Verified Reference Layer index; preferred over individual reference files.")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
@@ -107,10 +126,13 @@ def main():
     terminology = {}
     protected = set()
 
-    if args.terminology:
-        terminology = json.loads(Path(args.terminology).read_text(encoding="utf-8"))
-    if args.protected:
-        protected = set(json.loads(Path(args.protected).read_text(encoding="utf-8")))
+    if args.reference_index:
+        terminology, protected = load_reference_rules(args.reference_index)
+    else:
+        if args.terminology:
+            terminology = json.loads(Path(args.terminology).read_text(encoding="utf-8"))
+        if args.protected:
+            protected = set(json.loads(Path(args.protected).read_text(encoding="utf-8")))
 
     findings = run(source, target, terminology, protected)
     output = result(args.source, args.target, findings)
