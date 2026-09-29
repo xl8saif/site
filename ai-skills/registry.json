@@ -125,10 +125,11 @@
       "scripts/evaluate.py",
       "scripts/validate_references.py",
       "scripts/retrieve_references.py",
-      "scripts/smoke_test.py"
+      "scripts/smoke_test.py",
+      "scripts/self_audit.py"
     ]
   },
-  "version": "1.6.3",
+  "version": "1.7.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
