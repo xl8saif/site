@@ -7,7 +7,8 @@ from pathlib import Path
 
 ALLOWED_TASKS = {"translation", "mtpe", "lqa", "terminology", "structural_qa"}
 ALLOWED_SEVERITIES = {"critical", "major", "minor", "query"}
-REQUIRED = {"id", "source", "expected_target", "task", "error_type", "severity", "checks", "rationale"}
+REQUIRED = {"id", "source", "expected_target", "task", "error_type", "severity", "checks", "rationale", "provenance"}
+ALLOWED_PROVENANCE = {"prior_conversation", "synthetic_fixture"}
 
 def main():
     if len(sys.argv) != 2:
@@ -38,6 +39,28 @@ def main():
 
         if not isinstance(case.get("checks"), list):
             errors.append(f"line {line_no}: checks must be a list")
+
+        if case.get("provenance") not in ALLOWED_PROVENANCE:
+            errors.append(f"line {line_no}: invalid provenance: {case.get("provenance")}")
+
+        source = case.get("source", "")
+        expected = case.get("expected_target", "")
+        checks = set(case.get("checks", [])) if isinstance(case.get("checks"), list) else set()
+
+        if "placeholders" in checks:
+            import re
+            pattern = re.compile(r"\\{[^{}]+\\}|\\$\\{[^{}]+\\}|%(?:\\d+\\$)?[sdif]|%%")
+            if sorted(pattern.findall(source)) != sorted(pattern.findall(expected)):
+                errors.append(f"line {line_no}: placeholder mismatch between source and expected_target")
+
+        if "tags" in checks:
+            import re
+            pattern = re.compile(r"<[^>]+>")
+            if pattern.findall(source) != pattern.findall(expected):
+                errors.append(f"line {line_no}: tag mismatch between source and expected_target")
+
+        if "linebreaks" in checks and source.count("\\n") != expected.count("\\n"):
+            errors.append(f"line {line_no}: line-break count mismatch between source and expected_target")
 
     if errors:
         print("FAIL")
