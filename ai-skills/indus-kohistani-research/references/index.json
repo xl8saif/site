@@ -6,13 +6,14 @@
       "id": "ik-research-knowledge",
       "type": "dataset",
       "title": "Indus-Kohistani research knowledge",
-      "status": "draft",
-      "source": "Reserved for verified FiKR&CD research data",
+      "status": "verified",
+      "source": "user-confirmed FiKR&CD project knowledge",
       "tags": [
         "indus-kohistani",
         "dardic",
         "language-data"
-      ]
+      ],
+      "path": "research-knowledge.json"
     },
     {
       "id": "ik-data-integrity",
