@@ -16,6 +16,13 @@ on:
     paths:
       - "ai-skills/**"
       - ".agents/skills/**"
+      - "api/skills/**"
+      - "public/skills/**"
+      - "src/**"
+      - "package.json"
+      - "vite.config.js"
+      - "vercel.json"
+      - ".github/workflows/ai-skills.yml"
   workflow_dispatch:
 
 jobs:
@@ -48,6 +55,10 @@ jobs:
         run: python ai-skills/core/scripts/smoke_test.py
       - name: Compile Skills Console API
         run: python -m py_compile api/skills/run.py
+      - name: Validate Skills Console JavaScript
+        run: node --check public/skills/app.js
+      - name: Validate Skills Console shell
+        run: test -f public/skills/index.html && grep -q "id=\"pipeline\"" public/skills/index.html && grep -q "id=\"knowledge\"" public/skills/index.html
       - name: Build portfolio and Skills Console
         run: |
           npm ci
