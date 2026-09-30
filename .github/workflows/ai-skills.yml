@@ -27,6 +27,8 @@ jobs:
         run: python -m json.tool ai-skills/paperclip-agent-profiles.json > /dev/null
       - name: Run deterministic Skill Router tests
         run: python ai-skills/scripts/test_router.py
+      - name: Run executable Skill planning tests
+        run: python ai-skills/scripts/test_plan.py
       - name: Validate and evaluate all Skills
         run: python ai-skills/run.py all
       - name: Run framework smoke test
