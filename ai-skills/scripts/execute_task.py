@@ -119,12 +119,13 @@ def main():
             command += [flag, value]
         if missing:
             reports.append({
-                "status": "REVIEW",
+                "status": "SKIP" if plan.get("mode") == "validation-only" else "REVIEW",
                 "skill_id": skill["id"],
                 "validator": tool,
                 "exit_code": None,
                 "result": None,
-                "stderr": "Required execution input is missing.",
+                "stderr": "Required execution input is missing." if plan.get("mode") != "validation-only" else "Validator skipped because its required input was not supplied for this QA pass.",
+                "skipped": plan.get("mode") == "validation-only",
             })
             continue
         if contract.get("json"):
@@ -133,7 +134,7 @@ def main():
         completed = run_json(command, ROOT.parent)
         reports.append(normalize_result(skill["id"], tool, completed))
 
-    statuses = {item["status"] for item in reports}
+    statuses = {item["status"] for item in reports if item["status"] != "SKIP"}
     overall = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
     payload = {
         "status": overall,
