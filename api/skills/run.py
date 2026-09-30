@@ -103,9 +103,8 @@ class handler(BaseHTTPRequestHandler):
                     timeout=45,
                 )
 
-                lines = [line for line in process.stdout.splitlines() if line.strip()]
                 try:
-                    payload = json.loads(lines[-1]) if lines else {}
+                    payload = json.loads(process.stdout)
                 except json.JSONDecodeError:
                     payload = {}
 
