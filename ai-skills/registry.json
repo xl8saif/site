@@ -157,7 +157,8 @@
       "retrieve",
       "promote-check",
       "check",
-      "all"
+      "all",
+      "review"
     ]
   },
   "paperclip": {
