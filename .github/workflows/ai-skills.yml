@@ -60,7 +60,9 @@ jobs:
       - name: Run Skills Console API integration smoke test
         run: python api/skills/test_run.py
       - name: Validate Skills Console JavaScript
-        run: node --check public/skills/app.js
+        run: |
+          node --check public/skills/runtime-fixed.js
+          node --check public/skills/app.js
       - name: Validate Skills Console shell
         run: test -f public/skills/index.html && grep -q 'id="pipeline"' public/skills/index.html && grep -q 'id="knowledge"' public/skills/index.html
       - name: Build portfolio and Skills Console
