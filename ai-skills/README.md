@@ -111,7 +111,11 @@ python ai-skills/scripts/test_execute.py
 
 ```bash
 python ai-skills/scripts/review_gate.py --task "PUBG MOBILE Urdu LQA for a WOW event" --source source.txt --target target.txt --json
+
+# Indus-Kohistani research can use a knowledge/data input:
+python ai-skills/scripts/review_gate.py --task "Indus-Kohistani research corpus integrity" --knowledge knowledge.json --json
 python ai-skills/scripts/test_review_gate.py
+node --check public/skills/app.js
 ```
 
 
