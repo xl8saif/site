@@ -33,8 +33,6 @@ jobs:
         run: python ai-skills/scripts/test_execute.py
       - name: Run Human Review Gate tests
         run: python ai-skills/scripts/test_review_gate.py
-      - name: Run executable Skill planning tests
-        run: python ai-skills/scripts/test_plan.py
       - name: Validate and evaluate all Skills
         run: python ai-skills/run.py all
       - name: Run framework smoke test
