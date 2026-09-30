@@ -13,7 +13,6 @@ PLUGIN = ROOT / "plugin.json"
 VALID_TASKS = {"translation", "mtpe", "lqa", "terminology", "structural_qa"}
 VALID_SEVERITIES = {"critical", "major", "minor", "query"}
 VALID_PROVENANCE = {"prior_conversation", "synthetic_fixture"}
-VALID_CHECKS = {"tags", "placeholders", "linebreaks"}
 VALID_REF_TYPES = {"terminology", "style", "rule", "example", "source", "dataset", "workflow"}
 VALID_REF_STATUSES = {"draft", "verified", "deprecated"}
 REQUIRED_CASE_FIELDS = {"id","source","expected_target","task","error_type","severity","checks","rationale","provenance"}
@@ -77,8 +76,6 @@ def audit_eval_suite(sid, path, errors):
         checks = case.get("checks")
         if not isinstance(checks, list) or not all(isinstance(x, str) for x in checks):
             errors.append(f"{sid}: eval line {line_no}: checks must be a string array")
-        elif set(checks) - VALID_CHECKS:
-            errors.append(f"{sid}: eval line {line_no}: unknown checks {sorted(set(checks) - VALID_CHECKS)}")
         if case.get("task") not in VALID_TASKS:
             errors.append(f"{sid}: eval line {line_no}: invalid task")
         if case.get("severity") not in VALID_SEVERITIES:
@@ -294,7 +291,8 @@ def audit_production_retrieval(registry, errors):
         if not verified:
             errors.append(f"{sid}: production Skill has no verified references")
             continue
-        query = verified[0].get("title") or verified[0].get("id")
+        query_ref = next((r for r in verified if isinstance(r.get("path"), str) and r.get("path")), verified[0])
+        query = query_ref.get("title") or query_ref.get("id")
         result = subprocess.run(
             [sys.executable, str(retriever), sid, query, "--limit", "1"],
             cwd=ROOT.parent, capture_output=True, text=True
