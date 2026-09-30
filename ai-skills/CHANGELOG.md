@@ -1,3 +1,10 @@
+## 1.16.0
+
+- Fixed the Skills Console API JSON parsing for pretty-printed review reports.
+- Added an API integration smoke test covering PASS, FAIL, and research execution paths.
+- Added the API integration test to CI.
+- Bumped release metadata to 1.16.0.
+
 ## 1.15.0
 
 - Added canonical per-Skill execution contracts to the registry.
