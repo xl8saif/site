@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "multilingual-translation-mtpe",
+  "references": [
+    {
+      "id": "multilingual-terminology",
+      "type": "terminology",
+      "title": "Multilingual terminology",
+      "status": "draft",
+      "source": "Reserved for user-confirmed terminology",
+      "tags": [
+        "multilingual",
+        "mtpe"
+      ]
+    },
+    {
+      "id": "multilingual-structural-rules",
+      "type": "rule",
+      "title": "Shared structural preservation",
+      "status": "verified",
+      "source": "shared Core contract",
+      "tags": [
+        "xml",
+        "html",
+        "placeholders",
+        "line-breaks"
+      ]
+    },
+    {
+      "id": "multilingual-mtpe-workflow",
+      "type": "workflow",
+      "title": "MTPE workflow rules",
+      "status": "verified",
+      "source": "user-confirmed production QA principles",
+      "tags": [
+        "mtpe",
+        "workflow",
+        "quality"
+      ],
+      "path": "mtpe-workflow.json"
+    }
+  ]
+}
