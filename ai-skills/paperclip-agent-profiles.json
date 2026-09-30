@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "system": "saif-language-agent-system",
+  "paperclip": {
+    "company_library": "production Skills from ai-skills/paperclip.json",
+    "assignment_mode": "least-privilege",
+    "skill_source": "ai-skills"
+  },
+  "agents": [
+    {
+      "id": "localization-agent",
+      "purpose": "General multilingual translation, MTPE, terminology and structural QA",
+      "skills": ["multilingual-translation-mtpe", "arabic-urdu-localization"],
+      "handoff_to": ["legal-translation-agent", "pubg-urdu-lqa-agent"]
+    },
+    {
+      "id": "pubg-urdu-lqa-agent",
+      "purpose": "PUBG MOBILE Urdu localization and live-ops LQA",
+      "skills": ["pubg-urdu-lqa", "multilingual-translation-mtpe"],
+      "handoff_to": ["localization-agent"]
+    },
+    {
+      "id": "legal-translation-agent",
+      "purpose": "Legal translation and controlled document QA",
+      "skills": ["legal-translation-qa", "arabic-urdu-localization", "multilingual-translation-mtpe"],
+      "handoff_to": ["localization-agent"]
+    },
+    {
+      "id": "indus-kohistani-research-agent",
+      "purpose": "Indus-Kohistani research, corpus/data integrity and linguistic documentation",
+      "skills": ["indus-kohistani-research", "multilingual-translation-mtpe"],
+      "handoff_to": ["localization-agent"]
+    },
+    {
+      "id": "qa-gate-agent",
+      "purpose": "Final deterministic validation before human review or delivery",
+      "skills": ["pubg-urdu-lqa", "arabic-urdu-localization", "multilingual-translation-mtpe", "legal-translation-qa", "indus-kohistani-research"],
+      "mode": "validation-only"
+    }
+  ],
+  "routing": [
+    {"when":"PUBG MOBILE/WOW Urdu localization or LQA","agent":"pubg-urdu-lqa-agent"},
+    {"when":"Arabic to Urdu localization","agent":"localization-agent"},
+    {"when":"legal translation/document QA","agent":"legal-translation-agent"},
+    {"when":"Indus-Kohistani research or language data","agent":"indus-kohistani-research-agent"},
+    {"when":"final structural/deterministic QA","agent":"qa-gate-agent"}
+  ]
+}
