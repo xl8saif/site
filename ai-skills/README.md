@@ -94,6 +94,16 @@ python ai-skills/scripts/plan_task.py --task "PUBG MOBILE Urdu LQA for a WOW eve
 python ai-skills/scripts/test_plan.py
 ```
 
+
+## Deterministic Execution Engine
+
+`execute_task.py` takes a routed task plus the required input files, runs only the registered deterministic validator, and normalizes the result to `PASS`, `FAIL`, or `REVIEW`. It has no write/mutation capability.
+
+```bash
+python ai-skills/scripts/execute_task.py --task "PUBG MOBILE Urdu LQA for a WOW event" --source source.txt --target target.txt --json
+python ai-skills/scripts/test_execute.py
+```
+
 ## Plugin distribution
 
 The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
@@ -101,7 +111,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.11.0`
+The manifest version and registry release are kept in sync. Current release: `1.12.0`
 
 ## Promotion gate
 
