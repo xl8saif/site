@@ -164,7 +164,7 @@
           "source": "--source",
           "target": "--target"
         },
-        "json": true
+        "json": false
       }
     }
   ],
