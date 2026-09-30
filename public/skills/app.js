@@ -128,10 +128,18 @@ const task = $("task");
 const detected = $("detected");
 
 skills.forEach(s => {
-  $("skills").insertAdjacentHTML(
-    "beforeend",
-    '<div class="skill"><strong>' + s[1] + '</strong><span>' + s[0] + '</span></div>'
-  );
+  const el = document.createElement("button");
+  el.type = "button";
+  el.className = "skill";
+  el.dataset.skillId = s[0];
+  el.innerHTML = '<strong>' + s[1] + '</strong><span>' + s[0] + '</span>';
+  el.addEventListener("click", () => {
+    task.value = s[1] + " — " + s[0] + " task";
+    detect(task.value);
+    task.focus();
+    task.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+  $("skills").appendChild(el);
 });
 
 function detect(v) {
