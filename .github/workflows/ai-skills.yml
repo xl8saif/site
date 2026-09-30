@@ -31,6 +31,8 @@ jobs:
         run: python ai-skills/scripts/test_plan.py
       - name: Run deterministic execution engine tests
         run: python ai-skills/scripts/test_execute.py
+      - name: Run Human Review Gate tests
+        run: python ai-skills/scripts/test_review_gate.py
       - name: Run executable Skill planning tests
         run: python ai-skills/scripts/test_plan.py
       - name: Validate and evaluate all Skills
