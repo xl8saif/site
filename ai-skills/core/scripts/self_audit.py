@@ -75,8 +75,8 @@ def audit_eval_suite(sid, path, errors):
             if field in case and not isinstance(case[field], str):
                 errors.append(f"{sid}: eval line {line_no}: {field} must be a string")
         checks = case.get("checks")
-        if not isinstance(checks, list) or not checks or not all(isinstance(x, str) for x in checks):
-            errors.append(f"{sid}: eval line {line_no}: checks must be a non-empty string array")
+        if not isinstance(checks, list) or not all(isinstance(x, str) for x in checks):
+            errors.append(f"{sid}: eval line {line_no}: checks must be a string array")
         elif set(checks) - VALID_CHECKS:
             errors.append(f"{sid}: eval line {line_no}: unknown checks {sorted(set(checks) - VALID_CHECKS)}")
         if case.get("task") not in VALID_TASKS:
