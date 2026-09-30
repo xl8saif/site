@@ -188,6 +188,23 @@ def audit_registry(registry, errors):
                 errors.append(f"{sid}: entrypoint escapes Skill directory: {entrypoint}")
             elif not ep.is_file():
                 errors.append(f"{sid}: entrypoint is missing: {entrypoint}")
+        execution = item.get("execution")
+        if not isinstance(execution, dict):
+            errors.append(f"{sid}: missing execution contract")
+        else:
+            inputs = execution.get("inputs")
+            flags = execution.get("args")
+            if not isinstance(inputs, list) or not all(isinstance(x, str) for x in inputs):
+                errors.append(f"{sid}: execution.inputs must be a string array")
+                inputs = []
+            if not isinstance(flags, dict):
+                errors.append(f"{sid}: execution.args must be an object")
+                flags = {}
+            for input_name in inputs:
+                if not isinstance(flags.get(input_name), str) or not flags.get(input_name):
+                    errors.append(f"{sid}: execution missing flag for {input_name}")
+            if not isinstance(execution.get("json"), bool):
+                errors.append(f"{sid}: execution.json must be boolean")
         tools = item.get("deterministic_tools", [])
         if not isinstance(tools, list) or not all(isinstance(x, str) for x in tools):
             errors.append(f"{sid}: deterministic_tools must be a string array")
