@@ -67,29 +67,34 @@ class handler(BaseHTTPRequestHandler):
             task = str(fields.get("task", "")).strip()
             source = files.get("source")
             target = files.get("target")
+            knowledge = files.get("knowledge")
 
-            if not task or not source or not target:
-                send_json(self, {"error": "task, source and target are required."}, 400)
+            if not task or (not source and not knowledge):
+                send_json(self, {"error": "task and at least one input file are required."}, 400)
                 return
 
-            source_bytes = source["data"]
-            target_bytes = target["data"]
-            if len(source_bytes) > MAX_FILE or len(target_bytes) > MAX_FILE:
+            source_bytes = source["data"] if source else None
+            target_bytes = target["data"] if target else None
+            knowledge_bytes = knowledge["data"] if knowledge else None
+            if any(data is not None and len(data) > MAX_FILE for data in (source_bytes, target_bytes, knowledge_bytes)):
                 send_json(self, {"error": "Each file must be 2 MB or smaller."}, 413)
                 return
 
             with tempfile.TemporaryDirectory() as td:
                 source_path = Path(td) / "source.txt"
                 target_path = Path(td) / "target.txt"
-                source_path.write_bytes(source_bytes)
-                target_path.write_bytes(target_bytes)
+                knowledge_path = Path(td) / "knowledge.json"
+                if source_bytes is not None: source_path.write_bytes(source_bytes)
+                if target_bytes is not None: target_path.write_bytes(target_bytes)
+                if knowledge_bytes is not None: knowledge_path.write_bytes(knowledge_bytes)
 
                 process = subprocess.run(
                     [
                         sys.executable, str(SCRIPT),
                         "--task", task,
-                        "--source", str(source_path),
-                        "--target", str(target_path),
+                        *(["--source", str(source_path)] if source_bytes is not None else []),
+                        *(["--target", str(target_path)] if target_bytes is not None else []),
+                        *(["--knowledge", str(knowledge_path)] if knowledge_bytes is not None else []),
                         "--json",
                     ],
                     cwd=str(ROOT),
