@@ -51,8 +51,13 @@ def main():
         ]
         for task, src, tgt in cases:
             r=call(task,src,tgt)
-            if r.returncode != 0 or json.loads(r.stdout).get("status") != "PASS":
-                failures.append(f"registry-driven execution failed for: {task}")
+            try:
+                payload=json.loads(r.stdout)
+            except json.JSONDecodeError:
+                payload={}
+            if r.returncode != 0 or payload.get("status") != "PASS":
+                detail=r.stderr.strip() or r.stdout.strip()
+                failures.append(f"registry-driven execution failed for: {task} (exit={r.returncode}; {detail[:500]})")
 
         knowledge=tmp/"knowledge.json"
         knowledge.write_text(json.dumps({
