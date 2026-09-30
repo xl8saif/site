@@ -92,8 +92,7 @@ async function runOcr(kind) {
     if (status) {
       status.hidden = false;
       status.textContent =
-        (kind === "source" ? "Source" : "Target") +
-        " OCR جاهز. سيتم استخدام النص المستخرج تلقائياً عند تشغيل المهمة.";
+        tr("ocrReady").replace("{label}", kind === "source" ? tr("source") : tr("target"));
     }
   } catch (e) {
     if (status) {
@@ -170,14 +169,14 @@ task.addEventListener("input", () => detect(task.value));
 
 $("source").addEventListener("change", e => {
   ocrSourceFile = null;
-  $("sourceName").textContent = e.target.files[0]?.name || "اختر ملف المصدر";
+  $("sourceName").textContent = e.target.files[0]?.name || tr("source");
 });
 $("target").addEventListener("change", e => {
   ocrTargetFile = null;
-  $("targetName").textContent = e.target.files[0]?.name || "اختر ملف الهدف";
+  $("targetName").textContent = e.target.files[0]?.name || tr("target");
 });
 $("knowledge").addEventListener("change", e => {
-  $("knowledgeName").textContent = e.target.files[0]?.name || "اختياري للبحث";
+  $("knowledgeName").textContent = e.target.files[0]?.name || tr("knowledge");
 });
 
 $("ocr-source-btn").onclick = () => runOcr("source");
@@ -190,8 +189,8 @@ $("clear").onclick = () => {
   $("knowledge").value = "";
   ocrSourceFile = null;
   ocrTargetFile = null;
-  $("sourceName").textContent = "اختر ملف المصدر";
-  $("targetName").textContent = "اختر ملف الهدف";
+  $("sourceName").textContent = tr("source");
+  $("targetName").textContent = tr("target");
   $("knowledgeName").textContent = tr("knowledge");
   $("result").hidden = true;
   $("pipeline").hidden = true;
@@ -363,4 +362,5 @@ function esc(s) {
   }[c]));
 }
 
+setLanguage(uiLang);
 const nextLang={ar:"en",en:"ur",ur:"ar"}; $("langBtn").onclick=()=>setLanguage(nextLang[uiLang]);
