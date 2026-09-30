@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.12.0
+
+- Added the deterministic Execution Engine after routing and planning.
+- Added normalized `PASS` / `FAIL` / `REVIEW` execution reports.
+- Added side-effect-free validator invocation with explicit source/target or research inputs.
+- Added execution smoke tests and CI coverage.
+- Bumped release metadata to 1.12.0.
+
+
 ## 1.11.0
 
 - Added executable Skill planning after deterministic routing.
