@@ -111,5 +111,5 @@
     const status=execution.status==="FAIL"||summary.critical||summary.major?"FAIL":execution.status==="REVIEW"||unknown.length||summary.minor||summary.query?"REVIEW":"PASS";
     return{status,decision:status==="FAIL"?"BLOCK_DELIVERY":status==="REVIEW"?"HUMAN_REVIEW_REQUIRED":"READY_FOR_HUMAN_SIGNOFF",task,agent_id:execution.agent_id,confidence:execution.confidence,summary,findings,execution,human_signoff:status!=="FAIL",side_effects:"none",traceability:{router_rule:execution.matched_rule,agent:execution.agent_id,validators:execution.reports.map(x=>x.validator)}};
   }
-  window.SaifSkillsBrowser={version:"1.18.0-browser",route,plan,run};
+  window.SaifSkillsBrowser={version:"1.20.0-browser",route,plan,run};
 })();
