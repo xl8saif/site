@@ -31,7 +31,7 @@ def mirrored_files(skill: str) -> list[Path]:
     for folder in ("references", "scripts"):
         base = src / folder
         if base.exists():
-            files.extend(p for p in base.rglob("*") if p.is_file())
+            files.extend(p for p in base.rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc")
     return sorted(files)
 
 
