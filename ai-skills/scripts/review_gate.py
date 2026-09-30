@@ -51,6 +51,17 @@ def main():
         return 2
 
     findings=extract_findings(execution.get("reports",[]))
+    if execution.get("status") == "FAIL" and not findings:
+        failed_reports = [r for r in execution.get("reports", []) if r.get("status") == "FAIL"]
+        for report in failed_reports:
+            detail = report.get("stderr") or report.get("result") or "Validator returned FAIL without structured findings."
+            findings.append({
+                "severity": "query",
+                "code": "VALIDATOR_FAILED_WITHOUT_FINDINGS",
+                "issue": f"Validator {report.get('validator') or 'unknown'} returned FAIL without structured findings: {detail}",
+                "skill_id": report.get("skill_id"),
+                "validator": report.get("validator"),
+            })
     counts={s:sum(1 for f in findings if f.get("severity")==s) for s in SEVERITIES}
     unknown=[f for f in findings if f.get("severity") not in SEVERITIES]
     if unknown:
