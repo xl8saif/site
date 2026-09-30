@@ -58,6 +58,14 @@ The console runs the deterministic pipeline:
 
 GitHub Pages can host the static console, but it cannot execute the Python API server-side. A Vercel deployment is therefore the production path for the full interactive console.
 
+## AI Skills Console
+
+The portfolio includes a production AI Skills Console for reusable localization, QA and language workflows:
+
+- **AI Skills Console:** https://xl8saif.vercel.app/skills/
+- Deterministic pipeline: Router → Planner → Execution Engine → Human Review Gate
+- Production Skills for PUBG Urdu LQA, Arabic–Urdu localization, multilingual MTPE, legal translation QA and Indus-Kohistani research
+
 ## Deployment
 
 The main branch is deployed to GitHub Pages for the static portfolio. For the full AI Skills Console, import this repository into Vercel with the repository root as the project root, use `npm run build`, and keep the output directory as `dist`. The repository's `vercel.json` already configures the Python API function, includes the canonical `ai-skills/**` runtime files, and sets a bounded function duration.
