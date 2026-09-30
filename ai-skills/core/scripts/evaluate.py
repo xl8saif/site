@@ -13,7 +13,6 @@ REQUIRED = {"id","source","expected_target","task","error_type","severity","chec
 TASKS = {"translation","mtpe","lqa","terminology","structural_qa"}
 SEVERITIES = {"critical","major","minor","query"}
 PROVENANCE = {"prior_conversation","synthetic_fixture"}
-VALID_CHECKS = {"tags","placeholders","linebreaks"}
 ALLOWED_FIELDS = REQUIRED | {"previous_target"}
 
 
