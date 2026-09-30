@@ -135,7 +135,7 @@
       "scripts/self_audit.py"
     ]
   },
-  "version": "1.12.0",
+  "version": "1.13.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
@@ -175,6 +175,8 @@
     "plan": "scripts/plan_task.py",
     "plan_test": "scripts/test_plan.py",
     "execution": "scripts/execute_task.py",
-    "execution_test": "scripts/test_execute.py"
+    "execution_test": "scripts/test_execute.py",
+    "review_gate": "scripts/review_gate.py",
+    "review_gate_test": "scripts/test_review_gate.py"
   }
 }
