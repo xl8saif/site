@@ -50,6 +50,7 @@ def build_plan(task):
             "domain": item.get("domain", []),
             "deterministic_tools": tools,
             "primary_tool": tools[0] if tools else None,
+            "execution": item.get("execution"),
         })
 
     if agent.get("mode") == "validation-only":
