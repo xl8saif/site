@@ -38,7 +38,7 @@
   };
   const IK={identity:{name:"Indus-Kohistani",iso_639_3:"mvy",family:"Dardic"},orthography:{letters:["چھ","څ","ݜ","ڙ","ݨ"]}};
   function normalize(s){return String(s||"").replace(/\s+/g," ").toLocaleLowerCase().trim();}
-  function escRx(s){return s.replace(/[|\\{}()[\]^$+*?.-]/g,"\\$&");}
+  function escRx(s){return s.replace(/[|\\{}()[\]^$+*?.]/g,"\\function escRx(s){return s.replace(/[|\\{}()[\]^$+*?.-]/g,"\\$&");}").replace(/-/g,"\\x2d");}
   function route(task){
     if(!String(task||"").trim())throw new Error("task must be non-empty");
     const t=normalize(task),c=[];
