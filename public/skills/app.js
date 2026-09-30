@@ -7,10 +7,11 @@ async function extractScannedPdf(file, label) {
   if (!window.pdfjsLib || !window.Tesseract) {
     throw new Error("مكتبات PDF/OCR لم تُحمّل بعد. أعد تحميل الصفحة ثم جرّب مرة أخرى.");
   }
-  if (window.pdfjsLib.GlobalWorkerOptions) {
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  if (!window.pdfjsLib.GlobalWorkerOptions) {
+    throw new Error("PDF.js Worker configuration is unavailable. أعد تحميل الصفحة ثم جرّب مرة أخرى.");
   }
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   const buffer = await file.arrayBuffer();
   const pdf = await window.pdfjsLib.getDocument({ data: buffer }).promise;
   let text = "";
