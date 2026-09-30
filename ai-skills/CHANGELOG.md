@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.13.0
+
+- Added the Human Review Gate and findings aggregator.
+- Added severity-based delivery gating for deterministic findings.
+- Preserved human sign-off as the final decision layer.
+- Added review-gate smoke tests and CI coverage.
+- Bumped release metadata to 1.13.0.
+
+
 ## 1.12.0
 
 - Added the deterministic Execution Engine after routing and planning.
