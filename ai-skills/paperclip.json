@@ -32,5 +32,6 @@
       "paperclip": "github/xl8saif/site/ai-skills/indus-kohistani-research"
     }
   ],
-  "import_command": "bash ai-skills/scripts/import_to_paperclip.sh"
+  "import_command": "bash ai-skills/scripts/import_to_paperclip.sh",
+  "agent_profiles": "paperclip-agent-profiles.json"
 }
