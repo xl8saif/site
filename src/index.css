@@ -1170,3 +1170,107 @@ body::before{
   .brand{min-width:82px}
   .brand-mark{width:78px!important;height:78px!important;min-width:78px!important;left:0}
 }
+
+/* AI Skills Console — new-project spotlight */
+.development-card-new{
+  grid-column:span 2;
+  position:relative;
+  min-height:330px;
+  padding:28px!important;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(54,126,232,.18),transparent 28%),
+    radial-gradient(circle at 8% 92%,rgba(138,103,45,.12),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.98),rgba(221,231,244,.82) 55%,rgba(241,237,228,.88));
+  border:1px solid rgba(54,126,232,.20);
+  box-shadow:14px 16px 38px rgba(86,105,130,.30),-10px -10px 26px rgba(255,255,255,.98),inset 0 1px rgba(255,255,255,.98);
+}
+.development-card-new::after{
+  content:"";
+  position:absolute;
+  width:190px;height:190px;
+  right:-70px;bottom:-80px;
+  border:1px solid rgba(54,126,232,.14);
+  border-radius:50%;
+  box-shadow:0 0 0 24px rgba(54,126,232,.035),0 0 0 48px rgba(54,126,232,.025);
+  pointer-events:none;
+}
+.development-card-new:hover{
+  transform:translateY(-7px);
+  border-color:rgba(54,126,232,.34);
+  box-shadow:18px 22px 46px rgba(72,94,122,.36),-12px -12px 30px rgba(255,255,255,1);
+}
+.development-new-badge{
+  position:absolute;
+  top:20px;right:20px;
+  z-index:2;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#1a5fb4;
+  color:#fff;
+  font-family:var(--mono);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.14em;
+  box-shadow:4px 5px 10px rgba(26,95,180,.28),inset 0 1px rgba(255,255,255,.35);
+}
+.development-card-new .development-card-top{padding-right:55px}
+.development-card-new .development-card-top span{color:#1a5fb4}
+.development-card-new .development-icon{
+  position:relative;
+  width:64px!important;height:64px!important;
+  margin:8px 0 20px!important;
+  border-radius:19px;
+  background:linear-gradient(145deg,#eef5ff,#d7e4f5);
+  color:#174f96;
+  font-size:17px;
+  box-shadow:7px 8px 15px rgba(115,137,164,.28),-5px -5px 12px rgba(255,255,255,.98),inset 2px 2px 5px rgba(255,255,255,.9);
+}
+.development-ai-icon i{
+  position:absolute;
+  right:-7px;bottom:-7px;
+  width:23px;height:23px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:#fff;
+  color:#1a5fb4;
+  font-family:var(--mono);
+  font-size:11px;
+  font-style:normal;
+  box-shadow:3px 4px 8px rgba(50,70,95,.20);
+}
+.development-card-new h3{font-size:32px!important;letter-spacing:-.025em}
+.development-card-new p{max-width:760px}
+.development-card-new p strong{color:var(--neu-ink);font-weight:700}
+.development-card-new .development-tags span{
+  background:rgba(255,255,255,.72);
+  border-color:rgba(26,95,180,.12);
+}
+.development-card-new .development-launch-link{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:20px!important;
+  padding:10px 15px;
+  border:1px solid rgba(26,95,180,.22);
+  border-radius:12px;
+  background:linear-gradient(145deg,#2c7be5,#1a5fb4);
+  color:#fff!important;
+  box-shadow:6px 7px 13px rgba(26,95,180,.28),-3px -3px 8px rgba(255,255,255,.85);
+  text-transform:none;
+  letter-spacing:.02em;
+}
+.development-card-new .development-launch-link:hover{
+  color:#fff!important;
+  transform:translateY(-2px);
+  box-shadow:8px 10px 17px rgba(26,95,180,.34),-4px -4px 10px rgba(255,255,255,.95);
+}
+.development-card-new .development-launch-link span{font-size:14px;line-height:1}
+@media(max-width:800px){
+  .development-card-new{grid-column:span 2}
+}
+@media(max-width:620px){
+  .development-card-new{grid-column:span 1;min-height:auto;padding:22px!important}
+  .development-new-badge{top:16px;right:16px}
+  .development-card-new h3{font-size:28px!important}
+  .development-card-new .development-icon{width:56px!important;height:56px!important}
+}
