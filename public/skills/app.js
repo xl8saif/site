@@ -5,10 +5,10 @@ let ocrTargetFile = null;
 async function extractScannedPdf(file, label) {
   if (!file || !file.name.toLowerCase().endsWith(".pdf")) return null;
   if (!window.pdfjsLib || !window.Tesseract) {
-    throw new Error("مكتبات PDF/OCR لم تُحمّل بعد. أعد تحميل الصفحة ثم جرّب مرة أخرى.");
+    throw new Error(tr("ocrLib"));
   }
   if (!window.pdfjsLib.GlobalWorkerOptions) {
-    throw new Error("PDF.js Worker configuration is unavailable. أعد تحميل الصفحة ثم جرّب مرة أخرى.");
+    throw new Error(tr("ocrWorker"));
   }
   window.pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -30,7 +30,7 @@ async function extractScannedPdf(file, label) {
 
     if (status) {
       status.hidden = false;
-      status.textContent = label + " — rendering page " + i + "/" + pdf.numPages;
+      status.textContent = label + " — " + (uiLang==="ur"?"صفحہ دکھایا جا رہا ہے ":"rendering page ") + i + "/" + pdf.numPages;
     }
 
     const result = await window.Tesseract.recognize(
@@ -41,7 +41,7 @@ async function extractScannedPdf(file, label) {
           if (!status) return;
           const pct = Math.round((m.progress || 0) * 100);
           status.hidden = false;
-          status.textContent = label + " — OCR " + pct + "% — page " + i + "/" + pdf.numPages;
+          status.textContent = label + " — OCR " + pct + "% — " + (uiLang==="ur"?"صفحہ ":"page ") + i + "/" + pdf.numPages;
         }
       }
     );
@@ -70,14 +70,14 @@ async function runOcr(kind) {
   if (!file) {
     if (status) {
       status.hidden = false;
-      status.textContent = "اختر ملف " + (kind === "source" ? "Source" : "Target") + " PDF أولاً.";
+      status.textContent = tr("selectPdf").replace("{label}", kind === "source" ? "Source" : "Target");
     }
     return;
   }
   if (!file.name.toLowerCase().endsWith(".pdf")) {
     if (status) {
       status.hidden = false;
-      status.textContent = "OCR متاح لملفات PDF فقط.";
+      status.textContent = tr("ocrPdfOnly");
     }
     return;
   }
@@ -85,7 +85,7 @@ async function runOcr(kind) {
   btn.disabled = true;
   try {
     const text = await extractScannedPdf(file, kind === "source" ? "Source" : "Target");
-    if (!text) throw new Error("تعذر استخراج نص من ملف PDF.");
+    if (!text) throw new Error(tr("ocrFailed"));
     const ocrFile = makeOcrFile(file, text);
     if (kind === "source") ocrSourceFile = ocrFile;
     else ocrTargetFile = ocrFile;
@@ -106,11 +106,11 @@ async function runOcr(kind) {
 }
 
 const skills = [
-  ["pubg-urdu-lqa","PUBG Urdu LQA","فحص جودة PUBG بالأردية","pubg|wow|world of wonder|urdu lqa|mission card|wow tokens|creation mode"],
-  ["arabic-urdu-localization","Arabic ↔ Urdu Localization","التوطين من العربية إلى الأردية والعكس","arabic to urdu|arabic-urdu|عربي|عربی اردو|localization|translation"],
-  ["multilingual-translation-mtpe","Multilingual Translation / MTPE","الترجمة متعددة اللغات / المعالجة اللاحقة للترجمة الآلية","mtpe|multilingual|terminology|translation"],
-  ["legal-translation-qa","Legal Translation QA","فحص جودة الترجمة القانونية","legal|contract|court|case law|judgment|محكمة|قانون|دعوى|عقد"],
-  ["indus-kohistani-research","Indus-Kohistani Research","أبحاث الإندوس-كوهستانية","indus-kohistani|mvy|dardic|duber|kandia|common voice|corpus|کوہستانی|کارپس"]
+  ["pubg-urdu-lqa","PUBG Urdu LQA","فحص جودة PUBG بالأردية","PUBG اردو LQA","pubg|wow|world of wonder|urdu lqa|mission card|wow tokens|creation mode"],
+  ["arabic-urdu-localization","Arabic ↔ Urdu Localization","التوطين من العربية إلى الأردية والعكس","عربی ↔ اردو لوکلائزیشن","arabic to urdu|arabic-urdu|عربي|عربی اردو|localization|translation"],
+  ["multilingual-translation-mtpe","Multilingual Translation / MTPE","الترجمة متعددة اللغات / المعالجة اللاحقة للترجمة الآلية","کثیر لسانی ترجمہ / MTPE","mtpe|multilingual|terminology|translation"],
+  ["legal-translation-qa","Legal Translation QA","فحص جودة الترجمة القانونية","قانونی ترجمہ کی معیار جانچ","legal|contract|court|case law|judgment|محكمة|قانون|دعوى|عقد"],
+  ["indus-kohistani-research","Indus-Kohistani Research","أبحاث الإندوس-كوهستانية","انڈس کوہستانی تحقیق","indus-kohistani|mvy|dardic|duber|kandia|common voice|corpus|کوہستانی|کارپس"]
 ];
 const $ = id => document.getElementById(id);
 
@@ -140,9 +140,9 @@ function renderSkills(){ $("skills").innerHTML=""; skills.forEach(s => {
   el.type = "button";
   el.className = "skill";
   el.dataset.skillId = s[0];
-  el.innerHTML = '<strong>' + (uiLang==="ar"?s[2]:uiLang==="ur"?s[1]:s[1]) + '</strong><span>' + s[0] + '</span>';
+  el.innerHTML = '<strong>' + (uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:s[1]) + '</strong><span>' + s[0] + '</span>';
   el.addEventListener("click", () => {
-    task.value = (uiLang==="ar"?s[2]:s[1]) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
+    task.value = (uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:s[1]) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
     detect(task.value);
     task.focus();
     task.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -154,13 +154,13 @@ function detect(v) {
   const t = v.toLowerCase();
   let best = null;
   for (const s of skills) {
-    const score = s[3].split("|").reduce(
+    const score = s[4].split("|").reduce(
       (n, k) => n + (t.includes(k.toLowerCase()) ? 1 : 0), 0
     );
     if (score && (!best || score > best.score)) best = { s, score };
   }
   detected.textContent = best
-    ? (uiLang==="ar"?best.s[2]:best.s[1]) + " · " + best.s[0]
+    ? (uiLang==="ar"?best.s[2]:uiLang==="ur"?best.s[3]:best.s[1]) + " · " + best.s[0]
     : tr("auto");
   return best;
 }
@@ -191,11 +191,11 @@ $("clear").onclick = () => {
   ocrTargetFile = null;
   $("sourceName").textContent = "اختر ملف المصدر";
   $("targetName").textContent = "اختر ملف الهدف";
-  $("knowledgeName").textContent = "اختياري للبحث";
+  $("knowledgeName").textContent = tr("knowledge");
   $("result").hidden = true;
   $("pipeline").hidden = true;
   $("ocr-status").hidden = true;
-  detected.textContent = "سيتم الاكتشاف تلقائياً";
+  detected.textContent = tr("auto");
 };
 
 $("run").onclick = async () => {
