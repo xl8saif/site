@@ -135,7 +135,7 @@
       "scripts/self_audit.py"
     ]
   },
-  "version": "1.10.0",
+  "version": "1.11.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
@@ -171,6 +171,8 @@
     "path": "scripts/route_task.py",
     "profiles": "paperclip-agent-profiles.json",
     "test": "scripts/test_router.py",
-    "status": "stable"
+    "status": "stable",
+    "plan": "scripts/plan_task.py",
+    "plan_test": "scripts/test_plan.py"
   }
 }
