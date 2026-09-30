@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "pubg-urdu-lqa",
+  "references": [
+    {
+      "id": "pubg-urdu-terminology",
+      "type": "terminology",
+      "title": "PUBG Urdu terminology",
+      "status": "verified",
+      "source": "user-confirmed production terminology",
+      "tags": [
+        "pubg",
+        "urdu",
+        "localization"
+      ],
+      "path": "terminology.json",
+      "notes": "Production terminology decisions: use preferred Urdu forms; rejected forms are QA-detectable."
+    },
+    {
+      "id": "pubg-protected-terms",
+      "type": "rule",
+      "title": "Protected product terms",
+      "status": "verified",
+      "source": "user-confirmed production rules",
+      "tags": [
+        "protected-terms",
+        "qa"
+      ],
+      "path": "protected-terms.json"
+    },
+    {
+      "id": "pubg-structural-invariants",
+      "type": "rule",
+      "title": "Structural preservation rules",
+      "status": "verified",
+      "source": "user-confirmed production QA rules",
+      "tags": [
+        "structure",
+        "xml",
+        "html",
+        "placeholders",
+        "line-breaks"
+      ]
+    }
+  ]
+}
