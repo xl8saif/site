@@ -124,7 +124,7 @@ function App() {
               <div className="hero-actions">
                 <button className="button button-primary" onClick={() => scrollToSection("projects")}>Explore my work</button>
                 <button className="button button-secondary" onClick={() => scrollToSection("contact")}>Get in touch</button>
-                <a className="button button-secondary" href={`${import.meta.env.BASE_URL}skills/`}>AI Skills Console ↗</a>
+                <a className="button button-secondary" href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">AI Skills Console ↗</a>
               </div>
             </div>
             <div className="hero-profile">
@@ -263,6 +263,15 @@ function App() {
                 <p>Practical Windows keyboard layouts supporting Urdu and Indus-Kohistani typing, digital communication and language preservation.</p>
                 <div className="development-tags"><span>Windows</span><span>Urdu</span><span>Indus-Kohistani</span><span>Input Tools</span></div>
                 <a href="#keyboards">Explore keyboard tools ↗</a>
+              </article>
+
+              <article className="development-card development-skills-console-card">
+                <div className="development-card-top"><span>06</span><b>AI · AUTOMATION · QA</b></div>
+                <div className="development-icon" aria-hidden="true">AI</div>
+                <h3>AI Skills Console</h3>
+                <p>A production-oriented console for running reusable AI Skills through a deterministic Router, Planner, Execution Engine and Human Review Gate.</p>
+                <div className="development-tags"><span>AI Skills</span><span>QA</span><span>Localization</span><span>Human Review</span></div>
+                <a href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">Open the AI Skills Console ↗</a>
               </article>
 
               <article className="development-card development-skills-card">
