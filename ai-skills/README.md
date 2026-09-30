@@ -104,6 +104,16 @@ python ai-skills/scripts/execute_task.py --task "PUBG MOBILE Urdu LQA for a WOW 
 python ai-skills/scripts/test_execute.py
 ```
 
+
+## Human Review Gate
+
+`review_gate.py` aggregates deterministic findings, counts severity, and produces a delivery decision without replacing human judgment. Critical/major findings block delivery; minor/query findings require human review.
+
+```bash
+python ai-skills/scripts/review_gate.py --task "PUBG MOBILE Urdu LQA for a WOW event" --source source.txt --target target.txt --json
+python ai-skills/scripts/test_review_gate.py
+```
+
 ## Plugin distribution
 
 The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
@@ -111,7 +121,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.12.0`
+The manifest version and registry release are kept in sync. Current release: `1.13.0`
 
 ## Promotion gate
 
