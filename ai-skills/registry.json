@@ -62,7 +62,9 @@
       ],
       "path": "multilingual-translation-mtpe",
       "entrypoint": "multilingual-translation-mtpe/SKILL.md",
-      "deterministic_tools": [],
+      "deterministic_tools": [
+        "scripts/check_mtpe.py"
+      ],
       "protected_work": [
         "source meaning",
         "XML/HTML structure",
@@ -81,7 +83,9 @@
       ],
       "path": "indus-kohistani-research",
       "entrypoint": "indus-kohistani-research/SKILL.md",
-      "deterministic_tools": [],
+      "deterministic_tools": [
+        "scripts/check_research_data.py"
+      ],
       "protected_work": [
         "source meaning",
         "XML/HTML structure",
@@ -100,7 +104,9 @@
       ],
       "path": "legal-translation-qa",
       "entrypoint": "legal-translation-qa/SKILL.md",
-      "deterministic_tools": [],
+      "deterministic_tools": [
+        "scripts/check_legal.py"
+      ],
       "protected_work": [
         "source meaning",
         "XML/HTML structure",
