@@ -1,3 +1,10 @@
+## 1.15.0
+
+- Added canonical per-Skill execution contracts to the registry.
+- Hardened the Execution Engine so validator invocation is registry-driven across all five production Skills.
+- Expanded execution smoke coverage across translation, localization, legal QA, and Indus-Kohistani research.
+- Hardened the Human Review Gate so any deterministic validator failure blocks delivery.
+
 # Changelog
 
 ## 1.14.0
