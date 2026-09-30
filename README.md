@@ -56,7 +56,7 @@ The console runs the deterministic pipeline:
 
 `Router → Planner → Execution Engine → Human Review Gate`
 
-GitHub Pages can host the static console, but it cannot execute the Python API server-side. A Vercel deployment is therefore the production path for the full interactive console. GitHub Pages does not support server-side Python. citeturn0search3
+GitHub Pages can host the static console, but it cannot execute the Python API server-side. A Vercel deployment is therefore the production path for the full interactive console.
 
 ## Deployment
 
@@ -66,6 +66,6 @@ For a local authenticated deployment:
 
 `npx vercel --prod`
 
-Vercel supports GitHub repository imports and automatic deployments from the production branch. citeturn0search1turn0search2
+Vercel supports GitHub repository imports and automatic deployments from the production branch.
 
 The Vite configuration automatically uses `/site/` for GitHub Pages and `/` on Vercel, so the same repository can serve both deployment targets correctly.
