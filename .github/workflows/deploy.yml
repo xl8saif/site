@@ -34,7 +34,7 @@ jobs:
         run: node scripts/sync-site-images.mjs
 
       - name: Validate browser Skills engine
-        run: node --check public/skills/runtime.js
+        run: node --check public/skills/runtime-fixed.js
 
       - name: Build Vite portfolio
         run: npm run build
