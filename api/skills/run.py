@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "ai-skills" / "scripts" / "review_gate.py"
-MAX_FILE = 1536 * 1024
+MAX_FILE = 4 * 1024 * 1024
 MAX_BODY = 4 * 1024 * 1024
 
 
@@ -77,7 +77,7 @@ class handler(BaseHTTPRequestHandler):
             target_bytes = target["data"] if target else None
             knowledge_bytes = knowledge["data"] if knowledge else None
             if any(data is not None and len(data) > MAX_FILE for data in (source_bytes, target_bytes, knowledge_bytes)):
-                send_json(self, {"error": "Each file must be 1.5 MB or smaller."}, 413)
+                send_json(self, {"error": "Each file must be 4 MB or smaller."}, 413)
                 return
 
             with tempfile.TemporaryDirectory() as td:
