@@ -124,7 +124,7 @@ function App() {
               <div className="hero-actions">
                 <button className="button button-primary" onClick={() => scrollToSection("projects")}>Explore my work</button>
                 <button className="button button-secondary" onClick={() => scrollToSection("contact")}>Get in touch</button>
-                <a className="button button-secondary" href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">AI Skills Console ↗</a>
+                <a className="button button-secondary" href="/site/skills/" target="_blank" rel="noreferrer">AI Skills Console ↗</a>
               </div>
             </div>
             <div className="hero-profile">
@@ -272,7 +272,7 @@ function App() {
                 <h3>AI Skills Console</h3>
                 <p>A production-oriented console for reusable AI Skills, orchestrated through a deterministic <strong>Router → Planner → Execution → Human Review</strong> pipeline.</p>
                 <div className="development-tags"><span>AI Skills</span><span>Automation</span><span>Localization</span><span>QA</span><span>Human Review</span></div>
-                <a className="development-launch-link" href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">Launch Console <span>↗</span></a>
+                <a className="development-launch-link" href="/site/skills/" target="_blank" rel="noreferrer">Launch Console <span>↗</span></a>
               </article>
 
               <article className="development-card development-skills-card">
