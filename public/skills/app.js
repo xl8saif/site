@@ -114,6 +114,13 @@ const skills = [
 ];
 const $ = id => document.getElementById(id);
 
+const I18N={ar:{taskLabel:"المهمة",taskPlaceholder:"مثال: PUBG MOBILE Urdu LQA for a WOW event",auto:"سيتم الاكتشاف تلقائياً",source:"اختر ملف المصدر",target:"اختر ملف الهدف",knowledge:"اختياري للبحث",run:"تشغيل المهمة",clear:"مسح",progress:"جاري تنفيذ المسار الموحد…",how:"طريقة العمل",howText:"النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط؛ والقرار النهائي يبقى للمراجعة البشرية.",pipeline:"مسار التنفيذ",router:"تحديد Agent",planner:"اختيار Skill",execution:"تشغيل Validator",review:"قرار المراجعة",result:"النتيجة",evidence:"EVIDENCE",trace:"التتبع",raw:"Raw JSON",cli:"إذا كنت تعمل محلياً",cliText:"يمكن تشغيل نفس المسار من الطرفية:",pdf:"لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.",ocr:"PDF ممسوح",ocrText:"استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.",ocrSource:"OCR Source PDF",ocrTarget:"OCR Target PDF",noFindings:"يمكن الانتقال إلى المراجعة البشرية النهائية.",critical:"حرج",major:"رئيسي",minor:"طفيف",query:"استفسار"},en:{taskLabel:"Task",taskPlaceholder:"Example: PUBG MOBILE Urdu LQA for a WOW event",auto:"Auto-detection",source:"Choose source file",target:"Choose target file",knowledge:"Optional research data",run:"Run Task",clear:"Clear",progress:"Running the unified pipeline…",how:"How it works",howText:"Your files are not modified. Inputs are used for validation only; the final decision remains with human review.",pipeline:"Execution Pipeline",router:"Select Agent",planner:"Select Skill",execution:"Run Validator",review:"Review Decision",result:"Result",evidence:"EVIDENCE",trace:"Traceability",raw:"Raw JSON",cli:"If you are working locally",cliText:"Run the same pipeline from the terminal:",pdf:"For scanned PDFs: run OCR first, then use the extracted text as the Source or Target file.",ocr:"Scanned PDF",ocrText:"Scanned PDF text is extracted locally in the browser. After extraction, the text is used automatically when you run the task.",ocrSource:"OCR Source PDF",ocrTarget:"OCR Target PDF",noFindings:"The task can proceed to final human review.",critical:"Critical",major:"Major",minor:"Minor",query:"Query"}};
+let uiLang=document.documentElement.lang==="en"?"en":"ar";
+function tr(key){return I18N[uiLang][key]||key}
+function setText(el,key){if(el)el.textContent=tr(key)}
+function setLanguage(lang){uiLang=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";setText(document.querySelector('label[for="task"]'),"taskLabel");task.placeholder=tr("taskPlaceholder");setText($("run"),"run");setText($("clear"),"clear");setText($(".progress p"),"progress");setText($(".help strong"),"how");setText($(".help p"),"howText");setText($("#pipeline h2"),"pipeline");["router","planner","execution","review"].forEach(k=>setText(document.querySelector('[data-stage="'+k+'"] span'),k));setText($("#resultTitle"),"result");setText(document.querySelector("#result .kicker"),"evidence");setText(document.querySelector("#result details:nth-of-type(1) summary"),"trace");setText(document.querySelector("#result details:nth-of-type(2) summary"),"raw");setText($(".cli h2"),"cli");setText($(".cli p"),"cliText");setText($(".cli p:last-child"),"pdf");setText($("#ocr-panel .panel-title span:last-child"),"ocr");setText($("#ocr-panel p"),"ocrText");setText($("#ocr-source-btn"),"ocrSource");setText($("#ocr-target-btn"),"ocrTarget");document.querySelectorAll(".drop").forEach((el,i)=>setText(el.querySelector("span"),i===0?"source":i===1?"target":"knowledge"));setText($("#detected"),"auto");setText($("#langBtn"),lang==="ar"?"English":"العربية");render(currentResult)}
+
+
 function stages(state) {
   $("pipeline").hidden = false;
   ["router","planner","execution","review"].forEach(x => {
@@ -124,6 +131,7 @@ function stages(state) {
 
 const API_BASE = (window.SAIF_SKILLS_API_BASE ||
   (location.hostname.endsWith("github.io") ? "http://127.0.0.1:8787" : ""));
+let currentResult={};
 const task = $("task");
 const detected = $("detected");
 
@@ -311,7 +319,7 @@ function showLocal() {
   });
 }
 
-function render(d) {
+function render(d){currentResult=d||{};
   $("result").hidden = false;
   $("resultTitle").textContent = d.decision || "النتيجة";
   const b = $("badge");
@@ -345,8 +353,4 @@ function esc(s) {
   }[c]));
 }
 
-$("langBtn").onclick = () => {
-  document.documentElement.dir = document.documentElement.dir === "rtl" ? "ltr" : "rtl";
-  document.documentElement.lang = document.documentElement.lang === "ar" ? "en" : "ar";
-  $("langBtn").textContent = document.documentElement.lang === "ar" ? "English" : "العربية";
-};
+$("langBtn").onclick=()=>setLanguage(uiLang==="ar"?"en":"ar");
