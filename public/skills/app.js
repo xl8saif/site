@@ -1,3 +1,29 @@
+
+// Browser OCR helper: keeps scanned PDFs out of the server path until text is available.
+async function extractScannedPdf(file){
+  if(!file || !file.name.toLowerCase().endsWith(".pdf")) return null;
+  if(!window.pdfjsLib || !window.Tesseract) return null;
+  const buffer=await file.arrayBuffer();
+  const pdf=await window.pdfjsLib.getDocument({data:buffer}).promise;
+  let text="";
+  for(let i=1;i<=pdf.numPages;i++){
+    const page=await pdf.getPage(i);
+    const viewport=page.getViewport({scale:1.6});
+    const canvas=document.createElement("canvas");
+    canvas.width=viewport.width; canvas.height=viewport.height;
+    await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
+    const result=await window.Tesseract.recognize(canvas,"eng+ara+urd",{logger:m=>{const el=document.getElementById("ocr-status"); if(el){el.hidden=false; el.textContent="OCR "+Math.round((m.progress||0)*100)+"% — page "+i+"/"+pdf.numPages;}}});
+    text+="\n"+result.data.text;
+  }
+  return text.trim();
+}
+function downloadTextFile(name,text){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
+  a.download=name.replace(/\.pdf$/i,"")+".ocr.txt";
+  a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
 const skills=[["pubg-urdu-lqa","PUBG Urdu LQA","pubg|wow|world of wonder|urdu lqa|mission card|wow tokens|creation mode"],["arabic-urdu-localization","Arabic ↔ Urdu Localization","arabic to urdu|arabic-urdu|عربي|عربی اردو|localization|translation"],["multilingual-translation-mtpe","Multilingual Translation / MTPE","mtpe|multilingual|terminology|translation"],["legal-translation-qa","Legal Translation QA","legal|contract|court|case law|judgment|محكمة|قانون|دعوى|عقد"],["indus-kohistani-research","Indus-Kohistani Research","indus-kohistani|mvy|dardic|duber|kandia|common voice|corpus|کوہستانی|کارپس"]];
 const $=id=>document.getElementById(id);
 function stages(state){
