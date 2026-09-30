@@ -17,6 +17,25 @@ async function extractScannedPdf(file){
   }
   return text.trim();
 }
+document.addEventListener("DOMContentLoaded",()=>{
+  const btn=document.getElementById("ocr-btn");
+  if(!btn) return;
+  btn.addEventListener("click",async()=>{
+    const input=document.getElementById("source-file")||document.querySelector('input[type="file"]');
+    const file=input&&input.files&&input.files[0];
+    const status=document.getElementById("ocr-status");
+    if(!file){ if(status){status.hidden=false;status.textContent="اختر ملف PDF أولاً";} return; }
+    btn.disabled=true;
+    try{
+      const text=await extractScannedPdf(file);
+      if(!text) throw new Error("تعذر استخراج النص. تحقق من ملف PDF.");
+      downloadTextFile(file.name,text);
+      if(status){status.hidden=false;status.textContent="تم استخراج النص وتنزيل ملف OCR."; }
+    }catch(e){ if(status){status.hidden=false;status.textContent=e.message||String(e);} }
+    finally{btn.disabled=false;}
+  });
+});
+
 function downloadTextFile(name,text){
   const a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));
