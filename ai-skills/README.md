@@ -72,6 +72,18 @@ python ai-skills/run.py evaluate
 python ai-skills/run.py retrieve --skill <skill-id> <query>\npython ai-skills/run.py --skill <skill-id> promote-check
 ```
 
+
+## Deterministic Skill Router
+
+The agent router is driven by `paperclip-agent-profiles.json` rather than hard-coded routing branches. It selects the least-privilege agent from explicit priority/keyword rules and falls back to `localization-agent` when no rule matches.
+
+```bash
+python ai-skills/scripts/route_task.py --task "PUBG MOBILE Urdu LQA for a WOW event" --json
+python ai-skills/scripts/test_router.py
+```
+
+The router is deterministic and inspectable; it does not claim live Paperclip assignment. The output identifies the selected agent, Skills, confidence, matched rule, and matched keywords.
+
 ## Plugin distribution
 
 The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
@@ -79,7 +91,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.9.0`
+The manifest version and registry release are kept in sync. Current release: `1.10.0`
 
 ## Promotion gate
 
