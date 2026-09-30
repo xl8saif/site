@@ -23,41 +23,18 @@ def load_json(path):
         raise SystemExit(f"invalid JSON {path}: {exc}") from exc
 
 
-def route(task, profiles):
-    normalized = re.sub(r"\s+", " ", task.casefold()).strip()
-    candidates = []
-    for rule in profiles["routing"]:
-        matches = []
-        score = 0
-        for keyword in rule["keywords"]:
-            token = re.sub(r"\s+", " ", keyword.casefold()).strip()
-            if token and re.search(r"(?<!\w)" + re.escape(token) + r"(?!\w)", normalized):
-                matches.append(keyword)
-                score += max(1, len(token.split()))
-        if score:
-            candidates.append((rule["priority"], score, rule, matches))
-    if not candidates:
-        agent_id = profiles["fallback"]["agent"]
-        confidence = profiles["fallback"].get("confidence", "low")
-        matches = []
-        rule_id = None
-        score = 0
-    else:
-        _, score, rule, matches = max(candidates, key=lambda item: (item[0], item[1]))
-        agent_id = rule["agent"]
-        confidence = "high" if score >= 4 else "medium" if score >= 2 else "low"
-        rule_id = rule["id"]
-
-    agent = next((a for a in profiles["agents"] if a["id"] == agent_id), None)
-    if agent is None:
-        raise SystemExit(f"unknown routed agent: {agent_id}")
-    return agent_id, agent, confidence, rule_id, matches, score
-
+from route_task import load_profiles, route as route_task
 
 def build_plan(task):
     profiles = load_json(PROFILES)
     registry = load_json(REGISTRY)
-    agent_id, agent, confidence, rule_id, matches, score = route(task, profiles)
+    routed = route_task(task, profiles)
+    agent_id = routed["agent_id"]
+    agent = next(a for a in profiles["agents"] if a["id"] == agent_id)
+    confidence = routed["confidence"]
+    rule_id = (routed.get("matched_rules") or [None])[0]
+    matches = routed.get("matched_keywords", [])
+    score = routed.get("score", 0)
     by_id = {item["id"]: item for item in registry["skills"]}
 
     skills = []
