@@ -114,6 +114,13 @@ python ai-skills/scripts/review_gate.py --task "PUBG MOBILE Urdu LQA for a WOW e
 python ai-skills/scripts/test_review_gate.py
 ```
 
+
+## Evidence and Traceability
+
+The Review Gate preserves a machine-readable trace from routed agent and Skill through the deterministic validator to each finding. It records the validator output as evidence without inventing source locations or semantic judgments.
+
+The evidence contract is defined in `core/evidence.schema.json`.
+
 ## Plugin distribution
 
 The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
@@ -121,7 +128,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.13.0`
+The manifest version and registry release are kept in sync. Current release: `1.14.0` Current release: `1.13.0`
 
 ## Promotion gate
 
