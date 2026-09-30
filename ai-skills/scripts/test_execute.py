@@ -39,7 +39,7 @@ def main():
             failures.append("invalid PUBG execution did not FAIL")
 
         # Restore the valid fixture before testing the other production validators.
-        target.write_text("<b>{name}</b>\\n",encoding="utf-8")
+        target.write_text("<b>{name}</b>\n",encoding="utf-8")
         r=call("PUBG MOBILE Urdu LQA for a WOW event")
         if r.returncode != 2:
             failures.append("missing source/target did not return REVIEW")
