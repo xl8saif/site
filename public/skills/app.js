@@ -154,7 +154,7 @@ function detect(v) {
   const t = v.toLowerCase();
   let best = null;
   for (const s of skills) {
-    const score = s[2].split("|").reduce(
+    const score = s[3].split("|").reduce(
       (n, k) => n + (t.includes(k.toLowerCase()) ? 1 : 0), 0
     );
     if (score && (!best || score > best.score)) best = { s, score };
