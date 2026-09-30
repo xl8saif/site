@@ -135,7 +135,7 @@
       "scripts/self_audit.py"
     ]
   },
-  "version": "1.8.0",
+  "version": "1.9.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
@@ -159,5 +159,12 @@
       "check",
       "all"
     ]
+  },
+  "paperclip": {
+    "status": "integrated",
+    "source_of_truth": "ai-skills",
+    "project_discovery_root": ".agents/skills",
+    "sync_script": "scripts/sync_paperclip_skills.py",
+    "manifest": "paperclip.json"
   }
 }
