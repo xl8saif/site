@@ -12,10 +12,13 @@ Each skill is self-contained and should expose:
 - evals/ — regression and evaluation cases
 - README.md — optional human-facing documentation
 
-The current production skill is:
+The current production Skills are:
 
 - pubg-urdu-lqa — PUBG MOBILE Urdu translation, MTPE, terminology, and LQA
 - arabic-urdu-localization — Arabic→Urdu localization, MTPE, terminology, and LQA
+- multilingual-translation-mtpe — multilingual translation and MTPE workflow
+- legal-translation-qa — legal translation and document QA
+- indus-kohistani-research — Indus-Kohistani research and language-data workflow
 
 ## Design principles
 
@@ -76,7 +79,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.8.0`.
+The manifest version and registry release are kept in sync. Current release: `1.9.0`
 
 ## Promotion gate
 
@@ -91,3 +94,14 @@ A production Skill must have:
 - all registry-listed deterministic tools present
 
 These conditions are enforced by the unified runner. Production Skills must also expose a valid `references/index.json` with verified references. The Reference Retrieval Layer reads verified reference files and returns relevant entries for the active Skill.
+
+## Paperclip integration
+
+The production Skills are Paperclip-compatible. The canonical source remains `ai-skills/`; a synchronized project-discovery mirror lives in `.agents/skills/`.
+
+```bash
+python ai-skills/scripts/sync_paperclip_skills.py
+python ai-skills/scripts/sync_paperclip_skills.py --check
+```
+
+Paperclip can also import each production Skill directly from the GitHub folders listed in `ai-skills/paperclip.json`. Paperclip remains the agent orchestration/control-plane layer while the existing Skill framework remains the source of truth for terminology, references, evals, and deterministic QA.
