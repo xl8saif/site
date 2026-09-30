@@ -56,7 +56,7 @@ def main():
     if unknown:
         counts["unknown"]=len(unknown)
 
-    if counts["critical"] or counts["major"]:
+    if execution.get("status")=="FAIL" or counts["critical"] or counts["major"]:
         status="FAIL"
         decision="BLOCK_DELIVERY"
     elif execution.get("status")=="REVIEW" or unknown:
