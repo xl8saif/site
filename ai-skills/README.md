@@ -84,6 +84,16 @@ python ai-skills/scripts/test_router.py
 
 The router is deterministic and inspectable; it does not claim live Paperclip assignment. The output identifies the selected agent, Skills, confidence, matched rule, and matched keywords.
 
+
+## Executable Skill Planning
+
+After routing, `plan_task.py` resolves the selected agent into its registered Skill entrypoint and deterministic validator without performing side effects. Validation-only agents expose all assigned Skills so the QA gate can cover the complete validation surface.
+
+```bash
+python ai-skills/scripts/plan_task.py --task "PUBG MOBILE Urdu LQA for a WOW event" --json
+python ai-skills/scripts/test_plan.py
+```
+
 ## Plugin distribution
 
 The canonical plugin manifest is `plugin.json`. It exposes all production Skills:
@@ -91,7 +101,7 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.10.0`
+The manifest version and registry release are kept in sync. Current release: `1.11.0`
 
 ## Promotion gate
 
