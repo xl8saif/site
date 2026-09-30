@@ -44,6 +44,26 @@ def main():
         if result.returncode == 0:
             failures.append("shared structural checker failed to detect line-break mismatch")
 
+    # Exercise each production Skill's deterministic tool with a valid fixture.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        source = tmp / "source.txt"
+        target = tmp / "target.txt"
+        source.write_text("<p>{name}</p>\\nDate: 2026-01-01", encoding="utf-8")
+        target.write_text("<p>{name}</p>\\nDate: 2026-01-01", encoding="utf-8")
+        production_tools = {
+            "multilingual-translation-mtpe": ROOT / "multilingual-translation-mtpe" / "scripts" / "check_mtpe.py",
+            "legal-translation-qa": ROOT / "legal-translation-qa" / "scripts" / "check_legal.py",
+        }
+        for sid, tool in production_tools.items():
+            result = run(tool, "--source", source, "--target", target)
+            if result.returncode:
+                failures.append(f"production deterministic tool failed: {sid}\\n{result.stdout}{result.stderr}")
+        research_tool = ROOT / "indus-kohistani-research" / "scripts" / "check_research_data.py"
+        result = run(research_tool)
+        if result.returncode:
+            failures.append(f"production deterministic tool failed: indus-kohistani-research\\n{result.stdout}{result.stderr}")
+
     # Verify the Reference Retrieval Layer on a production Skill.
     retriever = ROOT / "core" / "scripts" / "retrieve_references.py"
     result = run(retriever, "pubg-urdu-lqa", "Official", "--limit", "5")
