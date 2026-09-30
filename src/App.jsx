@@ -124,6 +124,7 @@ function App() {
               <div className="hero-actions">
                 <button className="button button-primary" onClick={() => scrollToSection("projects")}>Explore my work</button>
                 <button className="button button-secondary" onClick={() => scrollToSection("contact")}>Get in touch</button>
+                <a className="button button-secondary" href={`${import.meta.env.BASE_URL}skills/`}>AI Skills Console ↗</a>
               </div>
             </div>
             <div className="hero-profile">
