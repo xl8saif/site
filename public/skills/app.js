@@ -349,7 +349,7 @@ function render(d){currentResult=d||{};
       esc(f.code || f.skill_id || labelFor("finding", "finding")) + '</strong></div><p>' +
       esc(f.issue || f.message || "") + '</p></div>'
     ).join("")
-    : '<div class="finding"><strong>No findings.</strong><p>يمكن الانتقال إلى المراجعة البشرية النهائية.</p></div>';
+    : '<div class="finding"><strong>' + labelFor("finding", "finding") + '</strong><p>' + tr("noFindings") + '</p></div>';
 
   $("trace").textContent = JSON.stringify(d.traceability || {}, null, 2);
   $("raw").textContent = JSON.stringify(d, null, 2);
