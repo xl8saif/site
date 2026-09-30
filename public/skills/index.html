@@ -9,7 +9,7 @@
 <body>
 <header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a href="../">Portfolio</a></div></header>
 <main class="shell">
-<section class="intro"><div><span class="kicker">AI SKILLS CONSOLE · v1.14</span><h1>نفّذ مهام الترجمة والتوطين وQA من واجهة واحدة</h1><p>اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate.</p></div><div class="status-card"><span class="dot"></span><div><strong>Framework</strong><small>Deterministic orchestration</small></div></div></section>
+<section class="intro"><div><span class="kicker">AI SKILLS CONSOLE · v1.15</span><h1>نفّذ مهام الترجمة والتوطين وQA من واجهة واحدة</h1><p>اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate.</p></div><div class="status-card"><span class="dot"></span><div><strong>Framework</strong><small>Deterministic orchestration</small></div></div></section>
 <section class="workspace">
 <div class="panel main-panel">
 <label for="task">المهمة</label>
@@ -20,11 +20,11 @@
 <label class="drop"><input id="target" type="file" accept=".txt,.xml,.html,.json,.csv,.md"><b>Target</b><span id="targetName">اختر ملف الهدف</span></label>
 </div>
 <div class="controls"><button class="primary" id="run">تشغيل المهمة</button><button class="secondary" id="clear">مسح</button></div>
-<div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ Router → Planner → QA → Review Gate…</p></div>
+<div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ المسار الموحد…</p></div>
 </div>
 <aside class="panel side-panel"><h2>Skills</h2><div id="skills"></div><div class="help"><strong>طريقة العمل</strong><p>النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط، والقرار النهائي يبقى للمراجعة البشرية.</p></div></aside>
 </section>
-<section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary>Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary>Raw JSON</summary><pre id="raw"></pre></details></section>
+<section class="pipeline panel" id="pipeline" hidden><h2>مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span>تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span>اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span>تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span>قرار المراجعة</span></div></div></section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary>Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary>Raw JSON</summary><pre id="raw"></pre></details></section>
 <section class="panel cli"><h2>إذا كنت تعمل محلياً</h2><p>يمكن تشغيل نفس المسار من الطرفية:</p><code>python ai-skills/scripts/review_gate.py --task "YOUR TASK" --source source.txt --target target.txt --json</code>
 </section>
 </main>
