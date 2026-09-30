@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.0
+
+- Integrated the production Skills with Paperclip's project skill discovery layout under `.agents/skills/`.
+- Added `ai-skills/paperclip.json` as the machine-readable integration manifest.
+- Added `sync_paperclip_skills.py` with drift detection so `.agents/skills/` remains a generated mirror of `ai-skills/`.
+- Updated GitHub Actions coverage to validate the Paperclip mirror whenever Skills or the mirror changes.
+- Bumped release metadata to 1.9.0.
+
 ## 1.8.0
 
 - Promoted `multilingual-translation-mtpe`, `legal-translation-qa`, and `indus-kohistani-research` from draft to production after satisfying the repository promotion gate artifacts and verified-reference requirements.
