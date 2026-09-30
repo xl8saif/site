@@ -7,7 +7,7 @@
     "api/skills/**/*.py": {
       "maxDuration": 60,
       "includeFiles": ["ai-skills/**"],
-      "excludeFiles": ["**/test_*.py", "**/*_test.py", "**/fixtures/**", "**/__pycache__/**"]
+      "excludeFiles": "**/test_*.py,**/*_test.py,**/fixtures/**,**/__pycache__/**"
     }
   }
 }
