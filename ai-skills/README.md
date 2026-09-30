@@ -102,6 +102,7 @@ The production Skills are Paperclip-compatible. The canonical source remains `ai
 ```bash
 python ai-skills/scripts/sync_paperclip_skills.py
 python ai-skills/scripts/sync_paperclip_skills.py --check
+bash ai-skills/scripts/import_to_paperclip.sh
 ```
 
 Paperclip can also import each production Skill directly from the GitHub folders listed in `ai-skills/paperclip.json`. Paperclip remains the agent orchestration/control-plane layer while the existing Skill framework remains the source of truth for terminology, references, evals, and deterministic QA.
