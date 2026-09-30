@@ -42,9 +42,30 @@ def main():
         if r.returncode != 2:
             failures.append("missing source/target did not return REVIEW")
 
-        r=call("Run final deterministic structural QA before delivery",source,target)
+        cases = [
+            ("Arabic to Urdu localization", source, target),
+            ("Multilingual translation MTPE", source, target),
+            ("Legal translation QA for a contract", source, target),
+        ]
+        for task, src, tgt in cases:
+            r=call(task,src,tgt)
+            if r.returncode != 0 or json.loads(r.stdout).get("status") != "PASS":
+                failures.append(f"registry-driven execution failed for: {task}")
+
+        knowledge=tmp/"knowledge.json"
+        knowledge.write_text(json.dumps({
+            "identity":{"name":"Indus-Kohistani","iso_639_3":"mvy","family":"Dardic"},
+            "orthography":{"letters":["چھ","څ","ݜ","ڙ","ݨ"]},
+            "research_principles":["preserve provenance"],
+            "common_voice_27":{"clips":1,"duration_hours":1,"speakers":1,"validated_clips":1,"dataset_id":"test","license":"CC0"}
+        },ensure_ascii=False),encoding="utf-8")
+        r=call("Indus-Kohistani research corpus integrity",knowledge=knowledge)
+        if r.returncode != 0 or json.loads(r.stdout).get("status") != "PASS":
+            failures.append("registry-driven research execution did not PASS")
+
+        r=call("Indus-Kohistani research corpus integrity")
         if r.returncode != 2:
-            failures.append("QA gate without complete valid inputs did not return REVIEW")
+            failures.append("missing research knowledge did not return REVIEW")
 
     if failures:
         print("EXECUTION SMOKE FAIL")
