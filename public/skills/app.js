@@ -128,8 +128,6 @@ function stages(state) {
   });
 }
 
-const API_BASE = (window.SAIF_SKILLS_API_BASE ||
-  (location.hostname.endsWith("github.io") ? "http://127.0.0.1:8787" : ""));
 let currentResult={};
 const task = $("task");
 const detected = $("detected");
@@ -248,56 +246,24 @@ $("run").onclick = async () => {
   stages({ router: "active", planner: "pending", execution: "pending", review: "pending" });
 
   try {
-    const fd = new FormData();
-    fd.append("task", task.value);
-    if (sf) fd.append("source", sf);
-    if (tf) fd.append("target", tf);
-    if (kf) fd.append("knowledge", kf);
-
-    const r = await fetch(API_BASE + "/api/skills/run", {
-      method: "POST",
-      body: fd
+    if (!window.SaifSkillsBrowser?.run) throw new Error("Browser Skills engine is unavailable.");
+    stages({ router: "done", planner: "active", execution: "pending", review: "pending" });
+    const data = await window.SaifSkillsBrowser.run(task.value, {
+      source: sf || null,
+      target: tf || null,
+      knowledge: kf || null
     });
-
-    let data = {};
-    try {
-      data = await r.json();
-    } catch (_) {
-      data = {
-        status: "REVIEW",
-        decision: "HUMAN_REVIEW_REQUIRED",
-        summary: { critical: 0, major: 0, minor: 0, query: 1 },
-        findings: [{ severity: "query", issue: tr("apiUnreadable") }]
-      };
-    }
-
-    if (!r.ok && data.status !== "REVIEW") {
-      data.status = "REVIEW";
-      data.decision = "HUMAN_REVIEW_REQUIRED";
-      data.findings = [
-        ...(data.findings || []),
-        { severity: "query", issue: tr("serverError").replace("{status}", r.status) }
-      ];
-    }
-
-    stages({
-      router: "done",
-      planner: "done",
-      execution: data.execution ? "done" : "active",
-      review: data.status === "PASS" || data.status === "FAIL" ? "done" : "active"
-    });
+    stages({ router: "done", planner: "done", execution: "done", review: "done" });
     render(data);
   } catch (e) {
     stages({ router: "done", planner: "done", execution: "review", review: "active" });
     render({
       status: "REVIEW",
       decision: "HUMAN_REVIEW_REQUIRED",
-      summary: { critical: 0, major: 0, minor: 0, query: 0 },
-      findings: [{
-        severity: "query",
-        issue: tr("apiUnavailable")
-      }]
+      summary: { critical: 0, major: 0, minor: 0, query: 1 },
+      findings: [{ severity: "query", issue: tr("apiUnavailable") + " " + String(e.message || e) }]
     });
+
   } finally {
     $("progress").hidden = true;
     $("run").disabled = false;
