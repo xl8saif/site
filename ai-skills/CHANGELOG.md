@@ -4,6 +4,7 @@
 
 - Promoted `multilingual-translation-mtpe`, `legal-translation-qa`, and `indus-kohistani-research` from draft to production after satisfying the repository promotion gate artifacts and verified-reference requirements.
 - Synchronized the production plugin manifest with the expanded production Skill set.
+- Added deterministic production tools for multilingual MTPE, legal controlled-identifier QA, and Indus-Kohistani research metadata integrity.
 - Updated release metadata to 1.8.0.
 
 ## 1.7.0
