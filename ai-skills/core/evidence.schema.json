@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Skills Evidence Trace",
+  "type": "object",
+  "required": ["status", "decision", "task", "agent_id", "summary", "findings", "traceability", "side_effects"],
+  "properties": {
+    "status": {"enum": ["PASS", "FAIL", "REVIEW"]},
+    "decision": {"enum": ["READY_FOR_HUMAN_SIGNOFF", "BLOCK_DELIVERY", "HUMAN_REVIEW_REQUIRED"]},
+    "task": {"type": "string"},
+    "agent_id": {"type": ["string", "null"]},
+    "confidence": {"type": ["string", "null"]},
+    "summary": {"type": "object"},
+    "findings": {"type": "array", "items": {"type": "object"}},
+    "traceability": {
+      "type": "object",
+      "required": ["router_rule", "agent", "validators"],
+      "properties": {
+        "router_rule": {"type": ["string", "null"]},
+        "agent": {"type": ["string", "null"]},
+        "validators": {"type": "array", "items": {"type": ["string", "null"]}}
+      },
+      "additionalProperties": false
+    },
+    "side_effects": {"const": "none"}
+  },
+  "additionalProperties": true
+}
