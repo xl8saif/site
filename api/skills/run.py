@@ -7,7 +7,7 @@ from email.parser import BytesParser
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "ai-skills" / "scripts" / "review_gate.py"
 MAX_FILE = 2 * 1024 * 1024
 MAX_BODY = 5 * 1024 * 1024
