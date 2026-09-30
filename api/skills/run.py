@@ -40,13 +40,25 @@ def parse_multipart(content_type, body):
     return fields, files
 
 def extract_pdf_text(data):
-    try:
-        from pypdf import PdfReader
-        import io
-        reader = PdfReader(io.BytesIO(data))
-        return "\n\n".join((page.extract_text() or "") for page in reader.pages).strip()
-    except Exception:
-        return ""
+    """Best-effort extraction for text PDFs using only the Python standard library."""
+    import re
+    import zlib
+    chunks = []
+    for match in re.finditer(rb"stream\\r?\\n(.*?)\\r?\\nendstream", data, re.S):
+        raw = match.group(1)
+        candidates = [raw]
+        try:
+            candidates.append(zlib.decompress(raw))
+        except Exception:
+            pass
+        for chunk in candidates:
+            text = chunk.decode("latin-1", errors="ignore")
+            for value in re.findall(r"\\((?:\\\\.|[^()\\\\]){1,2000}\\)", text):
+                value = value[1:-1]
+                value = re.sub(r"\\\\([\\\\()])", r"\\1", value)
+                if any(ch.isalpha() for ch in value):
+                    chunks.append(value)
+    return "\\n".join(chunks).strip()
 
 def prepare_input(file_info, path):
     data = file_info["data"]
