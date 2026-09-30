@@ -14,18 +14,18 @@
 <div class="panel main-panel">
 <label for="task">المهمة</label>
 <textarea id="task" rows="4" placeholder="مثال: PUBG MOBILE Urdu LQA for a WOW event"></textarea>
-<div class="detected"><span>Skill / Agent</span><strong id="detected">سيتم الاكتشاف تلقائياً</strong></div>
+<div class="detected"><span id="detected-label">Skill / Agent</span><strong id="detected">سيتم الاكتشاف تلقائياً</strong></div>
 <div class="files">
-<label class="drop"><input id="source" type="file"><b>Source</b><span id="sourceName">اختر ملف المصدر</span></label>
-<label class="drop"><input id="target" type="file" accept=".txt,.xml,.html,.json,.csv,.md,.pdf"><b>Target</b><span id="targetName">اختر ملف الهدف</span></label><label class="drop"><input id="knowledge" type="file"><b>Knowledge / Research Data</b><span id="knowledgeName">اختياري للبحث</span></label>
+<label class="drop"><input id="source" type="file"><b id="source-label">Source</b><span id="sourceName">اختر ملف المصدر</span></label>
+<label class="drop"><input id="target" type="file"><b id="target-label">Target</b><span id="targetName">اختر ملف الهدف</span></label><label class="drop"><input id="knowledge" type="file"><b id="knowledge-label">Knowledge / Research Data</b><span id="knowledgeName">اختياري للبحث</span></label>
 </div>
 <div class="controls"><button class="primary" id="run">تشغيل المهمة</button><button class="secondary" id="clear">مسح</button></div>
 <div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ المسار الموحد…</p></div>
 </div>
-<aside class="panel side-panel"><h2>Skills</h2><div id="skills"></div><div class="help"><strong>طريقة العمل</strong><p>النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط، والقرار النهائي يبقى للمراجعة البشرية.</p></div></aside>
+<aside class="panel side-panel"><h2 id="skills-title">Skills</h2><div id="skills"></div><div class="help"><strong>طريقة العمل</strong><p>النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط، والقرار النهائي يبقى للمراجعة البشرية.</p></div></aside>
 </section>
 <section class="pipeline panel" id="pipeline" hidden><h2>مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span>تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span>اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span>تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span>قرار المراجعة</span></div></div></section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary>Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary>Raw JSON</summary><pre id="raw"></pre></details></section>
 <section class="panel cli"><h2>إذا كنت تعمل محلياً</h2><p>يمكن تشغيل نفس المسار من الطرفية:</p><code>python ai-skills/scripts/review_gate.py --task "YOUR TASK" --source source.txt --target target.txt --json</code><p>لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.</p>
 </section>
 </main>
-<section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span>OCR</span><span>PDF ممسوح</span></div><p>استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><script src="./app.js"></script></body></html>
+<section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">PDF ممسوح</span></div><p>استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><script src="./app.js"></script></body></html>
