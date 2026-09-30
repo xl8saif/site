@@ -55,6 +55,8 @@ jobs:
         run: python ai-skills/core/scripts/smoke_test.py
       - name: Compile Skills Console API
         run: python -m py_compile api/skills/run.py
+      - name: Run Skills Console API integration smoke test
+        run: python api/skills/test_run.py
       - name: Validate Skills Console JavaScript
         run: node --check public/skills/app.js
       - name: Validate Skills Console shell
