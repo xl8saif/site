@@ -131,8 +131,11 @@ The canonical plugin manifest is `plugin.json`. It exposes all production Skills
 
 - `pubg-urdu-lqa/SKILL.md`
 - `arabic-urdu-localization/SKILL.md`
+- `multilingual-translation-mtpe/SKILL.md`
+- `legal-translation-qa/SKILL.md`
+- `indus-kohistani-research/SKILL.md`
 
-The manifest version and registry release are kept in sync. Current release: `1.14.0` Current release: `1.13.0`
+The manifest version and registry release are kept in sync. Current production release: `1.16.0`.
 
 ## Promotion gate
 
@@ -159,3 +162,24 @@ bash ai-skills/scripts/import_to_paperclip.sh
 ```
 
 Paperclip can also import each production Skill directly from the GitHub folders listed in `ai-skills/paperclip.json`. Paperclip remains the agent orchestration/control-plane layer while the existing Skill framework remains the source of truth for terminology, references, evals, and deterministic QA.
+
+
+## Skills Console
+
+The repository includes a browser console at `public/skills/` for running the Router → Planner → Execution → Human Review Gate pipeline.
+
+For local execution:
+
+```bash
+python api/skills/run.py
+```
+
+Then open the Skills Console and submit the required inputs. Translation/LQA tasks use Source + Target; Indus-Kohistani research can use Knowledge / Research Data.
+
+The API integration smoke test is:
+
+```bash
+python api/skills/test_run.py
+```
+
+GitHub Pages serves the static console only; the Python API must run locally or on a Python-capable deployment target.
