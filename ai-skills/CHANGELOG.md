@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.0
+
+- Added machine-readable evidence and traceability to the Human Review Gate.
+- Refactored planning to reuse the canonical Router instead of duplicating routing logic.
+- Removed duplicate planning execution from CI.
+- Added the evidence contract and bumped release metadata to 1.14.0.
+
+
 ## 1.13.0
 
 - Added the Human Review Gate and findings aggregator.
