@@ -265,13 +265,14 @@ function App() {
                 <a href="#keyboards">Explore keyboard tools ↗</a>
               </article>
 
-              <article className="development-card development-skills-console-card">
+              <article className="development-card development-skills-console-card development-card-new">
+                <div className="development-new-badge">NEW</div>
                 <div className="development-card-top"><span>06</span><b>AI · AUTOMATION · QA</b></div>
-                <div className="development-icon" aria-hidden="true">AI</div>
+                <div className="development-icon development-ai-icon" aria-hidden="true"><span>AI</span><i>↗</i></div>
                 <h3>AI Skills Console</h3>
-                <p>A production-oriented console for running reusable AI Skills through a deterministic Router, Planner, Execution Engine and Human Review Gate.</p>
-                <div className="development-tags"><span>AI Skills</span><span>QA</span><span>Localization</span><span>Human Review</span></div>
-                <a href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">Open the AI Skills Console ↗</a>
+                <p>A production-oriented console for reusable AI Skills, orchestrated through a deterministic <strong>Router → Planner → Execution → Human Review</strong> pipeline.</p>
+                <div className="development-tags"><span>AI Skills</span><span>Automation</span><span>Localization</span><span>QA</span><span>Human Review</span></div>
+                <a className="development-launch-link" href="https://xl8saif.vercel.app/skills/" target="_blank" rel="noreferrer">Launch Console <span>↗</span></a>
               </article>
 
               <article className="development-card development-skills-card">
