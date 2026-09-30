@@ -320,25 +320,34 @@ function showLocal() {
   });
 }
 
+function labelFor(kind, value) {
+  const maps = {
+    ar: { status:{PASS:"ناجح",FAIL:"فشل",REVIEW:"مراجعة"}, decision:{READY_FOR_HUMAN_SIGNOFF:"جاهز للمراجعة البشرية النهائية",BLOCK_DELIVERY:"حظر التسليم",HUMAN_REVIEW_REQUIRED:"مطلوب مراجعة بشرية"}, severity:{critical:"حرج",major:"رئيسي",minor:"طفيف",query:"استفسار"}, finding:"ملاحظة" },
+    en: { status:{PASS:"PASS",FAIL:"FAIL",REVIEW:"REVIEW"}, decision:{READY_FOR_HUMAN_SIGNOFF:"Ready for Human Sign-off",BLOCK_DELIVERY:"Block Delivery",HUMAN_REVIEW_REQUIRED:"Human Review Required"}, severity:{critical:"Critical",major:"Major",minor:"Minor",query:"Query"}, finding:"Finding" },
+    ur: { status:{PASS:"کامیاب",FAIL:"ناکام",REVIEW:"جائزہ"}, decision:{READY_FOR_HUMAN_SIGNOFF:"حتمی انسانی منظوری کے لیے تیار",BLOCK_DELIVERY:"ترسیل روکیں",HUMAN_REVIEW_REQUIRED:"انسانی جائزہ ضروری ہے"}, severity:{critical:"اہم",major:"بڑا",minor:"معمولی",query:"استفسار"}, finding:"ملاحظہ" }
+  };
+  return (maps[uiLang][kind] && maps[uiLang][kind][value]) || value || "";
+}
+
 function render(d){currentResult=d||{};
   $("result").hidden = false;
-  $("resultTitle").textContent = d.decision || "النتيجة";
+  $("resultTitle").textContent = labelFor("decision", d.decision) || tr("result");
   const b = $("badge");
-  b.textContent = d.status || "REVIEW";
+  b.textContent = labelFor("status", d.status) || labelFor("status", "REVIEW");
   b.className = "badge " + String(d.status || "REVIEW").toLowerCase();
   const s = d.summary || {};
   $("summary").innerHTML = [
-    ["Critical", s.critical || 0],
-    ["Major", s.major || 0],
-    ["Minor", s.minor || 0],
-    ["Query", s.query || 0]
-  ].map(x => '<div class="metric"><b>' + x[1] + '</b><span>' + x[0] + '</span></div>').join("");
+    ["critical", s.critical || 0],
+    ["major", s.major || 0],
+    ["minor", s.minor || 0],
+    ["query", s.query || 0]
+  ].map(x => '<div class="metric"><b>' + x[1] + '</b><span>' + labelFor("severity", x[0]) + '</span></div>').join("");
 
   $("findings").innerHTML = (d.findings || []).length
     ? (d.findings || []).map(f =>
       '<div class="finding"><div class="finding-top"><span class="sev">' +
-      (f.severity || "unknown") + '</span><strong>' +
-      esc(f.code || f.skill_id || "Finding") + '</strong></div><p>' +
+      labelFor("severity", f.severity || "query") + '</span><strong>' +
+      esc(f.code || f.skill_id || labelFor("finding", "finding")) + '</strong></div><p>' +
       esc(f.issue || f.message || "") + '</p></div>'
     ).join("")
     : '<div class="finding"><strong>No findings.</strong><p>يمكن الانتقال إلى المراجعة البشرية النهائية.</p></div>';
