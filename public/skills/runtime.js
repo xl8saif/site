@@ -60,7 +60,7 @@
     return{task,agent_id:r.agent_id,confidence:r.confidence,matched_rule:(r.matched_rules||[])[0]||null,matched_keywords:r.matched_keywords||[],routing_score:r.score||0,mode:a.mode||"execution",selected_skills:selected.map(id=>({id,...SKILLS[id]})),available_skills:a.skills.map(id=>({id,...SKILLS[id]})),side_effects:"none"};
   }
   function counts(text){
-    const tags=String(text).match(/<[^>]+>/g)||[],ph=String(text).match(/\{[^{}]+\}|\$\\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g)||[];
+    const tags=String(text).match(/<[^>]+>/g)||[],ph=String(text).match(/\{[^{}]+\}|\\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g)||[];
     const count=a=>a.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{});return{tags:count(tags),placeholders:count(ph),linebreaks:(String(text).match(/\n/g)||[]).length};
   }
   function same(a,b){const ka=Object.keys(a),kb=Object.keys(b);return ka.length===kb.length&&ka.every(k=>a[k]===b[k]);}
