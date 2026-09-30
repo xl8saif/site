@@ -96,24 +96,39 @@ def main():
             })
             continue
 
+        contract = skill.get("execution")
+        if not isinstance(contract, dict):
+            reports.append({
+                "status": "REVIEW",
+                "skill_id": skill["id"],
+                "validator": tool,
+                "exit_code": None,
+                "result": None,
+                "stderr": "No execution contract registered.",
+            })
+            continue
+
         command = [sys.executable, str(tool_path)]
-        if skill["id"] == "indus-kohistani-research":
-            if args.knowledge:
-                command += ["--knowledge", args.knowledge]
-        else:
-            if not args.source or not args.target:
-                reports.append({
-                    "status": "REVIEW",
-                    "skill_id": skill["id"],
-                    "validator": tool,
-                    "exit_code": None,
-                    "result": None,
-                    "stderr": "This validator requires --source and --target.",
-                })
-                continue
-            command += ["--source", args.source, "--target", args.target]
-            if skill["id"] == "pubg-urdu-lqa" or skill["id"] == "arabic-urdu-localization":
-                command.append("--json")
+        missing = False
+        for input_name in contract.get("inputs", []):
+            value = getattr(args, input_name, None)
+            flag = contract.get("args", {}).get(input_name)
+            if not value or not flag:
+                missing = True
+                break
+            command += [flag, value]
+        if missing:
+            reports.append({
+                "status": "REVIEW",
+                "skill_id": skill["id"],
+                "validator": tool,
+                "exit_code": None,
+                "result": None,
+                "stderr": "Required execution input is missing.",
+            })
+            continue
+        if contract.get("json"):
+            command.append("--json")
 
         completed = run_json(command, ROOT.parent)
         reports.append(normalize_result(skill["id"], tool, completed))
