@@ -16,6 +16,9 @@ MAX_BODY = 5 * 1024 * 1024
 def send_json(handler, payload, status=200):
     data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     handler.send_response(status)
+    handler.send_header("Access-Control-Allow-Origin", "*")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    handler.send_header("Access-Control-Allow-Headers", "Content-Type")
     handler.send_header("Content-Type", "application/json; charset=utf-8")
     handler.send_header("Content-Length", str(len(data)))
     handler.end_headers()
@@ -44,6 +47,9 @@ def parse_multipart(content_type, body):
 
 
 class handler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        send_json(self, {"ok": True})
+
     def do_POST(self):
         try:
             length = int(self.headers.get("Content-Length", "0"))
