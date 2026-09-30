@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "skill_id": "legal-translation-qa",
+  "references": [
+    {
+      "id": "legal-terminology",
+      "type": "terminology",
+      "title": "Legal terminology",
+      "status": "draft",
+      "source": "Reserved for user-confirmed legal terminology",
+      "tags": [
+        "legal",
+        "urdu",
+        "translation"
+      ]
+    },
+    {
+      "id": "legal-structural-rules",
+      "type": "rule",
+      "title": "Document structure preservation",
+      "status": "verified",
+      "source": "shared localization QA contract",
+      "tags": [
+        "structure",
+        "placeholders",
+        "line-breaks"
+      ]
+    },
+    {
+      "id": "legal-workflow",
+      "type": "workflow",
+      "title": "Legal translation QA workflow",
+      "status": "verified",
+      "source": "user-confirmed legal translation workflow principles",
+      "tags": [
+        "legal",
+        "qa",
+        "workflow"
+      ],
+      "path": "legal-workflow.json"
+    }
+  ]
+}
