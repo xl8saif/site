@@ -69,7 +69,7 @@ python ai-skills/run.py list
   python ai-skills/run.py audit
 python ai-skills/run.py validate
 python ai-skills/run.py evaluate
-python ai-skills/run.py retrieve --skill <skill-id> <query>\npython ai-skills/run.py --skill <skill-id> promote-check
+python ai-skills/run.py retrieve --skill <skill-id> <query>\npython ai-skills/run.py review --skill <skill-id> <task>\npython ai-skills/run.py --skill <skill-id> promote-check
 ```
 
 
