@@ -208,6 +208,29 @@ def audit_registry(registry, errors):
             print(f"AUDIT WARNING: {sid}: legacy nested skills/ structure detected; registry uses the direct Skill path")
 
 
+def audit_orchestration(registry, errors):
+    router = registry.get("router", {})
+    if not isinstance(router, dict):
+        errors.append("registry: router metadata must be an object")
+        return
+    for key in ("path", "profiles", "test", "plan", "plan_test", "execution", "execution_test", "review_gate", "review_gate_test"):
+        value = router.get(key)
+        if not isinstance(value, str) or not value:
+            errors.append(f"router: missing {key}")
+            continue
+        target = ROOT / value if key not in ("profiles",) else ROOT / value
+        if not contained(ROOT, target):
+            errors.append(f"router: {key} escapes ai-skills/: {value}")
+        elif not target.is_file():
+            errors.append(f"router: missing {key}: {value}")
+    evidence = ROOT / "core" / "evidence.schema.json"
+    if not evidence.is_file():
+        errors.append("core: missing evidence.schema.json")
+    else:
+        data = read_json(evidence, errors, "core/evidence.schema.json")
+        if not isinstance(data, dict) or data.get("type") != "object":
+            errors.append("core/evidence.schema.json: invalid schema contract")
+
 def audit_plugin(registry, errors):
     plugin = read_json(PLUGIN, errors, "plugin.json")
     if not isinstance(plugin, dict):
@@ -277,6 +300,7 @@ def main():
     if isinstance(registry, dict):
         audit_registry(registry, errors)
         audit_plugin(registry, errors)
+        audit_orchestration(registry, errors)
         audit_production_retrieval(registry, errors)
     audit_python(errors)
     if errors:
