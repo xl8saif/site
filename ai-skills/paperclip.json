@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "integration": "paperclip",
+  "source_of_truth": "ai-skills",
+  "project_discovery_root": ".agents/skills",
+  "sync_command": "python ai-skills/scripts/sync_paperclip_skills.py",
+  "check_command": "python ai-skills/scripts/sync_paperclip_skills.py --check",
+  "skills": [
+    {"id":"pubg-urdu-lqa","source":"ai-skills/pubg-urdu-lqa","paperclip":"github/xl8saif/site/ai-skills/pubg-urdu-lqa"},
+    {"id":"arabic-urdu-localization","source":"ai-skills/arabic-urdu-localization","paperclip":"github/xl8saif/site/ai-skills/arabic-urdu-localization"},
+    {"id":"multilingual-translation-mtpe","source":"ai-skills/multilingual-translation-mtpe","paperclip":"github/xl8saif/site/ai-skills/multilingual-translation-mtpe"},
+    {"id":"legal-translation-qa","source":"ai-skills/legal-translation-qa","paperclip":"github/xl8saif/site/ai-skills/legal-translation-qa"},
+    {"id":"indus-kohistani-research","source":"ai-skills/indus-kohistani-research","paperclip":"github/xl8saif/site/ai-skills/indus-kohistani-research"}
+  ]
+}
