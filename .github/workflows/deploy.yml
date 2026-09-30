@@ -33,6 +33,9 @@ jobs:
       - name: Materialize local portfolio images
         run: node scripts/sync-site-images.mjs
 
+      - name: Validate browser Skills engine
+        run: node --check public/skills/runtime.js
+
       - name: Build Vite portfolio
         run: npm run build
 
