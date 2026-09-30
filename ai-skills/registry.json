@@ -26,7 +26,18 @@
         "line breaks",
         "PUBG Urdu terminology",
         "protected product terms"
-      ]
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     },
     {
       "id": "arabic-urdu-localization",
@@ -50,7 +61,18 @@
         "line breaks",
         "Arabic→Urdu terminology",
         "protected technical terms"
-      ]
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     },
     {
       "id": "multilingual-translation-mtpe",
@@ -70,7 +92,18 @@
         "XML/HTML structure",
         "placeholders",
         "line breaks"
-      ]
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     },
     {
       "id": "indus-kohistani-research",
@@ -91,7 +124,16 @@
         "XML/HTML structure",
         "placeholders",
         "line breaks"
-      ]
+      ],
+      "execution": {
+        "inputs": [
+          "knowledge"
+        ],
+        "args": {
+          "knowledge": "--knowledge"
+        },
+        "json": false
+      }
     },
     {
       "id": "legal-translation-qa",
@@ -112,7 +154,18 @@
         "XML/HTML structure",
         "placeholders",
         "line breaks"
-      ]
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     }
   ],
   "core": {
