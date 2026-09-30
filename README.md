@@ -43,6 +43,29 @@ Saif Ullah’s work connects **Arabic ↔ Urdu translation** with **multilingual
 
 The site publishes a root-level sitemap and robots.txt and includes structured Person/ProfilePage/WebSite data. Google Search Console can be used to inspect the homepage, request indexing, monitor queries and review discovered backlinks.
 
+## AI Skills Console
+
+The repository includes the production AI Skills framework and browser console:
+
+- GitHub Pages UI: https://xl8saif.github.io/site/skills/
+- Local API: `python api/skills/run.py`
+- Local console API endpoint: `http://127.0.0.1:8787/api/skills/run`
+- Production-capable Vercel Python Function: `/api/skills/run`
+
+The console runs the deterministic pipeline:
+
+`Router → Planner → Execution Engine → Human Review Gate`
+
+GitHub Pages can host the static console, but it cannot execute the Python API server-side. A Vercel deployment is therefore the production path for the full interactive console. GitHub Pages does not support server-side Python. citeturn0search3
+
 ## Deployment
 
-The main branch is deployed to GitHub Pages. After significant SEO or content changes, verify the production URL, sitemap and Search Console indexing status.
+The main branch is deployed to GitHub Pages for the static portfolio. For the full AI Skills Console, import this repository into Vercel with the repository root as the project root, use `npm run build`, and keep the output directory as `dist`. The repository's `vercel.json` already configures the Python API function, includes the canonical `ai-skills/**` runtime files, and sets a bounded function duration.
+
+For a local authenticated deployment:
+
+`npx vercel --prod`
+
+Vercel supports GitHub repository imports and automatic deployments from the production branch. citeturn0search1turn0search2
+
+The Vite configuration automatically uses `/site/` for GitHub Pages and `/` on Vercel, so the same repository can serve both deployment targets correctly.
