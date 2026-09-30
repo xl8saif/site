@@ -10,39 +10,172 @@
     {
       "id": "localization-agent",
       "purpose": "General multilingual translation, MTPE, terminology and structural QA",
-      "skills": ["multilingual-translation-mtpe", "arabic-urdu-localization"],
-      "handoff_to": ["legal-translation-agent", "pubg-urdu-lqa-agent"]
+      "skills": [
+        "multilingual-translation-mtpe",
+        "arabic-urdu-localization"
+      ],
+      "handoff_to": [
+        "legal-translation-agent",
+        "pubg-urdu-lqa-agent"
+      ]
     },
     {
       "id": "pubg-urdu-lqa-agent",
       "purpose": "PUBG MOBILE Urdu localization and live-ops LQA",
-      "skills": ["pubg-urdu-lqa", "multilingual-translation-mtpe"],
-      "handoff_to": ["localization-agent"]
+      "skills": [
+        "pubg-urdu-lqa",
+        "multilingual-translation-mtpe"
+      ],
+      "handoff_to": [
+        "localization-agent"
+      ]
     },
     {
       "id": "legal-translation-agent",
       "purpose": "Legal translation and controlled document QA",
-      "skills": ["legal-translation-qa", "arabic-urdu-localization", "multilingual-translation-mtpe"],
-      "handoff_to": ["localization-agent"]
+      "skills": [
+        "legal-translation-qa",
+        "arabic-urdu-localization",
+        "multilingual-translation-mtpe"
+      ],
+      "handoff_to": [
+        "localization-agent"
+      ]
     },
     {
       "id": "indus-kohistani-research-agent",
       "purpose": "Indus-Kohistani research, corpus/data integrity and linguistic documentation",
-      "skills": ["indus-kohistani-research", "multilingual-translation-mtpe"],
-      "handoff_to": ["localization-agent"]
+      "skills": [
+        "indus-kohistani-research",
+        "multilingual-translation-mtpe"
+      ],
+      "handoff_to": [
+        "localization-agent"
+      ]
     },
     {
       "id": "qa-gate-agent",
       "purpose": "Final deterministic validation before human review or delivery",
-      "skills": ["pubg-urdu-lqa", "arabic-urdu-localization", "multilingual-translation-mtpe", "legal-translation-qa", "indus-kohistani-research"],
+      "skills": [
+        "pubg-urdu-lqa",
+        "arabic-urdu-localization",
+        "multilingual-translation-mtpe",
+        "legal-translation-qa",
+        "indus-kohistani-research"
+      ],
       "mode": "validation-only"
     }
   ],
   "routing": [
-    {"when":"PUBG MOBILE/WOW Urdu localization or LQA","agent":"pubg-urdu-lqa-agent"},
-    {"when":"Arabic to Urdu localization","agent":"localization-agent"},
-    {"when":"legal translation/document QA","agent":"legal-translation-agent"},
-    {"when":"Indus-Kohistani research or language data","agent":"indus-kohistani-research-agent"},
-    {"when":"final structural/deterministic QA","agent":"qa-gate-agent"}
-  ]
+    {
+      "id": "pubg-urdu-lqa",
+      "priority": 100,
+      "agent": "pubg-urdu-lqa-agent",
+      "keywords": [
+        "pubg",
+        "pubg mobile",
+        "wow",
+        "world of wonder",
+        "urdu lqa",
+        "urdu localization",
+        "live-ops",
+        "live ops",
+        "mission card",
+        "wow tokens",
+        "creation mode",
+        "کریئٹر",
+        "کریئیشن",
+        "ورلڈ آف ونڈر",
+        "ای سپورٹس"
+      ]
+    },
+    {
+      "id": "legal-translation",
+      "priority": 90,
+      "agent": "legal-translation-agent",
+      "keywords": [
+        "legal translation",
+        "legal qa",
+        "legal document",
+        "contract",
+        "court",
+        "case law",
+        "lawsuit",
+        "judgment",
+        "clause",
+        "محكمة",
+        "قانون",
+        "دعوى",
+        "قضية",
+        "عقد",
+        "ترجمة قانونية",
+        "قانونی ترجمہ"
+      ]
+    },
+    {
+      "id": "indus-kohistani-research",
+      "priority": 80,
+      "agent": "indus-kohistani-research-agent",
+      "keywords": [
+        "indus-kohistani",
+        "indus kohistani",
+        "mvy",
+        "dardic",
+        "duber",
+        "kandia",
+        "seo-patan",
+        "jijal-kayal",
+        "ranolia",
+        "bankad",
+        "common voice",
+        "corpus",
+        "language documentation",
+        "linguistic research",
+        "indus-kohistani research",
+        "انڈس کوہستانی",
+        "کوہستانی",
+        "لسانی تحقیق",
+        "کارپس"
+      ]
+    },
+    {
+      "id": "final-qa",
+      "priority": 70,
+      "agent": "qa-gate-agent",
+      "keywords": [
+        "final qa",
+        "final validation",
+        "deterministic qa",
+        "structural qa",
+        "pre-delivery qa",
+        "delivery validation",
+        "release gate",
+        "qa gate"
+      ]
+    },
+    {
+      "id": "arabic-urdu",
+      "priority": 60,
+      "agent": "localization-agent",
+      "keywords": [
+        "arabic to urdu",
+        "arabic-urdu",
+        "arabic urdu",
+        "عربی اردو",
+        "عربی سے اردو",
+        "localization",
+        "localisation",
+        "translation",
+        "translator",
+        "mtpe",
+        "terminology",
+        "multilingual translation"
+      ]
+    }
+  ],
+  "fallback": {
+    "agent": "localization-agent",
+    "confidence": "low",
+    "reason": "No routing rule matched; use the general localization agent as the least-privilege default."
+  }
 }
