@@ -20,6 +20,9 @@ def main():
         t.write_text("<b>{name}</b>",encoding="utf-8")
         r=call("PUBG MOBILE Urdu LQA for a WOW event",s,t)
         if r.returncode!=1: raise SystemExit("REVIEW GATE SMOKE FAIL: invalid case")
+        t.write_text("<b>{name}</b>\\n",encoding="utf-8")
+        r=call("Run final deterministic structural QA before delivery",s,t)
+        if r.returncode!=0: raise SystemExit("REVIEW GATE SMOKE FAIL: validation-only gate")
     print("REVIEW GATE SMOKE PASS")
     return 0
 
