@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - "ai-skills/**"
+      - ".agents/skills/**"
   pull_request:
     paths:
       - "ai-skills/**"
+      - ".agents/skills/**"
   workflow_dispatch:
 
 jobs:
@@ -19,6 +21,8 @@ jobs:
           python-version: "3.11"
       - name: Framework self-audit
         run: python ai-skills/core/scripts/self_audit.py
+      - name: Check Paperclip skill mirror
+        run: python ai-skills/scripts/sync_paperclip_skills.py --check
       - name: Validate and evaluate all Skills
         run: python ai-skills/run.py all
       - name: Run framework smoke test
