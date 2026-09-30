@@ -5,6 +5,13 @@ on:
     paths:
       - "ai-skills/**"
       - ".agents/skills/**"
+      - "api/skills/**"
+      - "public/skills/**"
+      - "src/**"
+      - "package.json"
+      - "vite.config.js"
+      - "vercel.json"
+      - ".github/workflows/ai-skills.yml"
   pull_request:
     paths:
       - "ai-skills/**"
@@ -39,3 +46,9 @@ jobs:
         run: python ai-skills/run.py all
       - name: Run framework smoke test
         run: python ai-skills/core/scripts/smoke_test.py
+      - name: Compile Skills Console API
+        run: python -m py_compile api/skills/run.py
+      - name: Build portfolio and Skills Console
+        run: |
+          npm ci
+          npm run build
