@@ -22,6 +22,11 @@ def extract_findings(reports):
                     f = dict(item)
                     f["skill_id"] = report.get("skill_id")
                     f["validator"] = report.get("validator")
+                    f["evidence"] = {
+                        "skill_id": report.get("skill_id"),
+                        "validator": report.get("validator"),
+                        "deterministic_result": f.copy(),
+                    }
                     findings.append(f)
     return findings
 
@@ -75,6 +80,7 @@ def main():
         "execution":execution,
         "human_signoff": status in ("PASS","REVIEW"),
         "side_effects":"none",
+        "traceability":{"router_rule":execution.get("matched_rule"),"agent":execution.get("agent_id"),"validators":[r.get("validator") for r in execution.get("reports",[])]},
     }
     print(json.dumps(payload,ensure_ascii=False,indent=2))
     return 1 if status=="FAIL" else 2 if status=="REVIEW" else 0
