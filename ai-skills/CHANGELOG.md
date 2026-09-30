@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.0
+
+- Added executable Skill planning after deterministic routing.
+- Resolved agents to registered Skill entrypoints and deterministic validators without side effects.
+- Added validation-only handling for the QA gate and planning smoke tests.
+- Added CI coverage for the planning layer and bumped release metadata to 1.11.0.
+
+
 ## 1.10.0
 
 - Added a deterministic Skill Router driven by `paperclip-agent-profiles.json`.
