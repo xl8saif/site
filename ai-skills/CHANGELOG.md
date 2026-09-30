@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.10.0
+
+- Added a deterministic Skill Router driven by `paperclip-agent-profiles.json`.
+- Added explicit routing priorities, keyword signals, least-privilege fallback behavior, and machine-readable router output.
+- Added router smoke tests covering production domains and fallback behavior.
+- Added CI validation for the router and bumped release metadata to 1.10.0.
+
+
 ## 1.9.0
 
 - Integrated the production Skills with Paperclip's project skill discovery layout under `.agents/skills/`.
