@@ -1,6 +1,6 @@
 {
   "name": "saif-language-skills",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "Reusable language, localization, and QA workflows developed for Saif Ullah production work.",
   "skills": ["./pubg-urdu-lqa/SKILL.md","./arabic-urdu-localization/SKILL.md","./multilingual-translation-mtpe/SKILL.md","./legal-translation-qa/SKILL.md","./indus-kohistani-research/SKILL.md"]
 }
