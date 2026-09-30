@@ -1,0 +1,10 @@
+{
+  "workflow": "multilingual translation and MTPE",
+  "rules": [
+    "Preserve source meaning; do not add information silently.",
+    "Preserve XML/HTML tags, placeholders, punctuation, structure, and line breaks when they are part of the source contract.",
+    "Separate deterministic structural QA from semantic and contextual review.",
+    "Use user-confirmed terminology as authoritative; do not invent production terminology.",
+    "Record stable production corrections as regression cases."
+  ]
+}
