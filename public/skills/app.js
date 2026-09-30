@@ -106,11 +106,11 @@ async function runOcr(kind) {
 }
 
 const skills = [
-  ["pubg-urdu-lqa","PUBG Urdu LQA","pubg|wow|world of wonder|urdu lqa|mission card|wow tokens|creation mode"],
-  ["arabic-urdu-localization","Arabic ↔ Urdu Localization","arabic to urdu|arabic-urdu|عربي|عربی اردو|localization|translation"],
-  ["multilingual-translation-mtpe","Multilingual Translation / MTPE","mtpe|multilingual|terminology|translation"],
-  ["legal-translation-qa","Legal Translation QA","legal|contract|court|case law|judgment|محكمة|قانون|دعوى|عقد"],
-  ["indus-kohistani-research","Indus-Kohistani Research","indus-kohistani|mvy|dardic|duber|kandia|common voice|corpus|کوہستانی|کارپس"]
+  ["pubg-urdu-lqa","PUBG Urdu LQA","فحص جودة PUBG بالأردية","pubg|wow|world of wonder|urdu lqa|mission card|wow tokens|creation mode"],
+  ["arabic-urdu-localization","Arabic ↔ Urdu Localization","التوطين من العربية إلى الأردية والعكس","arabic to urdu|arabic-urdu|عربي|عربی اردو|localization|translation"],
+  ["multilingual-translation-mtpe","Multilingual Translation / MTPE","الترجمة متعددة اللغات / المعالجة اللاحقة للترجمة الآلية","mtpe|multilingual|terminology|translation"],
+  ["legal-translation-qa","Legal Translation QA","فحص جودة الترجمة القانونية","legal|contract|court|case law|judgment|محكمة|قانون|دعوى|عقد"],
+  ["indus-kohistani-research","Indus-Kohistani Research","أبحاث الإندوس-كوهستانية","indus-kohistani|mvy|dardic|duber|kandia|common voice|corpus|کوہستانی|کارپس"]
 ];
 const $ = id => document.getElementById(id);
 
@@ -140,9 +140,9 @@ skills.forEach(s => {
   el.type = "button";
   el.className = "skill";
   el.dataset.skillId = s[0];
-  el.innerHTML = '<strong>' + s[1] + '</strong><span>' + s[0] + '</span>';
+  el.innerHTML = '<strong>' + (uiLang==="ar"?s[2]:s[1]) + '</strong><span>' + s[0] + '</span>';
   el.addEventListener("click", () => {
-    task.value = s[1] + " — " + s[0] + " task";
+    task.value = (uiLang==="ar"?s[2]:s[1]) + " — " + s[0] + (uiLang==="ar"?" — مهمة":" task");
     detect(task.value);
     task.focus();
     task.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -160,7 +160,7 @@ function detect(v) {
     if (score && (!best || score > best.score)) best = { s, score };
   }
   detected.textContent = best
-    ? best.s[1] + " · " + best.s[0]
+    ? (uiLang==="ar"?best.s[2]:best.s[1]) + " · " + best.s[0]
     : "سيتم الاكتشاف تلقائياً";
   return best;
 }
