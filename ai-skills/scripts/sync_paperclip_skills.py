@@ -13,10 +13,9 @@ import filecmp
 import shutil
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-REGISTRY = ROOT / "registry.json"
-SOURCE_ROOT = ROOT
-REPO_ROOT = ROOT.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SOURCE_ROOT = REPO_ROOT / "ai-skills"
+REGISTRY = SOURCE_ROOT / "registry.json"
 PAPERCLIP_ROOT = REPO_ROOT / ".agents" / "skills"
 
 
