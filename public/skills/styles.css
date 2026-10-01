@@ -37,3 +37,22 @@ html[lang="ur"] .loc-workbench-head h2{line-height:1.8}html[lang="ur"] .loc-work
 #locResult.result-lang-fa #localizedOutput{font-family:"Mehr","Noto Nastaliq Urdu","Noto Nastaliq",serif;font-size:18px;line-height:2.2;direction:rtl;text-align:right}
 #locResult.result-lang-ar #localizedOutput{font-family:"Traditional Arabic","Noto Naskh Arabic","Noto Sans Arabic","Amiri",serif;font-size:18px;line-height:1.9;direction:rtl;text-align:right}
 #locResult.result-lang-en #localizedOutput{font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:15px;line-height:1.7;direction:ltr;text-align:left}
+
+/* Persistent translation memory */
+.localization-memory{margin-top:14px;padding:15px;border:1px solid #e0e6ee;border-radius:15px;background:#f8fafc}
+.memory-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:12px}
+.memory-head h3{margin:4px 0;font-size:16px}
+.memory-head p{margin:0;color:#687284;font-size:10px;line-height:1.6}
+.memory-count{font:700 9px ui-monospace,monospace;color:#7b8695;white-space:nowrap}
+.memory-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.memory-grid label{display:block;font-size:10px;font-weight:750;color:#687284;margin-bottom:5px}
+.memory-grid input{width:100%;height:34px;border:1px solid #d9e1eb;border-radius:9px;padding:0 9px;background:#fff;font:inherit;font-size:11px}
+.memory-grid button,.memory-actions button,.memory-import{border:1px solid #d9e1eb;border-radius:9px;background:#fff;color:#465166;padding:8px 10px;font:700 10px inherit;cursor:pointer}
+.memory-grid .memory-primary{width:100%;height:34px;background:#edf3ff;border-color:#cbdcfb;color:#285fc7}
+.memory-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.memory-import{display:inline-flex;align-items:center;cursor:pointer}
+.memory-import input{display:none}
+.memory-note{min-height:0;margin-top:8px;color:#247043;font-size:10px}
+html[lang="ur"] .memory-head h3{font-family:"Mehr",serif;font-size:20px;line-height:1.8}
+html[lang="ur"] .memory-head p,html[lang="ur"] .memory-grid label,html[lang="ur"] .memory-actions button,html[lang="ur"] .memory-import{font-size:13px;line-height:1.8}
+@media(max-width:620px){.memory-grid{grid-template-columns:1fr}.memory-head{display:block}.memory-count{display:block;margin-top:7px}.memory-actions>*{flex:1 1 45%}}
