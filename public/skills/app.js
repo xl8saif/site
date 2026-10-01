@@ -210,6 +210,48 @@ function setLocalizationCopy() {
   if($("locReadinessText") && !getLocalizationSource().hasSource) $("locReadinessText").textContent=c.waitingSource;
 }
 
+function updateLocalizationWorkbench() {
+  const ctx = localizationContext();
+  const c = localizationCopy();
+  const sourceCount = (ctx.pasted || "").length;
+  const countEl = $("sourceCount");
+  const sourceName = $("sourceName");
+  const targetName = $("targetName");
+  const skillName = $("smartSkillName");
+  const skillId = $("smartSkillId");
+  const readiness = $("locReadinessText");
+  const next = $("locNextText");
+  const runBtn = $("localize");
+
+  if (countEl) countEl.textContent = sourceCount.toLocaleString() + " " + c.chars;
+
+  if (sourceName && ctx.file) sourceName.textContent = ctx.file.name || c.noAttachment;
+  if (targetName && $("target")?.files?.[0]) targetName.textContent = $("target").files[0].name;
+  if (sourceName && !ctx.file && !ctx.pasted) sourceName.textContent = c.noAttachment;
+
+  const skill = ctx.best;
+  if (skillName) {
+    skillName.textContent = skill
+      ? (uiLang === "ar" ? skill.s[2] : uiLang === "ur" ? skill.s[3] : skill.s[1])
+      : c.waiting;
+  }
+  if (skillId) skillId.textContent = skill ? skill.s[0] : c.waiting;
+
+  const ready = Boolean(ctx.hasSource && ctx.language);
+  if (readiness) readiness.textContent = ready
+    ? c.ready + (skill ? (uiLang === "ar" ? skill.s[2] : uiLang === "ur" ? skill.s[3] : skill.s[1]) : "Multilingual Translation / MTPE")
+    : c.waitingSource;
+  if (next) next.textContent = ready ? c.nextReady : c.nextWait;
+
+  if (runBtn) runBtn.disabled = !ready;
+
+  if (ready && !task.value.trim()) {
+    const label = ctx.language === "ur" ? "Urdu" : ctx.language === "ar" ? "Arabic" : ctx.language === "fa" ? "Persian" : "English";
+    task.value = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
+    detect(task.value);
+  }
+}
+
 task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
 $("sourceText").addEventListener("input", updateLocalizationWorkbench);
 $("targetLanguage").addEventListener("change", updateLocalizationWorkbench);
@@ -220,7 +262,12 @@ $("source").addEventListener("change", async e => {
   const file = e.target.files[0];
   $("sourceName").textContent = file?.name || "No attachment";
   if (file?.name?.toLowerCase().endsWith(".pdf")) {
-    try { ocrSourceFile = await extractScannedPdf(file, "Source"); } catch (err) { $("localizeNote").textContent = err.message || err; }
+    try {
+      const ocrText = await extractScannedPdf(file, "Source");
+      if (ocrText) ocrSourceFile = makeOcrFile(file, ocrText);
+    } catch (err) {
+      $("localizeNote").textContent = err.message || err;
+    }
   }
   updateLocalizationWorkbench();
 });
