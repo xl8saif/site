@@ -58,7 +58,8 @@ jobs:
       - name: Validate Skills Console JavaScript
         run: |
           node --check public/skills/runtime-fixed.js
-          node --check public/skills/app.js\n          node --check public/skills/localize-runtime.js
+          node --check public/skills/app.js
+          node --check public/skills/localize-runtime.js
       - name: Validate Skills Console shell
         run: test -f public/skills/index.html && grep -q 'id="pipeline"' public/skills/index.html && grep -q 'id="knowledge"' public/skills/index.html && grep -q 'localize-runtime.js' public/skills/index.html && grep -q 'localizedOutput' public/skills/index.html
       - name: Build portfolio and Skills Console
