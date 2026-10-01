@@ -64,14 +64,30 @@ async function getTranslator(onProgress){
   loading=(async()=>{
     const device = navigator.gpu ? "webgpu" : "wasm";
     onProgress?.("Loading browser translation model ("+device+")…");
-    translator=await pipeline("translation",MODEL,{
+    const preferredDtype = device === "webgpu" ? "q4f16" : "q8";
+    const createPipeline = (dtype) => pipeline("translation", MODEL, {
       device,
-      dtype: device==="webgpu" ? "q4" : "q8",
-      progress_callback:p=>{
-        if(p?.status==="progress" && Number.isFinite(p.progress))
-          onProgress?.("Loading translation model… "+Math.round(p.progress)+"%");
+      dtype,
+      progress_callback: p => {
+        if (p?.status === "progress" && Number.isFinite(p.progress)) {
+          const pct = Math.max(0, Math.min(100, Math.round(p.progress)));
+          const file = p.file ? " · " + String(p.file).split("/").pop() : "";
+          onProgress?.("Downloading translation model… " + pct + "%" + file);
+        } else if (p?.status === "ready") {
+          onProgress?.("Preparing translation engine…");
+        }
       }
     });
+    try {
+      translator = await createPipeline(preferredDtype);
+    } catch (firstError) {
+      if (device === "webgpu" && preferredDtype === "q4f16") {
+        onProgress?.("WebGPU q4f16 unavailable; switching to q4…");
+        translator = await createPipeline("q4");
+      } else {
+        throw firstError;
+      }
+    }
     return translator;
   })();
   try{return await loading;}finally{loading=null;}
