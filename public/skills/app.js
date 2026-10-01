@@ -245,7 +245,11 @@ $("clear").onclick = () => {
   task.value = "";
   $("source").value = "";
   $("target").value = "";
-  $("knowledge").value = "";\n  if ($("sourceText")) $("sourceText").value = "";\n  if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }\n  window.__localizedResult = null;\n  $("exportLocalized").disabled = true;
+  $("knowledge").value = "";
+  if ($("sourceText")) $("sourceText").value = "";
+  if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }
+  window.__localizedResult = null;
+  $("exportLocalized").disabled = true;
   ocrSourceFile = null;
   ocrTargetFile = null;
   $("sourceName").textContent = tr("source");
