@@ -68,7 +68,7 @@ async function getTranslator(src,tgt,onProgress){
       }
       if(model!==FALLBACK_MODEL){
         onProgress?.("Specialized model unavailable; using NLLB fallback…");
-        const pipe=await pipeline("translation",FALLBACK_MODEL,{device,dtype:"q4f16",progress_callback:options.progress_callback});
+        const pipe=await pipeline("translation",FALLBACK_MODEL,{device,dtype:device==="webgpu"?"q4f16":"q8",progress_callback:options.progress_callback});
         translators.set(key,pipe); return pipe;
       }
       throw error;
@@ -110,7 +110,8 @@ async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",
   if(!window.XLSX) throw new Error("Spreadsheet engine is not loaded.");
   const data=await file.arrayBuffer();
   const wb=XLSX.read(data,{type:"array",cellFormula:false});
-  const pipe=await getTranslator(onProgress);
+  const firstSrc=sourceLanguage==="auto"?null:sourceLanguage;
+  const pipe=firstSrc&&firstSrc!==targetLanguage?await getTranslator(firstSrc,targetLanguage,onProgress):null;
   for(const wsName of wb.SheetNames){
     const ws=wb.Sheets[wsName];
     const range=XLSX.utils.decode_range(ws["!ref"]||"A1:A1");
