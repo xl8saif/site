@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="./styles.css?v=1.34.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script></head>
 <body>
-<header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a href="../">Portfolio</a></div></header>
+<header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a id="portfolioLink" href="../">Portfolio</a></div></header>
 <main class="shell">
 <section class="intro"><div><span class="kicker" data-i18n="consoleKicker">AI SKILLS CONSOLE · v1.20</span><h1 id="intro-title">نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة</h1><p id="intro-text">اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.</p></div><div class="status-card"><span class="dot"></span><div><strong id="framework-label">Framework</strong><small id="framework-text">Deterministic orchestration</small></div></div></section>
 <section class="workspace">
@@ -66,7 +66,7 @@
   </div>
 
   <div class="localize-command loc-primary-actions">
-    <button class="primary" id="localize" type="button" disabled><span>Run</span><b id="localizeActionText">Localize with selected Skill</b></button>
+    <button class="primary" id="localize" type="button" disabled><span id="localizeRunLabel">Run</span><b id="localizeActionText">Localize with selected Skill</b></button>
     <button class="secondary" id="exportLocalized" type="button" disabled>Export result</button>
   </div>
 
@@ -77,7 +77,5 @@
 </div>
 </section>
 <section class="pipeline panel" id="pipeline" hidden><h2 id="pipeline-title">مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span data-stage-label="router">تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span data-stage-label="planner">اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span data-stage-label="execution">تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span data-stage-label="review">قرار المراجعة</span></div></div></section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker" id="evidence-label">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary id="trace-label">Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary id="raw-label">Raw JSON</summary><pre id="raw"></pre></details></section>
-<section class="panel cli"><h2 id="cli-title">إذا كنت تعمل محلياً</h2><p id="cli-text">يمكن تشغيل نفس المسار من الطرفية:</p><code>python ai-skills/scripts/review_gate.py --task "YOUR TASK" --source source.txt --target target.txt --json</code><p>لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.</p>
-</section>
 </main>
 <section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">PDF ممسوح</span></div><p id="ocr-text">استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><script src="./runtime-fixed.js?v=1.34.0"></script><script src="./localization-memory.js?v=1.34.0"></script><script src="./app.js?v=1.34.0"></script><script type="module" src="./localize-runtime.js?v=1.34.0"></script></body></html>
