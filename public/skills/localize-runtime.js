@@ -8,7 +8,7 @@ env.allowLocalModels = false;
 env.useBrowserCache = true;
 
 const MODEL = "Xenova/nllb-200-distilled-600M";
-const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };
+const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };\nfunction detectSourceLanguage(text){ const t=String(text||""); if(/[ٹڈڑںےہھچژگپکڑ]/u.test(t)) return "ur"; if(/[پچژگ]/u.test(t) && !/[ٹڈڑںے]/u.test(t)) return "fa"; if(/[ؠ-ۿ]/u.test(t)) return "ar"; return "en"; }\nconst TERMINOLOGY={\n  "pubg-urdu-lqa":{"Official":"آفیشل","Esports":"ای سپورٹس","Hidden Leaf Center":"پوشیدہ پتّا سینٹر","Valley of the End":"اختتام کی وادی","Brainrot":"برین راٹ","Creation Mode":"تخلیق موڈ","Creator":"کریئٹر","Creation":"کریئیشن","World of Wonder (WOW)":"ورلڈ آف ونڈر (WOW)","Creation Shop":"کریئیشن شاپ"},\n  "arabic-urdu-localization":{"ترجمة":"ترجمہ","مترجم":"مترجم","لغة":"زبان","لغات":"زبانیں","نص":"متن","محتوى":"مواد","مصطلحات":"اصطلاحات","وزارة":"وزارت","حكومة":"حکومت","قرار":"فیصلہ","قانون":"قانون","محكمة":"عدالت","حكم":"فیصلہ","دعوى":"دعویٰ"}\n};\nfunction enforceTerminology(text,skillId,targetLanguage){ if(targetLanguage!=="ur") return text; let out=String(text); for(const [from,to] of Object.entries(TERMINOLOGY[skillId]||{})) out=out.split(from).join(to); return out; }\nfunction tokenCounts(text){ const tags=String(text).match(/<[^>]+>/g)||[],ph=String(text).match(/\\{[^{}]+\\}|\\$\\{[^{}]+\\}|%(?:\\d+\\$)?[sdif]|%%/g)||[]; const count=a=>a.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{}); return {tags:count(tags),placeholders:count(ph),linebreaks:(String(text).match(/\\n/g)||[]).length}; }\nfunction sameCounts(a,b){ const ka=Object.keys(a),kb=Object.keys(b); return ka.length===kb.length&&ka.every(k=>a[k]===b[k]); }\nfunction qaText(source,target){ const a=tokenCounts(source),b=tokenCounts(target),findings=[]; if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:"XML/HTML tags changed during localization."}); if(!sameCounts(a.placeholders,b.placeholders)) findings.push({severity:"critical",code:"PLACEHOLDER_MISMATCH",issue:"Placeholders changed during localization."}); if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."}); return findings; }
 let translator = null;
 let loading = null;
 
@@ -53,8 +53,8 @@ async function translateChunk(text,src,tgt,pipe){
   const value=Array.isArray(result)?result[0]?.translation_text ?? "":result?.translation_text ?? "";
   return restore(value,tokens);
 }
-async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",onProgress}={}){
-  const src=sourceLanguage==="auto" ? "en" : sourceLanguage;
+async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
+  const src=sourceLanguage==="auto" ? detectSourceLanguage(text) : sourceLanguage;
   if(!LANG[targetLanguage]) throw new Error("Unsupported target language: "+targetLanguage);
   if(!LANG[src]) throw new Error("Unsupported source language: "+sourceLanguage);
   if(src===targetLanguage) return cleanText(text);
@@ -67,13 +67,13 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",onP
     if(!p.trim()){out.push(p);continue;}
     const nl=p.endsWith("\n")?"\n":"";
     const body=p.slice(0,nl? -1:undefined);
-    out.push(await translateChunk(body,src,targetLanguage,pipe)+nl);
+    out.push(enforceTerminology(await translateChunk(body,src,targetLanguage,pipe),skillId,targetLanguage)+nl);
     onProgress?.("Translating "+(i+1)+"/"+paragraphs.length);
   }
   return out.join("");
 }
 function isTextCell(v){return typeof v==="string" && v.trim() && !v.startsWith("=");}
-async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",onProgress}={}){
+async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
   if(!window.XLSX) throw new Error("Spreadsheet engine is not loaded.");
   const data=await file.arrayBuffer();
   const wb=XLSX.read(data,{type:"array",cellFormula:false});
@@ -90,7 +90,7 @@ async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",
     for(let r=range.s.r;r<=range.e.r;r++) for(let c=range.s.c;c<=range.e.c;c++){
       const addr=XLSX.utils.encode_cell({r,c}),cell=ws[addr];
       if(!cell || !isTextCell(cell.v)) continue;
-      cell.v=await translateChunk(cell.v,sourceLanguage==="auto"?"en":sourceLanguage,targetLanguage,pipe);
+      cell.v=enforceTerminology(await translateChunk(cell.v,sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage,targetLanguage,pipe),skillId,targetLanguage);
       cell.t="s"; done++;
       onProgress?.("Translating "+wsName+" "+done+"/"+total);
     }
@@ -105,7 +105,7 @@ async function localizeFile(file,opts={}){
   const target=opts.targetLanguage||"ur";
   if(name.endsWith(".txt")||name.endsWith(".json")||name.endsWith(".xml")||name.endsWith(".xliff")){
     const source=await file.text();
-    const translated=await translateText(source,{...opts,targetLanguage:target});
+    const translated=await translateText(source,{...opts,targetLanguage:target});\n    const qa=qaText(source,translated);
     const type=name.endsWith(".json")?"application/json":name.endsWith(".xml")||name.endsWith(".xliff")?"application/xml":"text/plain";
     return {blob:new Blob([translated],{type}),name:file.name.replace(/\.[^.]+$/,"")+"_localized"+file.name.slice(file.name.lastIndexOf(".")),preview:translated};
   }
