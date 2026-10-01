@@ -209,3 +209,73 @@ html[lang="ur"] .footer-credit,html[lang="ur"] .footer-project-line,html[lang="u
   .footer-logos{grid-column:1;gap:18px}
   .footer-logos a{width:82px;height:82px;padding:11px}
 }
+
+/* Portfolio parity: full-width navy footer with responsive two-column hierarchy */
+.site-footer{
+  max-width:none;
+  margin:28px -22px -80px;
+  padding:30px 22px 34px;
+  border-top:0;
+  background:#1b2635;
+  color:rgba(255,255,255,.62);
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(250px,.85fr);
+  align-items:center;
+  column-gap:34px;
+  row-gap:22px;
+  text-align:start;
+}
+.site-footer a{color:rgba(255,255,255,.82)}
+.site-footer a:hover{color:#fff;text-decoration:underline}
+.footer-project{min-width:0}
+.footer-project-line{margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.footer-description{margin:0 0 10px;font-size:10px;line-height:1.7;color:rgba(255,255,255,.46)}
+.footer-credit{margin:0 0 8px;font-size:12px;line-height:1.6;color:#fff}
+.footer-address,.footer-contact{margin:4px 0;font-size:10px;line-height:1.75;color:rgba(255,255,255,.58)}
+.visitor-section{
+  margin:0;
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  background:rgba(255,255,255,.045);
+  box-shadow:inset 0 1px rgba(255,255,255,.04);
+  text-align:center;
+}
+.visitor-title{margin-bottom:9px;font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.48)}
+.visitor-counter{flex-direction:column;gap:9px}
+.visitor-counter img{height:28px}
+.visitor-countries{font-size:10px}
+.footer-logos{
+  grid-column:1/-1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  margin-top:0;
+}
+.footer-logos a{
+  width:76px;
+  height:76px;
+  padding:9px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 8px 20px rgba(0,0,0,.20);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.footer-logos a:hover{transform:translateY(-2px);box-shadow:0 11px 24px rgba(0,0,0,.28);text-decoration:none}
+.footer-logos img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;border-radius:50%}
+html[lang="ur"] .footer-project-line,html[lang="ur"] .footer-credit,html[lang="ur"] .footer-address,html[lang="ur"] .footer-contact{font-family:"Mehr",serif}
+@media(max-width:700px){
+  .site-footer{
+    grid-template-columns:1fr;
+    gap:17px;
+    margin:24px -13px -50px;
+    padding:24px 13px 28px;
+    text-align:center;
+  }
+  .visitor-section{grid-column:1}
+  .footer-logos{grid-column:1;gap:15px}
+  .footer-logos a{width:68px;height:68px;padding:8px}
+}
