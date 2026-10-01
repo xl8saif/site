@@ -279,3 +279,20 @@ html[lang="ur"] .footer-project-line,html[lang="ur"] .footer-credit,html[lang="u
   .footer-logos{grid-column:1;gap:15px}
   .footer-logos a{width:68px;height:68px;padding:8px}
 }
+
+
+/* User-facing console: keep implementation diagnostics out of the normal workflow. */
+.status-card,.task-skill-header,#pipeline,#ocr-panel,#trace-label,#raw-label,.result details{display:none!important}
+#run,#clear{display:none!important}
+.target-preview{margin-top:10px;border:1px solid #e1e6ed;border-radius:10px;background:#fff;overflow:hidden}
+.target-preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid #e8edf2;background:#f8fafc}
+.target-preview-head strong{font-size:10px;color:#465166}
+.target-preview-head span{font-size:9px;color:#8b96a6}
+#targetPreview{margin:0;padding:13px 14px;min-height:108px;max-height:360px;overflow:auto;white-space:pre-wrap;word-break:break-word;font:inherit;font-size:13px;line-height:1.75;color:var(--ink);background:#fff}
+#targetPreview[dir="rtl"]{text-align:right}
+#targetPreview[dir="ltr"]{text-align:left}
+#locResult.result-lang-ur #targetPreview{font-family:"Mehr","Noto Nastaliq Urdu","Noto Nastaliq",serif;font-size:18px;line-height:2.2}
+#locResult.result-lang-ar #targetPreview{font-family:"Traditional Arabic","Noto Naskh Arabic","Noto Sans Arabic","Amiri",serif;font-size:18px;line-height:1.9}
+#locResult.result-lang-en #targetPreview{font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:15px;line-height:1.7}
+#locResult.result-lang-fa #targetPreview{font-family:Tahoma,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:2}
+@media(max-width:620px){.target-preview-head{padding:7px 9px}#targetPreview{min-height:92px;padding:11px 12px}}
