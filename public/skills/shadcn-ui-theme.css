@@ -216,3 +216,135 @@ button{
   .main-panel,.localization-workbench{padding:14px}
   .loc-options-row,.loc-input-grid,.loc-context-row{grid-template-columns:1fr!important}
 }
+
+
+/* Responsive localization workbench: prevent horizontal overflow at every viewport. */
+.localization-workbench,
+.loc-workbench-head,
+.loc-options-row,
+.loc-input-grid,
+.loc-context-row,
+.loc-source-card,
+.loc-target-card,
+.loc-option,
+.smart-skill,
+.knowledge-compact,
+.loc-next,
+.loc-result,
+.loc-result-head,
+.source-actions,
+.target-attachment-row,
+.loc-primary-actions{
+  min-width:0;
+  max-width:100%;
+}
+.loc-workbench-head > *,
+.loc-option > *,
+.smart-skill > *,
+.knowledge-compact > *,
+.loc-next > *,
+.loc-card-head > *,
+.source-actions > *,
+.target-attachment-row > *{
+  min-width:0;
+  max-width:100%;
+}
+.loc-workbench-head p,
+.loc-option label,
+.smart-skill strong,
+.smart-skill small,
+.knowledge-compact b,
+.knowledge-compact small,
+.loc-next b,
+.loc-next small,
+.loc-card-head strong,
+.loc-card-head > span,
+.source-actions > span,
+.target-attachment-row > span{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.loc-option select,
+#targetLanguage,
+#sourceText,
+#localizedOutput,
+.loc-source-card textarea,
+.loc-target-card textarea,
+.loc-result{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+.loc-source-card > textarea{
+  width:calc(100% - 24px);
+  max-width:calc(100% - 24px);
+}
+.loc-options-row,
+.loc-input-grid,
+.loc-context-row{
+  align-items:stretch;
+}
+.source-actions,
+.target-attachment-row{
+  flex-wrap:wrap;
+}
+.attach-btn{
+  max-width:100%;
+  flex:0 1 auto;
+}
+.attach-btn span{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.loc-primary-actions{
+  display:flex;
+  flex-wrap:wrap;
+}
+.loc-primary-actions > *{
+  min-width:0;
+  max-width:100%;
+}
+@media(max-width:900px){
+  .loc-options-row,
+  .loc-input-grid,
+  .loc-context-row{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .loc-workbench-head{
+    display:block;
+  }
+  .loc-readiness{
+    display:inline-flex;
+    margin-top:10px;
+  }
+}
+@media(max-width:620px){
+  .shell{padding-left:12px;padding-right:12px;}
+  .localization-workbench{padding:12px!important;}
+  .loc-source-card,
+  .loc-target-card{padding:10px!important;}
+  .loc-card-head{gap:8px;align-items:flex-start;}
+  .loc-card-head > div{min-width:0;}
+  .loc-card-head strong{overflow-wrap:anywhere;}
+  .paste-zone{margin:10px!important;}
+  .loc-source-card > textarea{width:calc(100% - 20px);max-width:calc(100% - 20px);}
+  .source-actions,
+  .target-attachment-row{align-items:flex-start;}
+  .source-actions > span,
+  .target-attachment-row > span{flex:1 1 120px;}
+  .attach-btn{flex:0 1 auto;}
+  .loc-primary-actions > button{flex:1 1 100%;width:100%;}
+}
+@media(max-width:380px){
+  .shell{padding-left:9px;padding-right:9px;}
+  .localization-workbench{padding:10px!important;}
+  .loc-source-card,
+  .loc-target-card{padding:9px!important;}
+  .loc-card-head{display:block;}
+  .loc-card-head > span:last-child{display:block;margin-top:5px;}
+  .source-actions,
+  .target-attachment-row{display:block;}
+  .source-actions > span,
+  .target-attachment-row > span{display:block;margin-bottom:7px;}
+  .attach-btn{display:inline-flex!important;}
+}
