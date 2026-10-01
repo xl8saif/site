@@ -179,7 +179,27 @@ $("knowledge").addEventListener("change", e => {
   $("knowledgeName").textContent = e.target.files[0]?.name || tr("knowledge");
 });
 
-$("ocr-source-btn").onclick = () => runOcr("source");
+
+$("localize").onclick = () => {
+  const detectedSkill = detect(task.value)?.s?.[0] || "multilingual-translation-mtpe";
+  const language = $("targetLanguage")?.value || "ur";
+  const label = language === "ur" ? "Urdu" : language === "ar" ? "Arabic" : language === "fa" ? "Persian" : "English";
+  task.value = "Translate / localize under skill " + detectedSkill + " into " + label + " with full terminology, placeholder, tag, punctuation and line-break QA";
+  detect(task.value);
+  $("localizeNote").textContent = "Task prepared for " + detectedSkill + " → " + label + ". Press Run Skill + QA to execute.";
+  task.focus();
+};
+
+$("exportLocalized").onclick = () => {
+  const target = ocrTargetFile || $("target").files[0];
+  if (!target) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(target);
+  a.download = target.name.replace(/(\\.[^.]+)?$/, "_localized$1");
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+\n$("ocr-source-btn").onclick = () => runOcr("source");
 $("ocr-target-btn").onclick = () => runOcr("target");
 
 $("clear").onclick = () => {
@@ -204,7 +224,8 @@ $("run").onclick = async () => {
     return;
   }
 
-  const sf = ocrSourceFile || $("source").files[0];
+  const pasted = $("sourceText")?.value.trim();
+  const sf = ocrSourceFile || $("source").files[0] || (pasted ? new File([pasted], "pasted-source.txt", { type: "text/plain" }) : null);
   const tf = ocrTargetFile || $("target").files[0];
   const kf = $("knowledge").files[0];
 
