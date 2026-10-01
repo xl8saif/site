@@ -324,7 +324,9 @@ $("localize").onclick = async () => {
   try {
     const result = await window.SaifLocalizer.localizeFile(source, {
       targetLanguage: language,
-      sourceLanguage: "auto",\n      skillId: detectedSkill,\n      onProgress: msg => { $("localizeNote").textContent = msg; }
+      sourceLanguage: "auto",
+      skillId: detectedSkill,
+      onProgress: msg => { $("localizeNote").textContent = msg; }
     });
     window.__localizedResult = result;
     window.__localizedMachineDraft = result.preview != null ? result.preview : "";
