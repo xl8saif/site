@@ -1,3 +1,4 @@
+// User-focused localization console.
 // Browser OCR helper for scanned PDFs. OCR output is kept in memory and sent as text.
 let ocrSourceFile = null;
 let ocrTargetFile = null;
@@ -117,7 +118,8 @@ const skills = [
   ["dify-scope-ownership","Dify Scope & Ownership","حدود الملكية ونطاق التغيير","Dify اسکوپ اور اونرشپ","scope ownership|component ownership|feature boundary|state ownership|data flow|interaction ownership|module boundary"],
   ["dify-frontend-verification","Dify Frontend Verification","التحقق من واجهة المستخدم","Dify فرنٹ اینڈ ویریفکیشن","frontend testing|browser testing|ui test|visual regression|rtl qa|localization qa|frontend verification"],
   ["dify-evidence-verification","Dify Evidence Verification","التحقق القائم على الأدلة","Dify شواہد کی جانچ","verify evidence|evidence check|prove behavior|verification|audit implementation|source verification"],
-  ["dify-skill-packaging","Dify Skill Packaging","تغليف مهارات الوكلاء","Dify اسکل پیکیجنگ","skill package|portable skill|skill.md|import skill|export skill|skill archive|package skill"]
+  ["dify-skill-packaging","Dify Skill Packaging","تغليف مهارات الوكلاء","Dify اسکل پیکیجنگ","skill package|portable skill|skill.md|import skill|export skill|skill archive|package skill"],
+  ["localization-structure-preservation","Localization Structure Preservation","الحفاظ على بنية الترجمة","ترجمہ کی ساخت برقرار رکھنا","structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization qa|xml localization|html localization|structure QA"]
 ];
 const $ = selector => /^[A-Za-z][A-Za-z0-9_-]*$/.test(selector) ? document.getElementById(selector) : document.querySelector(selector);
 
@@ -205,6 +207,7 @@ function detect(v) {
     if (s[0] === "openhands-iterate-verify" && /iterate|verify|regression|ci|build failure|test failure|qa|تکراری جانچ|راستی.?آزمایی/.test(t)) score += 8;
     if (s[0] === "openhands-skill-creator" && /create skill|new skill|skill design|skill creator|agent skill|agentskills|skill بنائیں|مهارت/.test(t)) score += 8;
     if (s[0] === "openhands-review-learning" && /learn from reviews|review learning|distill reviews|coding standards|extract review patterns|review سے سیکھیں/.test(t)) score += 8;
+    if (s[0] === "localization-structure-preservation" && /structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization|xml localization|html localization|structure qa|tags|placeholders|line.?break/.test(t)) score += 10;
     if (score && (!best || score > best.score)) best = {s,score};
   }
   detected.textContent = best ? skillLabel(best.s)+" · "+best.s[0] : tr("auto");
@@ -299,6 +302,19 @@ function updateLocalizationWorkbench() {
 
 task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
 $("sourceText").addEventListener("input", updateLocalizationWorkbench);
+$("localizedOutput").addEventListener("input",()=>updateTargetPreview($("targetLanguage")?.value||"ur"));
+function updateTargetPreview(language){
+  const output=$("localizedOutput"), preview=$("targetPreview"), box=$("targetPreviewBox");
+  if(!output||!preview||!box) return;
+  const value=output.value||"";
+  if(!value){ box.hidden=true; preview.textContent=""; return; }
+  box.hidden=false;
+  const lang=["ur","ar","fa","en"].includes(language)?language:"en";
+  preview.lang=lang;
+  preview.dir=lang==="en"?"ltr":"rtl";
+  preview.textContent=value;
+}
+
 function applyResultLanguageFont(language){
   const resultBox = $("locResult");
   const output = $("localizedOutput");
@@ -308,6 +324,7 @@ function applyResultLanguageFont(language){
   resultBox.classList.add("result-lang-" + lang);
   output.setAttribute("lang", lang);
   output.setAttribute("dir", lang === "en" ? "ltr" : "rtl");
+  updateTargetPreview(lang);
 }
 applyResultLanguageFont($("targetLanguage")?.value || "ur");
 
@@ -375,6 +392,7 @@ $("localize").onclick = async () => {
       applyResultLanguageFont(language);
       $("localizedOutput").value = result.preview;
       $("localizedOutput").hidden = false;
+      updateTargetPreview(language);
     }
     $("exportLocalized").disabled = false;
     if (result.preview != null) {
@@ -421,6 +439,7 @@ $("clear").onclick = () => {
   $("knowledge").value = "";
   if ($("sourceText")) $("sourceText").value = "";
   if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }
+  if ($("targetPreviewBox")) { $("targetPreviewBox").hidden = true; $("targetPreview").textContent = ""; }
   window.__localizedResult = null;
   window.__localizedMachineDraft = "";
   $("exportLocalized").disabled = true;
