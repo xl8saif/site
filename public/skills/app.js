@@ -254,7 +254,22 @@ function updateLocalizationWorkbench() {
 
 task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
 $("sourceText").addEventListener("input", updateLocalizationWorkbench);
-$("targetLanguage").addEventListener("change", updateLocalizationWorkbench);
+function applyResultLanguageFont(language){
+  const resultBox = $("locResult");
+  const output = $("localizedOutput");
+  if(!resultBox || !output) return;
+  resultBox.classList.remove("result-lang-ur","result-lang-ar","result-lang-fa","result-lang-en");
+  const lang = ["ur","ar","fa","en"].includes(language) ? language : "en";
+  resultBox.classList.add("result-lang-" + lang);
+  output.setAttribute("lang", lang);
+  output.setAttribute("dir", lang === "en" ? "ltr" : "rtl");
+}
+applyResultLanguageFont($("targetLanguage")?.value || "ur");
+
+$("targetLanguage").addEventListener("change", () => {
+  applyResultLanguageFont($("targetLanguage")?.value || "ur");
+  updateLocalizationWorkbench();
+});
 $("sourceText").addEventListener("paste", () => setTimeout(updateLocalizationWorkbench, 0));
 
 $("source").addEventListener("change", async e => {
@@ -309,6 +324,7 @@ $("localize").onclick = async () => {
     });
     window.__localizedResult = result;
     if (result.preview != null) {
+      applyResultLanguageFont(language);
       $("localizedOutput").value = result.preview;
       $("localizedOutput").hidden = false;
     }
