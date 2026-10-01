@@ -136,7 +136,8 @@ async function localizeFile(file,opts={}){
   const target=opts.targetLanguage||"ur";
   if(name.endsWith(".txt")||name.endsWith(".json")||name.endsWith(".xml")||name.endsWith(".xliff")){
     const source=await file.text();
-    const translated=await translateText(source,{...opts,targetLanguage:target});\n    const qa=qaText(source,translated);
+    const translated=await translateText(source,{...opts,targetLanguage:target});
+    const qa=qaText(source,translated);
     const type=name.endsWith(".json")?"application/json":name.endsWith(".xml")||name.endsWith(".xliff")?"application/xml":"text/plain";
     return {blob:new Blob([translated],{type}),name:file.name.replace(/\.[^.]+$/,"")+"_localized"+file.name.slice(file.name.lastIndexOf(".")),preview:translated};
   }
