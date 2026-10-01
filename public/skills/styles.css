@@ -61,3 +61,12 @@ html[lang="ur"] .memory-head p,html[lang="ur"] .memory-grid label,html[lang="ur"
 .memory-suggestion{min-height:0;margin-top:9px;padding:9px 11px;border-radius:10px;background:#eef5ff;border:1px solid #d8e6ff;color:#315d91;font-size:10px;line-height:1.6}
 .memory-note{font-size:10px}
 @media(max-width:620px){.memory-suggestion{font-size:12px;line-height:1.8}html[lang="ur"] .memory-suggestion{font-size:13px;line-height:2}}
+
+.memory-intelligence{margin-top:10px;padding:10px 12px;border:1px solid #dfe5ec;border-radius:10px;background:#fafbfc;font-size:11px;line-height:1.6}
+.memory-intelligence strong{display:block;margin-bottom:5px}
+.intel-grid{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 7px}
+.intel-grid span{padding:3px 7px;border-radius:999px;background:#eef2f7}
+.memory-intelligence ul{margin:6px 0 0;padding-left:18px}
+.memory-intelligence li{margin:3px 0}
+.intel-high{font-weight:700}
+.intel-medium{font-weight:500}
