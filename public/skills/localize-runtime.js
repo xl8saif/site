@@ -203,6 +203,7 @@ async function localizeFile(file,opts={}){
     const source=cleanText(await file.text());
     const translated=await translateText(source,{...opts,targetLanguage:target});
     const qa=qaText(source,translated);
+    window.SaifLocalizationMemory?.recordQA?.(source,translated,qa,{sourceLanguage:opts.sourceLanguage||"auto",targetLanguage:target,skillId:opts.skillId||""});
     return {
       blob:new Blob([translated],{type:name.endsWith(".json")?"application/json":name.endsWith(".xml")||name.endsWith(".xliff")?"application/xml":"text/plain"}),
       name:file.name.replace(/\.[^.]+$/,"")+"_localized"+file.name.slice(file.name.lastIndexOf(".")),
