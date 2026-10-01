@@ -212,6 +212,10 @@ function setLocalizationCopy() {
 
 function updateLocalizationWorkbench() {
   const ctx = localizationContext();
+  if(window.SaifLocalizationMemory?.renderSuggestion && ctx.hasSource){
+    const src=ctx.pasted || "";
+    if(src && ctx.language) window.SaifLocalizationMemory.renderSuggestion(src,"en",ctx.language,ctx.best?.s?.[0]||"multilingual-translation-mtpe");
+  }
   const c = localizationCopy();
   const sourceCount = (ctx.pasted || "").length;
   const countEl = $("sourceCount");
@@ -297,7 +301,9 @@ $("knowledge").addEventListener("change", e => {
 
 $("localize").onclick = async () => {
   const ctx = localizationContext();
-  const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";\n  window.__localizedSkillId = detectedSkill;\n  const language = $("targetLanguage")?.value || "ur";
+  const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";
+  window.__localizedSkillId = detectedSkill;
+  const language = $("targetLanguage")?.value || "ur";
   const label = language === "ur" ? "Urdu" : language === "ar" ? "Arabic" : language === "fa" ? "Persian" : "English";
   const source = ctx.file || (ctx.pasted ? new File([ctx.pasted], "pasted-source.txt", {type:"text/plain"}) : null);
   if (!source) {
@@ -321,6 +327,7 @@ $("localize").onclick = async () => {
       sourceLanguage: "auto",\n      skillId: detectedSkill,\n      onProgress: msg => { $("localizeNote").textContent = msg; }
     });
     window.__localizedResult = result;
+    window.__localizedMachineDraft = result.preview != null ? result.preview : "";
     if (result.preview != null) {
       applyResultLanguageFont(language);
       $("localizedOutput").value = result.preview;
@@ -335,6 +342,7 @@ $("localize").onclick = async () => {
         render(qa);
       }
     }
+    if(window.SaifLocalizationMemory?.renderSuggestion && ctx.pasted) window.SaifLocalizationMemory.renderSuggestion(ctx.pasted,"en",language,detectedSkill);
     $("localizeNote").className = "loc-message ok";
     $("localizeNote").textContent = tr("localizeReady") + " " + result.name;
     task.value = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
@@ -371,6 +379,7 @@ $("clear").onclick = () => {
   if ($("sourceText")) $("sourceText").value = "";
   if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }
   window.__localizedResult = null;
+  window.__localizedMachineDraft = "";
   $("exportLocalized").disabled = true;
   ocrSourceFile = null;
   ocrTargetFile = null;
