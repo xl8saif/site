@@ -113,7 +113,11 @@ const skills = [
   ["openhands-code-review","OpenHands Code Review","مراجعة الكود وفق سير عمل OpenHands","OpenHands کوڈ ریویو","code review|review code|review changes|pr review|codereview|security review"],
   ["openhands-iterate-verify","OpenHands Iterate & Verify","التكرار والتحقق وفق سير عمل OpenHands","OpenHands تکراری جانچ","iterate|verify|regression|ci|build failure|test failure|qa"],
   ["openhands-skill-creator","OpenHands Skill Creator","إنشاء مهارات AgentSkills قابلة لإعادة الاستخدام","OpenHands Skill Creator","create skill|new skill|skill design|skill creator|agent skill|agentskills"],
-  ["openhands-review-learning","OpenHands Review Learning","استخلاص أنماط قابلة لإعادة الاستخدام من مراجعات الكود","OpenHands ریویو لرننگ","learn from reviews|review learning|distill reviews|coding standards|extract review patterns"]
+  ["openhands-review-learning","OpenHands Review Learning","استخلاص أنماط قابلة لإعادة الاستخدام من مراجعات الكود","OpenHands ریویو لرننگ","learn from reviews|review learning|distill reviews|coding standards|extract review patterns"],
+  ["dify-scope-ownership","Dify Scope & Ownership","حدود الملكية ونطاق التغيير","Dify اسکوپ اور اونرشپ","scope ownership|component ownership|feature boundary|state ownership|data flow|interaction ownership|module boundary"],
+  ["dify-frontend-verification","Dify Frontend Verification","التحقق من واجهة المستخدم","Dify فرنٹ اینڈ ویریفکیشن","frontend testing|browser testing|ui test|visual regression|rtl qa|localization qa|frontend verification"],
+  ["dify-evidence-verification","Dify Evidence Verification","التحقق القائم على الأدلة","Dify شواہد کی جانچ","verify evidence|evidence check|prove behavior|verification|audit implementation|source verification"],
+  ["dify-skill-packaging","Dify Skill Packaging","تغليف مهارات الوكلاء","Dify اسکل پیکیجنگ","skill package|portable skill|skill.md|import skill|export skill|skill archive|package skill"]
 ];
 const $ = selector => /^[A-Za-z][A-Za-z0-9_-]*$/.test(selector) ? document.getElementById(selector) : document.querySelector(selector);
 
