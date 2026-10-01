@@ -171,6 +171,21 @@
       '<div id="memorySuggestion" class="memory-suggestion" aria-live="polite"></div><div id="memoryNote" class="memory-note" aria-live="polite"></div>';
     wb.insertBefore(panel,wb.querySelector(".loc-result"));
     const note=msg=>{const n=document.getElementById("memoryNote");if(n)n.textContent=msg;};
+    const copy={
+      en:{k:"PERSISTENT MEMORY · v2",h:"Translation Memory & Style",p:"Only approved wording becomes permanent memory. Similar matches are suggestions unless confidence is very high.",save:"Save approved translation",termS:"Terminology: source",termT:"Terminology: preferred target",style:"Style / wording rule",st:"Save terminology",ss:"Save style rule",ex:"Export memory",ec:"Export approved corpus",im:"Import memory",cl:"Clear saved memory"},
+      ar:{k:"الذاكرة المستمرة · الإصدار 2",h:"ذاكرة الترجمة والأسلوب",p:"تدخل الصياغات المعتمدة فقط في الذاكرة الدائمة. المطابقات المتشابهة تظل اقتراحات ما لم تكن الثقة مرتفعة جداً.",save:"حفظ الترجمة المعتمدة",termS:"المصطلح: المصدر",termT:"المصطلح: الترجمة المفضلة",style:"قاعدة الأسلوب / الصياغة",st:"حفظ المصطلح",ss:"حفظ قاعدة الأسلوب",ex:"تصدير الذاكرة",ec:"تصدير corpus المعتمد",im:"استيراد الذاكرة",cl:"مسح الذاكرة المحفوظة"},
+      ur:{k:"مستقل میموری · ورژن 2",h:"ترجمہ میموری اور اسلوب",p:"صرف منظور شدہ عبارت مستقل میموری میں شامل ہوتی ہے۔ ملتے جلتے نتائج اس وقت تک صرف تجاویز رہتے ہیں جب تک اعتماد بہت زیادہ نہ ہو۔",save:"منظور شدہ ترجمہ محفوظ کریں",termS:"اصطلاح: ماخذ",termT:"اصطلاح: ترجیحی ترجمہ",style:"اسلوب / لفظی اصول",st:"اصطلاح محفوظ کریں",ss:"اسلوب کا اصول محفوظ کریں",ex:"میموری برآمد کریں",ec:"منظور شدہ corpus برآمد کریں",im:"میموری درآمد کریں",cl:"محفوظ میموری صاف کریں"}
+    };
+    const localizePanel=()=>{
+      const lang=document.documentElement.lang==="ur"?"ur":document.documentElement.lang==="ar"?"ar":"en",x=copy[lang];
+      const q=(s)=>panel.querySelector(s);
+      q(".kicker").textContent=x.k;q("h3").textContent=x.h;q(".memory-head p").textContent=x.p;
+      q("#saveMemoryPair").textContent=x.save;q(".memory-grid label:nth-child(1)").textContent="Approved source → target";
+      q(".memory-grid label:nth-child(2)").textContent=x.termS;q(".memory-grid label:nth-child(3)").textContent=x.termT;q(".memory-grid label:nth-child(4)").textContent=x.style;
+      q("#saveMemoryTerm").textContent=x.st;q("#saveMemoryStyle").textContent=x.ss;q("#exportMemory").textContent=x.ex;q("#exportCorrections").textContent=x.ec;q(".memory-import").childNodes[0].textContent=x.im+" ";
+      q("#clearMemory").textContent=x.cl;
+    };
+    localizePanel(); window.addEventListener("saif-skills-language",localizePanel);
     renderStats(panel);
     document.getElementById("saveMemoryPair").onclick=()=>{
       const source=document.getElementById("sourceText")?.value||"",target=document.getElementById("localizedOutput")?.value||"",lang=document.getElementById("targetLanguage")?.value||"ur";
