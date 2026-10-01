@@ -23,6 +23,10 @@
 <div class="task-skills">
   <div class="task-skills-head"><h2 id="skills-title">المهارات</h2><span>Skills</span></div>
   <div id="skills"></div>
+  <div class="task-how-it-works">
+    <strong id="help-title">How it works</strong>
+    <p id="help-text">Your files are never modified. Uploaded content is used only for validation, localization, and quality checks. Any suggested changes remain under your control, and the final decision is always made by a human reviewer.</p>
+  </div>
 </div>
 <section class="inline-localize localization-workbench" aria-labelledby="localize-workbench-title">
   <div class="loc-workbench-head">
@@ -77,7 +81,6 @@
 <div class="controls"><button class="primary" id="run">Run Skill + QA</button><button class="secondary" id="clear">Clear</button></div>
 <div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ المسار الموحد…</p></div>
 </div>
-<aside class="panel side-panel"><div class="help"><strong id="help-title">طريقة العمل</strong><p id="help-text">النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط، والقرار النهائي يبقى للمراجعة البشرية.</p></div></aside>
 </section>
 <section class="pipeline panel" id="pipeline" hidden><h2 id="pipeline-title">مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span data-stage-label="router">تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span data-stage-label="planner">اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span data-stage-label="execution">تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span data-stage-label="review">قرار المراجعة</span></div></div></section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker" id="evidence-label">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary id="trace-label">Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary id="raw-label">Raw JSON</summary><pre id="raw"></pre></details></section>
 <section class="panel cli"><h2 id="cli-title">إذا كنت تعمل محلياً</h2><p id="cli-text">يمكن تشغيل نفس المسار من الطرفية:</p><code>python ai-skills/scripts/review_gate.py --task "YOUR TASK" --source source.txt --target target.txt --json</code><p>لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.</p>
