@@ -1,0 +1,218 @@
+/* shadcn-inspired visual layer for the static GitHub Pages console.
+   No framework migration: preserve the existing browser runtime and localization engine. */
+
+:root{
+  --sh-bg: #f8fafc;
+  --sh-fg: #0f172a;
+  --sh-muted: #64748b;
+  --sh-muted-fg: #94a3b8;
+  --sh-border: #e2e8f0;
+  --sh-input: #e2e8f0;
+  --sh-ring: #94a3b8;
+  --sh-card: #ffffff;
+  --sh-primary: #0f172a;
+  --sh-primary-fg: #f8fafc;
+  --sh-accent: #f1f5f9;
+  --sh-radius: 12px;
+  --sh-shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.05);
+}
+
+html,body{background:var(--sh-bg);color:var(--sh-fg)}
+body{
+  background:
+    radial-gradient(900px 420px at 50% -180px,rgba(226,232,240,.8),transparent 70%),
+    var(--sh-bg);
+}
+.topbar{
+  height:64px;
+  padding:0 max(18px,calc((100vw - 1180px)/2));
+  background:rgba(248,250,252,.86);
+  border-bottom:1px solid var(--sh-border);
+  box-shadow:none;
+  backdrop-filter:blur(14px);
+}
+.brand{font-size:15px;letter-spacing:-.025em;color:var(--sh-fg)}
+.top-actions{gap:6px}
+.top-actions a,.top-actions button{
+  border-color:var(--sh-border);
+  background:var(--sh-card);
+  border-radius:9px;
+  padding:7px 11px;
+  color:#475569;
+  font-size:12px;
+  box-shadow:0 1px 1px rgba(15,23,42,.02);
+}
+.top-actions a:hover,.top-actions button:hover{border-color:#cbd5e1;background:#fff;transform:none}
+
+.shell{max-width:1180px;padding:38px 20px 64px}
+.intro{display:block;margin-bottom:22px}
+.intro h1{
+  font-family:Inter,ui-sans-serif,system-ui,sans-serif;
+  font-size:clamp(32px,4.4vw,52px);
+  line-height:1.08;
+  font-weight:700;
+  letter-spacing:-.045em;
+  max-width:850px;
+  margin:9px 0 12px;
+}
+.intro p{max-width:720px;font-size:13px;line-height:1.7;color:#64748b}
+.kicker{color:#64748b;font-size:10px;letter-spacing:.12em}
+
+.panel,.localization-workbench{
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--sh-border);
+  border-radius:var(--sh-radius);
+  box-shadow:var(--sh-shadow);
+}
+.main-panel{padding:20px}
+.main-panel textarea,
+textarea,select,input[type="text"]{
+  border-color:var(--sh-input);
+  border-radius:9px;
+  background:#fff;
+}
+.main-panel textarea:focus,
+textarea:focus,select:focus,input[type="text"]:focus{
+  border-color:#94a3b8;
+  box-shadow:0 0 0 3px rgba(148,163,184,.18);
+}
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+.primary{
+  background:var(--sh-primary);
+  color:var(--sh-primary-fg);
+  box-shadow:0 1px 2px rgba(15,23,42,.12);
+  border-radius:9px!important;
+}
+.primary:hover{
+  background:#1e293b;
+  box-shadow:0 3px 8px rgba(15,23,42,.16);
+  transform:none;
+}
+.secondary{
+  background:#fff;
+  color:#334155;
+  border:1px solid var(--sh-border)!important;
+  border-radius:9px!important;
+}
+.secondary:hover{background:var(--sh-accent);transform:none}
+
+.localization-workbench{
+  margin-top:18px;
+  padding:20px;
+}
+.loc-workbench-head{
+  padding-bottom:16px!important;
+  border-bottom:1px solid var(--sh-border);
+}
+.loc-workbench-head h2{
+  font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;
+  font-weight:650!important;
+  letter-spacing:-.025em!important;
+  font-size:20px!important;
+}
+.loc-workbench-head p{color:#64748b!important;font-size:12px!important}
+.loc-options-row{gap:12px!important;margin:16px 0!important}
+.loc-option,.smart-skill{
+  border:1px solid var(--sh-border)!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.loc-option select{border-radius:8px!important}
+.smart-skill.compact{padding:11px 13px!important}
+.smart-skill strong{color:#0f172a!important}
+.loc-input-grid{gap:12px!important}
+.loc-source-card,.loc-target-card{
+  border:1px solid var(--sh-border)!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.loc-card-head{
+  border-bottom:1px solid #f1f5f9!important;
+  padding:11px 13px!important;
+}
+.loc-step{
+  width:24px!important;height:24px!important;
+  display:inline-grid!important;place-items:center!important;
+  border-radius:7px!important;
+  background:#f1f5f9!important;color:#475569!important;
+  font-size:9px!important;font-weight:800!important;
+}
+.paste-zone{
+  margin:12px!important;
+  border:1px dashed #cbd5e1!important;
+  border-radius:9px!important;
+  background:#fafafa!important;
+}
+.paste-zone:hover{background:#f8fafc!important;border-color:#94a3b8!important}
+.loc-source-card>textarea{
+  margin:0 12px!important;
+  width:calc(100% - 24px)!important;
+  border-radius:8px!important;
+}
+.source-actions,.target-attachment-row{
+  padding:10px 12px!important;
+  border-top:1px solid #f1f5f9!important;
+}
+.attach-btn{
+  border:1px solid var(--sh-border)!important;
+  background:#fff!important;
+  color:#475569!important;
+  border-radius:8px!important;
+}
+.loc-result{
+  margin:12px!important;
+  border:1px solid #e2e8f0!important;
+  border-radius:9px!important;
+  overflow:hidden;
+}
+.loc-result-head{background:#f8fafc!important;border-bottom:1px solid #e2e8f0!important}
+.target-preview{
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#fff!important;
+}
+.target-preview-head{
+  background:#f8fafc!important;
+  border-bottom:1px solid #e2e8f0!important;
+  color:#475569!important;
+}
+.target-preview pre,#targetPreview{
+  margin:0!important;
+  min-height:150px;
+  background:#fff!important;
+  color:#0f172a!important;
+  border-radius:0!important;
+  font-size:13px!important;
+  line-height:1.9!important;
+}
+.loc-context-row{gap:12px!important}
+.knowledge-compact,.loc-next{
+  border:1px solid var(--sh-border)!important;
+  border-radius:9px!important;
+  background:#fff!important;
+}
+.loc-primary-actions{
+  padding-top:16px!important;
+  border-top:1px solid #f1f5f9!important;
+}
+.loc-message{border-radius:9px!important}
+
+.site-footer{
+  border-top:1px solid var(--sh-border)!important;
+  background:#fff!important;
+  color:#475569!important;
+}
+.footer-description,.footer-address{color:#64748b!important}
+
+@media(max-width:760px){
+  .topbar{height:58px}
+  .shell{padding:28px 14px 48px}
+  .intro h1{font-size:34px}
+  .main-panel,.localization-workbench{padding:14px}
+  .loc-options-row,.loc-input-grid,.loc-context-row{grid-template-columns:1fr!important}
+}
