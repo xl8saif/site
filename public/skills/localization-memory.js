@@ -6,9 +6,28 @@
   const clean=v=>String(v??"").replace(/\r\n?/g,"\n").trim();
   const norm=v=>clean(v).replace(/[ \t]+/g," ").toLowerCase();
   const empty=()=>({version:1,updatedAt:now(),pairs:[],terms:[],styles:[],stats:{lookups:0,hits:0}});
+  function seed(db){
+    if(db.pairs.length||db.terms.length||db.styles.length)return db;
+    const t=[
+      ["Official","آفیشل","en","ur","pubg-urdu-lqa"],["Esports","ای سپورٹس","en","ur","pubg-urdu-lqa"],
+      ["Hidden Leaf Center","پوشیدہ پتّا سینٹر","en","ur","pubg-urdu-lqa"],["Valley of the End","اختتام کی وادی","en","ur","pubg-urdu-lqa"],
+      ["Brainrot","برین راٹ","en","ur","pubg-urdu-lqa"],["Creation Mode","تخلیق موڈ","en","ur","pubg-urdu-lqa"],
+      ["Creator","کریئٹر","en","ur","pubg-urdu-lqa"],["Creation","کریئیشن","en","ur","pubg-urdu-lqa"],
+      ["World of Wonder (WOW)","ورلڈ آف ونڈر (WOW)","en","ur","pubg-urdu-lqa"],["Creation Shop","کریئیشن شاپ","en","ur","pubg-urdu-lqa"]
+    ];
+    db.terms=t.map((x,i)=>({id:"seed-"+i,source:x[0],target:x[1],sourceLanguage:x[2],targetLanguage:x[3],skillId:x[4],createdAt:now(),updatedAt:now()}));
+    db.styles=[
+      "Use concise Standard Pakistani Urdu; keep wording natural, culturally appropriate and production-ready.",
+      "Preserve XML/HTML tags, placeholders, variables, punctuation, structure, spaces and line breaks exactly.",
+      "Do not add words that are not present in the source unless required by grammar.",
+      "Do not add a final period when the source has no final period.",
+      "Prefer consistent approved terminology over literal variation."
+    ].map((text,i)=>({id:"seed-style-"+i,text,scope:"global",enabled:true,createdAt:now(),updatedAt:now()}));
+    return db;
+  }
   function load(){
-    try{const x=JSON.parse(localStorage.getItem(KEY)||"null");return x&&x.version===1?x:empty();}
-    catch(_){return empty();}
+    try{const x=JSON.parse(localStorage.getItem(KEY)||"null");return x&&x.version===1?x:save(seed(x));}
+    catch(_){return save(seed(empty()));}
   }
   function save(db){db.updatedAt=now();localStorage.setItem(KEY,JSON.stringify(db));return db;}
   function lookup(source,src,tgt,skillId){
