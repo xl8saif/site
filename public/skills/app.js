@@ -142,12 +142,19 @@ let currentResult={};
 const task = $("task");
 const detected = $("detected");
 
+function skillLabel(s){return uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:uiLang==="fa"?({
+  "pubg-urdu-lqa":"PUBG اردو LQA",
+  "arabic-urdu-localization":"عربی ↔ اردو بومی‌سازی",
+  "multilingual-translation-mtpe":"ترجمه چندزبانه / MTPE",
+  "legal-translation-qa":"کنترل کیفیت ترجمه حقوقی",
+  "indus-kohistani-research":"پژوهش هندوکش-کوهستانی"
+}[s[0]]||s[1]):s[1]}
 function renderSkills(){ $("skills").innerHTML=""; skills.forEach(s => {
   const el = document.createElement("button");
   el.type = "button";
   el.className = "skill";
   el.dataset.skillId = s[0];
-  el.innerHTML = '<strong>' + (uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:s[1]) + '</strong><span>' + s[0] + '</span>';
+  el.innerHTML = '<strong>' + (skillLabel(s)) + '</strong><span>' + s[0] + '</span>';
   el.addEventListener("click", () => {
     task.value = (uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:s[1]) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
     detect(task.value);
