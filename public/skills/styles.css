@@ -15,3 +15,5 @@ html[lang="ur"] .gulzar-regular{font-family:"Mehr",serif;font-weight:400;font-st
 #localizeNote{margin:10px 0 0;min-height:0}
 html[lang="ur"] #sourceText{font-family:"Mehr",serif;font-size:15px;line-height:2;direction:rtl}
 @media(max-width:620px){.localize-command>*{flex:1 1 100%}.localize-command button{width:100%}}
+
+#localizedOutput-label{display:block;margin-top:12px;font-size:11px;font-weight:750;color:#687284}#localizedOutput{width:100%;margin-top:6px;min-height:150px;resize:vertical;border:1px solid #dbe2ea;border-radius:10px;padding:10px;background:#fff;font:inherit;font-size:12px;line-height:1.8}html[lang="ur"] #localizedOutput{font-family:"Mehr",serif;font-size:15px;line-height:2;direction:rtl}html[lang="ar"] #localizedOutput{font-family:"Cairo",sans-serif;direction:rtl}
