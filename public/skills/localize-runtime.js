@@ -27,7 +27,8 @@ function rt(key){const lang=document.documentElement.lang||"en";return RT_I18N[l
 
 function detectSourceLanguage(text){
   const t=String(text||"");
-  if(/[ٹڈڑںےہھچژگپکڑ]/u.test(t)) return "ur";
+  if(/[ٹڈڑںےھ]/u.test(t)) return "ur";
+  if(/[پچژگ]/u.test(t)) return "fa";
   if(/[ؠ-ۿ]/u.test(t)) return "ar";
   return "en";
 }
