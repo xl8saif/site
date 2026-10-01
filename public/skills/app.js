@@ -1,4 +1,4 @@
-// Browser OCR helper for scanned PDFs. OCR output is kept in memory and sent as text.
+// User-focused localization console.\n// Browser OCR helper for scanned PDFs. OCR output is kept in memory and sent as text.
 let ocrSourceFile = null;
 let ocrTargetFile = null;
 
