@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Saif AI Skills Console — translation, localization, QA and research workflows">
-<meta name="build" content="1.24.0-pages">
+<meta name="build" content="1.25.0-pages">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/mehr/mehr-font.css">
 <title>Saif AI Skills Console</title>
-<link rel="stylesheet" href="./styles.css?v=1.24.0">
+<link rel="stylesheet" href="./styles.css?v=1.25.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script></head>
 <body>
 <header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a href="../">Portfolio</a></div></header>
@@ -33,7 +33,7 @@
 <button class="primary" id="localize" type="button">Translate / Localize with detected Skill</button>
 <button class="secondary" id="exportLocalized" type="button" disabled>Download localized file</button>
 </div>
-<div id="localizeNote" class="loc-message" aria-live="polite"></div>
+<div id="localizeNote" class="loc-message" aria-live="polite"></div><label for="localizedOutput" id="localizedOutput-label">Localized output / ترجمہ شدہ متن</label><textarea id="localizedOutput" rows="8" placeholder="Generated localized text will appear here…" hidden></textarea>
 </div>
 <div class="controls"><button class="primary" id="run">Run Skill + QA</button><button class="secondary" id="clear">Clear</button></div>
 <div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ المسار الموحد…</p></div>
@@ -44,4 +44,4 @@
 <section class="panel cli"><h2 id="cli-title">إذا كنت تعمل محلياً</h2><p id="cli-text">يمكن تشغيل نفس المسار من الطرفية:</p><code>python ai-skills/scripts/review_gate.py --task "YOUR TASK" --source source.txt --target target.txt --json</code><p>لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.</p>
 </section>
 </main>
-<section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">PDF ممسوح</span></div><p id="ocr-text">استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><script src="./runtime-fixed.js?v=1.24.0"></script><script src="./app.js?v=1.24.0"></script></body></html>
+<section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">PDF ممسوح</span></div><p id="ocr-text">استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><script src="./runtime-fixed.js?v=1.25.0"></script><script src="./app.js?v=1.25.0"></script><script type="module" src="./localize-runtime.js?v=1.25.0"></script></body></html>
