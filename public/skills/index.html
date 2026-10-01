@@ -14,7 +14,7 @@
 <body>
 <header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a id="portfolioLink" href="../">Portfolio</a></div></header>
 <main class="shell">
-<section class="intro"><div><span class="kicker" data-i18n="consoleKicker">AI SKILLS CONSOLE · v1.20</span><h1 id="intro-title">نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة</h1><p id="intro-text">اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.</p></div><div class="status-card"><span class="dot"></span><div><strong id="framework-label">Framework</strong><small id="framework-text">Deterministic orchestration</small></div></div></section>
+<section class="intro"><div><span class="kicker" data-i18n="consoleKicker">AI SKILLS CONSOLE · v1.20</span><h1 id="intro-title">نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة</h1><p id="intro-text">اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.</p></div></section>
 <section class="workspace">
 <div class="panel main-panel">
 <div class="task-skill-header"><div><label for="task" id="task-label">المهمة</label><textarea id="task" rows="4" placeholder="مثال: PUBG MOBILE Urdu LQA for a WOW event"></textarea></div><div class="task-detection"><span id="detected-label">Skill / Agent</span><strong id="detected">سيتم الاكتشاف تلقائياً</strong></div></div>
@@ -55,7 +55,7 @@
       <div class="target-attachment-row"><span id="targetName">No target attachment</span><label class="attach-btn" for="target"><input id="target" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-target-label">Attach existing target</span></label></div>
       <div class="loc-result" id="locResult">
         <div class="loc-result-head"><label for="localizedOutput" id="localizedOutput-label">Result</label><span id="resultMeta">Ready for review</span></div>
-        <textarea id="localizedOutput" rows="10" placeholder="Your localized result will appear here…" hidden></textarea>
+        <textarea id="localizedOutput" rows="10" placeholder="Your localized result will appear here…" hidden></textarea>\n        <div class="target-preview" id="targetPreviewBox" hidden><div class="target-preview-head"><strong id="targetPreviewLabel">Target Preview</strong><span id="targetPreviewMeta">Live preview</span></div><pre id="targetPreview" aria-label="Target result preview"></pre></div>
       </div>
     </div>
   </div>
