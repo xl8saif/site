@@ -90,3 +90,67 @@ html[lang="ar"] .task-detection span,html[lang="ur"] .task-detection span{font-s
 html[lang="fa"] .task-skill-header label,html[lang="fa"] .task-detection,html[lang="fa"] .task-skills-head h2,html[lang="fa"] .loc-workbench-head h2,html[lang="fa"] .loc-workbench-head p,html[lang="fa"] .paste-zone,html[lang="fa"] .smart-skill,html[lang="fa"] .knowledge-compact,html[lang="fa"] .loc-next,html[lang="fa"] .loc-result,html[lang="fa"] #localizedOutput{font-family:Tahoma,"Segoe UI",Arial,sans-serif}
 html[lang="fa"] #localizedOutput{font-size:16px;line-height:2;direction:rtl;text-align:right}
 html[lang="fa"] .task-skills-head h2{font-size:23px;line-height:1.8}
+
+/* 2026 visual refresh — compact, calm, workspace-first */
+:root{--ink:#182235;--muted:#718096;--line:#e5eaf1;--blue:#315fce;--blue2:#526fc7;--card:#ffffff;--soft:#f6f8fb}
+body{background:#f5f7fa;color:var(--ink)}
+.topbar{height:64px;background:rgba(255,255,255,.92);border-bottom:1px solid #e9edf2;box-shadow:0 2px 14px rgba(28,39,58,.04);backdrop-filter:blur(16px)}
+.brand{font-size:16px;letter-spacing:-.025em}
+.top-actions a,.top-actions button{border:1px solid #e1e6ed;background:#fff;border-radius:10px;padding:7px 11px;color:#4c586b;box-shadow:none}
+.shell{max-width:1180px;padding:34px 20px 64px}
+.intro{grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;margin-bottom:18px}
+.intro .kicker{font-size:9px;color:#718096;letter-spacing:.12em}
+.intro h1{font-family:inherit;font-weight:720;font-size:clamp(28px,3.2vw,40px);line-height:1.18;letter-spacing:-.035em;max-width:760px;margin:8px 0 9px}
+.intro p{max-width:760px;font-size:12px;line-height:1.7;color:#778397;margin:0}
+.status-card{min-width:180px;padding:11px 13px;border:1px solid #e5eaf0;border-radius:13px;background:#fff;box-shadow:0 8px 22px rgba(35,48,68,.05)}
+.status-card small{font-size:10px}.dot{width:8px;height:8px}
+.panel{background:#fff;border:1px solid #e5eaf0;border-radius:17px;box-shadow:0 8px 28px rgba(35,48,68,.055);padding:20px}
+.main-panel{padding:20px}
+.task-skill-header{grid-template-columns:minmax(0,1fr) 205px;gap:10px}
+.main-panel textarea{min-height:108px;border-color:#e0e6ee;border-radius:12px;background:#fafbfd;padding:13px 14px;font-size:13px}
+.task-detection{min-height:108px;padding:12px;border:1px solid #e1e7ef;border-radius:12px;background:#f8fafc}
+.task-detection strong{font-size:11px}
+.task-skills{margin-top:10px}
+.task-skills-head{margin-bottom:6px}
+.task-skills-head h2{font-family:inherit;font-size:15px;font-weight:750;margin:0}
+.task-skills-head>span{font-size:9px;color:#9aa4b2}
+.task-skills #skills{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.task-skills .skill{padding:9px 9px;border:1px solid #e6ebf1;border-radius:11px;background:#fbfcfd;min-height:54px;transition:.16s ease}
+.task-skills .skill:hover{background:#f5f8ff;border-color:#cddcff;transform:translateY(-1px)}
+.task-skills .skill strong{font-size:10px;line-height:1.35}
+.task-skills .skill span{font-size:8px;color:#9aa4b2}
+.localization-workbench{margin-top:18px!important;border:1px solid #e4e9f0!important;border-radius:15px!important;background:#fafbfd!important;padding:17px!important}
+.loc-workbench-head{gap:14px!important;margin-bottom:13px!important}
+.loc-workbench-head .kicker{font-size:9px}
+.loc-workbench-head h2{font-family:inherit!important;font-size:18px!important;font-weight:720!important;line-height:1.35!important;letter-spacing:-.02em!important;margin:5px 0 5px!important}
+.loc-workbench-head p{font-size:11px!important;line-height:1.65!important;color:#7b8798!important}
+.loc-readiness{padding:7px 10px!important;border-radius:10px!important;font-size:9px!important}
+.loc-options-row{gap:9px!important;margin-bottom:10px!important}
+.loc-option,.smart-skill{border:1px solid #e3e8ef!important;border-radius:11px!important;background:#fff!important;padding:9px 10px!important}
+.loc-option label,.smart-skill span{font-size:9px!important;color:#7b8798!important}
+.loc-option select{font-size:12px!important;margin-top:4px!important}
+.loc-input-grid{gap:10px!important}
+.loc-source-card,.loc-target-card{border:1px solid #e3e8ef!important;border-radius:13px!important;background:#fff!important;padding:12px!important}
+.loc-card-head{margin-bottom:9px!important}.loc-card-head strong{font-size:12px!important}.loc-card-head>span{font-size:9px!important;color:#9aa4b2}
+.paste-zone{border-radius:10px!important;border-color:#dfe5ed!important;padding:10px!important;background:#fafbfd!important}
+.paste-zone b{font-size:10px!important}.paste-zone small{font-size:9px!important}
+.loc-source-card textarea,.loc-target-card textarea{border:1px solid #e1e6ed!important;border-radius:10px!important;background:#fbfcfe!important;font-size:12px!important;min-height:108px!important}
+.attach-btn{border:1px solid #dfe5ed!important;border-radius:9px!important;background:#fff!important;font-size:9px!important;padding:6px 9px!important}
+.loc-context-row{gap:9px!important;margin-top:10px!important}.knowledge-compact,.loc-next{border:1px solid #e3e8ef!important;border-radius:11px!important;background:#fff!important;padding:9px 10px!important}.knowledge-compact b,.loc-next b{font-size:10px!important}.knowledge-compact small,.loc-next small{font-size:9px!important;color:#8b96a6!important}
+.localize-command{margin-top:11px!important}.localize-command .primary{border-radius:10px!important;padding:9px 14px!important;box-shadow:0 5px 14px rgba(49,95,206,.16)!important}.localize-command .secondary{border-radius:10px!important;padding:9px 12px!important}
+.controls{margin-top:11px!important}.controls button{border-radius:10px!important;padding:9px 14px!important}
+.pipeline,.result{margin-top:14px!important}.pipeline h2,.result h2{font-family:inherit!important;font-weight:720!important}.pipeline h2{font-size:18px!important}.result h2{font-size:20px!important}
+.pipeline-grid{gap:7px}.pipeline-grid>div{padding:11px;border-radius:11px}.pipeline-grid strong{font-size:11px}.pipeline-grid span{font-size:9px}
+#ocr-panel{margin-top:14px!important;padding:16px!important;border-radius:15px!important}
+#ocr-panel .controls button{font-size:10px!important}
+/* Keep headings visually balanced in every script */
+html[lang="ar"] .intro h1{font-size:clamp(26px,3vw,38px)!important;line-height:1.45!important;letter-spacing:0!important;margin:7px 0 9px!important}
+html[lang="ur"] .intro h1{font-size:clamp(27px,3.2vw,40px)!important;line-height:1.65!important;letter-spacing:0!important;margin:6px 0 8px!important}
+html[lang="fa"] .intro h1{font-size:clamp(26px,3vw,38px)!important;line-height:1.55!important;letter-spacing:0!important;margin:7px 0 9px!important}
+html[lang="en"] .intro h1{font-size:clamp(28px,3.2vw,40px)!important;line-height:1.18!important}
+html[lang="ar"] .intro p,html[lang="ur"] .intro p,html[lang="fa"] .intro p{font-size:12px!important;line-height:1.9!important}
+html[lang="fa"] body,html[lang="fa"] button,html[lang="fa"] input,html[lang="fa"] textarea{font-family:Tahoma,"Segoe UI",Arial,sans-serif}
+html[lang="fa"] .intro h1,html[lang="fa"] .pipeline h2,html[lang="fa"] .result h2{font-family:Tahoma,"Segoe UI",Arial,sans-serif;font-weight:700}
+@media(max-width:900px){.intro{grid-template-columns:1fr}.status-card{justify-self:start}.task-skill-header{grid-template-columns:1fr}.task-skills #skills{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.shell{padding:26px 13px 50px}.intro h1{font-size:30px!important}.intro p{font-size:11px!important}.panel{padding:15px}.task-skills #skills{grid-template-columns:repeat(2,minmax(0,1fr))}.localization-workbench{padding:13px!important}}
+@media(max-width:420px){.task-skills #skills{grid-template-columns:1fr}}
