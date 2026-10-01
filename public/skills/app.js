@@ -166,26 +166,78 @@ function detect(v) {
   return best;
 }
 
-task.addEventListener("input", () => detect(task.value));
+function getLocalizationSource() {
+  const pasted = ($("sourceText")?.value || "").trim();
+  const file = ocrSourceFile || $("source")?.files?.[0] || null;
+  return { pasted, file, hasSource: Boolean(pasted || file), text: pasted };
+}
 
-$("source").addEventListener("change", e => {
+function localizationContext() {
+  const { pasted, file, hasSource } = getLocalizationSource();
+  const language = $("targetLanguage")?.value || "ur";
+  const name = file?.name || "";
+  const taskHints = [pasted, name, language].filter(Boolean).join(" ").toLowerCase();
+  const explicitTask = task.value.trim();
+  const combined = [explicitTask, taskHints].filter(Boolean).join(" ");
+  const best = detect(combined);
+  return { language, file, pasted, hasSource, best, name };
+}
+
+function updateLocalizationWorkbench() {
+  const ctx = localizationContext();
+  const skill = ctx.best?.s;
+  const hasTarget = Boolean(ctx.language);
+  const ready = ctx.hasSource && hasTarget;
+  const label = ctx.language === "ur" ? "Urdu" : ctx.language === "ar" ? "Arabic" : ctx.language === "fa" ? "Persian" : "English";
+  const skillName = skill ? (uiLang==="ar"?skill[2]:uiLang==="ur"?skill[3]:skill[1]) : tr("auto");
+  $("smartSkillName").textContent = skillName;
+  $("smartSkillId").textContent = skill ? skill[0] + " · " + label : "Waiting for source + target";
+  $("detected").textContent = skill ? skillName + " · " + skill[0] : tr("auto");
+  $("localize").disabled = !ready;
+  const count = ctx.pasted.length;
+  $("sourceCount").textContent = count + (uiLang==="ur" ? " حروف" : uiLang==="ar" ? " حرفاً" : " chars");
+  $("locReadiness").classList.toggle("ready", ready);
+  $("locReadinessText").textContent = ready
+    ? (uiLang==="ur" ? "تیار — " + label + " کے لیے Skill منتخب" : uiLang==="ar" ? "جاهز — تم اختيار المهارة لـ " + label : "Ready — Skill selected for " + label)
+    : (ctx.hasSource ? (uiLang==="ur" ? "ہدف زبان منتخب کریں" : "Choose a target language") : (uiLang==="ur" ? "ماخذ متن پیسٹ یا منسلک کریں" : "Paste or attach source"));
+  $("locNextText").textContent = ready
+    ? (uiLang==="ur" ? "چلائیں؛ نتیجہ نیچے جائزے کے لیے تیار ہوگا۔" : "Run it; the result will appear below for review.")
+    : (uiLang==="ur" ? "ماخذ متن اور ہدف زبان دونوں درکار ہیں۔" : "Source text and target language are required.");
+  if (ready) {
+    const autoTask = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
+    task.value = autoTask;
+  }
+}
+
+task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
+$("sourceText").addEventListener("input", updateLocalizationWorkbench);
+$("targetLanguage").addEventListener("change", updateLocalizationWorkbench);
+$("sourceText").addEventListener("paste", () => setTimeout(updateLocalizationWorkbench, 0));
+
+$("source").addEventListener("change", async e => {
   ocrSourceFile = null;
-  $("sourceName").textContent = e.target.files[0]?.name || tr("source");
+  const file = e.target.files[0];
+  $("sourceName").textContent = file?.name || "No attachment";
+  if (file?.name?.toLowerCase().endsWith(".pdf")) {
+    try { ocrSourceFile = await extractScannedPdf(file, "Source"); } catch (err) { $("localizeNote").textContent = err.message || err; }
+  }
+  updateLocalizationWorkbench();
 });
 $("target").addEventListener("change", e => {
   ocrTargetFile = null;
-  $("targetName").textContent = e.target.files[0]?.name || tr("target");
+  $("targetName").textContent = e.target.files[0]?.name || "No target attachment";
+  updateLocalizationWorkbench();
 });
 $("knowledge").addEventListener("change", e => {
-  $("knowledgeName").textContent = e.target.files[0]?.name || tr("knowledge");
+  $("knowledgeName").textContent = e.target.files[0]?.name || "Optional terminology, reference or context file";
 });
 
-
 $("localize").onclick = async () => {
-  const detectedSkill = detect(task.value)?.s?.[0] || "multilingual-translation-mtpe";
+  const ctx = localizationContext();
+  const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";
   const language = $("targetLanguage")?.value || "ur";
   const label = language === "ur" ? "Urdu" : language === "ar" ? "Arabic" : language === "fa" ? "Persian" : "English";
-  const source = ocrSourceFile || $("source").files[0] || (($("sourceText")?.value || "").trim() ? new File([$("sourceText").value], "pasted-source.txt", {type:"text/plain"}) : null);
+  const source = ctx.file || (ctx.pasted ? new File([ctx.pasted], "pasted-source.txt", {type:"text/plain"}) : null);
   if (!source) {
     $("localizeNote").className = "loc-message warn";
     $("localizeNote").textContent = tr("localizeNeedSource");
@@ -223,7 +275,7 @@ $("localize").onclick = async () => {
     }
     $("localizeNote").className = "loc-message ok";
     $("localizeNote").textContent = tr("localizeReady") + " " + result.name;
-    task.value = "Translate / localize under skill " + detectedSkill + " into " + label + " with full terminology, placeholder, tag, punctuation and line-break QA";
+    task.value = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
     detect(task.value);
     task.focus();
   } catch (e) {
