@@ -30,6 +30,13 @@
     <div class="loc-readiness" id="locReadiness" aria-live="polite"><span class="readiness-dot"></span><span id="locReadinessText">Waiting for source text</span></div>
   </div>
 
+  <div class="loc-options-row">
+    <div class="loc-option"><label for="targetLanguage" id="targetLanguage-label">Target language</label><select id="targetLanguage">
+      <option value="ur">Urdu / اردو</option><option value="ar">Arabic / العربية</option><option value="en">English</option><option value="fa">Persian / فارسی</option>
+    </select></div>
+    <div class="smart-skill compact" id="smartSkill"><span id="smartSkillLabel">Selected Skill</span><strong id="smartSkillName">Auto-detect from input</strong><small id="smartSkillId">Waiting for source + target</small></div>
+  </div>
+
   <div class="loc-input-grid">
     <div class="loc-source-card">
       <div class="loc-card-head"><div><span class="loc-step">01</span><strong id="loc-source-title">Source</strong></div><span id="sourceCount">0 chars</span></div>
@@ -42,13 +49,12 @@
     </div>
 
     <div class="loc-target-card">
-      <div class="loc-card-head"><div><span class="loc-step">02</span><strong id="loc-target-title">Target</strong></div><span id="targetContext">Auto skill routing</span></div>
-      <label for="targetLanguage" id="targetLanguage-label">Target language</label>
-      <select id="targetLanguage">
-        <option value="ur">Urdu / اردو</option><option value="ar">Arabic / العربية</option><option value="en">English</option><option value="fa">Persian / فارسی</option>
-      </select>
-      <div class="smart-skill" id="smartSkill"><span id="smartSkillLabel">Selected Skill</span><strong id="smartSkillName">Auto-detect from input</strong><small id="smartSkillId">Waiting for source + target</small></div>
-      <div class="source-actions target-attachment"><span id="targetName">No target attachment</span><label class="attach-btn" for="target"><input id="target" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-target-label">Attach existing target</span></label></div>
+      <div class="loc-card-head"><div><span class="loc-step">02</span><strong id="loc-target-title">Target / Result</strong></div><span id="targetContext">Output workspace</span></div>
+      <div class="target-attachment-row"><span id="targetName">No target attachment</span><label class="attach-btn" for="target"><input id="target" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-target-label">Attach existing target</span></label></div>
+      <div class="loc-result">
+        <div class="loc-result-head"><label for="localizedOutput" id="localizedOutput-label">Result</label><span id="resultMeta">Ready for review</span></div>
+        <textarea id="localizedOutput" rows="10" placeholder="Your localized result will appear here…" hidden></textarea>
+      </div>
     </div>
   </div>
 
