@@ -142,8 +142,8 @@
     db.stats.qaRuns=(db.stats.qaRuns||0)+1;db.stats.qaFindings=(db.stats.qaFindings||0)+items.length;save(db);return entry;
   }
   function qaIntelligence(skillId="",src="",tgt=""){
-    const db=load(),rows=db.corrections.filter(c=>(!skillId||!c.skillId)&&(!src||c.sourceLanguage===src)&&(!tgt||c.targetLanguage===tgt));
-    const qa=db.qaHistory.filter(q=>(!skillId||!q.skillId)&&(!src||q.sourceLanguage===src)&&(!tgt||q.targetLanguage===tgt));
+    const db=load(),rows=db.corrections.filter(c=>(!skillId||c.skillId===skillId||!c.skillId)&&(!src||c.sourceLanguage===src)&&(!tgt||c.targetLanguage===tgt));
+    const qa=db.qaHistory.filter(q=>(!skillId||q.skillId===skillId||!q.skillId)&&(!src||q.sourceLanguage===src)&&(!tgt||q.targetLanguage===tgt));
     const correctionPatterns={};
     for(const c of rows){
       if(c.correctionType==="human-correction"){
