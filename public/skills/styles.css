@@ -31,3 +31,9 @@ html[lang="ur"] #sourceText{font-family:"Mehr",serif;font-size:15px;line-height:
 .loc-primary-actions{align-items:center;margin-top:14px}.loc-primary-actions #localize{min-width:220px}.loc-result{margin-top:14px}.loc-result-head{display:flex;justify-content:space-between;align-items:center}.loc-result-head label{font-size:11px;font-weight:750}.loc-result-head span{font-size:9px;color:#8791a0}#localizedOutput{min-height:190px;margin-top:7px}
 html[lang="ur"] .loc-workbench-head h2{line-height:1.8}html[lang="ur"] .loc-workbench-head p,html[lang="ur"] .paste-zone small,html[lang="ur"] .smart-skill small,html[lang="ur"] .knowledge-compact small,html[lang="ur"] .loc-next small{line-height:1.8}html[lang="ur"] #sourceText,html[lang="ur"] #localizedOutput{font-family:"Mehr",serif;font-size:16px;line-height:2;direction:rtl}
 @media(max-width:760px){.loc-workbench-head{display:block}.loc-readiness{display:inline-flex;margin-top:12px}.loc-input-grid,.loc-context-row{grid-template-columns:1fr}.localization-workbench{padding:14px}.loc-primary-actions #localize{min-width:0}}
+
+/* Result font follows the actual target language, independently of UI language. */
+#locResult.result-lang-ur #localizedOutput,
+#locResult.result-lang-fa #localizedOutput{font-family:"Mehr","Noto Nastaliq Urdu","Noto Nastaliq",serif;font-size:18px;line-height:2.2;direction:rtl;text-align:right}
+#locResult.result-lang-ar #localizedOutput{font-family:"Traditional Arabic","Noto Naskh Arabic","Noto Sans Arabic","Amiri",serif;font-size:18px;line-height:1.9;direction:rtl;text-align:right}
+#locResult.result-lang-en #localizedOutput{font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:15px;line-height:1.7;direction:ltr;text-align:left}
