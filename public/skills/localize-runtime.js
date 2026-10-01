@@ -1,19 +1,24 @@
-/* Saif AI Skills — browser-local translation engine
- * GitHub Pages compatible: no API key, no server.
- * Uses Transformers.js + NLLB-200 in-browser with WebGPU/WASM fallback.
- */
+/* Saif AI Skills — fast browser localization runtime (GitHub Pages) */
 import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0";
 
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
 const FALLBACK_MODEL = "Xenova/nllb-200-distilled-600M";
-const PAIR_MODELS = {"en>ur":"R4kSo1997/opus-mt-en-ur-onnx-int8","ur>en":"R4kSo1997/opus-mt-ur-en-onnx-int8","ar>en":"Xenova/opus-mt-ar-en","en>ar":"Xenova/opus-mt-en-ar"};
+const PAIR_MODELS = {
+  "en>ur":"R4kSo1997/opus-mt-en-ur-onnx-int8",
+  "ur>en":"R4kSo1997/opus-mt-ur-en-onnx-int8",
+  "ar>en":"Xenova/opus-mt-ar-en",
+  "en>ar":"Xenova/opus-mt-en-ar"
+};
 const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };
+const REMOTE_API = "https://api.mymemory.translated.net/get";
+const REMOTE_TIMEOUT = 10000;
+const MAX_REMOTE_CHARS = 450;
+
 function detectSourceLanguage(text){
   const t=String(text||"");
   if(/[ٹڈڑںےہھچژگپکڑ]/u.test(t)) return "ur";
-  if(/[پچژگ]/u.test(t) && !/[ٹڈڑںے]/u.test(t)) return "fa";
   if(/[ؠ-ۿ]/u.test(t)) return "ar";
   return "en";
 }
@@ -27,13 +32,29 @@ function enforceTerminology(text,skillId,targetLanguage){
   for(const [from,to] of Object.entries(TERMINOLOGY[skillId]||{})) out=out.split(from).join(to);
   return out;
 }
+function cleanText(text){ return String(text??"").replace(/\r\n?/g,"\n"); }
+
+function protectedParts(text){
+  const tokens=[];
+  const marked=String(text).replace(/<[^>]+>|\{[^{}]+\}|\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g,m=>{
+    const key="__SAIF_TOKEN_"+tokens.length+"__";
+    tokens.push([key,m]);
+    return " "+key+" ";
+  });
+  return {marked,tokens};
+}
+function restore(text,tokens){
+  let out=String(text);
+  for(const [key,value] of tokens) out=out.split(key).join(value);
+  return out.replace(/[ \t]+\n/g,"\n").replace(/\n[ \t]+/g,"\n");
+}
 function tokenCounts(text){
   const tags=String(text).match(/<[^>]+>/g)||[];
   const ph=String(text).match(/\{[^{}]+\}|\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g)||[];
   const count=a=>a.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{});
   return {tags:count(tags),placeholders:count(ph),linebreaks:(String(text).match(/\n/g)||[]).length};
 }
-function sameCounts(a,b){const ka=Object.keys(a),kb=Object.keys(b);return ka.length===kb.length&&ka.every(k=>a[k]===b[k]);}
+function sameCounts(a,b){const keys=new Set([...Object.keys(a),...Object.keys(b)]);return [...keys].every(k=>a[k]===b[k]);}
 function qaText(source,target){
   const a=tokenCounts(source),b=tokenCounts(target),findings=[];
   if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:"XML/HTML tags changed during localization."});
@@ -41,8 +62,36 @@ function qaText(source,target){
   if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."});
   return findings;
 }
-const translators = new Map();
-const loadings = new Map();
+
+async function remoteTranslateChunk(text,src,tgt,onProgress){
+  if(src===tgt) return text;
+  const {marked,tokens}=protectedParts(text);
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),REMOTE_TIMEOUT);
+  try{
+    const url=new URL(REMOTE_API);
+    url.searchParams.set("q",marked);
+    url.searchParams.set("langpair",src+"|"+tgt);
+    url.searchParams.set("mt","1");
+    onProgress?.("Fast translation engine…");
+    const res=await fetch(url,{signal:controller.signal,headers:{"Accept":"application/json"}});
+    if(!res.ok) throw new Error("Fast translation service HTTP "+res.status);
+    const data=await res.json();
+    const value=data?.responseData?.translatedText;
+    if(!value || /NO QUERY|MYMEMORY WARNING/i.test(String(value))) throw new Error("Fast translation service returned no translation.");
+    return restore(value,tokens);
+  }finally{clearTimeout(timer);}
+}
+async function remoteTranslate(text,src,tgt,onProgress){
+  const parts=[];
+  for(let i=0;i<text.length;i+=MAX_REMOTE_CHARS){
+    parts.push(await remoteTranslateChunk(text.slice(i,i+MAX_REMOTE_CHARS),src,tgt,onProgress));
+    onProgress?.("Fast translation "+Math.min(i+MAX_REMOTE_CHARS,text.length)+"/"+text.length);
+  }
+  return parts.join("");
+}
+
+const translators=new Map(),loadings=new Map();
 async function getTranslator(src,tgt,onProgress){
   const key=src+">"+tgt;
   if(translators.has(key)) return translators.get(key);
@@ -51,23 +100,23 @@ async function getTranslator(src,tgt,onProgress){
   const loading=(async()=>{
     const device=navigator.gpu?"webgpu":"wasm";
     const dtype=device==="webgpu"?"q4f16":"q8";
-    onProgress?.("Loading "+(PAIR_MODELS[key]?"specialized":"fallback")+" translation engine ("+device+")…");
+    onProgress?.("Fast engine unavailable; loading private local engine…");
     const options={device,dtype,progress_callback:p=>{
-      if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.("Downloading translation engine… "+Math.round(p.progress)+"%");
-      else if(p?.status==="ready") onProgress?.("Preparing translation engine…");
+      if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.("Downloading local translation engine… "+Math.round(p.progress)+"%");
+      else if(p?.status==="ready") onProgress?.("Preparing local translation engine…");
     }};
     try{
       const pipe=await pipeline("translation",model,options);
       translators.set(key,pipe); return pipe;
     }catch(error){
-      if(device==="webgpu"&&dtype==="q4f16"){
+      if(device==="webgpu"){
         try{
           const pipe=await pipeline("translation",model,{...options,dtype:"q4"});
           translators.set(key,pipe); return pipe;
         }catch(_){}
       }
       if(model!==FALLBACK_MODEL){
-        onProgress?.("Specialized model unavailable; using NLLB fallback…");
+        onProgress?.("Specialized local model unavailable; trying NLLB fallback…");
         const pipe=await pipeline("translation",FALLBACK_MODEL,{device,dtype:device==="webgpu"?"q4f16":"q8",progress_callback:options.progress_callback});
         translators.set(key,pipe); return pipe;
       }
@@ -77,56 +126,55 @@ async function getTranslator(src,tgt,onProgress){
   loadings.set(key,loading);
   try{return await loading;}finally{loadings.delete(key);}
 }
-async function translateChunk(text,src,tgt,pipe,onProgress){
-  const s=String(text);
-  if(!s.trim()||src===tgt) return s;
+async function localTranslateChunk(text,src,tgt,pipe,onProgress){
+  if(!text.trim()||src===tgt) return text;
   const localPipe=pipe||await getTranslator(src,tgt,onProgress);
-  const {marked,tokens}=protectedParts(s);
+  const {marked,tokens}=protectedParts(text);
   const result=await localPipe(marked,{src_lang:LANG[src],tgt_lang:LANG[tgt],max_new_tokens:512});
   const value=Array.isArray(result)?result[0]?.translation_text??"":result?.translation_text??"";
+  if(!value) throw new Error("Local translation engine returned no text.");
   return restore(value,tokens);
 }
+async function translateChunk(text,src,tgt,pipe,onProgress){
+  try{
+    return await remoteTranslate(text,src,tgt,onProgress);
+  }catch(error){
+    onProgress?.("Fast engine unavailable; switching to private local translation…");
+    return localTranslateChunk(text,src,tgt,pipe,onProgress);
+  }
+}
 async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
-  const src=sourceLanguage==="auto" ? detectSourceLanguage(text) : sourceLanguage;
+  const input=cleanText(text);
+  const src=sourceLanguage==="auto"?detectSourceLanguage(input):sourceLanguage;
   if(!LANG[targetLanguage]) throw new Error("Unsupported target language: "+targetLanguage);
   if(!LANG[src]) throw new Error("Unsupported source language: "+sourceLanguage);
-  if(src===targetLanguage) return cleanText(text);
-  const pipe=await getTranslator(src,targetLanguage,onProgress);
-  const input=cleanText(text);
-  const paragraphs=input.split(/(?<=\n)/);
+  if(src===targetLanguage) return enforceTerminology(input,skillId,targetLanguage);
   const out=[];
+  const paragraphs=input.split(/(?<=\n)/);
   for(let i=0;i<paragraphs.length;i++){
     const p=paragraphs[i];
     if(!p.trim()){out.push(p);continue;}
     const nl=p.endsWith("\n")?"\n":"";
-    const body=p.slice(0,nl? -1:undefined);
-    out.push(enforceTerminology(await translateChunk(body,src,targetLanguage,pipe,onProgress),skillId,targetLanguage)+nl);
+    const body=p.slice(0,nl?-1:undefined);
+    out.push(enforceTerminology(await translateChunk(body,src,targetLanguage,null,onProgress),skillId,targetLanguage)+nl);
     onProgress?.("Translating "+(i+1)+"/"+paragraphs.length);
   }
   return out.join("");
 }
-function isTextCell(v){return typeof v==="string" && v.trim() && !v.startsWith("=");}
+function isTextCell(v){return typeof v==="string"&&v.trim()&&!v.startsWith("=");}
 async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
   if(!window.XLSX) throw new Error("Spreadsheet engine is not loaded.");
-  const data=await file.arrayBuffer();
-  const wb=XLSX.read(data,{type:"array",cellFormula:false});
-  const firstSrc=sourceLanguage==="auto"?null:sourceLanguage;
-  const pipe=firstSrc&&firstSrc!==targetLanguage?await getTranslator(firstSrc,targetLanguage,onProgress):null;
+  const wb=XLSX.read(await file.arrayBuffer(),{type:"array",cellFormula:false});
   for(const wsName of wb.SheetNames){
-    const ws=wb.Sheets[wsName];
-    const range=XLSX.utils.decode_range(ws["!ref"]||"A1:A1");
+    const ws=wb.Sheets[wsName],range=XLSX.utils.decode_range(ws["!ref"]||"A1:A1");
     let total=0;
-    for(let r=range.s.r;r<=range.e.r;r++) for(let c=range.s.c;c<=range.e.c;c++){
-      const addr=XLSX.utils.encode_cell({r,c}),cell=ws[addr];
-      if(cell && isTextCell(cell.v)) total++;
-    }
+    for(let r=range.s.r;r<=range.e.r;r++)for(let c=range.s.c;c<=range.e.c;c++){const cell=ws[XLSX.utils.encode_cell({r,c})];if(cell&&isTextCell(cell.v))total++;}
     let done=0;
-    for(let r=range.s.r;r<=range.e.r;r++) for(let c=range.s.c;c<=range.e.c;c++){
-      const addr=XLSX.utils.encode_cell({r,c}),cell=ws[addr];
-      if(!cell || !isTextCell(cell.v)) continue;
-      cell.v=enforceTerminology(await translateChunk(cell.v,sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage,targetLanguage,pipe,onProgress),skillId,targetLanguage);
-      cell.t="s"; done++;
-      onProgress?.("Translating "+wsName+" "+done+"/"+total);
+    for(let r=range.s.r;r<=range.e.r;r++)for(let c=range.s.c;c<=range.e.c;c++){
+      const cell=ws[XLSX.utils.encode_cell({r,c})]; if(!cell||!isTextCell(cell.v))continue;
+      const src=sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage;
+      cell.v=enforceTerminology(await translateChunk(String(cell.v),src,targetLanguage,null,onProgress),skillId,targetLanguage); cell.t="s";
+      onProgress?.("Translating "+wsName+" "+(++done)+"/"+total);
     }
   }
   const ext=file.name.toLowerCase().endsWith(".csv")?"csv":"xlsx";
@@ -135,16 +183,18 @@ async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",
   return {blob:new Blob([bytes],{type}),name:file.name.replace(/\.[^.]+$/,"")+"_localized."+ext,preview:null};
 }
 async function localizeFile(file,opts={}){
-  const name=file.name.toLowerCase();
-  const target=opts.targetLanguage||"ur";
+  const name=file.name.toLowerCase(),target=opts.targetLanguage||"ur";
   if(name.endsWith(".txt")||name.endsWith(".json")||name.endsWith(".xml")||name.endsWith(".xliff")){
-    const source=await file.text();
+    const source=cleanText(await file.text());
     const translated=await translateText(source,{...opts,targetLanguage:target});
     const qa=qaText(source,translated);
-    const type=name.endsWith(".json")?"application/json":name.endsWith(".xml")||name.endsWith(".xliff")?"application/xml":"text/plain";
-    return {blob:new Blob([translated],{type}),name:file.name.replace(/\.[^.]+$/,"")+"_localized"+file.name.slice(file.name.lastIndexOf(".")),preview:translated};
+    return {
+      blob:new Blob([translated],{type:name.endsWith(".json")?"application/json":name.endsWith(".xml")||name.endsWith(".xliff")?"application/xml":"text/plain"}),
+      name:file.name.replace(/\.[^.]+$/,"")+"_localized"+file.name.slice(file.name.lastIndexOf(".")),
+      preview:translated,qa
+    };
   }
-  if(name.endsWith(".csv")||name.endsWith(".xlsx")) return localizeWorkbook(file,opts);
-  throw new Error("Supported browser localization formats: TXT, CSV, XLSX, JSON, XML and XLIFF. DOCX/PDF require an extraction step first.");
+  if(name.endsWith(".csv")||name.endsWith(".xlsx"))return localizeWorkbook(file,opts);
+  throw new Error("Supported formats: TXT, CSV, XLSX, JSON, XML and XLIFF. DOCX/PDF require extraction first.");
 }
-window.SaifLocalizer={version:"2.1.0-specialized-pairs",translateText,localizeFile,engine:"specialized-pair-models-with-nllb-fallback"};
+window.SaifLocalizer={version:"2.2.0-fast-first",translateText,localizeFile,engine:"fast-online-with-private-local-fallback"};
