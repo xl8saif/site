@@ -8,7 +8,38 @@ env.allowLocalModels = false;
 env.useBrowserCache = true;
 
 const MODEL = "Xenova/nllb-200-distilled-600M";
-const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };\nfunction detectSourceLanguage(text){ const t=String(text||""); if(/[ٹڈڑںےہھچژگپکڑ]/u.test(t)) return "ur"; if(/[پچژگ]/u.test(t) && !/[ٹڈڑںے]/u.test(t)) return "fa"; if(/[ؠ-ۿ]/u.test(t)) return "ar"; return "en"; }\nconst TERMINOLOGY={\n  "pubg-urdu-lqa":{"Official":"آفیشل","Esports":"ای سپورٹس","Hidden Leaf Center":"پوشیدہ پتّا سینٹر","Valley of the End":"اختتام کی وادی","Brainrot":"برین راٹ","Creation Mode":"تخلیق موڈ","Creator":"کریئٹر","Creation":"کریئیشن","World of Wonder (WOW)":"ورلڈ آف ونڈر (WOW)","Creation Shop":"کریئیشن شاپ"},\n  "arabic-urdu-localization":{"ترجمة":"ترجمہ","مترجم":"مترجم","لغة":"زبان","لغات":"زبانیں","نص":"متن","محتوى":"مواد","مصطلحات":"اصطلاحات","وزارة":"وزارت","حكومة":"حکومت","قرار":"فیصلہ","قانون":"قانون","محكمة":"عدالت","حكم":"فیصلہ","دعوى":"دعویٰ"}\n};\nfunction enforceTerminology(text,skillId,targetLanguage){ if(targetLanguage!=="ur") return text; let out=String(text); for(const [from,to] of Object.entries(TERMINOLOGY[skillId]||{})) out=out.split(from).join(to); return out; }\nfunction tokenCounts(text){ const tags=String(text).match(/<[^>]+>/g)||[],ph=String(text).match(/\\{[^{}]+\\}|\\$\\{[^{}]+\\}|%(?:\\d+\\$)?[sdif]|%%/g)||[]; const count=a=>a.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{}); return {tags:count(tags),placeholders:count(ph),linebreaks:(String(text).match(/\\n/g)||[]).length}; }\nfunction sameCounts(a,b){ const ka=Object.keys(a),kb=Object.keys(b); return ka.length===kb.length&&ka.every(k=>a[k]===b[k]); }\nfunction qaText(source,target){ const a=tokenCounts(source),b=tokenCounts(target),findings=[]; if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:"XML/HTML tags changed during localization."}); if(!sameCounts(a.placeholders,b.placeholders)) findings.push({severity:"critical",code:"PLACEHOLDER_MISMATCH",issue:"Placeholders changed during localization."}); if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."}); return findings; }
+const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };
+function detectSourceLanguage(text){
+  const t=String(text||"");
+  if(/[ٹڈڑںےہھچژگپکڑ]/u.test(t)) return "ur";
+  if(/[پچژگ]/u.test(t) && !/[ٹڈڑںے]/u.test(t)) return "fa";
+  if(/[ؠ-ۿ]/u.test(t)) return "ar";
+  return "en";
+}
+const TERMINOLOGY={
+  "pubg-urdu-lqa":{"Official":"آفیشل","Esports":"ای سپورٹس","Hidden Leaf Center":"پوشیدہ پتّا سینٹر","Valley of the End":"اختتام کی وادی","Brainrot":"برین راٹ","Creation Mode":"تخلیق موڈ","Creator":"کریئٹر","Creation":"کریئیشن","World of Wonder (WOW)":"ورلڈ آف ونڈر (WOW)","Creation Shop":"کریئیشن شاپ"},
+  "arabic-urdu-localization":{"ترجمة":"ترجمہ","مترجم":"مترجم","لغة":"زبان","لغات":"زبانیں","نص":"متن","محتوى":"مواد","مصطلحات":"اصطلاحات","وزارة":"وزارت","حكومة":"حکومت","قرار":"فیصلہ","قانون":"قانون","محكمة":"عدالت","حكم":"فیصلہ","دعوى":"دعویٰ"}
+};
+function enforceTerminology(text,skillId,targetLanguage){
+  if(targetLanguage!=="ur") return text;
+  let out=String(text);
+  for(const [from,to] of Object.entries(TERMINOLOGY[skillId]||{})) out=out.split(from).join(to);
+  return out;
+}
+function tokenCounts(text){
+  const tags=String(text).match(/<[^>]+>/g)||[];
+  const ph=String(text).match(/\{[^{}]+\}|\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g)||[];
+  const count=a=>a.reduce((m,x)=>(m[x]=(m[x]||0)+1,m),{});
+  return {tags:count(tags),placeholders:count(ph),linebreaks:(String(text).match(/\n/g)||[]).length};
+}
+function sameCounts(a,b){const ka=Object.keys(a),kb=Object.keys(b);return ka.length===kb.length&&ka.every(k=>a[k]===b[k]);}
+function qaText(source,target){
+  const a=tokenCounts(source),b=tokenCounts(target),findings=[];
+  if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:"XML/HTML tags changed during localization."});
+  if(!sameCounts(a.placeholders,b.placeholders)) findings.push({severity:"critical",code:"PLACEHOLDER_MISMATCH",issue:"Placeholders changed during localization."});
+  if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."});
+  return findings;
+}
 let translator = null;
 let loading = null;
 
