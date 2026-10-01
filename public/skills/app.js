@@ -237,7 +237,8 @@ $("exportLocalized").onclick = () => {
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 };
-\n$("ocr-source-btn").onclick = () => runOcr("source");
+
+$("ocr-source-btn").onclick = () => runOcr("source");
 $("ocr-target-btn").onclick = () => runOcr("target");
 
 $("clear").onclick = () => {
