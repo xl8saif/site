@@ -15,6 +15,7 @@ const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };
 const REMOTE_API = "https://api.mymemory.translated.net/get";
 const REMOTE_TIMEOUT = 10000;
 const MAX_REMOTE_CHARS = 450;
+const RUNTIME_VERSION = "2.3.0-stable-browser";
 
 function detectSourceLanguage(text){
   const t=String(text||"");
@@ -98,8 +99,12 @@ async function getTranslator(src,tgt,onProgress){
   if(loadings.has(key)) return loadings.get(key);
   const model=PAIR_MODELS[key]||FALLBACK_MODEL;
   const loading=(async()=>{
-    const device=navigator.gpu?"webgpu":"wasm";
-    const dtype=device==="webgpu"?"q4f16":"q8";
+    // R4kSo1997 exports INT8 Marian ONNX files, not q4f16 WebGPU weights.
+    // Force WASM q8 for these specialized models; otherwise Chromium can surface
+    // the misleading generic "Failed to fetch" when a q4 variant is requested.
+    const specialized = model !== FALLBACK_MODEL;
+    const device = specialized ? "wasm" : (navigator.gpu ? "webgpu" : "wasm");
+    const dtype = specialized ? "q8" : (device === "webgpu" ? "q4f16" : "q8");
     onProgress?.("Fast engine unavailable; loading private local engine…");
     const options={device,dtype,progress_callback:p=>{
       if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.("Downloading local translation engine… "+Math.round(p.progress)+"%");
@@ -109,20 +114,19 @@ async function getTranslator(src,tgt,onProgress){
       const pipe=await pipeline("translation",model,options);
       translators.set(key,pipe); return pipe;
     }catch(error){
-      if(device==="webgpu"){
+      if(specialized){
+        onProgress?.("Specialized local engine failed; trying NLLB fallback…");
         try{
-          const pipe=await pipeline("translation",model,{...options,dtype:"q4"});
+          const fallbackDevice=navigator.gpu?"webgpu":"wasm";
+          const fallbackDtype=fallbackDevice==="webgpu"?"q4f16":"q8";
+          const pipe=await pipeline("translation",FALLBACK_MODEL,{device:fallbackDevice,dtype:fallbackDtype,progress_callback:options.progress_callback});
           translators.set(key,pipe); return pipe;
-        }catch(_){}
-      }
-      if(model!==FALLBACK_MODEL){
-        onProgress?.("Specialized local model unavailable; trying NLLB fallback…");
-        const pipe=await pipeline("translation",FALLBACK_MODEL,{device,dtype:device==="webgpu"?"q4f16":"q8",progress_callback:options.progress_callback});
-        translators.set(key,pipe); return pipe;
+        }catch(fallbackError){
+          throw new Error("Local translation engine could not load. Specialized: "+(error?.message||error)+" | NLLB: "+(fallbackError?.message||fallbackError));
+        }
       }
       throw error;
-    }
-  })();
+    }  })();
   loadings.set(key,loading);
   try{return await loading;}finally{loadings.delete(key);}
 }
@@ -197,4 +201,4 @@ async function localizeFile(file,opts={}){
   if(name.endsWith(".csv")||name.endsWith(".xlsx"))return localizeWorkbook(file,opts);
   throw new Error("Supported formats: TXT, CSV, XLSX, JSON, XML and XLIFF. DOCX/PDF require extraction first.");
 }
-window.SaifLocalizer={version:"2.2.0-fast-first",translateText,localizeFile,engine:"fast-online-with-private-local-fallback"};
+window.SaifLocalizer={version:RUNTIME_VERSION,translateText,localizeFile,engine:"fast-online-with-private-local-fallback"};
