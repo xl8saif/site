@@ -223,7 +223,7 @@ function updateLocalizationWorkbench() {
   const ctx = localizationContext();
   if(window.SaifLocalizationMemory?.renderSuggestion && ctx.hasSource){
     const src=ctx.pasted || "";
-    const srcLang=/[ٹڈڑںےہھچژگپکڑ]/u.test(src)?"ur":/[ؠ-ۿ]/u.test(src)?"ar":"en";
+    const srcLang=/[ٹڈڑںےھ]/u.test(src)?"ur":/[پچژگ]/u.test(src)?"fa":/[ؠ-ۿ]/u.test(src)?"ar":"en";
     if(src && ctx.language) window.SaifLocalizationMemory.renderSuggestion(src,srcLang,ctx.language,ctx.best?.s?.[0]||"multilingual-translation-mtpe");
   }
   const c = localizationCopy();
