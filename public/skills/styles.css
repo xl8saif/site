@@ -154,3 +154,22 @@ html[lang="fa"] .intro h1,html[lang="fa"] .pipeline h2,html[lang="fa"] .result h
 @media(max-width:900px){.intro{grid-template-columns:1fr}.status-card{justify-self:start}.task-skill-header{grid-template-columns:1fr}.task-skills #skills{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:620px){.shell{padding:26px 13px 50px}.intro h1{font-size:30px!important}.intro p{font-size:11px!important}.panel{padding:15px}.task-skills #skills{grid-template-columns:repeat(2,minmax(0,1fr))}.localization-workbench{padding:13px!important}}
 @media(max-width:420px){.task-skills #skills{grid-template-columns:1fr}}
+
+/* Site footer */
+.site-footer{max-width:1180px;margin:0 auto 28px;padding:22px 20px 28px;border-top:1px solid #e1e6ed;color:#687386;text-align:center}
+.footer-project-line{margin:0;font-size:12px;color:#536174}
+.footer-credit{margin:5px 0;font-size:13px;color:#182235}
+.footer-address,.footer-contact{margin:4px 0;font-size:11px;line-height:1.7}
+.site-footer a{color:#315fce;text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.visitor-section{margin-top:18px}
+.visitor-title{font:800 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:#7b8798;margin-bottom:9px}
+.visitor-counter{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.visitor-counter img{display:block;height:28px;width:auto;border:0}
+.visitor-countries{font-size:10px}
+.footer-logos{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:20px;flex-wrap:wrap}
+.footer-logos a{display:flex;align-items:center;justify-content:center;width:145px;height:58px;padding:7px 12px;border:1px solid #e3e8ef;border-radius:12px;background:#fff;box-shadow:0 5px 16px rgba(35,48,68,.045)}
+.footer-logos img{max-width:100%;max-height:42px;width:auto;height:auto;object-fit:contain}
+html[lang="ar"] .site-footer,html[lang="ur"] .site-footer,html[lang="fa"] .site-footer{line-height:1.9}
+html[lang="ur"] .footer-credit,html[lang="ur"] .footer-project-line,html[lang="ur"] .footer-address,html[lang="ur"] .footer-contact{font-family:"Mehr",serif}
+@media(max-width:620px){.site-footer{margin-bottom:14px;padding:18px 13px 22px}.footer-address{max-width:360px;margin-left:auto;margin-right:auto}.footer-logos{gap:10px}.footer-logos a{width:135px;height:54px}.visitor-counter{gap:8px}}
