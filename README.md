@@ -45,35 +45,20 @@ The site publishes a root-level sitemap and robots.txt and includes structured P
 
 ## AI Skills Console
 
-The repository includes the production AI Skills framework and browser console:
+The repository includes a static, GitHub Pages-compatible AI Skills Console:
 
 - GitHub Pages UI: https://xl8saif.github.io/site/skills/
-- Local API: `python api/skills/run.py`
+- Local API for development: `python api/skills/run.py`
 - Local console API endpoint: `http://127.0.0.1:8787/api/skills/run`
-- Production-capable Vercel Python Function: `/api/skills/run`
 
-The console runs the deterministic pipeline:
+The browser console uses the deterministic pipeline:
 
 `Router → Planner → Execution Engine → Human Review Gate`
 
-GitHub Pages can host the static console, but it cannot execute the Python API server-side. A Vercel deployment is therefore the production path for the full interactive console.
-
-## AI Skills Console
-
-The portfolio includes a production AI Skills Console for reusable localization, QA and language workflows:
-
-- **AI Skills Console:** https://xl8saif.vercel.app/skills/
-- Deterministic pipeline: Router → Planner → Execution Engine → Human Review Gate
-- Production Skills for PUBG Urdu LQA, Arabic–Urdu localization, multilingual MTPE, legal translation QA and Indus-Kohistani research
+On GitHub Pages, the console uses its browser-side deterministic runtime and clearly reports when server-side validation is unavailable. It does not depend on a server deployment for the static interface.
 
 ## Deployment
 
-The main branch is deployed to GitHub Pages for the static portfolio. For the full AI Skills Console, import this repository into Vercel with the repository root as the project root, use `npm run build`, and keep the output directory as `dist`. The repository's `vercel.json` already configures the Python API function, includes the canonical `ai-skills/**` runtime files, and sets a bounded function duration.
+The `main` branch is deployed to GitHub Pages through `.github/workflows/deploy.yml`. The Vite base path is fixed to `/site/`, matching the repository Pages URL.
 
-For a local authenticated deployment:
-
-`npx vercel --prod`
-
-Vercel supports GitHub repository imports and automatic deployments from the production branch.
-
-The Vite configuration automatically uses `/site/` for GitHub Pages and `/` on Vercel, so the same repository can serve both deployment targets correctly.
+The AI Skills validation workflow independently runs the framework audits, deterministic tests, JavaScript checks, shell checks and production build.
