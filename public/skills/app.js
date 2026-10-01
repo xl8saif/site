@@ -213,6 +213,14 @@ $("localize").onclick = async () => {
       $("localizedOutput").hidden = false;
     }
     $("exportLocalized").disabled = false;
+    if (result.preview != null) {
+      ocrTargetFile = new File([result.preview], result.name || "localized-target.txt", {type:"text/plain"});
+      if (window.SaifSkillsBrowser?.run) {
+        const qa = await window.SaifSkillsBrowser.run(task.value || ("Localization under " + detectedSkill), {source, target: ocrTargetFile, knowledge: null});
+        stages({router:"done",planner:"done",execution:"done",review:"active"});
+        render(qa);
+      }
+    }
     $("localizeNote").className = "loc-message ok";
     $("localizeNote").textContent = tr("localizeReady") + " " + result.name;
     task.value = "Translate / localize under skill " + detectedSkill + " into " + label + " with full terminology, placeholder, tag, punctuation and line-break QA";
