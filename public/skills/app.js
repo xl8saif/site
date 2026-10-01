@@ -114,6 +114,11 @@ const skills = [
 const $ = selector => /^[A-Za-z][A-Za-z0-9_-]*$/.test(selector) ? document.getElementById(selector) : document.querySelector(selector);
 
 const I18N={ar:{taskLabel:"المهمة",consoleKicker:"وحدة مهارات الذكاء الاصطناعي · v1.20",sourceLabel:"المصدر",targetLabel:"الهدف",knowledgeLabel:"المعرفة / بيانات البحث",skillAgent:"المهارة / الوكيل",skillsTitle:"المهارات",taskPlaceholder:"مثال: PUBG MOBILE Urdu LQA for a WOW event",auto:"سيتم الاكتشاف تلقائياً",source:"اختر ملف المصدر",target:"اختر ملف الهدف",knowledge:"اختياري للبحث",run:"تشغيل المهمة",clear:"مسح",progress:"جاري تنفيذ المسار الموحد…",how:"طريقة العمل",howText:"النظام لا يغيّر ملفاتك. المدخلات تُستخدم للفحص فقط؛ والقرار النهائي يبقى للمراجعة البشرية.",pipeline:"مسار التنفيذ",router:"تحديد Agent",planner:"اختيار Skill",execution:"تشغيل Validator",review:"قرار المراجعة",result:"النتيجة",evidence:"EVIDENCE",trace:"التتبع",raw:"Raw JSON",cli:"إذا كنت تعمل محلياً",cliText:"يمكن تشغيل نفس المسار من الطرفية:",pdf:"لملفات PDF الممسوحة ضوئياً: نفّذ OCR أولاً ثم استخدم النص الناتج كملف Source أو Target.",ocr:"PDF ممسوح",introTitle:"نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة",introText:"اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.",framework:"الإطار",frameworkText:"تنسيق حتمي لسير العمل",ocrText:"استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.",ocrSource:"OCR Source PDF",ocrTarget:"OCR Target PDF",noFindings:"يمكن الانتقال إلى المراجعة البشرية النهائية.",finding:"ملاحظة",critical:"حرج",major:"رئيسي",minor:"طفيف",query:"استفسار",taskError:"أدخل وصف المهمة أولاً.",needFiles:"ارفع المدخلات المطلوبة للتنفيذ. الترجمة وLQA تحتاجان إلى Source وTarget؛ ويمكن استخدام Knowledge / Research Data للبحث.",apiUnreadable:"أعادت الواجهة البرمجية استجابة غير قابلة للقراءة.",serverError:"تعذّر إكمال الطلب على الخادم (HTTP {status}).",apiUnavailable:"الواجهة البرمجية غير متاحة حالياً. شغّل النظام محلياً باستخدام الأمر أدناه.",browserFallback:"وضع المتصفح فعال. لا تتوفر المصادقة الكاملة من جهة الخادم على GitHub Pages؛ تم توجيه المهمة وهي جاهزة للمراجعة البشرية.",runtimeError:"تعذّر إكمال المهمة في المتصفح. راجع المدخلات وحاول مرة أخرى.",fileTooLarge:"الملف {name} يتجاوز حد 4 MB. خفّض حجم الملف ثم أعد المحاولة.",totalTooLarge:"الحجم الإجمالي للملفات كبير جداً بالنسبة إلى حد حجم طلب المتصفح. استخدم ملفات نصية أصغر أو شغّل المهمة على دفعات.",selectPdf:"اختر ملف PDF لـ {label} أولاً.",ocrPdfOnly:"OCR متاح لملفات PDF فقط.",ocrFailed:"تعذّر استخراج النص من ملف PDF.",ocrReady:"أصبح OCR لـ {label} جاهزاً. سيُستخدم النص المستخرج تلقائياً عند تشغيل المهمة.",ocrLib:"لم تُحمّل مكتبات PDF/OCR بعد. أعد تحميل الصفحة وحاول مرة أخرى.",ocrWorker:"إعداد PDF.js Worker غير متاح. أعد تحميل الصفحة وحاول مرة أخرى.",localizeNeedSource:"اختر ملف المصدر أو الصق النص أولاً.",localizeEngineMissing:"محرك التوطين في المتصفح لم يتم تحميله بعد. أعد تحميل الصفحة وحاول مرة أخرى.",localizeLoading:"جاري تحميل محرك الترجمة المحلي…",localizeReady:"تم إنشاء الترجمة بنجاح:",localizeError:"فشلت عملية التوطين:"},en:{taskLabel:"Task",consoleKicker:"AI SKILLS CONSOLE · v1.20",sourceLabel:"Source",targetLabel:"Target",knowledgeLabel:"Knowledge / Research Data",skillAgent:"Skill / Agent",skillsTitle:"Skills",taskPlaceholder:"Example: PUBG MOBILE Urdu LQA for a WOW event",auto:"Auto-detection",source:"Choose source file",target:"Choose target file",knowledge:"Optional research data",run:"Run Task",clear:"Clear",progress:"Running the unified pipeline…",how:"How it works",howText:"Your files are not modified. Inputs are used for validation only; the final decision remains with human review.",pipeline:"Execution Pipeline",router:"Select Agent",planner:"Select Skill",execution:"Run Validator",review:"Review Decision",result:"Result",evidence:"EVIDENCE",trace:"Traceability",raw:"Raw JSON",cli:"If you are working locally",cliText:"Run the same pipeline from the terminal:",pdf:"For scanned PDFs: run OCR first, then use the extracted text as the Source or Target file.",ocr:"Scanned PDF",introTitle:"Run translation, localization, and quality assurance tasks from one console",introText:"Enter the task, upload source and target files, then let the system route them through Router → Planner → Execution → Human Review Gate. Text PDFs are extracted automatically; scanned PDFs require OCR before validation.",framework:"Framework",frameworkText:"Deterministic orchestration",ocrText:"Scanned PDF text is extracted locally in the browser. After extraction, the text is used automatically when you run the task.",ocrSource:"OCR Source PDF",ocrTarget:"OCR Target PDF",noFindings:"The task can proceed to final human review.",finding:"Finding",critical:"Critical",major:"Major",minor:"Minor",query:"Query",taskError:"Enter a task description first.",needFiles:"Upload the inputs required for execution. Translation and LQA require Source and Target; research can use Knowledge / Research Data.",apiUnreadable:"The API returned an unreadable response.",serverError:"The server could not complete the request (HTTP {status}).",apiUnavailable:"The API is currently unavailable. Run the system locally using the command below.",browserFallback:"Browser mode is active. Full server-side validation is unavailable on GitHub Pages; the task has been routed and is ready for human review.",runtimeError:"The task could not be completed in the browser. Review the input and try again.",fileTooLarge:"File {name} exceeds the 4 MB limit. Reduce the file size and try again.",totalTooLarge:"The combined file size is too large for the browser request-size limit. Use smaller text files or run the task in batches.",selectPdf:"Select a {label} PDF file first.",ocrPdfOnly:"OCR is available for PDF files only.",ocrFailed:"Could not extract text from the PDF.",ocrReady:"{label} OCR is ready. The extracted text will be used automatically when you run the task.",ocrLib:"PDF/OCR libraries have not loaded yet. Reload the page and try again.",ocrWorker:"PDF.js Worker configuration is unavailable. Reload the page and try again.",localizeNeedSource:"Select a source file or paste source text first.",localizeEngineMissing:"The browser localization engine has not loaded yet. Reload the page and try again.",localizeLoading:"Loading the local translation engine…",localizeReady:"Localization generated successfully:",localizeError:"Localization failed:"},ur:{taskLabel:"کام",consoleKicker:"AI SKILLS CONSOLE · v1.20",sourceLabel:"ماخذ",targetLabel:"ہدف",knowledgeLabel:"علم / تحقیقی ڈیٹا",skillAgent:"Skill / Agent",skillsTitle:"Skills",taskPlaceholder:"مثال: PUBG MOBILE Urdu LQA for a WOW event",auto:"خودکار شناخت",source:"ماخذ فائل منتخب کریں",target:"ہدف فائل منتخب کریں",knowledge:"تحقیق کے لیے اختیاری",run:"کام چلائیں",clear:"صاف کریں",progress:"متحدہ پائپ لائن چل رہی ہے…",how:"طریقۂ کار",howText:"آپ کی فائلوں میں کوئی تبدیلی نہیں کی جاتی۔ ان پٹ صرف جانچ کے لیے استعمال ہوتے ہیں؛ حتمی فیصلہ انسانی جائزے کا ہے۔",pipeline:"عمل درآمد کی پائپ لائن",router:"Agent منتخب کریں",planner:"Skill منتخب کریں",execution:"Validator چلائیں",review:"جائزے کا فیصلہ",result:"نتیجہ",evidence:"شواہد",trace:"تتبّع",raw:"خام JSON",cli:"اگر آپ مقامی طور پر کام کر رہے ہیں",cliText:"اسی پائپ لائن کو ٹرمینل سے چلائیں:",pdf:"اسکین شدہ PDF کے لیے پہلے OCR چلائیں، پھر حاصل شدہ متن کو Source یا Target فائل کے طور پر استعمال کریں۔",ocr:"اسکین شدہ PDF",introTitle:"ایک ہی کنسول سے ترجمہ، لوکلائزیشن اور معیار کی جانچ کے کام چلائیں",introText:"کام درج کریں، ماخذ اور ہدف فائلیں اپ لوڈ کریں، پھر نظام انہیں Router → Planner → Execution → Human Review Gate کے ذریعے چلائے گا۔ متنی PDF خودکار طور پر نکالی جاتی ہیں؛ اسکین شدہ PDF کے لیے جانچ سے پہلے OCR ضروری ہے۔",framework:"فریم ورک",frameworkText:"مقررہ ورک فلو آرکیسٹریشن",ocrText:"اسکین شدہ PDF سے متن براؤزر میں مقامی طور پر نکالا جاتا ہے۔ نکالنے کے بعد کام چلانے پر یہی متن خودکار طور پر استعمال ہوگا۔",ocrSource:"OCR ماخذ PDF",ocrTarget:"OCR ہدف PDF",noFindings:"کام کو حتمی انسانی جائزے کے لیے آگے بڑھایا جا سکتا ہے۔",finding:"ملاحظہ",critical:"اہم",major:"بڑا",minor:"معمولی",query:"استفسار",taskError:"پہلے کام کی وضاحت درج کریں۔",needFiles:"عمل درآمد کے لیے مطلوبہ ان پٹ فائلیں اپ لوڈ کریں۔ ترجمہ اور LQA کے لیے Source اور Target درکار ہیں؛ تحقیق کے لیے Knowledge / Research Data استعمال کیا جا سکتا ہے۔",apiUnreadable:"API نے ناقابلِ مطالعہ جواب دیا۔",serverError:"سرور پر درخواست مکمل نہیں ہو سکی (HTTP {status})۔",apiUnavailable:"API فی الحال دستیاب نہیں۔ نیچے دیا گیا کمانڈ استعمال کرتے ہوئے نظام مقامی طور پر چلائیں۔",browserFallback:"براؤزر موڈ فعال ہے۔ GitHub Pages پر مکمل سرور سائیڈ جانچ دستیاب نہیں؛ کام کو درست Skill کی طرف بھیج دیا گیا ہے اور انسانی جائزے کے لیے تیار ہے۔",runtimeError:"کام براؤزر میں مکمل نہیں ہو سکا۔ ان پٹ کی جانچ کریں اور دوبارہ کوشش کریں۔",fileTooLarge:"فائل {name} مقررہ حد (4 MB) سے بڑی ہے۔ فائل کا حجم کم کریں اور دوبارہ کوشش کریں۔",totalTooLarge:"فائلوں کا مجموعی حجم براؤزر کی درخواست کی حد کے لیے بہت زیادہ ہے۔ چھوٹی متنی فائلیں استعمال کریں یا کام کو حصوں میں چلائیں۔",selectPdf:"پہلے {label} PDF فائل منتخب کریں۔",ocrPdfOnly:"OCR صرف PDF فائلوں کے لیے دستیاب ہے۔",ocrFailed:"PDF فائل سے متن نکالا نہیں جا سکا۔",ocrReady:"{label} OCR تیار ہے۔ کام چلانے پر نکالا گیا متن خودکار طور پر استعمال ہوگا۔",ocrLib:"PDF/OCR لائبریریاں ابھی لوڈ نہیں ہوئیں۔ صفحہ دوبارہ لوڈ کریں اور دوبارہ کوشش کریں۔",ocrWorker:"PDF.js Worker configuration دستیاب نہیں۔ صفحہ دوبارہ لوڈ کریں اور دوبارہ کوشش کریں۔",localizeNeedSource:"پہلے ماخذ فائل منتخب کریں یا ماخذ متن پیسٹ کریں۔",localizeEngineMissing:"براؤزر کا لوکلائزیشن انجن ابھی لوڈ نہیں ہوا۔ صفحہ دوبارہ لوڈ کریں اور دوبارہ کوشش کریں۔",localizeLoading:"مقامی ترجمہ انجن لوڈ ہو رہا ہے…",localizeReady:"لوکلائزیشن کامیابی سے تیار ہو گئی:",localizeError:"لوکلائزیشن ناکام ہو گئی:"}};
+const LOC_I18N={
+  ar:{workTitle:"محرّك التوطين",workIntro:"ألصق النص أو أرفق المستند، اختر اللغة الهدف، وسيتم اختيار المهارة تلقائياً من المدخلات وسياق المهمة.",source:"المصدر",paste:"ألصق النص هنا",pasteHint:"يمكنك اللصق مباشرة من أدوات CAT أو الجداول أو المستندات أو المحادثات.",target:"الهدف",autoRoute:"التوجيه الذكي للمهارة",targetLanguage:"اللغة الهدف",selectedSkill:"المهارة المختارة",waiting:"بانتظار المصدر واللغة الهدف",knowledge:"المعرفة / البحث",knowledgeHint:"ملف اختياري للمصطلحات أو المراجع أو السياق",next:"التالي",nextReady:"شغّل المهمة؛ ستظهر النتيجة أدناه للمراجعة.",nextWait:"أضف النص المصدر واختر اللغة الهدف.",run:"تشغيل",runSkill:"توطين بالمهارة المختارة",export:"تصدير النتيجة",result:"النتيجة",review:"جاهز للمراجعة",noAttachment:"لا يوجد مرفق",attach:"إرفاق مستند",chars:"حرف",waitingSource:"ألصق النص أو أرفق المصدر",ready:"جاهز — تم اختيار المهارة لـ "},
+  en:{workTitle:"Localization Workbench",workIntro:"Paste text or attach a document, choose the target language, and the console will automatically select the most relevant Skill from the actual input and context.",source:"Source",paste:"Paste text here",pasteHint:"Paste directly from CAT tools, spreadsheets, documents or chat.",target:"Target",autoRoute:"Smart Skill Routing",targetLanguage:"Target language",selectedSkill:"Selected Skill",waiting:"Waiting for source + target",knowledge:"Knowledge / research",knowledgeHint:"Optional terminology, reference or context file",next:"Next",nextReady:"Run it; the result will appear below for review.",nextWait:"Add source text and choose a target language.",run:"Run",runSkill:"Localize with selected Skill",export:"Export result",result:"Result",review:"Ready for review",noAttachment:"No attachment",attach:"Attach document",chars:"chars",waitingSource:"Paste or attach source",ready:"Ready — Skill selected for "},
+  ur:{workTitle:"لوکلائزیشن ورک بینچ",workIntro:"متن چسپاں کریں یا دستاویز منسلک کریں، ہدف زبان منتخب کریں، اور کنسول اصل ان پٹ اور سیاق کے مطابق متعلقہ Skill خودکار طور پر منتخب کرے گا۔",source:"ماخذ",paste:"متن یہاں چسپاں کریں",pasteHint:"CAT ٹولز، اسپریڈ شیٹس، دستاویز یا چیٹ سے براہِ راست متن چسپاں کریں۔",target:"ہدف",autoRoute:"اسمارٹ Skill Routing",targetLanguage:"ہدف زبان",selectedSkill:"منتخب Skill",waiting:"ماخذ اور ہدف کا انتظار",knowledge:"علم / تحقیق",knowledgeHint:"اصطلاحات، حوالہ یا سیاق کی اختیاری فائل",next:"اگلا مرحلہ",nextReady:"کام چلائیں؛ نتیجہ نیچے جائزے کے لیے ظاہر ہوگا۔",nextWait:"ماخذ متن شامل کریں اور ہدف زبان منتخب کریں۔",run:"چلائیں",runSkill:"منتخب Skill سے لوکلائز کریں",export:"نتیجہ برآمد کریں",result:"نتیجہ",review:"جائزے کے لیے تیار",noAttachment:"کوئی منسلکہ نہیں",attach:"دستاویز منسلک کریں",chars:"حروف",waitingSource:"ماخذ متن چسپاں یا منسلک کریں",ready:"تیار — اس زبان کے لیے Skill منتخب ہے: "}
+};
 let savedLang = null;
 try { savedLang = localStorage.getItem("saif-skills-lang"); } catch (_) {}
 let uiLang=["ar","en","ur"].includes(savedLang)?savedLang:(["ar","en","ur"].includes(document.documentElement.lang)?document.documentElement.lang:"ar");
@@ -152,17 +157,17 @@ function renderSkills(){ $("skills").innerHTML=""; skills.forEach(s => {
 }
 
 function detect(v) {
-  const t = v.toLowerCase();
+  const t = String(v || "").toLowerCase();
   let best = null;
   for (const s of skills) {
-    const score = s[4].split("|").reduce(
-      (n, k) => n + (t.includes(k.toLowerCase()) ? 1 : 0), 0
-    );
-    if (score && (!best || score > best.score)) best = { s, score };
+    let score = s[4].split("|").reduce((n,k)=>n+(t.includes(k.toLowerCase())?1:0),0);
+    if (s[0] === "arabic-urdu-localization" && /[\u0600-\u06ff]/.test(t) && /localiz|translate|ترجم|لوکلائز|توطین/.test(t)) score += 4;
+    if (s[0] === "multilingual-translation-mtpe" && /localiz|translate|ترجم|لوکلائز|توطین/.test(t)) score += 2;
+    if (s[0] === "pubg-urdu-lqa" && /pubg|wow|world of wonder/.test(t)) score += 8;
+    if (s[0] === "legal-translation-qa" && /legal|contract|court|case law|judgment|قانون|عدالت|معاہد/.test(t)) score += 6;
+    if (score && (!best || score > best.score)) best = {s,score};
   }
-  detected.textContent = best
-    ? (uiLang==="ar"?best.s[2]:uiLang==="ur"?best.s[3]:best.s[1]) + " · " + best.s[0]
-    : tr("auto");
+  detected.textContent = best ? (uiLang==="ar"?best.s[2]:uiLang==="ur"?best.s[3]:best.s[1])+" · "+best.s[0] : tr("auto");
   return best;
 }
 
@@ -176,37 +181,33 @@ function localizationContext() {
   const { pasted, file, hasSource } = getLocalizationSource();
   const language = $("targetLanguage")?.value || "ur";
   const name = file?.name || "";
-  const taskHints = [pasted, name, language].filter(Boolean).join(" ").toLowerCase();
+  const languageHint = language === "ur" ? " Urdu اردو" : language === "ar" ? " Arabic العربية" : language === "fa" ? " Persian فارسی" : " English";
+  const taskHints = [pasted, name, languageHint].filter(Boolean).join(" ").toLowerCase();
   const explicitTask = task.value.trim();
   const combined = [explicitTask, taskHints].filter(Boolean).join(" ");
   const best = detect(combined);
   return { language, file, pasted, hasSource, best, name };
 }
 
-function updateLocalizationWorkbench() {
-  const ctx = localizationContext();
-  const skill = ctx.best?.s;
-  const hasTarget = Boolean(ctx.language);
-  const ready = ctx.hasSource && hasTarget;
-  const label = ctx.language === "ur" ? "Urdu" : ctx.language === "ar" ? "Arabic" : ctx.language === "fa" ? "Persian" : "English";
-  const skillName = skill ? (uiLang==="ar"?skill[2]:uiLang==="ur"?skill[3]:skill[1]) : tr("auto");
-  $("smartSkillName").textContent = skillName;
-  $("smartSkillId").textContent = skill ? skill[0] + " · " + label : "Waiting for source + target";
-  $("detected").textContent = skill ? skillName + " · " + skill[0] : tr("auto");
-  $("localize").disabled = !ready;
-  const count = ctx.pasted.length;
-  $("sourceCount").textContent = count + (uiLang==="ur" ? " حروف" : uiLang==="ar" ? " حرفاً" : " chars");
-  $("locReadiness").classList.toggle("ready", ready);
-  $("locReadinessText").textContent = ready
-    ? (uiLang==="ur" ? "تیار — " + label + " کے لیے Skill منتخب" : uiLang==="ar" ? "جاهز — تم اختيار المهارة لـ " + label : "Ready — Skill selected for " + label)
-    : (ctx.hasSource ? (uiLang==="ur" ? "ہدف زبان منتخب کریں" : "Choose a target language") : (uiLang==="ur" ? "ماخذ متن پیسٹ یا منسلک کریں" : "Paste or attach source"));
-  $("locNextText").textContent = ready
-    ? (uiLang==="ur" ? "چلائیں؛ نتیجہ نیچے جائزے کے لیے تیار ہوگا۔" : "Run it; the result will appear below for review.")
-    : (uiLang==="ur" ? "ماخذ متن اور ہدف زبان دونوں درکار ہیں۔" : "Source text and target language are required.");
-  if (ready) {
-    const autoTask = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
-    task.value = autoTask;
-  }
+function localizationCopy() { return LOC_I18N[uiLang] || LOC_I18N.en; }
+
+function setLocalizationCopy() {
+  const c = localizationCopy();
+  const map = {
+    "localize-workbench-title": c.workTitle, "localize-workbench-intro": c.workIntro,
+    "loc-source-title": c.source, "paste-title": c.paste, "paste-hint": c.pasteHint,
+    "loc-target-title": c.target, "targetLanguage-label": c.targetLanguage,
+    "smartSkillLabel": c.selectedSkill, "knowledge-label": c.knowledge,
+    "knowledgeName": c.knowledgeHint, "loc-next-title": c.next,
+    "localizeActionText": c.runSkill, "exportLocalized": c.export,
+    "localizedOutput-label": c.result, "resultMeta": c.review,
+    "attach-source-label": c.attach, "attach-target-label": c.attach,
+    "targetContext": c.autoRoute
+  };
+  Object.entries(map).forEach(([id,value]) => { const el=$(id); if(el) el.textContent=value; });
+  if($("sourceName") && !$("source").files.length && !ocrSourceFile) $("sourceName").textContent=c.noAttachment;
+  if($("targetName") && !$("target").files.length) $("targetName").textContent=c.noAttachment;
+  if($("locReadinessText") && !getLocalizationSource().hasSource) $("locReadinessText").textContent=c.waitingSource;
 }
 
 task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
@@ -475,6 +476,7 @@ function esc(s) {
   }[c]));
 }
 
+setLocalizationCopy();
 setLanguage(uiLang);
 const languageButton=$("langBtn");
 if(languageButton){languageButton.type="button";languageButton.setAttribute("aria-label","Change interface language");languageButton.addEventListener("click",()=>setLanguage(nextLang[uiLang]||"ar"));}
