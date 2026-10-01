@@ -163,8 +163,15 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
   const memory=window.SaifLocalizationMemory;
   const detailed=memory?.lookupDetailed?.(input,src,targetLanguage,skillId)||null;
   if(detailed?.type==="exact" || detailed?.auto){
-    onProgress?.(detailed.type==="exact"?"Translation Memory exact match used.":"High-confidence Translation Memory match used.");
-    return memory.applyTerms(detailed.target,src,targetLanguage,skillId);
+    const memoryTarget=memory.applyTerms(detailed.target,src,targetLanguage,skillId);
+    const memoryQa=qaText(input,memoryTarget);
+    // Never reuse a memory entry that violates the source structure contract.
+    // A translation-memory hit is useful only when tags, placeholders and line breaks survive intact.
+    if(!memoryQa.length){
+      onProgress?.(detailed.type==="exact"?"Translation Memory exact match used.":"High-confidence Translation Memory match used.");
+      return memoryTarget;
+    }
+    onProgress?.("Translation Memory structural mismatch; regenerating with protected structure…");
   }
   memory?.renderSuggestion?.(input,src,targetLanguage,skillId);
   if(!LANG[src]) throw new Error(rt("sourceUnsupported")+sourceLanguage);
@@ -180,7 +187,25 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     out.push(enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage)+nl);
     onProgress?.(rt("translating")+(i+1)+"/"+paragraphs.length);
   }
-  return out.join("");
+  const translated=out.join("");
+  const structuralQa=qaText(input,translated);
+  if(structuralQa.length){
+    // One strict regeneration pass prevents a model/service response from escaping the
+    // browser localization contract even if an upstream engine normalized formatting.
+    const retry=[];
+    const retryParts=input.split(/(?<=\\n)/);
+    for(let i=0;i<retryParts.length;i++){
+      const p=retryParts[i];
+      if(!p.trim()){retry.push(p);continue;}
+      const nl=p.endsWith("\\n")?"\\n":"";
+      const body=p.slice(0,nl?-1:undefined);
+      const translatedLine=await localTranslateChunk(body,src,targetLanguage,null,onProgress);
+      retry.push(enforceTerminology(memory?.applyTerms?.(translatedLine,src,targetLanguage,skillId)||translatedLine,skillId,targetLanguage)+nl);
+    }
+    const regenerated=retry.join("");
+    if(!qaText(input,regenerated).length) return regenerated;
+  }
+  return translated;
 }
 function isTextCell(v){return typeof v==="string"&&v.trim()&&!v.startsWith("=");}
 async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
