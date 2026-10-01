@@ -173,3 +173,39 @@ html[lang="fa"] .intro h1,html[lang="fa"] .pipeline h2,html[lang="fa"] .result h
 html[lang="ar"] .site-footer,html[lang="ur"] .site-footer,html[lang="fa"] .site-footer{line-height:1.9}
 html[lang="ur"] .footer-credit,html[lang="ur"] .footer-project-line,html[lang="ur"] .footer-address,html[lang="ur"] .footer-contact{font-family:"Mehr",serif}
 @media(max-width:620px){.site-footer{margin-bottom:14px;padding:18px 13px 22px}.footer-address{max-width:360px;margin-left:auto;margin-right:auto}.footer-logos{gap:10px}.footer-logos a{width:135px;height:54px}.visitor-counter{gap:8px}}
+
+
+/* Footer refinement: balanced two-column layout and circular brand marks */
+.site-footer{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(250px,.85fr);
+  align-items:center;
+  column-gap:34px;
+  row-gap:20px;
+  text-align:left;
+  padding:26px 24px 30px;
+}
+.footer-project{min-width:0}
+.footer-project-line{font-size:13px;font-weight:650;color:#344256}
+.footer-credit{font-size:14px;line-height:1.6}
+.footer-address,.footer-contact{font-size:12px}
+.visitor-section{margin-top:0;text-align:center;padding:18px;border:1px solid #e5eaf1;border-radius:18px;background:linear-gradient(145deg,#fff,#f8faff)}
+.visitor-title{font-size:11px;letter-spacing:.14em}
+.visitor-counter{flex-direction:column;gap:10px}
+.visitor-counter img{height:30px}
+.visitor-countries{font-size:11px}
+.footer-logos{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:28px;margin-top:2px}
+.footer-logos a{
+  width:94px;height:94px;box-sizing:border-box;padding:13px;
+  border:1px solid #e1e7ef;border-radius:50%;background:#fff;
+  box-shadow:0 7px 22px rgba(35,48,68,.09);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.footer-logos a:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(35,48,68,.14);text-decoration:none}
+.footer-logos img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;border-radius:50%}
+@media(max-width:700px){
+  .site-footer{grid-template-columns:1fr;gap:18px;text-align:center;padding:22px 14px 26px}
+  .visitor-section{grid-column:1}
+  .footer-logos{grid-column:1;gap:18px}
+  .footer-logos a{width:82px;height:82px;padding:11px}
+}
