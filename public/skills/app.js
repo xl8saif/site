@@ -214,7 +214,8 @@ function updateLocalizationWorkbench() {
   const ctx = localizationContext();
   if(window.SaifLocalizationMemory?.renderSuggestion && ctx.hasSource){
     const src=ctx.pasted || "";
-    if(src && ctx.language) window.SaifLocalizationMemory.renderSuggestion(src,"en",ctx.language,ctx.best?.s?.[0]||"multilingual-translation-mtpe");
+    const srcLang=/[ٹڈڑںےہھچژگپکڑ]/u.test(src)?"ur":/[ؠ-ۿ]/u.test(src)?"ar":"en";
+    if(src && ctx.language) window.SaifLocalizationMemory.renderSuggestion(src,srcLang,ctx.language,ctx.best?.s?.[0]||"multilingual-translation-mtpe");
   }
   const c = localizationCopy();
   const sourceCount = (ctx.pasted || "").length;
