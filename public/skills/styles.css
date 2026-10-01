@@ -70,3 +70,14 @@ html[lang="ur"] .memory-head p,html[lang="ur"] .memory-grid label,html[lang="ur"
 .memory-intelligence li{margin:3px 0}
 .intel-high{font-weight:700}
 .intel-medium{font-weight:500}
+
+/* Skills directly under Task */
+.task-skills{margin:12px 0 18px;padding:14px;border:1px solid #e5eaf0;border-radius:16px;background:#f8fafc}
+.task-skills-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.task-skills-head h2{margin:0;font-family:Georgia,serif;font-size:22px;font-weight:500}
+.task-skills-head>span{font:700 9px ui-monospace,monospace;color:#8a94a3;text-transform:uppercase;letter-spacing:.08em}
+.task-skills #skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+.task-skills .skill{margin:0;padding:10px;border:1px solid transparent;background:#fff}
+@media(max-width:620px){.task-skills #skills{grid-template-columns:1fr}.task-skills-head h2{font-size:20px}}
+html[lang="ar"] .task-skills-head h2{font-family:"Cairo",sans-serif;font-size:24px}
+html[lang="ur"] .task-skills-head h2{font-family:"Mehr",serif;font-size:24px;line-height:1.7}
