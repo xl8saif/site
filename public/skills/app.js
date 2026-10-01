@@ -176,7 +176,7 @@ function detect(v) {
     if (s[0] === "legal-translation-qa" && /legal|contract|court|case law|judgment|قانون|عدالت|معاہد/.test(t)) score += 6;
     if (score && (!best || score > best.score)) best = {s,score};
   }
-  detected.textContent = best ? (uiLang==="ar"?best.s[2]:uiLang==="ur"?best.s[3]:best.s[1])+" · "+best.s[0] : tr("auto");
+  detected.textContent = best ? skillLabel(best.s)+" · "+best.s[0] : tr("auto");
   return best;
 }
 
@@ -246,7 +246,7 @@ function updateLocalizationWorkbench() {
   const skill = ctx.best;
   if (skillName) {
     skillName.textContent = skill
-      ? (uiLang === "ar" ? skill.s[2] : uiLang === "ur" ? skill.s[3] : skill.s[1])
+      ? skillLabel(skill)
       : c.waiting;
   }
   if (skillId) skillId.textContent = skill ? skill.s[0] : c.waiting;
