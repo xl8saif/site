@@ -16,6 +16,14 @@ const REMOTE_API = "https://api.mymemory.translated.net/get";
 const REMOTE_TIMEOUT = 10000;
 const MAX_REMOTE_CHARS = 450;
 const RUNTIME_VERSION = "2.3.0-stable-browser";
+const RT_I18N={
+  en:{fast:"Fast translation engine…",fallback:"Fast engine unavailable; switching to private local translation…",loading:"Fast engine unavailable; loading private local engine…",specialized:"Specialized local engine failed; trying NLLB fallback…",download:"Downloading local translation engine… ",preparing:"Preparing local translation engine…",progress:"Fast translation ",translating:"Translating ",tag:"XML/HTML tags changed during localization.",placeholder:"Placeholders changed during localization.",linebreak:"Line-break count changed during localization.",unsupported:"Unsupported target language: ",sourceUnsupported:"Unsupported source language: "},
+  ar:{fast:"محرك الترجمة السريع…",fallback:"محرك الترجمة السريع غير متاح؛ جارٍ التحويل إلى محرك الترجمة المحلي الخاص…",loading:"محرك الترجمة السريع غير متاح؛ جارٍ تحميل المحرك المحلي…",specialized:"تعذّر تشغيل المحرك المحلي المتخصص؛ جارٍ تجربة محرك NLLB الاحتياطي…",download:"جارٍ تنزيل محرك الترجمة المحلي… ",preparing:"جارٍ تجهيز محرك الترجمة المحلي…",progress:"الترجمة السريعة ",translating:"جارٍ الترجمة ",tag:"تم تغيير وسوم XML/HTML أثناء التوطين.",placeholder:"تم تغيير العناصر النائبة أثناء التوطين.",linebreak:"تغيّر عدد فواصل الأسطر أثناء التوطين.",unsupported:"لغة الهدف غير مدعومة: ",sourceUnsupported:"لغة المصدر غير مدعومة: "},
+  ur:{fast:"تیز ترجمہ انجن…",fallback:"تیز انجن دستیاب نہیں؛ نجی مقامی ترجمہ انجن پر منتقل ہو رہے ہیں…",loading:"تیز انجن دستیاب نہیں؛ نجی مقامی انجن لوڈ ہو رہا ہے…",specialized:"خصوصی مقامی انجن ناکام رہا؛ NLLB متبادل آزمایا جا رہا ہے…",download:"مقامی ترجمہ انجن ڈاؤن لوڈ ہو رہا ہے… ",preparing:"مقامی ترجمہ انجن تیار ہو رہا ہے…",progress:"تیز ترجمہ ",translating:"ترجمہ ہو رہا ہے ",tag:"لوکلائزیشن کے دوران XML/HTML ٹیگز تبدیل ہو گئے۔",placeholder:"لوکلائزیشن کے دوران پلیس ہولڈرز تبدیل ہو گئے۔",linebreak:"لوکلائزیشن کے دوران لائن بریکس کی تعداد تبدیل ہو گئی۔",unsupported:"ہدف زبان معاونت یافتہ نہیں: ",sourceUnsupported:"ماخذ زبان معاونت یافتہ نہیں: "},
+  fa:{fast:"موتور ترجمه سریع…",fallback:"موتور سریع در دسترس نیست؛ در حال انتقال به موتور ترجمه محلی خصوصی…",loading:"موتور ترجمه سریع در دسترس نیست؛ موتور محلی در حال بارگذاری است…",specialized:"موتور محلی تخصصی اجرا نشد؛ در حال آزمایش موتور جایگزین NLLB…",download:"در حال دانلود موتور ترجمه محلی… ",preparing:"در حال آماده‌سازی موتور ترجمه محلی…",progress:"ترجمه سریع ",translating:"در حال ترجمه ",tag:"برچسب‌های XML/HTML هنگام بومی‌سازی تغییر کرده‌اند.",placeholder:"جای‌نگهدارها هنگام بومی‌سازی تغییر کرده‌اند.",linebreak:"تعداد شکست‌های خط هنگام بومی‌سازی تغییر کرده است.",unsupported:"زبان مقصد پشتیبانی نمی‌شود: ",sourceUnsupported:"زبان مبدأ پشتیبانی نمی‌شود: "}
+};
+function rt(key){const lang=document.documentElement.lang||"en";return RT_I18N[lang]?.[key]??RT_I18N.en[key]??key}
+
 
 function detectSourceLanguage(text){
   const t=String(text||"");
@@ -58,9 +66,9 @@ function tokenCounts(text){
 function sameCounts(a,b){const keys=new Set([...Object.keys(a),...Object.keys(b)]);return [...keys].every(k=>a[k]===b[k]);}
 function qaText(source,target){
   const a=tokenCounts(source),b=tokenCounts(target),findings=[];
-  if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:"XML/HTML tags changed during localization."});
-  if(!sameCounts(a.placeholders,b.placeholders)) findings.push({severity:"critical",code:"PLACEHOLDER_MISMATCH",issue:"Placeholders changed during localization."});
-  if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."});
+  if(!sameCounts(a.tags,b.tags)) findings.push({severity:"critical",code:"TAG_MISMATCH",issue:rt("tag")});
+  if(!sameCounts(a.placeholders,b.placeholders)) findings.push({severity:"critical",code:"PLACEHOLDER_MISMATCH",issue:rt("placeholder")});
+  if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:rt("linebreak")});
   return findings;
 }
 
@@ -74,7 +82,7 @@ async function remoteTranslateChunk(text,src,tgt,onProgress){
     url.searchParams.set("q",marked);
     url.searchParams.set("langpair",src+"|"+tgt);
     url.searchParams.set("mt","1");
-    onProgress?.("Fast translation engine…");
+    onProgress?.(rt("fast"));
     const res=await fetch(url,{signal:controller.signal,headers:{"Accept":"application/json"}});
     if(!res.ok) throw new Error("Fast translation service HTTP "+res.status);
     const data=await res.json();
@@ -87,7 +95,7 @@ async function remoteTranslate(text,src,tgt,onProgress){
   const parts=[];
   for(let i=0;i<text.length;i+=MAX_REMOTE_CHARS){
     parts.push(await remoteTranslateChunk(text.slice(i,i+MAX_REMOTE_CHARS),src,tgt,onProgress));
-    onProgress?.("Fast translation "+Math.min(i+MAX_REMOTE_CHARS,text.length)+"/"+text.length);
+    onProgress?.(rt("progress")+Math.min(i+MAX_REMOTE_CHARS,text.length)+"/"+text.length);
   }
   return parts.join("");
 }
@@ -105,17 +113,17 @@ async function getTranslator(src,tgt,onProgress){
     const specialized = model !== FALLBACK_MODEL;
     const device = specialized ? "wasm" : (navigator.gpu ? "webgpu" : "wasm");
     const dtype = specialized ? "q8" : (device === "webgpu" ? "q4f16" : "q8");
-    onProgress?.("Fast engine unavailable; loading private local engine…");
+    onProgress?.(rt("loading"));
     const options={device,dtype,progress_callback:p=>{
-      if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.("Downloading local translation engine… "+Math.round(p.progress)+"%");
-      else if(p?.status==="ready") onProgress?.("Preparing local translation engine…");
+      if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.(rt("download")+Math.round(p.progress)+"%");
+      else if(p?.status==="ready") onProgress?.(rt("preparing"));
     }};
     try{
       const pipe=await pipeline("translation",model,options);
       translators.set(key,pipe); return pipe;
     }catch(error){
       if(specialized){
-        onProgress?.("Specialized local engine failed; trying NLLB fallback…");
+        onProgress?.(rt("specialized"));
         try{
           const fallbackDevice=navigator.gpu?"webgpu":"wasm";
           const fallbackDtype=fallbackDevice==="webgpu"?"q4f16":"q8";
@@ -143,14 +151,14 @@ async function translateChunk(text,src,tgt,pipe,onProgress){
   try{
     return await remoteTranslate(text,src,tgt,onProgress);
   }catch(error){
-    onProgress?.("Fast engine unavailable; switching to private local translation…");
+    onProgress?.(rt("fallback"));
     return localTranslateChunk(text,src,tgt,pipe,onProgress);
   }
 }
 async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
   const input=cleanText(text);
   const src=sourceLanguage==="auto"?detectSourceLanguage(input):sourceLanguage;
-  if(!LANG[targetLanguage]) throw new Error("Unsupported target language: "+targetLanguage);
+  if(!LANG[targetLanguage]) throw new Error(rt("unsupported")+targetLanguage);
   const memory=window.SaifLocalizationMemory;
   const detailed=memory?.lookupDetailed?.(input,src,targetLanguage,skillId)||null;
   if(detailed?.type==="exact" || detailed?.auto){
@@ -158,7 +166,7 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     return memory.applyTerms(detailed.target,src,targetLanguage,skillId);
   }
   memory?.renderSuggestion?.(input,src,targetLanguage,skillId);
-  if(!LANG[src]) throw new Error("Unsupported source language: "+sourceLanguage);
+  if(!LANG[src]) throw new Error(rt("sourceUnsupported")+sourceLanguage);
   if(src===targetLanguage) return enforceTerminology(input,skillId,targetLanguage);
   const out=[];
   const paragraphs=input.split(/(?<=\n)/);
@@ -169,7 +177,7 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     const body=p.slice(0,nl?-1:undefined);
     const translated=await translateChunk(body,src,targetLanguage,null,onProgress);
     out.push(enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage)+nl);
-    onProgress?.("Translating "+(i+1)+"/"+paragraphs.length);
+    onProgress?.(rt("translating")+(i+1)+"/"+paragraphs.length);
   }
   return out.join("");
 }
