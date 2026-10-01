@@ -297,8 +297,7 @@ $("knowledge").addEventListener("change", e => {
 
 $("localize").onclick = async () => {
   const ctx = localizationContext();
-  const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";
-  const language = $("targetLanguage")?.value || "ur";
+  const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";\n  window.__localizedSkillId = detectedSkill;\n  const language = $("targetLanguage")?.value || "ur";
   const label = language === "ur" ? "Urdu" : language === "ar" ? "Arabic" : language === "fa" ? "Persian" : "English";
   const source = ctx.file || (ctx.pasted ? new File([ctx.pasted], "pasted-source.txt", {type:"text/plain"}) : null);
   if (!source) {
@@ -319,8 +318,7 @@ $("localize").onclick = async () => {
   try {
     const result = await window.SaifLocalizer.localizeFile(source, {
       targetLanguage: language,
-      sourceLanguage: "auto",
-      onProgress: msg => { $("localizeNote").textContent = msg; }
+      sourceLanguage: "auto",\n      skillId: detectedSkill,\n      onProgress: msg => { $("localizeNote").textContent = msg; }
     });
     window.__localizedResult = result;
     if (result.preview != null) {
