@@ -135,7 +135,7 @@
     save(db);return item;
   }
   function data(){return load();}
-  function clearAll(){localStorage.removeItem(KEY);}
+  function clearAll(){localStorage.removeItem(KEY);localStorage.removeItem(LEGACY_KEY);}
   function downloadJson(name,data,type="application/json"){
     const blob=new Blob([JSON.stringify(data,null,2)],{type}),a=document.createElement("a");
     a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
