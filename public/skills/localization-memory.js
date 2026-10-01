@@ -7,7 +7,7 @@
   const clean=v=>String(v??"").replace(/\r\n?/g,"\n").trim();
   const norm=v=>clean(v).replace(/[ \t]+/g," ").toLowerCase();
   const tokens=v=>clean(v).split(/\s+/).filter(Boolean);
-  const empty=()=>({version:2,updatedAt:now(),pairs:[],terms:[],styles:[],corrections:[],stats:{lookups:0,hits:0,fuzzyLookups:0,fuzzyHits:0}});
+  const empty=()=>({version:2,updatedAt:now(),pairs:[],terms:[],styles:[],corrections:[],qaHistory:[],stats:{lookups:0,hits:0,fuzzyLookups:0,fuzzyHits:0,qaRuns:0,qaFindings:0}});
   function seed(db){
     if(db.terms.length||db.styles.length)return db;
     const t=[
@@ -33,7 +33,7 @@
     db.pairs=Array.isArray(old.pairs)?old.pairs:[];
     db.terms=Array.isArray(old.terms)?old.terms:[];
     db.styles=Array.isArray(old.styles)?old.styles:[];
-    db.stats=Object.assign(db.stats,old.stats||{});
+    db.stats=Object.assign(db.stats,old.stats||{});db.qaHistory=Array.isArray(old.qaHistory)?old.qaHistory:[];
     return seed(db);
   }
   function load(){
@@ -134,6 +134,45 @@
     addPair(source,approvedTarget,{sourceLanguage:item.sourceLanguage,targetLanguage:item.targetLanguage,skillId:item.skillId});
     save(db);return item;
   }
+  function recordQA(source,target,findings,meta={}){
+    const db=load(),items=Array.isArray(findings)?findings:[];
+    const entry={id:uid(),source:clean(source),target:clean(target),findings:items.map(x=>({severity:x.severity||"info",code:x.code||"QA",issue:x.issue||String(x)})),sourceLanguage:meta.sourceLanguage||"auto",targetLanguage:meta.targetLanguage||"ur",skillId:meta.skillId||"",createdAt:now()};
+    if(!entry.source&&!items.length)return null;
+    db.qaHistory.unshift(entry);db.qaHistory=db.qaHistory.slice(0,1000);
+    db.stats.qaRuns=(db.stats.qaRuns||0)+1;db.stats.qaFindings=(db.stats.qaFindings||0)+items.length;save(db);return entry;
+  }
+  function qaIntelligence(skillId="",src="",tgt=""){
+    const db=load(),rows=db.corrections.filter(c=>(!skillId||!c.skillId)&&(!src||c.sourceLanguage===src)&&(!tgt||c.targetLanguage===tgt));
+    const qa=db.qaHistory.filter(q=>(!skillId||!q.skillId)&&(!src||q.sourceLanguage===src)&&(!tgt||q.targetLanguage===tgt));
+    const correctionPatterns={};
+    for(const c of rows){
+      if(c.correctionType==="human-correction"){
+        const k=norm(c.machineDraft)+" → "+norm(c.approvedTarget);
+        correctionPatterns[k]=(correctionPatterns[k]||0)+1;
+      }
+    }
+    const qaPatterns={};
+    for(const q of qa)for(const f of q.findings||[]){
+      const k=f.code||f.issue||"QA";
+      qaPatterns[k]=(qaPatterns[k]||0)+1;
+    }
+    const conflicts={};
+    const buckets={};
+    for(const p of db.pairs.filter(p=>(!skillId||p.skillId===skillId||!p.skillId)&&(!src||p.sourceLanguage===src)&&(!tgt||p.targetLanguage===tgt))){
+      const k=norm(p.source);(buckets[k]??=[]).push(p.target);
+    }
+    for(const [k,vals] of Object.entries(buckets)){
+      const unique=[...new Set(vals.map(clean))];if(unique.length>1)conflicts[k]=unique;
+    }
+    const top=(obj,n=5)=>Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,n).map(([key,count])=>({key,count}));
+    const recommendations=[];
+    top(qaPatterns).forEach(x=>recommendations.push({type:"qa",priority:x.count>=3?"high":"medium",text:"Repeated QA issue: "+x.key+" ("+x.count+" occurrences)."}));
+    top(correctionPatterns).forEach(x=>recommendations.push({type:"correction",priority:x.count>=3?"high":"medium",text:"Repeated correction pattern: "+x.key+" ("+x.count+" occurrences)."}));
+    Object.entries(conflicts).slice(0,5).forEach(([term,vals])=>recommendations.push({type:"terminology",priority:"high",text:"Terminology conflict: "+term+" has multiple approved targets: "+vals.join(" / ")+". Choose one preferred form."}));
+    if(!recommendations.length)recommendations.push({type:"info",priority:"low",text:"No repeated QA or correction pattern has reached a recommendation threshold yet."});
+    return {correctionPatterns:top(correctionPatterns),qaPatterns:top(qaPatterns),terminologyConflicts:conflicts,recommendations,counts:{corrections:rows.length,qaRuns:qa.length}};
+  }
+  function exportIntelligence(skillId="",src="",tgt=""){downloadJson("saif-qa-intelligence.json",qaIntelligence(skillId,src,tgt));}
   function data(){return load();}
   function clearAll(){localStorage.removeItem(KEY);localStorage.removeItem(LEGACY_KEY);}
   function downloadJson(name,data,type="application/json"){
@@ -150,12 +189,13 @@
     merged.terms=[...x.terms,...current.terms].filter((t,i,a)=>a.findIndex(q=>q.source===t.source&&q.targetLanguage===t.targetLanguage&&q.skillId===t.skillId)===i);
     merged.styles=[...x.styles,...current.styles].filter((s,i,a)=>a.findIndex(q=>norm(q.text)===norm(s.text)&&q.scope===s.scope)===i);
     merged.corrections=[...(x.corrections||[]),...(current.corrections||[])].filter((c,i,a)=>a.findIndex(q=>q.source===c.source&&q.approvedTarget===c.approvedTarget&&q.createdAt===c.createdAt)===i);
+    merged.qaHistory=[...(x.qaHistory||[]),...(current.qaHistory||[])].filter((q,i,a)=>a.findIndex(z=>z.createdAt===q.createdAt&&z.source===q.source)===i);
     merged.stats=current.stats||merged.stats;save(merged);return merged;
   }
   function renderStats(root){
     const db=load();if(!root)return;
     const el=root.querySelector("[data-memory-count]");
-    if(el)el.textContent=db.pairs.length+" TM · "+db.terms.length+" terminology · "+db.styles.length+" style · "+db.corrections.length+" corrections";
+    if(el)el.textContent=db.pairs.length+" TM · "+db.terms.length+" terminology · "+db.styles.length+" style · "+db.corrections.length+" corrections · "+(db.qaHistory||[]).length+" QA runs";
   }
   function init(){
     const wb=document.querySelector(".localization-workbench");if(!wb||document.getElementById("localizationMemory"))return;
@@ -167,10 +207,18 @@
       '<div><label>Terminology: preferred target</label><input id="memoryTermTarget" type="text" placeholder="آفیشل"></div>'+
       '<div><label>Style / wording rule</label><input id="memoryStyle" type="text" placeholder="Use concise Standard Pakistani Urdu"></div>'+
       '</div>'+
-      '<div class="memory-actions"><button type="button" id="saveMemoryTerm">Save terminology</button><button type="button" id="saveMemoryStyle">Save style rule</button><button type="button" id="exportMemory">Export memory</button><button type="button" id="exportCorrections">Export approved corpus</button><label class="memory-import">Import memory<input id="importMemory" type="file" accept=".json"></label><button type="button" id="clearMemory">Clear saved memory</button></div>'+
-      '<div id="memorySuggestion" class="memory-suggestion" aria-live="polite"></div><div id="memoryNote" class="memory-note" aria-live="polite"></div>';
+      '<div class="memory-actions"><button type="button" id="saveMemoryTerm">Save terminology</button><button type="button" id="saveMemoryStyle">Save style rule</button><button type="button" id="exportMemory">Export memory</button><button type="button" id="exportCorrections">Export approved corpus</button><button type="button" id="exportIntelligence">Export QA intelligence</button><button type="button" id="refreshIntelligence">Analyze QA patterns</button><label class="memory-import">Import memory<input id="importMemory" type="file" accept=".json"></label><button type="button" id="clearMemory">Clear saved memory</button></div>'+
+      '<div id="memorySuggestion" class="memory-suggestion" aria-live="polite"></div><div id="memoryIntelligence" class="memory-intelligence" aria-live="polite"></div><div id="memoryNote" class="memory-note" aria-live="polite"></div>';
     wb.insertBefore(panel,wb.querySelector(".loc-result"));
     const note=msg=>{const n=document.getElementById("memoryNote");if(n)n.textContent=msg;};
+    function renderIntelligence(root){
+      const box=root.querySelector("#memoryIntelligence");if(!box)return;
+      const target=document.getElementById("targetLanguage")?.value||"ur";
+      const intel=qaIntelligence(window.__localizedSkillId||"", "", target);
+      const rec=intel.recommendations.slice(0,6);
+      box.innerHTML='<strong>QA intelligence</strong><div class="intel-grid"><span>'+intel.counts.corrections+' corrections</span><span>'+intel.counts.qaRuns+' QA runs</span><span>'+Object.keys(intel.terminologyConflicts).length+' terminology conflicts</span></div><ul>'+rec.map(x=>'<li class="intel-'+x.priority+'">'+x.text.replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</li>').join("")+'</ul>';
+    }
+
     const copy={
       en:{k:"PERSISTENT MEMORY · v2",h:"Translation Memory & Style",p:"Only approved wording becomes permanent memory. Similar matches are suggestions unless confidence is very high.",save:"Save approved translation",approved:"Approved source → target",termS:"Terminology: source",termT:"Terminology: preferred target",style:"Style / wording rule",st:"Save terminology",ss:"Save style rule",ex:"Export memory",ec:"Export approved corpus",im:"Import memory",cl:"Clear saved memory"},
       ar:{k:"الذاكرة المستمرة · الإصدار 2",h:"ذاكرة الترجمة والأسلوب",p:"تدخل الصياغات المعتمدة فقط في الذاكرة الدائمة. المطابقات المتشابهة تظل اقتراحات ما لم تكن الثقة مرتفعة جداً.",save:"حفظ الترجمة المعتمدة",approved:"المصدر المعتمد ← الهدف",termS:"المصطلح: المصدر",termT:"المصطلح: الترجمة المفضلة",style:"قاعدة الأسلوب / الصياغة",st:"حفظ المصطلح",ss:"حفظ قاعدة الأسلوب",ex:"تصدير الذاكرة",ec:"تصدير corpus المعتمد",im:"استيراد الذاكرة",cl:"مسح الذاكرة المحفوظة"},
@@ -186,24 +234,26 @@
       q("#clearMemory").textContent=x.cl;
     };
     localizePanel(); window.addEventListener("saif-skills-language",localizePanel);
-    renderStats(panel);
+    renderStats(panel);renderIntelligence(panel);
     document.getElementById("saveMemoryPair").onclick=()=>{
       const source=document.getElementById("sourceText")?.value||"",target=document.getElementById("localizedOutput")?.value||"",lang=document.getElementById("targetLanguage")?.value||"ur";
       if(!source.trim()||!target.trim()){note("Enter source and review the result first.");return;}
       addCorrection(source,window.__localizedMachineDraft||"",target,{sourceLanguage:"auto",targetLanguage:lang,skillId:window.__localizedSkillId||"",qaFindings:window.__localizedResult?.qa||[]});
-      renderStats(panel);note("Approved translation saved. The correction corpus and Translation Memory were updated.");
+      renderStats(panel);renderIntelligence(panel);note("Approved translation saved. The correction corpus and Translation Memory were updated.");
     };
     document.getElementById("saveMemoryTerm").onclick=()=>{
       const s=document.getElementById("memoryTermSource").value,t=document.getElementById("memoryTermTarget").value,lang=document.getElementById("targetLanguage")?.value||"ur";
       if(!s.trim()||!t.trim()){note("Enter both source and preferred target terminology.");return;}
-      addTerm(s,t,{targetLanguage:lang,skillId:window.__localizedSkillId||""});renderStats(panel);note("Terminology saved and will be reused.");
+      addTerm(s,t,{targetLanguage:lang,skillId:window.__localizedSkillId||""});renderStats(panel);renderIntelligence(panel);note("Terminology saved and will be reused.");
     };
     document.getElementById("saveMemoryStyle").onclick=()=>{
       const s=document.getElementById("memoryStyle").value;if(!s.trim()){note("Enter a style or wording rule.");return;}
-      addStyle(s,"global");renderStats(panel);note("Style rule saved.");
+      addStyle(s,"global");renderStats(panel);renderIntelligence(panel);note("Style rule saved.");
     };
     document.getElementById("exportMemory").onclick=exportJson;
     document.getElementById("exportCorrections").onclick=exportCorrections;
+    document.getElementById("exportIntelligence").onclick=()=>exportIntelligence("", "", document.getElementById("targetLanguage")?.value||"ur");
+    document.getElementById("refreshIntelligence").onclick=()=>{renderIntelligence(panel);note("QA intelligence refreshed from approved corrections and QA history.");};
     document.getElementById("importMemory").onchange=async e=>{try{if(!e.target.files[0])return;await importJson(e.target.files[0]);renderStats(panel);note("Memory imported and merged.");}catch(err){note(err.message||String(err));}e.target.value="";};
     document.getElementById("clearMemory").onclick=()=>{if(confirm("Clear all saved translation memory, terminology, style rules and correction corpus from this browser?")){clearAll();renderStats(panel);note("Saved localization memory cleared.");}};
     window.SaifLocalizationMemory.renderSuggestion=(source,src,tgt,skillId)=>{
@@ -214,6 +264,6 @@
       return hit;
     };
   }
-  window.SaifLocalizationMemory={lookup,lookupDetailed,suggest,applyTerms,addPair,addTerm,addStyle,addCorrection,data,exportJson,exportCorrections,importJson,renderStats,similarity};
+  window.SaifLocalizationMemory={lookup,lookupDetailed,suggest,applyTerms,addPair,addTerm,addStyle,addCorrection,recordQA,qaIntelligence,data,exportJson,exportCorrections,exportIntelligence,importJson,renderStats,similarity};
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
