@@ -7,7 +7,8 @@ import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transfo
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
-const MODEL = "Xenova/nllb-200-distilled-600M";
+const FALLBACK_MODEL = "Xenova/nllb-200-distilled-600M";
+const PAIR_MODELS = {"en>ur":"R4kSo1997/opus-mt-en-ur-onnx-int8","ur>en":"R4kSo1997/opus-mt-ur-en-onnx-int8","ar>en":"Xenova/opus-mt-ar-en","en>ar":"Xenova/opus-mt-en-ar"};
 const LANG = { ur:"urd_Arab", ar:"arb_Arab", en:"eng_Latn", fa:"pes_Arab" };
 function detectSourceLanguage(text){
   const t=String(text||"");
@@ -40,64 +41,49 @@ function qaText(source,target){
   if(a.linebreaks!==b.linebreaks) findings.push({severity:"major",code:"LINEBREAK_MISMATCH",issue:"Line-break count changed during localization."});
   return findings;
 }
-let translator = null;
-let loading = null;
-
-function cleanText(s){ return String(s ?? "").replace(/\r\n/g,"\n").replace(/\r/g,"\n"); }
-function protectedParts(text){
-  const tokens=[];
-  const marked=cleanText(text).replace(/<[^>]+>|\{[^{}]+\}|\$\{[^{}]+\}|%(?:\d+\$)?[sdif]|%%/g,m=>{
-    const id="\uE000"+tokens.length+"\uE001";
-    tokens.push([id,m]);
-    return id;
-  });
-  return {marked,tokens};
-}
-function restore(text,tokens){
-  let out=String(text);
-  for(const [id,value] of tokens) out=out.split(id).join(value);
-  return out;
-}
-async function getTranslator(onProgress){
-  if(translator) return translator;
-  if(loading) return loading;
-  loading=(async()=>{
-    const device = navigator.gpu ? "webgpu" : "wasm";
-    onProgress?.("Loading browser translation model ("+device+")…");
-    const preferredDtype = device === "webgpu" ? "q4f16" : "q8";
-    const createPipeline = (dtype) => pipeline("translation", MODEL, {
-      device,
-      dtype,
-      progress_callback: p => {
-        if (p?.status === "progress" && Number.isFinite(p.progress)) {
-          const pct = Math.max(0, Math.min(100, Math.round(p.progress)));
-          const file = p.file ? " · " + String(p.file).split("/").pop() : "";
-          onProgress?.("Downloading translation model… " + pct + "%" + file);
-        } else if (p?.status === "ready") {
-          onProgress?.("Preparing translation engine…");
-        }
+const translators = new Map();
+const loadings = new Map();
+async function getTranslator(src,tgt,onProgress){
+  const key=src+">"+tgt;
+  if(translators.has(key)) return translators.get(key);
+  if(loadings.has(key)) return loadings.get(key);
+  const model=PAIR_MODELS[key]||FALLBACK_MODEL;
+  const loading=(async()=>{
+    const device=navigator.gpu?"webgpu":"wasm";
+    const dtype=device==="webgpu"?"q4f16":"q8";
+    onProgress?.("Loading "+(PAIR_MODELS[key]?"specialized":"fallback")+" translation engine ("+device+")…");
+    const options={device,dtype,progress_callback:p=>{
+      if(p?.status==="progress"&&Number.isFinite(p.progress)) onProgress?.("Downloading translation engine… "+Math.round(p.progress)+"%");
+      else if(p?.status==="ready") onProgress?.("Preparing translation engine…");
+    }};
+    try{
+      const pipe=await pipeline("translation",model,options);
+      translators.set(key,pipe); return pipe;
+    }catch(error){
+      if(device==="webgpu"&&dtype==="q4f16"){
+        try{
+          const pipe=await pipeline("translation",model,{...options,dtype:"q4"});
+          translators.set(key,pipe); return pipe;
+        }catch(_){}
       }
-    });
-    try {
-      translator = await createPipeline(preferredDtype);
-    } catch (firstError) {
-      if (device === "webgpu" && preferredDtype === "q4f16") {
-        onProgress?.("WebGPU q4f16 unavailable; switching to q4…");
-        translator = await createPipeline("q4");
-      } else {
-        throw firstError;
+      if(model!==FALLBACK_MODEL){
+        onProgress?.("Specialized model unavailable; using NLLB fallback…");
+        const pipe=await pipeline("translation",FALLBACK_MODEL,{device,dtype:"q4f16",progress_callback:options.progress_callback});
+        translators.set(key,pipe); return pipe;
       }
+      throw error;
     }
-    return translator;
   })();
-  try{return await loading;}finally{loading=null;}
+  loadings.set(key,loading);
+  try{return await loading;}finally{loadings.delete(key);}
 }
-async function translateChunk(text,src,tgt,pipe){
+async function translateChunk(text,src,tgt,pipe,onProgress){
   const s=String(text);
-  if(!s.trim() || src===tgt) return s;
+  if(!s.trim()||src===tgt) return s;
+  const localPipe=pipe||await getTranslator(src,tgt,onProgress);
   const {marked,tokens}=protectedParts(s);
-  const result=await pipe(marked,{src_lang:LANG[src],tgt_lang:LANG[tgt],max_new_tokens:512});
-  const value=Array.isArray(result)?result[0]?.translation_text ?? "":result?.translation_text ?? "";
+  const result=await localPipe(marked,{src_lang:LANG[src],tgt_lang:LANG[tgt],max_new_tokens:512});
+  const value=Array.isArray(result)?result[0]?.translation_text??"":result?.translation_text??"";
   return restore(value,tokens);
 }
 async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
@@ -105,7 +91,7 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
   if(!LANG[targetLanguage]) throw new Error("Unsupported target language: "+targetLanguage);
   if(!LANG[src]) throw new Error("Unsupported source language: "+sourceLanguage);
   if(src===targetLanguage) return cleanText(text);
-  const pipe=await getTranslator(onProgress);
+  const pipe=await getTranslator(src,targetLanguage,onProgress);
   const input=cleanText(text);
   const paragraphs=input.split(/(?<=\n)/);
   const out=[];
@@ -114,7 +100,7 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     if(!p.trim()){out.push(p);continue;}
     const nl=p.endsWith("\n")?"\n":"";
     const body=p.slice(0,nl? -1:undefined);
-    out.push(enforceTerminology(await translateChunk(body,src,targetLanguage,pipe),skillId,targetLanguage)+nl);
+    out.push(enforceTerminology(await translateChunk(body,src,targetLanguage,pipe,onProgress),skillId,targetLanguage)+nl);
     onProgress?.("Translating "+(i+1)+"/"+paragraphs.length);
   }
   return out.join("");
@@ -137,7 +123,7 @@ async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",
     for(let r=range.s.r;r<=range.e.r;r++) for(let c=range.s.c;c<=range.e.c;c++){
       const addr=XLSX.utils.encode_cell({r,c}),cell=ws[addr];
       if(!cell || !isTextCell(cell.v)) continue;
-      cell.v=enforceTerminology(await translateChunk(cell.v,sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage,targetLanguage,pipe),skillId,targetLanguage);
+      cell.v=enforceTerminology(await translateChunk(cell.v,sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage,targetLanguage,pipe,onProgress),skillId,targetLanguage);
       cell.t="s"; done++;
       onProgress?.("Translating "+wsName+" "+done+"/"+total);
     }
@@ -160,4 +146,4 @@ async function localizeFile(file,opts={}){
   if(name.endsWith(".csv")||name.endsWith(".xlsx")) return localizeWorkbook(file,opts);
   throw new Error("Supported browser localization formats: TXT, CSV, XLSX, JSON, XML and XLIFF. DOCX/PDF require an extraction step first.");
 }
-window.SaifLocalizer={version:"1.0.0-browser",translateText,localizeFile};
+window.SaifLocalizer={version:"2.1.0-specialized-pairs",translateText,localizeFile,engine:"specialized-pair-models-with-nllb-fallback"};
