@@ -206,7 +206,8 @@ function detect(v) {
     if (s[0] === "openhands-iterate-verify" && /iterate|verify|regression|ci|build failure|test failure|qa|تکراری جانچ|راستی.?آزمایی/.test(t)) score += 8;
     if (s[0] === "openhands-skill-creator" && /create skill|new skill|skill design|skill creator|agent skill|agentskills|skill بنائیں|مهارت/.test(t)) score += 8;
     if (s[0] === "openhands-review-learning" && /learn from reviews|review learning|distill reviews|coding standards|extract review patterns|review سے سیکھیں/.test(t)) score += 8;
-    if (s[0] === "localization-structure-preservation" && /structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization|xml localization|html localization|structure qa|tags|placeholders|line.?break/.test(t)) score += 10;\n    if (score && (!best || score > best.score)) best = {s,score};
+    if (s[0] === "localization-structure-preservation" && /structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization|xml localization|html localization|structure qa|tags|placeholders|line.?break/.test(t)) score += 10;
+    if (score && (!best || score > best.score)) best = {s,score};
   }
   detected.textContent = best ? skillLabel(best.s)+" · "+best.s[0] : tr("auto");
   return best;
