@@ -152,11 +152,12 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
   const src=sourceLanguage==="auto"?detectSourceLanguage(input):sourceLanguage;
   if(!LANG[targetLanguage]) throw new Error("Unsupported target language: "+targetLanguage);
   const memory=window.SaifLocalizationMemory;
-  const saved=memory?.lookup?.(input,src,targetLanguage,skillId);
-  if(saved!=null){
-    onProgress?.("Translation Memory match used.");
-    return memory.applyTerms(saved,src,targetLanguage,skillId);
+  const detailed=memory?.lookupDetailed?.(input,src,targetLanguage,skillId)||null;
+  if(detailed?.type==="exact" || detailed?.auto){
+    onProgress?.(detailed.type==="exact"?"Translation Memory exact match used.":"High-confidence Translation Memory match used.");
+    return memory.applyTerms(detailed.target,src,targetLanguage,skillId);
   }
+  memory?.renderSuggestion?.(input,src,targetLanguage,skillId);
   if(!LANG[src]) throw new Error("Unsupported source language: "+sourceLanguage);
   if(src===targetLanguage) return enforceTerminology(input,skillId,targetLanguage);
   const out=[];
@@ -166,13 +167,15 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     if(!p.trim()){out.push(p);continue;}
     const nl=p.endsWith("\n")?"\n":"";
     const body=p.slice(0,nl?-1:undefined);
-    const translated=await translateChunk(body,src,targetLanguage,null,onProgress);\n    out.push(enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage)+nl);
+    const translated=await translateChunk(body,src,targetLanguage,null,onProgress);
+    out.push(enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage)+nl);
     onProgress?.("Translating "+(i+1)+"/"+paragraphs.length);
   }
   return out.join("");
 }
 function isTextCell(v){return typeof v==="string"&&v.trim()&&!v.startsWith("=");}
 async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",skillId,onProgress}={}){
+  const memory=window.SaifLocalizationMemory;
   if(!window.XLSX) throw new Error("Spreadsheet engine is not loaded.");
   const wb=XLSX.read(await file.arrayBuffer(),{type:"array",cellFormula:false});
   for(const wsName of wb.SheetNames){
@@ -183,7 +186,9 @@ async function localizeWorkbook(file,{sourceLanguage="auto",targetLanguage="ur",
     for(let r=range.s.r;r<=range.e.r;r++)for(let c=range.s.c;c<=range.e.c;c++){
       const cell=ws[XLSX.utils.encode_cell({r,c})]; if(!cell||!isTextCell(cell.v))continue;
       const src=sourceLanguage==="auto"?detectSourceLanguage(cell.v):sourceLanguage;
-      const translated=await translateChunk(String(cell.v),src,targetLanguage,null,onProgress);\n      cell.v=enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage); cell.t="s";
+      const detailed=memory?.lookupDetailed?.(String(cell.v),src,targetLanguage,skillId)||null;
+      const translated=detailed?.type==="exact"||detailed?.auto?detailed.target:await translateChunk(String(cell.v),src,targetLanguage,null,onProgress);
+      cell.v=enforceTerminology(memory?.applyTerms?.(translated,src,targetLanguage,skillId)||translated,skillId,targetLanguage); cell.t="s";
       onProgress?.("Translating "+wsName+" "+(++done)+"/"+total);
     }
   }
