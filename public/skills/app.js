@@ -156,7 +156,7 @@ function renderSkills(){ $("skills").innerHTML=""; skills.forEach(s => {
   el.dataset.skillId = s[0];
   el.innerHTML = '<strong>' + (skillLabel(s)) + '</strong><span>' + s[0] + '</span>';
   el.addEventListener("click", () => {
-    task.value = (uiLang==="ar"?s[2]:uiLang==="ur"?s[3]:s[1]) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
+    task.value = (skillLabel(s)) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
     detect(task.value);
     task.focus();
     task.scrollIntoView({ behavior: "smooth", block: "center" });
