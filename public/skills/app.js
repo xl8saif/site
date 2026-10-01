@@ -1,4 +1,5 @@
-// User-focused localization console.\n// Browser OCR helper for scanned PDFs. OCR output is kept in memory and sent as text.
+// User-focused localization console.
+// Browser OCR helper for scanned PDFs. OCR output is kept in memory and sent as text.
 let ocrSourceFile = null;
 let ocrTargetFile = null;
 
@@ -300,7 +301,8 @@ function updateLocalizationWorkbench() {
 }
 
 task.addEventListener("input", () => { detect(task.value); updateLocalizationWorkbench(); });
-$("sourceText").addEventListener("input", updateLocalizationWorkbench);\n$("localizedOutput").addEventListener("input",()=>updateTargetPreview($("targetLanguage")?.value||"ur"));
+$("sourceText").addEventListener("input", updateLocalizationWorkbench);
+$("localizedOutput").addEventListener("input",()=>updateTargetPreview($("targetLanguage")?.value||"ur"));
 function updateTargetPreview(language){
   const output=$("localizedOutput"), preview=$("targetPreview"), box=$("targetPreviewBox");
   if(!output||!preview||!box) return;
@@ -389,7 +391,8 @@ $("localize").onclick = async () => {
     if (result.preview != null) {
       applyResultLanguageFont(language);
       $("localizedOutput").value = result.preview;
-      $("localizedOutput").hidden = false;\n      updateTargetPreview(language);
+      $("localizedOutput").hidden = false;
+      updateTargetPreview(language);
     }
     $("exportLocalized").disabled = false;
     if (result.preview != null) {
@@ -435,7 +438,8 @@ $("clear").onclick = () => {
   $("target").value = "";
   $("knowledge").value = "";
   if ($("sourceText")) $("sourceText").value = "";
-  if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }\n  if ($("targetPreviewBox")) { $("targetPreviewBox").hidden = true; $("targetPreview").textContent = ""; }
+  if ($("localizedOutput")) { $("localizedOutput").value = ""; $("localizedOutput").hidden = true; }
+  if ($("targetPreviewBox")) { $("targetPreviewBox").hidden = true; $("targetPreview").textContent = ""; }
   window.__localizedResult = null;
   window.__localizedMachineDraft = "";
   $("exportLocalized").disabled = true;
