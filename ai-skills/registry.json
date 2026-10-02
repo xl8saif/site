@@ -181,7 +181,8 @@
       "deterministic_tools": [
         "scripts/validate_memory.py",
         "scripts/build_index.py",
-        "scripts/query_index.py"
+        "scripts/query_index.py",
+        "scripts/normalize_chatgpt_export.py"
       ],
       "protected_work": [
         "provenance",
