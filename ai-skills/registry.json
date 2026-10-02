@@ -6,70 +6,254 @@
     {
       "id": "pubg-urdu-lqa",
       "status": "production",
-      "domain": ["game-localization", "urdu", "lqa", "mtpe"],
+      "domain": [
+        "game-localization",
+        "urdu",
+        "lqa",
+        "mtpe"
+      ],
       "path": "pubg-urdu-lqa",
       "entrypoint": "pubg-urdu-lqa/SKILL.md",
-      "deterministic_tools": ["scripts/check_lqa.py", "scripts/batch_lqa.py", "scripts/validate_eval_cases.py", "scripts/run_regression.py"],
-      "protected_work": ["XML/HTML structure", "placeholders", "line breaks", "PUBG Urdu terminology", "protected product terms"],
-      "execution": {"inputs": ["source", "target"], "args": {"source": "--source", "target": "--target"}, "json": true}
+      "deterministic_tools": [
+        "scripts/check_lqa.py",
+        "scripts/batch_lqa.py",
+        "scripts/validate_eval_cases.py",
+        "scripts/run_regression.py"
+      ],
+      "protected_work": [
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks",
+        "PUBG Urdu terminology",
+        "protected product terms"
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     },
     {
       "id": "arabic-urdu-localization",
       "status": "production",
-      "domain": ["translation", "arabic", "urdu", "mtpe", "lqa"],
+      "domain": [
+        "translation",
+        "arabic",
+        "urdu",
+        "mtpe",
+        "lqa"
+      ],
       "path": "arabic-urdu-localization",
       "entrypoint": "arabic-urdu-localization/SKILL.md",
-      "deterministic_tools": ["scripts/check_ar_ur.py", "scripts/run_regression.py"],
-      "protected_work": ["XML/HTML structure", "placeholders", "line breaks", "Arabic→Urdu terminology", "protected technical terms"],
-      "execution": {"inputs": ["source", "target"], "args": {"source": "--source", "target": "--target"}, "json": true}
+      "deterministic_tools": [
+        "scripts/check_ar_ur.py",
+        "scripts/run_regression.py"
+      ],
+      "protected_work": [
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks",
+        "Arabic→Urdu terminology",
+        "protected technical terms"
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": true
+      }
     },
     {
       "id": "multilingual-translation-mtpe",
       "status": "production",
-      "domain": ["translation", "mtpe", "multilingual"],
+      "domain": [
+        "translation",
+        "mtpe",
+        "multilingual"
+      ],
       "path": "multilingual-translation-mtpe",
       "entrypoint": "multilingual-translation-mtpe/SKILL.md",
-      "deterministic_tools": ["scripts/check_mtpe.py"],
-      "protected_work": ["source meaning", "XML/HTML structure", "placeholders", "line breaks"],
-      "execution": {"inputs": ["source", "target"], "args": {"source": "--source", "target": "--target"}, "json": false}
+      "deterministic_tools": [
+        "scripts/check_mtpe.py"
+      ],
+      "protected_work": [
+        "source meaning",
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks"
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": false
+      }
     },
     {
       "id": "indus-kohistani-research",
       "status": "production",
-      "domain": ["linguistic-research", "indus-kohistani", "dardic", "language-data"],
+      "domain": [
+        "linguistic-research",
+        "indus-kohistani",
+        "dardic",
+        "language-data"
+      ],
       "path": "indus-kohistani-research",
       "entrypoint": "indus-kohistani-research/SKILL.md",
-      "deterministic_tools": ["scripts/check_research_data.py"],
-      "protected_work": ["source meaning", "XML/HTML structure", "placeholders", "line breaks"],
-      "execution": {"inputs": ["knowledge"], "args": {"knowledge": "--knowledge"}, "json": false}
+      "deterministic_tools": [
+        "scripts/check_research_data.py"
+      ],
+      "protected_work": [
+        "source meaning",
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks"
+      ],
+      "execution": {
+        "inputs": [
+          "knowledge"
+        ],
+        "args": {
+          "knowledge": "--knowledge"
+        },
+        "json": false
+      }
     },
     {
       "id": "legal-translation-qa",
       "status": "production",
-      "domain": ["legal", "translation", "urdu", "qa"],
+      "domain": [
+        "legal",
+        "translation",
+        "urdu",
+        "qa"
+      ],
       "path": "legal-translation-qa",
       "entrypoint": "legal-translation-qa/SKILL.md",
-      "deterministic_tools": ["scripts/check_legal.py"],
-      "protected_work": ["source meaning", "XML/HTML structure", "placeholders", "line breaks"],
-      "execution": {"inputs": ["source", "target"], "args": {"source": "--source", "target": "--target"}, "json": false}
+      "deterministic_tools": [
+        "scripts/check_legal.py"
+      ],
+      "protected_work": [
+        "source meaning",
+        "XML/HTML structure",
+        "placeholders",
+        "line breaks"
+      ],
+      "execution": {
+        "inputs": [
+          "source",
+          "target"
+        ],
+        "args": {
+          "source": "--source",
+          "target": "--target"
+        },
+        "json": false
+      }
+    },
+    {
+      "id": "second-brain",
+      "status": "experimental",
+      "domain": [
+        "personal-knowledge-management",
+        "agent-memory",
+        "knowledge-retrieval",
+        "decision-support"
+      ],
+      "path": "second-brain",
+      "entrypoint": "second-brain/SKILL.md",
+      "deterministic_tools": [
+        "scripts/validate_memory.py",
+        "scripts/build_index.py",
+        "scripts/query_index.py"
+      ],
+      "protected_work": [
+        "provenance",
+        "confidence",
+        "temporal validity",
+        "decision history",
+        "private memory data"
+      ],
+      "execution": {
+        "inputs": [
+          "memory"
+        ],
+        "args": {
+          "memory": "--memory"
+        },
+        "json": true
+      }
     }
   ],
   "core": {
     "path": "core",
     "status": "stable",
-    "contracts": ["structural-invariants", "finding-model", "evaluation-contract", "shared-evaluation", "reference-layer", "reference-retrieval"],
-    "tools": ["scripts/check_localization.py", "scripts/evaluate.py", "scripts/validate_references.py", "scripts/retrieve_references.py", "scripts/smoke_test.py", "scripts/self_audit.py"]
+    "contracts": [
+      "structural-invariants",
+      "finding-model",
+      "evaluation-contract",
+      "shared-evaluation",
+      "reference-layer",
+      "reference-retrieval"
+    ],
+    "tools": [
+      "scripts/check_localization.py",
+      "scripts/evaluate.py",
+      "scripts/validate_references.py",
+      "scripts/retrieve_references.py",
+      "scripts/smoke_test.py",
+      "scripts/self_audit.py"
+    ]
   },
-  "version": "1.17.0",
-  "factory": {"template": "templates/skill", "generator": "scripts/create_skill.py", "status": "stable"},
-  "evaluation": {"schema": "core/evaluation.schema.json", "engine": "core/scripts/evaluate.py"},
+  "version": "1.18.0",
+  "factory": {
+    "template": "templates/skill",
+    "generator": "scripts/create_skill.py",
+    "status": "stable"
+  },
+  "evaluation": {
+    "schema": "core/evaluation.schema.json",
+    "engine": "core/scripts/evaluate.py"
+  },
   "runner": {
     "command": "python ai-skills/run.py all",
     "path": "ai-skills/run.py",
     "status": "stable",
-    "commands": ["list", "audit", "validate", "evaluate", "retrieve", "promote-check", "check", "all", "review"]
+    "commands": [
+      "list",
+      "audit",
+      "validate",
+      "evaluate",
+      "retrieve",
+      "promote-check",
+      "check",
+      "all",
+      "review"
+    ]
   },
-  "paperclip": {"status": "integrated", "source_of_truth": "ai-skills", "project_discovery_root": ".agents/skills", "sync_script": "scripts/sync_paperclip_skills.py", "manifest": "paperclip.json"},
+  "paperclip": {
+    "status": "integrated",
+    "source_of_truth": "ai-skills",
+    "project_discovery_root": ".agents/skills",
+    "sync_script": "scripts/sync_paperclip_skills.py",
+    "manifest": "paperclip.json"
+  },
   "router": {
     "path": "scripts/route_task.py",
     "profiles": "paperclip-agent-profiles.json",
@@ -83,5 +267,11 @@
     "review_gate_test": "scripts/test_review_gate.py",
     "traceability": "scripts/review_gate.py",
     "traceability_schema": "core/evidence.schema.json"
+  },
+  "second_brain": {
+    "path": "SECOND_BRAIN.md",
+    "status": "experimental",
+    "storage": "private-by-default",
+    "mcp_target": "brain_search,brain_get,brain_remember,brain_update,brain_forget,brain_decisions,brain_conflicts,brain_sources"
   }
 }
