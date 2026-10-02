@@ -198,7 +198,8 @@
           "memory": "--memory"
         },
         "json": true
-      }
+      },
+      "ecosystem": true
     }
   ],
   "core": {
