@@ -183,3 +183,18 @@ python api/skills/test_run.py
 ```
 
 GitHub Pages serves the static console only; the Python API must run locally or on a Python-capable deployment target.
+## Open Agent Skills ecosystem
+
+The production Skills are distributed through the open Agent Skills ecosystem using the portable `SKILL.md` format. The ecosystem-facing mirror is `.agents/skills/`, synchronized from the canonical `ai-skills/` source tree.
+
+See `ai-skills/ECOSYSTEM.md` for installation and distribution details.
+
+Examples:
+
+`npx skills add xl8saif/site --list`
+
+`npx skills add xl8saif/site --skill pubg-urdu-lqa`
+
+`npx skills add xl8saif/site --skill arabic-urdu-localization`
+
+`skills.sh.json` groups the public skills for skills.sh discovery. The open skill distribution remains separate from the commercial Skills Console/SaaS execution layer.
