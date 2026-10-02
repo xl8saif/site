@@ -71,6 +71,12 @@ jobs:
         run: node --check public/skills/localize-runtime.js
       - name: Validate Second Brain browser runtime
         run: node --check public/skills/second-brain-memory.js
+      - name: Compile Second Brain tools
+        run: |
+          python -m py_compile ai-skills/second-brain/scripts/validate_memory.py
+          python -m py_compile ai-skills/second-brain/scripts/build_index.py
+          python -m py_compile ai-skills/second-brain/scripts/query_index.py
+          python -m py_compile ai-skills/second-brain/scripts/normalize_chatgpt_export.py
       - name: Validate Skills Console shell
         run: test -f public/skills/index.html && grep -q 'id="pipeline"' public/skills/index.html && grep -q 'id="knowledge"' public/skills/index.html && grep -q 'localize-runtime.js' public/skills/index.html && grep -q 'localizedOutput' public/skills/index.html
       - name: Build portfolio and Skills Console
