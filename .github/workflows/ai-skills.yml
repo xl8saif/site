@@ -77,6 +77,9 @@ jobs:
           python -m py_compile ai-skills/second-brain/scripts/build_index.py
           python -m py_compile ai-skills/second-brain/scripts/query_index.py
           python -m py_compile ai-skills/second-brain/scripts/normalize_chatgpt_export.py
+          python -m py_compile ai-skills/second-brain/scripts/extract_candidates.py
+          python -m py_compile ai-skills/second-brain/scripts/deduplicate_candidates.py
+          python -m py_compile ai-skills/second-brain/scripts/detect_conflicts.py
       - name: Validate Skills Console shell
         run: test -f public/skills/index.html && grep -q 'id="pipeline"' public/skills/index.html && grep -q 'id="knowledge"' public/skills/index.html && grep -q 'localize-runtime.js' public/skills/index.html && grep -q 'localizedOutput' public/skills/index.html
       - name: Build portfolio and Skills Console
