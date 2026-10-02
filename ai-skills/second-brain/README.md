@@ -81,6 +81,7 @@ The deterministic scripts are intentionally dependency-light:
 python ai-skills/second-brain/scripts/validate_memory.py path/to/memory.jsonl
 python ai-skills/second-brain/scripts/build_index.py path/to/memory.jsonl --db .second-brain/index.sqlite
 python ai-skills/second-brain/scripts/query_index.py .second-brain/index.sqlite "GitHub Pages"
+python ai-skills/second-brain/scripts/normalize_chatgpt_export.py conversations.json -o chatgpt-conversations.jsonl
 ```
 
 The index is disposable; the JSONL/Markdown records remain the source data.
