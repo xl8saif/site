@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xl8saif.github.io/site/ai-skills/second-brain/schemas/source.schema.json",
+  "title": "Saif Second Brain Source",
+  "type": "object",
+  "required": ["kind", "locator"],
+  "properties": {
+    "kind": {"enum": ["conversation", "document", "web", "github", "email", "project", "human", "derived"]},
+    "locator": {"type": "string", "minLength": 1},
+    "title": {"type": "string"},
+    "author": {"type": "string"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "verified_at": {"type": ["string", "null"], "format": "date-time"},
+    "quote_hash": {"type": "string"},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}
