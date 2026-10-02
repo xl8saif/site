@@ -20,6 +20,13 @@ The current production Skills are:
 - legal-translation-qa — legal translation and document QA
 - indus-kohistani-research — Indus-Kohistani research and language-data workflow
 
+Experimental:
+- second-brain — source-aware personal knowledge, decision memory, contradiction handling, and retrieval foundation
+
+## Second Brain
+
+The experimental `second-brain` Skill is the knowledge layer underneath the production Skills. It remains outside the production Agent Skills mirror until its import, retrieval, conflict and evaluation layers mature. See `SECOND_BRAIN.md` and `second-brain/README.md`.
+
 ## Design principles
 
 1. User-confirmed terminology is authoritative for the relevant production domain.
