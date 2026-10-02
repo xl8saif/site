@@ -19,7 +19,7 @@
       related_ids:Array.isArray(input.related_ids)?input.related_ids:[],
       supersedes:Array.isArray(input.supersedes)?input.supersedes:[]
     };
-    if(!item.content)return null;
+    if(!item.content)return null; if(item.status==="verified" && item.confidence<0.8)item.confidence=0.8;
     const existing=db.memories.find(x=>x.id===item.id);
     if(existing)Object.assign(existing,item);else db.memories.unshift(item);
     save(db);return item;
@@ -56,7 +56,7 @@
   function download(name,data,type="application/json"){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
   function exportVault(){download("saif-second-brain.json",JSON.stringify(load(),null,2));}
   async function importVault(file){
-    const raw=await file.text(), parsed=JSON.parse(raw), db=load();
+    const raw=await file.text(); let parsed; try{parsed=JSON.parse(raw);}catch(_){parsed=raw.split(/\\r?\\n/).filter(Boolean).map(line=>JSON.parse(line));} const db=load();
     const memories=Array.isArray(parsed)?parsed:(parsed.memories||[]);
     const decisions=Array.isArray(parsed)?[]:(parsed.decisions||[]);
     for(const x of memories)addMemory(x);
