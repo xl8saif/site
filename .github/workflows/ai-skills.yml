@@ -41,6 +41,12 @@ jobs:
         run: python -m json.tool ai-skills/paperclip-agent-profiles.json > /dev/null
       - name: Validate evidence trace schema
         run: python -m json.tool ai-skills/core/evidence.schema.json > /dev/null
+      - name: Validate Second Brain schemas
+        run: |
+          python -m json.tool ai-skills/second-brain/schemas/memory.schema.json > /dev/null
+          python -m json.tool ai-skills/second-brain/schemas/decision.schema.json > /dev/null
+          python -m json.tool ai-skills/second-brain/schemas/source.schema.json > /dev/null
+          python ai-skills/second-brain/scripts/validate_memory.py ai-skills/second-brain/schemas/example-memory.jsonl
       - name: Run deterministic Skill Router tests
         run: python ai-skills/scripts/test_router.py
       - name: Run executable Skill planning tests
@@ -63,6 +69,8 @@ jobs:
         run: node --check public/skills/app.js
       - name: Validate Skills Console localization runtime
         run: node --check public/skills/localize-runtime.js
+      - name: Validate Second Brain browser runtime
+        run: node --check public/skills/second-brain-memory.js
       - name: Validate Skills Console shell
         run: test -f public/skills/index.html && grep -q 'id="pipeline"' public/skills/index.html && grep -q 'id="knowledge"' public/skills/index.html && grep -q 'localize-runtime.js' public/skills/index.html && grep -q 'localizedOutput' public/skills/index.html
       - name: Build portfolio and Skills Console
