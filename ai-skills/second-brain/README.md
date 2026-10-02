@@ -102,3 +102,23 @@ Chat export
 ```
 
 Do not place a raw ChatGPT export in this public repository. When a private export is available, the parser can be added as a local-only ingestion step.
+
+
+## 2026 architecture notes
+
+The design deliberately follows the knowledge-centric direction in current agent-memory research: raw interaction histories are treated as source material, while retrieval should return compact, decision-relevant knowledge. PlugMem reports that this reduces context explosion and improves task-relevant reuse across heterogeneous agent tasks.
+
+Current open-source reference implementations also reinforce the local-first pattern: QMD-based second-brain systems combine BM25, vector search and reranking; local MCP memory servers expose typed memory to multiple agents; larger personal knowledge bases combine ingestion, search, graph relationships, MCP and encrypted backup. These projects are reference points, not dependencies.
+
+For Saif's brain, the preferred progression is:
+
+1. JSONL/Markdown canonical records.
+2. SQLite + FTS5 deterministic retrieval.
+3. Local embeddings + vector search.
+4. Reciprocal-rank/hybrid fusion.
+5. Optional reranking.
+6. Knowledge relationships and temporal graph.
+7. MCP interface.
+8. Encrypted private backup and optional authenticated sync.
+
+The brain should never answer from memory alone when a current external fact is required. It should use memory to recover context, preferences, prior decisions and reusable expertise, then use live sources when freshness matters.
