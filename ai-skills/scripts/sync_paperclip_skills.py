@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synchronize production AI Skills into Paperclip's project-discovery layout.
+"""Synchronize production and explicitly ecosystem-public AI Skills into Paperclip's project-discovery layout.
 
 Canonical source: ai-skills/<skill>/
 Paperclip discovery mirror: .agents/skills/<skill>/
@@ -19,10 +19,10 @@ REGISTRY = SOURCE_ROOT / "registry.json"
 PAPERCLIP_ROOT = REPO_ROOT / ".agents" / "skills"
 
 
-def production_skills() -> list[str]:
+def distributable_skills() -> list[str]:
     import json
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    return [item["id"] for item in data["skills"] if item.get("status") == "production"]
+    return [item["id"] for item in data["skills"] if item.get("status") == "production" or item.get("ecosystem") is True]
 
 
 def mirrored_files(skill: str) -> list[Path]:
@@ -83,7 +83,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="fail if the Paperclip mirror differs")
     args = parser.parse_args()
 
-    skills = production_skills()
+    skills = distributable_skills()
     if args.check:
         problems = [problem for skill in skills for problem in compare_skill(skill)]
         if problems:
@@ -95,7 +95,7 @@ def main() -> int:
 
     for skill in skills:
         sync_skill(skill)
-    print(f"SYNC PASS: mirrored {len(skills)} production Skills to .agents/skills/")
+    print(f"SYNC PASS: mirrored {len(skills)} distributable Agent Skills to .agents/skills/")
     return 0
 
 
