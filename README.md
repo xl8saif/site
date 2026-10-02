@@ -1,5 +1,7 @@
 # Saif Ullah — Professional Portfolio
 
+[![skills.sh](https://skills.sh/b/xl8saif/site)](https://skills.sh/xl8saif/site)
+
 Production portfolio for **Saif Ullah**, a multilingual translator, localization specialist, AI data specialist and language technology professional.
 
 **Live portfolio:** https://xl8saif.github.io/site/
@@ -62,3 +64,10 @@ On GitHub Pages, the console uses its browser-side deterministic runtime and cle
 The `main` branch is deployed to GitHub Pages through `.github/workflows/deploy.yml`. The Vite base path is fixed to `/site/`, matching the repository Pages URL.
 
 The AI Skills validation workflow independently runs the framework audits, deterministic tests, JavaScript checks, shell checks and production build.
+
+
+## Open Agent Skills ecosystem
+
+This repository publishes five production Agent Skills through the open `skills` ecosystem. The canonical skill framework is `ai-skills/`; the ecosystem-facing `.agents/skills/` mirror is kept synchronized automatically. See `ai-skills/ECOSYSTEM.md` for installation and distribution details.
+
+Install with `npx skills add xl8saif/site --list`.
