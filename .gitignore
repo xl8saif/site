@@ -5,3 +5,9 @@ dist/
 !.env.example
 .DS_Store
 Thumbs.db
+
+# Private Second Brain data — never commit raw memory
+.second-brain/
+private-brain/
+chatgpt-export/
+*.brain.jsonl
