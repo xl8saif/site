@@ -35,6 +35,8 @@ jobs:
         run: python ai-skills/core/scripts/self_audit.py
       - name: Check Paperclip skill mirror
         run: python ai-skills/scripts/sync_paperclip_skills.py --check
+      - name: Validate open Agent Skills distribution
+        run: python ai-skills/scripts/validate_agent_skills.py
       - name: Validate Paperclip agent profiles
         run: python -m json.tool ai-skills/paperclip-agent-profiles.json > /dev/null
       - name: Validate evidence trace schema
