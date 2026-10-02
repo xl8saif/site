@@ -31,7 +31,7 @@ def frontmatter(path: Path):
 
 def main():
     registry = json.loads(REGISTRY.read_text(encoding='utf-8'))
-    expected = {s['id'] for s in registry['skills'] if s.get('status') == 'production'}
+    expected = {s['id'] for s in registry['skills'] if s.get('status') == 'production' or s.get('ecosystem') is True}
     actual = {p.name for p in MIRROR.iterdir() if p.is_dir() and (p / 'SKILL.md').is_file()}
     if expected != actual:
         raise SystemExit(f'FAIL: mirror mismatch; expected={sorted(expected)} actual={sorted(actual)}')
@@ -41,7 +41,7 @@ def main():
     listed = {sid for group in groups.get('groupings', []) for sid in group.get('skills', [])}
     if not listed.issubset(expected):
         raise SystemExit(f'FAIL: skills.sh.json contains unknown skills: {sorted(listed - expected)}')
-    print(f'PASS: {len(expected)} production Agent Skills are ecosystem-compatible and grouped for skills.sh')
+    print(f'PASS: {len(expected)} Agent Skills are ecosystem-compatible and grouped for skills.sh')
     return 0
 
 if __name__ == '__main__':
