@@ -26,3 +26,9 @@ body{background:radial-gradient(900px 600px at 15% -10%,rgba(86,105,145,.22),tra
 .site-footer{border-top-color:rgba(255,255,255,.1)!important;color:#a1a9b6!important}.site-footer a{color:#b9c4d4!important}
 ::selection{background:rgba(100,160,255,.28)!important;color:#fff!important}
 @media(prefers-reduced-transparency:reduce){.panel,.topbar,.localization-workbench,.loc-option,.smart-skill.compact,.loc-source-card,.loc-target-card,.pipeline-grid>div,.brain-grid>*{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#11161e!important}}
+.second-brain-panel .brain-capture,.second-brain-panel .brain-result,.second-brain-panel .brain-empty{background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.12)!important;color:#e8ebf0!important;box-shadow:0 10px 30px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.04)!important}
+.second-brain-panel .brain-head p,.second-brain-panel .brain-capture-head small,.second-brain-panel .brain-library-head small,.brain-result-meta,.brain-confidence,.brain-result-type{color:#a1a9b6!important}
+.second-brain-panel .brain-type-switch{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.12)!important}.second-brain-panel .brain-type{color:#aeb6c2!important}.second-brain-panel .brain-type.active{color:#fff!important;background:rgba(10,132,255,.9)!important}
+.second-brain-panel .brain-primary-field label,.second-brain-panel .brain-form-row label{color:#aeb6c2!important}
+.second-brain-panel .brain-result-meta span,.second-brain-panel .brain-tags .brain-tag{background:rgba(255,255,255,.07)!important;color:#b9c4d4!important}
+.second-brain-panel .brain-empty{border-style:dashed!important}
