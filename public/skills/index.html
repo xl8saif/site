@@ -55,7 +55,7 @@
         <span><b id="paste-title">Paste text here</b><small id="paste-hint">You can paste directly from CAT tools, spreadsheets, documents or chat.</small></span>
       </label>
       <textarea id="sourceText" rows="8" placeholder="Paste source text here…"></textarea>
-      <div class="source-actions"><span id="sourceName">No attachment</span><label class="attach-btn" for="source"><input id="source" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-source-label">Attach document</span></label></div>
+      <div class="source-actions"><span id="sourceName">No attachment</span><label class="attach-btn" for="source"><input id="source" type="file" accept=".txt,.csv,.xlsx,.json,.xml,.xliff,.pdf"><span id="attach-source-label">Attach document</span></label></div>
     </div>
 
     <div class="loc-target-card">
@@ -63,7 +63,8 @@
       <div class="target-attachment-row"><span id="targetName">No target attachment</span><label class="attach-btn" for="target"><input id="target" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-target-label">Attach existing target</span></label></div>
       <div class="loc-result" id="locResult">
         <div class="loc-result-head"><label for="localizedOutput" id="localizedOutput-label">Result</label><span id="resultMeta">Ready for review</span></div>
-        <textarea id="localizedOutput" rows="10" placeholder="Your localized result will appear here…" hidden></textarea>\n        <div class="target-preview" id="targetPreviewBox" hidden><div class="target-preview-head"><strong id="targetPreviewLabel">Target Preview</strong><span id="targetPreviewMeta">Live preview</span></div><pre id="targetPreview" aria-label="Target result preview"></pre></div>
+        <textarea id="localizedOutput" rows="10" placeholder="Your localized result will appear here…" hidden></textarea>
+        <div class="target-preview" id="targetPreviewBox" hidden><div class="target-preview-head"><strong id="targetPreviewLabel">Target Preview</strong><span id="targetPreviewMeta">Live preview</span></div><pre id="targetPreview" aria-label="Target result preview"></pre></div>
       </div>
     </div>
   </div>
@@ -173,27 +174,4 @@
   </div>
 </footer>
 <script src="./runtime-fixed.js?v=1.36.0"></script>
-<script>
-/* Unified action wording: short, natural and fully localized. */
-(function(){
-  const labels = {
-    ar: { action: "ابدأ التوطين", run: "ابدأ", ocr: "بعد الاستخراج يصبح النص جاهزاً مباشرةً عند بدء التوطين." },
-    en: { action: "Start Localization", run: "Start", ocr: "After extraction, the text is ready when you start localization." },
-    ur: { action: "لوكلائزیشن شروع کریں", run: "لوكلائزیشن شروع کریں", ocr: "اخراج کے بعد متن لوکلائزیشن شروع کرتے ہی استعمال کے لیے تیار ہو جاتا ہے۔" }
-  };
-  function syncActionLabels(){
-    const lang = document.documentElement.lang || "en";
-    const t = labels[lang] || labels.en;
-    const action = document.getElementById("localizeActionText");
-    const run = document.getElementById("localizeRunLabel");
-    if(action) action.textContent = t.action;
-    if(run) run.textContent = t.run;
-    const ocr = document.getElementById("ocr-text");
-    if(ocr && ocr.dataset.unifiedOcrText === "1") ocr.textContent = t.ocr;
-  }
-  const ocr = document.getElementById("ocr-text");
-  if(ocr) ocr.dataset.unifiedOcrText = "1";
-  syncActionLabels();
-  new MutationObserver(syncActionLabels).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
-})();
-</script><script src="./openhands-skill-library.js?v=1.36.0"></script><script src="./dify-skill-library.js?v=1.36.0"></script><script src="./localization-memory.js?v=1.37.0"></script><script src="./second-brain-memory.js?v=1.41.0"></script><script src="./app.js?v=1.41.0"></script><script src="./ux-premium.js?v=1.41.0"></script><script type="module" src="./localize-runtime.js?v=1.36.0"></script></body></html>
+<script src="./openhands-skill-library.js?v=1.36.0"></script><script src="./dify-skill-library.js?v=1.36.0"></script><script src="./localization-memory.js?v=1.37.0"></script><script src="./second-brain-memory.js?v=1.41.0"></script><script src="./app.js?v=1.41.0"></script><script src="./ux-premium.js?v=1.41.0"></script><script type="module" src="./localize-runtime.js?v=1.36.0"></script></body></html>
