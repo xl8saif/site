@@ -25,10 +25,10 @@ on:
 
 jobs:
   validate-skills:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Framework self-audit
@@ -50,11 +50,11 @@ jobs:
         run: python ai-skills/core/scripts/skill_security_gate.py --version 2.11.2
       - name: Upload Skill security reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: skill-security-reports
           path: skill-security-reports/
-          if-no-files-found: warn
+          if-no-files-found: ignore
       - name: Validate Second Brain schemas
         run: |
           python -m json.tool ai-skills/second-brain/schemas/memory.schema.json > /dev/null
