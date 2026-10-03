@@ -64,7 +64,7 @@ def main() -> int:
             completeness.get('complete') is False or
             completeness.get('status') in {'partial', 'incomplete', 'failed'}
         )
-        blocking = exit_code == 1 or (isinstance(risk, (int, float)) and risk > 50) or incomplete
+        blocking = exit_code == 1 or execution_failed or (isinstance(risk, (int, float)) and risk > 50) or incomplete
         failed = failed or blocking
         results.append({
             'skill': str(skill), 'risk_score': risk,
