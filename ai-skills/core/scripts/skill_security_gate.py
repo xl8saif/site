@@ -18,7 +18,7 @@ def run_scan(skill: Path, out_dir: Path, version: str) -> tuple[int, dict]:
     report_path = out_dir / f"{skill.name}.json"
     cmd = [
         "skillspector", "scan", str(skill), "--no-llm", "--format", "json",
-        "--output", str(report_path), "--fail-on-incomplete",
+        "--output", str(report_path),
     ]
     proc = subprocess.run(cmd, text=True, capture_output=True)
     report = {}
@@ -61,10 +61,11 @@ def main() -> int:
             print(f"ERROR: {exc}", file=sys.stderr); failed = True; continue
         risk = report.get('risk_score'); completeness = report.get('analysis_completeness')
         incomplete = isinstance(completeness, dict) and (
-            completeness.get('complete') is False or
-            completeness.get('status') in {'partial', 'incomplete', 'failed'}
+            completeness.get('execution_successful') is False or
+            (isinstance(completeness.get('entirely_uninspected_files'), (int, float)) and completeness.get('entirely_uninspected_files') > 0) or
+            (isinstance(completeness.get('partially_inspected_files'), (int, float)) and completeness.get('partially_inspected_files') > 0)
         )
-        blocking = exit_code == 1 or (isinstance(risk, (int, float)) and risk > 50) or incomplete
+        blocking = exit_code == 2 or (isinstance(risk, (int, float)) and risk > 50) or incomplete
         failed = failed or blocking
         results.append({
             'skill': str(skill), 'risk_score': risk,
