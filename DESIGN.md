@@ -304,3 +304,8 @@ When a new visual decision is accepted:
 5. record significant architectural/design decisions in the appropriate private knowledge layer.
 
 This file is the bridge between human product decisions, Stitch design work, and coding agents.
+
+
+## Verification gate
+
+The public Skills Console should pass deterministic source, registry, asset, syntax, and build checks before deployment. Browser/visual verification remains a separate evidence layer.
