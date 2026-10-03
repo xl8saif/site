@@ -134,7 +134,7 @@ const LOC_I18N={
 let savedLang = null;
 try { savedLang = localStorage.getItem("saif-skills-lang"); } catch (_) {}
 let uiLang=["ar","en","ur","fa"].includes(savedLang)?savedLang:(["ar","en","ur","fa"].includes(document.documentElement.lang)?document.documentElement.lang:"ar");
-function tr(key){return I18N[uiLang][key]||key}
+function tr(key){return (I18N[uiLang]&&I18N[uiLang][key])||key}\nwindow.uiLang=uiLang;
 function setText(el,key){if(el)el.textContent=tr(key)}
 const FOOTER_I18N={
   ar:{project:"مشروع من مؤسسة وراق، جيلجت",credit:"تم التطوير والبرمجة بأسلوب Vibe Coding بواسطة: Saif Ullah Jailani",address:"مؤسسة وراق، طريق جامعة قراقرم الدولية (KIU Road)، منطقة المحاكم، کونوداس، جيلجت، باكستان - 15100",contact:"الجوال / واتساب:",visitors:"زوار الموقع",countries:"عرض دول الزوار ↗",waraq:"شعار مؤسسة وراق",cloudtrans:"شعار CloudTrans"},
@@ -153,7 +153,7 @@ function setFooterLanguage(){
 }
 const nextLang={ar:"en",en:"ur",ur:"fa",fa:"ar"};
 const langNames={ar:"English",en:"اردو",ur:"فارسی",fa:"العربية"};
-function setLanguage(lang){if(!["ar","en","ur","fa"].includes(lang))lang="ar";uiLang=lang;try { localStorage.setItem("saif-skills-lang",lang); } catch (_) {}document.documentElement.lang=lang;document.documentElement.dir=(lang==="ar"||lang==="ur"||lang==="fa")?"rtl":"ltr";setText(document.querySelector('label[for="task"]'),"taskLabel");setText($("#source-label"),"sourceLabel");setText($("#target-label"),"targetLabel");setText($("#knowledge-label"),"knowledgeLabel");setText($("#detected-label"),"skillAgent");setText($("#skills-title"),"skillsTitle");setText($("task-label"),"taskLabel");setText($("[data-i18n=\"consoleKicker\"]"),"consoleKicker");setText($("pipeline-title"),"pipeline");setText($("evidence-label"),"evidence");setText($("trace-label"),"trace");setText($("raw-label"),"raw");setText($("ocr-text"),"ocrText");setText($("intro-title"),"introTitle");setText($("#intro-text"),"introText");setText($("#framework-label"),"framework");setText($("#framework-text"),"frameworkText");task.placeholder=tr("taskPlaceholder");setText($("run"),"run");setText($("clear"),"clear");setText($(".progress p"),"progress");setText($("#pipeline h2"),"pipeline");["router","planner","execution","review"].forEach(k=>setText(document.querySelector('[data-stage="'+k+'"] span'),k));setText($("#resultTitle"),"result");setText(document.querySelector("#result .kicker"),"evidence");setText(document.querySelector("#result details:nth-of-type(1) summary"),"trace");setText(document.querySelector("#result details:nth-of-type(2) summary"),"raw");setText($("ocr-type"),"ocr");setText($("#ocr-panel p"),"ocrText");setText($("#ocr-source-btn"),"ocrSource");setText($("#ocr-target-btn"),"ocrTarget");document.querySelectorAll(".drop").forEach((el,i)=>{setText(el.querySelector("b"),i===0?"sourceLabel":i===1?"targetLabel":"knowledgeLabel");setText(el.querySelector("span"),i===0?"source":i===1?"target":"knowledge");});setText($("#detected"),"auto");setText($("langBtn"),langNames[lang]);setText($("portfolioLink"),lang==="ar"?"المحفظة":lang==="ur"?"پورٹ فولیو":lang==="fa"?"نمونه‌کارها":"Portfolio");setText(document.querySelector(".task-skills-head>span"),lang==="ar"?"المهارات":lang==="ur"?"اسکلز":lang==="fa"?"مهارت‌ها":"Skills");const targetOptions={ur:lang==="ar"?"الأردية":lang==="ur"?"اردو":lang==="fa"?"اردو":"Urdu",ar:lang==="ar"?"العربية":lang==="ur"?"عربی":lang==="fa"?"عربی":"Arabic",en:"English",fa:lang==="ar"?"الفارسية":lang==="ur"?"فارسی":lang==="fa"?"فارسی":"Persian"};document.querySelectorAll("#targetLanguage option").forEach(o=>{if(targetOptions[o.value])o.textContent=targetOptions[o.value];});setText($("localize-kicker"),lang==="ar"?"محرّك التوطين":lang==="ur"?"لوکلائزیشن ورک بینچ":lang==="fa"?"میز کار بومی‌سازی":"LOCALIZATION WORKBENCH");setText($("localizeRunLabel"),"run");setText($("exportLocalized"),"export");if (Object.keys(currentResult).length) render(currentResult); setLocalizationCopy(); renderSkills(); if (typeof updateLocalizationWorkbench === "function") updateLocalizationWorkbench(); setFooterLanguage();window.dispatchEvent(new CustomEvent("saif-skills-language"));}
+function setLanguage(lang){if(!["ar","en","ur","fa"].includes(lang))lang="ar";uiLang=lang;window.uiLang=lang;try { localStorage.setItem("saif-skills-lang",lang); } catch (_) {}document.documentElement.lang=lang;document.documentElement.dir=(lang==="ar"||lang==="ur"||lang==="fa")?"rtl":"ltr";setText(document.querySelector('label[for="task"]'),"taskLabel");setText($("#source-label"),"sourceLabel");setText($("#target-label"),"targetLabel");setText($("#knowledge-label"),"knowledgeLabel");setText($("#detected-label"),"skillAgent");setText($("#skills-title"),"skillsTitle");setText($("task-label"),"taskLabel");setText($("[data-i18n=\"consoleKicker\"]"),"consoleKicker");setText($("pipeline-title"),"pipeline");setText($("evidence-label"),"evidence");setText($("trace-label"),"trace");setText($("raw-label"),"raw");setText($("ocr-text"),"ocrText");setText($("intro-title"),"introTitle");setText($("#intro-text"),"introText");setText($("#framework-label"),"framework");setText($("#framework-text"),"frameworkText");task.placeholder=tr("taskPlaceholder");setText($("run"),"run");setText($("clear"),"clear");setText($(".progress p"),"progress");setText($("#pipeline h2"),"pipeline");["router","planner","execution","review"].forEach(k=>setText(document.querySelector('[data-stage="'+k+'"] span'),k));setText($("#resultTitle"),"result");setText(document.querySelector("#result .kicker"),"evidence");setText(document.querySelector("#result details:nth-of-type(1) summary"),"trace");setText(document.querySelector("#result details:nth-of-type(2) summary"),"raw");setText($("ocr-type"),"ocr");setText($("#ocr-panel p"),"ocrText");setText($("#ocr-source-btn"),"ocrSource");setText($("#ocr-target-btn"),"ocrTarget");document.querySelectorAll(".drop").forEach((el,i)=>{setText(el.querySelector("b"),i===0?"sourceLabel":i===1?"targetLabel":"knowledgeLabel");setText(el.querySelector("span"),i===0?"source":i===1?"target":"knowledge");});setText($("#detected"),"auto");setText($("langBtn"),langNames[lang]);setText($("portfolioLink"),lang==="ar"?"المحفظة":lang==="ur"?"پورٹ فولیو":lang==="fa"?"نمونه‌کارها":"Portfolio");setText(document.querySelector(".task-skills-head>span"),lang==="ar"?"المهارات":lang==="ur"?"اسکلز":lang==="fa"?"مهارت‌ها":"Skills");const targetOptions={ur:lang==="ar"?"الأردية":lang==="ur"?"اردو":lang==="fa"?"اردو":"Urdu",ar:lang==="ar"?"العربية":lang==="ur"?"عربی":lang==="fa"?"عربی":"Arabic",en:"English",fa:lang==="ar"?"الفارسية":lang==="ur"?"فارسی":lang==="fa"?"فارسی":"Persian"};document.querySelectorAll("#targetLanguage option").forEach(o=>{if(targetOptions[o.value])o.textContent=targetOptions[o.value];});setText($("localize-kicker"),lang==="ar"?"محرّك التوطين":lang==="ur"?"لوکلائزیشن ورک بینچ":lang==="fa"?"میز کار بومی‌سازی":"LOCALIZATION WORKBENCH");setText($("localizeRunLabel"),"run");setText($("exportLocalized"),"export");if (Object.keys(currentResult).length) render(currentResult); setLocalizationCopy(); renderSkills(); if (typeof updateLocalizationWorkbench === "function") updateLocalizationWorkbench(); setFooterLanguage();window.dispatchEvent(new CustomEvent("saif-skills-language"));}
 
 function stages(state) {
   $("pipeline").hidden = false;
@@ -185,7 +185,7 @@ function renderSkills(){ $("skills").innerHTML=""; skills.forEach(s => {
   el.dataset.skillId = s[0];
   el.innerHTML = '<strong>' + (skillLabel(s)) + '</strong><span>' + s[0] + '</span>';
   el.addEventListener("click", () => {
-    task.value = (skillLabel(s)) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":" task");
+    task.value = (skillLabel(s)) + " — " + s[0] + (uiLang==="ar"?" — مهمة":uiLang==="ur"?" — کام":uiLang==="fa"?" — وظیفه":" task");
     detect(task.value);
     task.focus();
     task.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -295,7 +295,7 @@ function updateLocalizationWorkbench() {
 
   if (ready && !task.value.trim()) {
     const label = ctx.language === "ur" ? "Urdu" : ctx.language === "ar" ? "Arabic" : ctx.language === "fa" ? "Persian" : "English";
-    task.value = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
+    task.value = ({ar:"وطّن المحتوى إلى "+label+" مع الحفاظ على المصطلحات والعلامات والعناصر النائبة وعلامات الترقيم وفواصل الأسطر",ur:"متن کو "+label+" میں لوکلائز کریں اور اصطلاحات، ٹیگز، پلیس ہولڈرز، رموزِ اوقاف اور لائن بریک برقرار رکھیں",fa:"محتوا را به "+label+" بومی‌سازی کنید و اصطلاحات، برچسب‌ها، جای‌نگهدارها، نشانه‌گذاری و شکست خطوط را حفظ کنید",en:"Localize source content into "+label+" with terminology, tags, placeholders, punctuation and line breaks"})[language];
     detect(task.value);
   }
 }
@@ -337,7 +337,7 @@ $("sourceText").addEventListener("paste", () => setTimeout(updateLocalizationWor
 $("source").addEventListener("change", async e => {
   ocrSourceFile = null;
   const file = e.target.files[0];
-  $("sourceName").textContent = file?.name || "No attachment";
+  $("sourceName").textContent = file?.name || tr("source");
   if (file?.name?.toLowerCase().endsWith(".pdf")) {
     try {
       const ocrText = await extractScannedPdf(file, "Source");
@@ -350,11 +350,11 @@ $("source").addEventListener("change", async e => {
 });
 $("target").addEventListener("change", e => {
   ocrTargetFile = null;
-  $("targetName").textContent = e.target.files[0]?.name || "No target attachment";
+  $("targetName").textContent = e.target.files[0]?.name || tr("target");
   updateLocalizationWorkbench();
 });
 $("knowledge").addEventListener("change", e => {
-  $("knowledgeName").textContent = e.target.files[0]?.name || "Optional terminology, reference or context file";
+  $("knowledgeName").textContent = e.target.files[0]?.name || localizationCopy().knowledgeHint;
 });
 
 $("localize").onclick = async () => {
@@ -362,7 +362,7 @@ $("localize").onclick = async () => {
   const detectedSkill = ctx.best?.s?.[0] || "multilingual-translation-mtpe";
   window.__localizedSkillId = detectedSkill;
   const language = $("targetLanguage")?.value || "ur";
-  const label = language === "ur" ? "Urdu" : language === "ar" ? "Arabic" : language === "fa" ? "Persian" : "English";
+  const label = ({ur:"اردو",ar:"العربية",fa:"فارسی",en:"English"})[language] || "English";
   const source = ctx.file || (ctx.pasted ? new File([ctx.pasted], "pasted-source.txt", {type:"text/plain"}) : null);
   if (!source) {
     $("localizeNote").className = "loc-message warn";
