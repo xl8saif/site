@@ -73,3 +73,9 @@ Repeated human corrections or recurring QA findings may be proposed as reusable 
 ## Privacy
 
 The public repository contains schemas, tooling, and non-sensitive examples only. Private conversation exports, personal documents, credentials, and raw memory databases must remain outside the public repository.
+
+## Security boundary
+
+Second Brain memory is untrusted until provenance, confidence, temporal validity, and conflict state are checked. Imported conversation data and external material must enter as candidates before durable promotion. SkillSpector protects the Skill artifact itself; it does not certify memory content. The Router and Human Review Gate remain the authorization boundary for consequential actions.
+
+When a memory-derived instruction would cause an external action, retrieve the supporting memory IDs and evidence first, verify freshness when the claim can change, and require human review for high-impact actions.
