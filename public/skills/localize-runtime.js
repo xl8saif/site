@@ -193,11 +193,11 @@ async function translateText(text,{sourceLanguage="auto",targetLanguage="ur",ski
     // One strict regeneration pass prevents a model/service response from escaping the
     // browser localization contract even if an upstream engine normalized formatting.
     const retry=[];
-    const retryParts=input.split(/(?<=\\n)/);
+    const retryParts=input.split(/(?<=\n)/);
     for(let i=0;i<retryParts.length;i++){
       const p=retryParts[i];
       if(!p.trim()){retry.push(p);continue;}
-      const nl=p.endsWith("\\n")?"\\n":"";
+      const nl=p.endsWith("\n")?"\n":"";
       const body=p.slice(0,nl?-1:undefined);
       const translatedLine=await localTranslateChunk(body,src,targetLanguage,null,onProgress);
       retry.push(enforceTerminology(memory?.applyTerms?.(translatedLine,src,targetLanguage,skillId)||translatedLine,skillId,targetLanguage)+nl);
