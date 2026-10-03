@@ -5,7 +5,7 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 MIRROR = ROOT.parent / '.agents' / 'skills'
 REGISTRY = ROOT / 'registry.json'
 GROUPS = ROOT.parent / 'skills.sh.json'
