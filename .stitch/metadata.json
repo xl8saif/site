@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "product": "Saif AI Skills Console",
+  "repository": "xl8saif/site",
+  "productionPath": "public/skills/",
+  "designSystem": ".stitch/DESIGN.md",
+  "status": "design-infrastructure",
+  "stitchProjectId": null,
+  "screens": {},
+  "notes": [
+    "No Stitch API key or project identifier is stored in the public repository.",
+    "Production remains GitHub Pages.",
+    "Populate stitchProjectId only through an authenticated Stitch workflow when a project is intentionally connected."
+  ]
+}
