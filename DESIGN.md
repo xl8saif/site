@@ -1,6 +1,6 @@
 # Saif AI Skills Console — Design System
 
-Version: 1.0.0
+Version: 1.1.0
 Status: canonical visual contract for the public Skills Console
 Scope: `public/skills/`
 
@@ -8,7 +8,7 @@ Scope: `public/skills/`
 
 Saif AI Skills Console is a multilingual, tool-oriented workspace for translation, localization, quality checking, language research, and agent workflows. The interface should feel like a focused professional product rather than a generic AI chat application.
 
-The visual system favors calm hierarchy, compact information density, precise controls, generous whitespace, neutral surfaces, and restrained luminous accents.
+The visual system follows an iPhone/iOS-inspired product language: calm hierarchy, compact information density, precise controls, generous whitespace, system-material surfaces, restrained blue tinting, and semantic state colors.
 
 ## Design principles
 
@@ -26,25 +26,24 @@ The visual system favors calm hierarchy, compact information density, precise co
 ## Brand and color tokens
 
 Primary interaction:
-- Saif blue: `#007AFF`
-- Indigo accent: `#5856D6`
-- Purple accent: `#AF52DE`
-- Pink accent: `#FF2D55`
-- Orange accent: `#FF9500`
-- Green success: `#34C759`
-- Cyan accent: `#32ADE6`
+- System blue: `#007AFF`
+- System green: `#34C759`
+- System orange: `#FF9500`
+- System red: `#FF3B30`
+- System teal: `#30B0C7`
 
-Neutral foundation:
-- Page background: `#F5F7FB`
-- Primary text: `#101828`
-- Secondary text: `#667085`
-- Subtle text: `#98A2B3`
-- Surface: translucent white, normally around 0.88–0.98 opacity
-- Border: low-contrast neutral, normally rgba(16,24,40,.07–.10)
-- Input background: near-white neutral
+Neutral foundation follows the iOS system palette:
+- Page background: `#F2F2F7`
+- Primary text: `#1C1C1E`
+- Secondary text: `#6C6C70`
+- Tertiary/subtle text: `#8E8E93`
+- Separators: `rgba(60,60,67,.18)`
+- Surface: translucent white system material, normally around 0.78–0.94 opacity
+- Secondary neutral surfaces: `#F8F8FA`
+- Input background: near-white system neutral
 - Code/evidence background: dark neutral
 
-Use blue as the primary action color. Indigo/purple are supporting intelligence accents. Green indicates success/readiness. Amber indicates review/caution. Red is reserved for errors or destructive states.
+The visual theme is explicitly iPhone/iOS-inspired: restrained system neutrals, blue as the primary tint, semantic colors only for state, compact rounded controls, system-material translucency, and minimal decorative gradients. Purple/pink are not used as primary visual accents.
 
 Do not introduce arbitrary new brand colors without a design-system reason.
 
