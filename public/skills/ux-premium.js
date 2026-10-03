@@ -146,7 +146,7 @@
     const brainEmpty=document.querySelector("#brainResults .brain-empty");if(brainEmpty&&!bs?.value)brainEmpty.textContent=c.brainEmpty;
     set("#evidence-label",c.evidence);set("#trace-label",c.trace);set("#raw-label",c.raw);set("#ocr-title",c.ocr);set("#ocr-type",c.ocr);
     set("#ocr-source-btn",c.ocrSource);set("#ocr-target-btn",c.ocrTarget);set("#footer-visitors",c.footerVisitors);set("#visitor-countries",c.visitorCountries);
-    const dirs=["en"].includes(lang())?"ltr":"rtl";document.querySelectorAll("#task,#sourceText,#localizedOutput,#brainMemory,#brainProject,#brainSearch").forEach(e=>e.dir=dirs);
+    const desc=document.querySelector("#footer-description"); if(desc) desc.textContent=({ar:"أدوات للترجمة والتوطين وفحص الجودة والبحث اللغوي.",en:"AI tools for translation, localization, quality checking and language research.",ur:"ترجمہ، لوکلائزیشن، معیار کی جانچ اور لسانی تحقیق کے لیے AI ٹولز۔",fa:"ابزارهای هوش مصنوعی برای ترجمه، بومی‌سازی، بررسی کیفیت و پژوهش زبانی."})[lang()]||"AI tools for translation, localization, quality checking and language research.";\n    const dirs=["en"].includes(lang())?"ltr":"rtl";document.querySelectorAll("#task,#sourceText,#localizedOutput,#brainMemory,#brainProject,#brainSearch").forEach(e=>e.dir=dirs);
   }
   function refresh(){
     document.querySelectorAll(".saif-agent-chip span:last-child").forEach((e,i)=>{
