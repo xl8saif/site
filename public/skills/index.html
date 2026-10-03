@@ -12,7 +12,15 @@
 <link rel="stylesheet" href="./styles.css?v=1.37.0"><link rel="stylesheet" href="./second-brain.css?v=1.37.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><link rel="stylesheet" href="./shadcn-ui-theme.css?v=1.36.0"><link rel="stylesheet" href="./ux-premium.css?v=1.41.0"></head>
 <body>
-<header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions"><button id="langBtn">English</button><a id="portfolioLink" href="../">Portfolio</a></div></header>
+<header class="topbar"><a class="brand" href="../">Saif AI Skills</a><div class="top-actions">
+  <div class="language-switcher" role="group" aria-label="Interface language">
+    <button type="button" class="lang-choice" data-lang="en">English</button>
+    <button type="button" class="lang-choice" data-lang="ar">العربية</button>
+    <button type="button" class="lang-choice" data-lang="ur">اردو</button>
+    <button type="button" class="lang-choice" data-lang="fa">فارسی</button>
+  </div>
+  <a id="portfolioLink" href="../">Portfolio</a>
+</div></header>
 <main class="shell">
 <section class="intro"><div><span class="kicker" data-i18n="consoleKicker">AI SKILLS CONSOLE · v1.20</span><h1 id="intro-title">نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة</h1><p id="intro-text">اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.</p></div></section>
 <section class="workspace">
