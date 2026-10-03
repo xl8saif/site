@@ -135,7 +135,8 @@ const LOC_I18N={
 let savedLang = null;
 try { savedLang = localStorage.getItem("saif-skills-lang"); } catch (_) {}
 let uiLang=["ar","en","ur","fa"].includes(savedLang)?savedLang:(["ar","en","ur","fa"].includes(document.documentElement.lang)?document.documentElement.lang:"ar");
-function tr(key){return (I18N[uiLang]&&I18N[uiLang][key])||key}\nwindow.uiLang=uiLang;
+function tr(key){return (I18N[uiLang]&&I18N[uiLang][key])||key}
+window.uiLang=uiLang;
 function setText(el,key){if(el)el.textContent=tr(key)}
 const FOOTER_I18N={
   ar:{project:"مشروع من مؤسسة وراق، جيلجت",credit:"تم التطوير والبرمجة بأسلوب Vibe Coding بواسطة: Saif Ullah Jailani",address:"مؤسسة وراق، طريق جامعة قراقرم الدولية (KIU Road)، منطقة المحاكم، کونوداس، جيلجت، باكستان - 15100",contact:"الجوال / واتساب:",visitors:"زوار الموقع",countries:"عرض دول الزوار ↗",waraq:"شعار مؤسسة وراق",cloudtrans:"شعار CloudTrans"},
