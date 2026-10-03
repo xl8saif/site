@@ -223,7 +223,15 @@
       "scripts/self_audit.py"
     ]
   },
-  "version": "1.18.0",
+  "security": {
+    "scanner": "NVIDIA SkillSpector",
+    "version": "2.11.2",
+    "mode": "static-only",
+    "gate": "ai-skills/core/scripts/skill_security_gate.py",
+    "policy": "ai-skills/core/SKILL_SECURITY.md",
+    "fail_on": ["incomplete-analysis", "risk-score-over-50"]
+  },
+  "version": "1.19.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
