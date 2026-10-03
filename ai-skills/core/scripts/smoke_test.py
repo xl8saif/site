@@ -20,9 +20,12 @@ def main():
     registry = json.loads((ROOT / "registry.json").read_text(encoding="utf-8"))
     failures = []
 
-    # Validate every registered reference index.
+    # Validate required production reference indexes and any optional indexes that exist.
     validator = ROOT / "core" / "scripts" / "validate_references.py"
     for skill in registry["skills"]:
+        index = ROOT / skill["path"] / "references" / "index.json"
+        if skill.get("status") != "production" and not index.is_file():
+            continue
         result = run(validator, skill["id"])
         if result.returncode:
             failures.append(f"reference validation failed: {skill['id']}\n{result.stdout}{result.stderr}")
