@@ -309,3 +309,18 @@ This file is the bridge between human product decisions, Stitch design work, and
 ## Verification gate
 
 The public Skills Console should pass deterministic source, registry, asset, syntax, and build checks before deployment. Browser/visual verification remains a separate evidence layer.
+
+## Motion interaction layer
+
+The public Skills Console uses **Motion for JavaScript** (the current Motion library behind the former Framer Motion ecosystem) as a progressive enhancement for the static GitHub Pages UI. The integration must remain framework-free: do not migrate the Console to React solely for animation.
+
+Use Motion for interaction patterns that benefit from spring physics or viewport-triggered transitions:
+- restrained section entrance transitions
+- button press/release feedback
+- primary action confirmation pulses
+- viewport reveal for the Localization Workbench, Second Brain, and pipeline
+- future layout/shared-element transitions only where they materially improve comprehension
+
+Keep simple hover/focus/colour transitions in CSS. Respect `prefers-reduced-motion`; when reduced motion is requested, Motion enhancements must become inert and the underlying UI must remain fully usable. Keep the Motion CDN version pinned and avoid `@latest`.
+
+Motion must never control localization state, routing, validation, file processing, Second Brain persistence, or security boundaries. Animation is presentation-only and must degrade gracefully if the CDN is unavailable.
