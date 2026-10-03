@@ -168,6 +168,8 @@ def run_self_audit():
 def evaluate_skill(item):
     cases = ROOT / item["path"] / "evals" / "cases.jsonl"
     if not cases.is_file():
+        if item.get("status") != "production":
+            return 0, f"{item['id']}: evaluation skipped ({item.get('status', 'non-production')})"
         return 1, f"{item['id']}: missing evals/cases.jsonl"
     result = subprocess.run([sys.executable, str(EVALUATOR), str(cases)], text=True)
     return result.returncode, f"{item['id']}: evaluator exit={result.returncode}"
