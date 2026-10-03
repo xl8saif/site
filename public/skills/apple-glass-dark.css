@@ -1,0 +1,28 @@
+/* Final dark Apple glass cascade for the Skills Console. Loaded after legacy UX layers. */
+:root{--saif-bg:#07090d;--saif-ink:#f5f7fa;--saif-muted:#a1a9b6;--saif-line:rgba(255,255,255,.13)}
+html,body{background:#07090d!important;color:#f5f7fa!important}
+body{background:radial-gradient(900px 600px at 15% -10%,rgba(86,105,145,.22),transparent 68%),radial-gradient(800px 560px at 90% 12%,rgba(61,78,112,.18),transparent 68%),radial-gradient(700px 500px at 50% 100%,rgba(38,48,68,.16),transparent 70%),#07090d!important}
+.topbar{background:rgba(10,13,18,.58)!important;border-color:rgba(255,255,255,.1)!important;box-shadow:0 8px 35px rgba(0,0,0,.24)!important;backdrop-filter:saturate(180%) blur(24px)!important;-webkit-backdrop-filter:saturate(180%) blur(24px)!important}
+.brand{color:#f5f7fa!important}.top-actions a,.top-actions button{color:#c9ced7!important;background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.13)!important}
+.panel{background:rgba(255,255,255,.075)!important;border-color:rgba(255,255,255,.16)!important;box-shadow:0 24px 80px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.07)!important;backdrop-filter:saturate(170%) blur(28px)!important;-webkit-backdrop-filter:saturate(170%) blur(28px)!important}
+.intro h1{background:linear-gradient(180deg,#f5f7fa,#aeb6c2)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+.intro p,.loc-workbench-head p,.task-detection #detected-label{color:#a1a9b6!important}
+.task-skill-header label,.loc-option label,.loc-result-head label,.loc-card-head strong,.task-detection strong{color:#e8ebf0!important}
+#task,#sourceText,#localizedOutput{color:#f5f7fa!important;background:rgba(7,10,15,.72)!important;border-color:rgba(255,255,255,.14)!important}
+#task:focus,#sourceText:focus,#localizedOutput:focus{background:rgba(10,14,21,.86)!important;border-color:rgba(125,174,255,.72)!important;box-shadow:0 0 0 5px rgba(74,144,255,.14)!important}
+#task::placeholder,#sourceText::placeholder,#localizedOutput::placeholder,input::placeholder,textarea::placeholder{color:#707b8a!important}
+.task-detection,.localization-workbench,.loc-option,.smart-skill.compact,.loc-source-card,.loc-target-card,.pipeline-grid>div,.brain-grid>*{background:rgba(255,255,255,.065)!important;border-color:rgba(255,255,255,.14)!important;color:#f5f7fa!important;box-shadow:0 10px 30px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.055)!important}
+.skill,.knowledge-compact,.loc-next,.saif-agent-chip,.saif-quickbar{background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.12)!important;color:#e8ebf0!important}
+.skill:hover{background:rgba(255,255,255,.1)!important;border-color:rgba(125,174,255,.28)!important}
+.paste-zone{background:rgba(255,255,255,.035)!important;border-color:rgba(255,255,255,.22)!important;color:#dce2ea!important}
+.paste-zone:hover{background:rgba(74,144,255,.08)!important;border-color:rgba(125,174,255,.5)!important}
+.attach-btn,.localize-command .secondary,.controls .secondary{background:rgba(255,255,255,.07)!important;color:#e8ebf0!important;border-color:rgba(255,255,255,.15)!important}
+.loc-option select,.brain-grid select,input,textarea,select{color:#f5f7fa!important;background:rgba(7,10,15,.68)!important;border-color:rgba(255,255,255,.14)!important}
+.progress{background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.12)!important;color:#dce2ea!important}
+.result,.result .finding{background:rgba(255,255,255,.055)!important;color:#e8ebf0!important;border-color:rgba(255,255,255,.12)!important}
+.brain-stats{background:rgba(74,144,255,.1)!important;color:#b9d4ff!important;border-color:rgba(125,174,255,.2)!important}
+.language-switcher{background:rgba(255,255,255,.065)!important;border-color:rgba(255,255,255,.15)!important}.lang-choice{color:#aeb6c2!important}.lang-choice:hover{background:rgba(255,255,255,.09)!important;color:#f5f7fa!important}
+#ocr-panel{background:rgba(255,255,255,.065)!important;border-color:rgba(255,255,255,.14)!important;color:#e8ebf0!important}
+.site-footer{border-top-color:rgba(255,255,255,.1)!important;color:#a1a9b6!important}.site-footer a{color:#b9c4d4!important}
+::selection{background:rgba(100,160,255,.28)!important;color:#fff!important}
+@media(prefers-reduced-transparency:reduce){.panel,.topbar,.localization-workbench,.loc-option,.smart-skill.compact,.loc-source-card,.loc-target-card,.pipeline-grid>div,.brain-grid>*{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#11161e!important}}
