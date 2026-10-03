@@ -2,8 +2,8 @@
 (function(){
   const copy={
     ar:{agents:"وكلاء جاهزون",local:"محلي",review:"مراجعة بشرية",privacy:"خصوصية محلية",quick:"اختصارات العمل",clearTask:"مسح المهمة",sourceReady:"المصدر جاهز",targetReady:"الهدف جاهز"},
-    en:{agents:"Agents ready",local:"Local",review:"Human review",privacy:"Local privacy",quick:"Work shortcuts",clearTask:"Clear task",sourceReady:"Source ready",targetReady:"Target ready"},
-    ur:{agents:"ایجنٹس تیار",local:"مقامی",review:"انسانی جائزہ",privacy:"مقامی رازداری",quick:"کام کے شارٹ کٹس",clearTask:"کام صاف کریں",sourceReady:"ماخذ تیار",targetReady:"ہدف تیار"}
+    en:{agents:"Agents ready",local:"Local",review:"Human review",privacy:"Local privacy",quick:"Work shortcuts",brainTitle:"Saif Knowledge Brain",brainDesc:"Store durable knowledge and decisions locally in this browser. No network calls are made by this memory layer.",remember:"Remember",export:"Export vault",import:"Import vault",clearBrain:"Clear local brain",brainSearch:"Search your stored knowledge, decisions, terminology or projects…",brainMemory:"Remember something durable…",brainProject:"Project / domain",clearTask:"Clear task",sourceReady:"Source ready",targetReady:"Target ready",brainTitle:"Saif Knowledge Brain",brainDesc:"Store durable knowledge and decisions locally in this browser. No network calls are made by this memory layer.",remember:"Remember",export:"Export vault",import:"Import vault",clearBrain:"Clear local brain",brainSearch:"Search your stored knowledge, decisions, terminology or projects…",brainMemory:"Remember something durable…",brainProject:"Project / domain"},
+    ur:{agents:"ایجنٹس تیار",local:"مقامی",review:"انسانی جائزہ",privacy:"مقامی رازداری",quick:"کام کے شارٹ کٹس",clearTask:"کام صاف کریں",sourceReady:"ماخذ تیار",targetReady:"ہدف تیار",brainTitle:"سیف نالج برین",brainDesc:"پائیدار علم اور فیصلے اسی براؤزر میں مقامی طور پر محفوظ کریں۔ یہ میموری لیئر کوئی نیٹ ورک کال نہیں کرتی۔",remember:"محفوظ کریں",export:"والٹ برآمد کریں",import:"والٹ درآمد کریں",clearBrain:"مقامی برین صاف کریں",brainSearch:"محفوظ علم، فیصلوں، اصطلاحات یا منصوبوں میں تلاش کریں…",brainMemory:"کوئی پائیدار معلومات محفوظ کریں…",brainProject:"منصوبہ / شعبہ"}
   };
   function lang(){return document.documentElement.lang||"en"}
   function t(k){return (copy[lang()]||copy.en)[k]||copy.en[k]}
@@ -28,11 +28,25 @@
       window.dispatchEvent(new Event("input"));
     });
   }
+  function localizeBrain(){
+    const c=copy[lang()]||copy.en;
+    const set=(id,val,attr)=>{
+      const e=document.getElementById(id); if(!e)return;
+      if(attr)e.setAttribute(attr,val); else e.textContent=val;
+    };
+    set("secondBrainTitle",c.brainTitle);
+    const desc=document.querySelector("#secondBrain .brain-head p"); if(desc)desc.textContent=c.brainDesc;
+    set("brainRemember",c.remember); set("brainExport",c.export); set("brainClear",c.clearBrain);
+    set("brainImport",c.import);
+    set("brainSearch","", "placeholder"); const bs=document.getElementById("brainSearch"); if(bs)bs.placeholder=c.brainSearch;
+    const bm=document.getElementById("brainMemory"); if(bm)bm.placeholder=c.brainMemory;
+    const bp=document.getElementById("brainProject"); if(bp)bp.placeholder=c.brainProject;
+  }
   function refresh(){
     document.querySelectorAll(".saif-agent-chip span:last-child").forEach((e,i)=>{
       const keys=["agents","local","review","privacy"];e.textContent=t(keys[i]);
     });
-    const b=document.getElementById("saifClearTask");if(b)b.textContent=t("clearTask");
+    const b=document.getElementById("saifClearTask");if(b)b.textContent=t("clearTask"); localizeBrain();
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
   new MutationObserver(refresh).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
