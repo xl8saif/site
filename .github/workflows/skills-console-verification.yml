@@ -1,0 +1,53 @@
+name: Skills Console Verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/skills/**'
+      - 'ai-skills/**'
+      - '.agents/skills/**'
+      - 'DESIGN.md'
+      - 'JULES.md'
+      - 'scripts/verify-skills-console.mjs'
+      - '.github/workflows/skills-console-verification.yml'
+      - 'package.json'
+      - 'package-lock.json'
+  pull_request:
+    paths:
+      - 'public/skills/**'
+      - 'ai-skills/**'
+      - '.agents/skills/**'
+      - 'DESIGN.md'
+      - 'JULES.md'
+      - 'scripts/verify-skills-console.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skills-console-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Deterministic verification
+        run: node scripts/verify-skills-console.mjs
+      - name: JavaScript syntax
+        run: |
+          node --check public/skills/app.js
+          node --check public/skills/ux-premium.js
+          node --check public/skills/second-brain-memory.js
+      - name: Production build
+        run: npm run build
