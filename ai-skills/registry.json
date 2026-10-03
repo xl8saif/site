@@ -201,6 +201,34 @@
         "json": true
       },
       "ecosystem": true
+    },
+    {
+      "id": "jules-agent-workflow",
+      "status": "experimental",
+      "domain": [
+        "agent-engineering",
+        "coding-agents",
+        "verification",
+        "github-workflow"
+      ],
+      "path": "jules-agent-workflow",
+      "entrypoint": "jules-agent-workflow/SKILL.md",
+      "deterministic_tools": [],
+      "protected_work": [
+        "repository invariants",
+        "verification evidence",
+        "private data boundaries"
+      ],
+      "execution": {
+        "inputs": [
+          "repository"
+        ],
+        "args": {
+          "repository": "--repository"
+        },
+        "json": false
+      },
+      "ecosystem": true
     }
   ],
   "core": {
@@ -229,9 +257,12 @@
     "mode": "static-only",
     "gate": "ai-skills/core/scripts/skill_security_gate.py",
     "policy": "ai-skills/core/SKILL_SECURITY.md",
-    "fail_on": ["incomplete-analysis", "risk-score-over-50"]
+    "fail_on": [
+      "incomplete-analysis",
+      "risk-score-over-50"
+    ]
   },
-  "version": "1.19.0",
+  "version": "1.20.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
