@@ -121,7 +121,11 @@ const skills = [
   ["dify-evidence-verification","Dify Evidence Verification","التحقق القائم على الأدلة","Dify شواہد کی جانچ","verify evidence|evidence check|prove behavior|verification|audit implementation|source verification"],
   ["dify-skill-packaging","Dify Skill Packaging","تغليف مهارات الوكلاء","Dify اسکل پیکیجنگ","skill package|portable skill|skill.md|import skill|export skill|skill archive|package skill"],
   ["localization-structure-preservation","Localization Structure Preservation","الحفاظ على بنية الترجمة","ترجمہ کی ساخت برقرار رکھنا","structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization qa|xml localization|html localization|structure QA"],
-  ["jules-agent-workflow","Jules Agent Workflow","سير عمل Jules الهندسي","Jules انجینئرنگ ورک فلو","jules|coding agent|agent workflow|plan implement verify|pull request|verification|async coding|engineering workflow"]
+  ["jules-agent-workflow","Jules Agent Workflow","سير عمل Jules الهندسي","Jules انجینئرنگ ورک فلو","jules|coding agent|agent workflow|plan implement verify|pull request|verification|async coding|engineering workflow"],
+  ["stitch-design-system","Stitch Design System","نظام تصميم Stitch","Stitch ڈیزائن سسٹم","stitch|design system|design tokens|visual system|design.md|theme"],
+  ["stitch-screen-generation","Stitch Screen Generation","إنشاء شاشات Stitch","Stitch اسکرین جنریشن","stitch|generate design|screen design|prototype|ui design|design variant"],
+  ["stitch-code-to-design","Stitch Code to Design","تحويل الكود إلى تصميم Stitch","کوڈ سے Stitch ڈیزائن","stitch|code to design|extract design|frontend design|html design"],
+  ["stitch-build-loop","Stitch Build Loop","حلقة بناء Stitch","Stitch بلڈ لوپ","stitch loop|design iteration|baton|visual iteration|design verification"]
 ];
 const $ = selector => /^[A-Za-z][A-Za-z0-9_-]*$/.test(selector) ? document.getElementById(selector) : document.querySelector(selector);
 
