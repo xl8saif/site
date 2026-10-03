@@ -349,6 +349,39 @@
       },
       "ecosystem": true,
       "source": "google-labs-code/stitch-skills"
+    },
+    {
+      "id": "jules-verification-gate",
+      "status": "experimental",
+      "domain": [
+        "agent-engineering",
+        "verification",
+        "pull-requests",
+        "security"
+      ],
+      "path": "jules-verification-gate",
+      "entrypoint": "jules-verification-gate/SKILL.md",
+      "deterministic_tools": [
+        "ai-skills/core/scripts/skill_security_gate.py",
+        "ai-skills/run.py"
+      ],
+      "protected_work": [
+        "verification evidence",
+        "private data boundaries",
+        "registry integrity",
+        "localization structure"
+      ],
+      "execution": {
+        "inputs": [
+          "pull_request"
+        ],
+        "args": {
+          "pull_request": "--pull-request"
+        },
+        "json": false
+      },
+      "ecosystem": true,
+      "source": "google-labs-code/jules-skills"
     }
   ],
   "core": {
@@ -382,7 +415,7 @@
       "risk-score-over-50"
     ]
   },
-  "version": "1.24.0",
+  "version": "1.25.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
