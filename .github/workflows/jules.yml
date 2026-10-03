@@ -1,0 +1,63 @@
+name: Jules Engineering Worker
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Scoped engineering task for Jules"
+        required: true
+        type: string
+      include_last_commit:
+        description: "Include the last commit in Jules context"
+        required: false
+        default: true
+        type: boolean
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  jules:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'jules' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare task
+        id: task
+        env:
+          EVENT_PROMPT: ${{ inputs.prompt }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          if [ -n "$EVENT_PROMPT" ]; then
+            printf '%s\n' "$EVENT_PROMPT" > jules-prompt.txt
+          else
+            {
+              printf 'Resolve this GitHub issue as a scoped engineering task.\n\n'
+              printf 'Issue: %s\n\n' "$ISSUE_TITLE"
+              printf '%s\n' "$ISSUE_BODY"
+              printf '\nFollow JULES.md. Explore, plan, implement, verify, review the diff, and open a PR.\n'
+            } > jules-prompt.txt
+          fi
+          cat jules-prompt.txt
+
+      - name: Run Jules
+        uses: google-labs-code/jules-action@v1
+        with:
+          prompt: |
+            Read JULES.md before changing anything.
+            Work only on the scoped task below.
+            Preserve existing architecture and repository invariants.
+            Run relevant tests/validators/build checks before delivery.
+            Do not expose secrets or private Second Brain data.
+            Create a pull request with a concise summary and verification evidence.
+
+            Task:
+            ${{ inputs.prompt || format('GitHub issue: {0}', github.event.issue.title) }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
+          starting_branch: main
+          include_last_commit: ${{ inputs.include_last_commit || true }}
+          include_commit_log: true
