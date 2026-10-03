@@ -84,6 +84,76 @@ function setup() {
     });
   });
 
+
+  // Workflow animation: make Router → Planner → Execution → Review visible.
+  window.addEventListener("saif-pipeline-stage-change", (event) => {
+    const order = ["router", "planner", "execution", "review"];
+    const state = event.detail || {};
+    const pipeline = document.querySelector("#pipeline");
+    if (pipeline && pipeline.hidden) pipeline.hidden = false;
+
+    order.forEach((name, index) => {
+      const stage = document.querySelector('[data-stage="' + name + '"]');
+      if (!stage) return;
+      const status = state[name] || "pending";
+      if (status === "active") {
+        animate(stage, {
+          scale: [1, 1.045, 1],
+          y: [6, 0],
+          opacity: [0.72, 1]
+        }, {
+          duration: 0.42,
+          delay: index * 0.035,
+          ease: "easeOut"
+        });
+      } else if (status === "done") {
+        animate(stage, {
+          scale: [1.025, 1],
+          y: [-2, 0],
+          opacity: [0.9, 1]
+        }, {
+          duration: 0.3,
+          ease: "easeOut"
+        });
+      } else if (status === "error") {
+        animate(stage, {
+          x: [-5, 5, -4, 4, 0],
+          opacity: [1, 0.78, 1]
+        }, {
+          duration: 0.34,
+          ease: "easeOut"
+        });
+      }
+    });
+  });
+
+  window.addEventListener("saif-localization-state", (event) => {
+    const state = event.detail?.state;
+    const result = document.querySelector("#localizedOutput");
+    const note = document.querySelector("#localizeNote");
+
+    if (state === "started" && note) {
+      animate(note, { opacity: [0.55, 1], y: [4, 0] }, {
+        duration: 0.32,
+        ease: "easeOut"
+      });
+    }
+
+    if (state === "review" && result) {
+      animate(result, { opacity: [0, 1], y: [18, 0] }, {
+        duration: 0.55,
+        ease: "easeOut"
+      });
+    }
+
+    if (state === "error" && note) {
+      animate(note, { x: [-5, 5, -4, 4, 0] }, {
+        duration: 0.34,
+        ease: "easeOut"
+      });
+    }
+  });
+
   document.addEventListener("click", (event) => {
     const button = event.target.closest?.(
       "#localize, #run, #brainRemember, #brainExport, #brainClear, #exportLocalized"
