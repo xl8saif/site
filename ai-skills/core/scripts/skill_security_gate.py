@@ -73,7 +73,8 @@ def main() -> int:
             'analysis_completeness': completeness,
             'finding_count': len(report.get('findings', [])), 'blocking': blocking
         })
-        print(f"[{"BLOCK" if blocking else "PASS"}] {skill} | risk={risk} | severity={report.get("risk_severity")} | findings={len(report.get("findings", []))}")
+        status = "BLOCK" if blocking else "PASS"
+        print(f"[{status}] {skill} | risk={risk} | severity={report.get("risk_severity")} | findings={len(report.get("findings", []))}")
     aggregate = {'scanner':'NVIDIA SkillSpector','scanner_version':args.version,'mode':'static-only','skills':results,'blocking':failed}
     (out_dir / "summary.json").write_text(json.dumps(aggregate, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if failed:
