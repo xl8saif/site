@@ -25,8 +25,8 @@
 <section class="intro"><div><span class="kicker" data-i18n="consoleKicker">AI SKILLS CONSOLE · v1.20</span><h1 id="intro-title">نفّذ مهام الترجمة والتوطين وفحص الجودة من واجهة واحدة</h1><p id="intro-text">اكتب المهمة، ارفع المصدر والهدف، ثم دع النظام يمرّرها عبر Router → Planner → Execution → Human Review Gate. ملفات PDF النصية تُستخرج تلقائياً؛ ملفات PDF الممسوحة ضوئياً تحتاج OCR قبل الفحص.</p></div></section>
 <section class="workspace">
 <div class="panel main-panel">
-<div class="task-skill-header"><div><label for="task" id="task-label">المهمة</label><textarea id="task" rows="4" placeholder="مثال: PUBG MOBILE Urdu LQA for a WOW event"></textarea></div><div class="task-detection"><span id="detected-label">Skill / Agent</span><strong id="detected">سيتم الاكتشاف تلقائياً</strong></div></div>
-<div class="task-skills">
+<div class="task-skill-header"><div><label for="task" id="task-label">المهمة</label><textarea id="task" rows="4" placeholder="مثال: PUBG MOBILE Urdu LQA for a WOW event"></textarea></div><div class="task-detection" hidden><span id="detected-label">Skill / Agent</span><strong id="detected">سيتم الاكتشاف تلقائياً</strong></div></div>
+<div class="task-skills" hidden>
   <div class="task-skills-head"><h2 id="skills-title">المهارات</h2><span>Skills</span></div>
   <div id="skills"></div>
   </div>
@@ -44,7 +44,7 @@
     <div class="loc-option"><label for="targetLanguage" id="targetLanguage-label">Target language</label><select id="targetLanguage">
       <option value="ur">Urdu / اردو</option><option value="ar">Arabic / العربية</option><option value="en">English</option><option value="fa">Persian / فارسی</option>
     </select></div>
-    <div class="smart-skill compact" id="smartSkill"><span id="smartSkillLabel">Selected Skill</span><strong id="smartSkillName">Auto-detect from input</strong><small id="smartSkillId">Waiting for source + target</small></div>
+    <div class="smart-skill compact" id="smartSkill" hidden><span id="smartSkillLabel">Selected Skill</span><strong id="smartSkillName">Auto-detect from input</strong><small id="smartSkillId">Waiting for source + target</small></div>
   </div>
 
   <div class="loc-input-grid">
@@ -68,15 +68,16 @@
     </div>
   </div>
 
+  <div class="localize-command loc-primary-actions">
+    <button class="primary" id="localize" type="button" disabled><span id="localizeRunLabel">Run</span><b id="localizeActionText">Localize with selected Skill</b></button>
+    <button class="secondary" id="exportLocalized" type="button" disabled>Export result</button>
+  </div>
+
   <div class="loc-context-row">
     <label class="knowledge-compact" for="knowledge"><input id="knowledge" type="file"><span><b id="knowledge-label">Knowledge / research</b><small id="knowledgeName">Optional terminology, reference or context file</small></span></label>
     <div class="loc-next" id="locNext"><span class="loc-step">03</span><span><b id="loc-next-title">Next</b><small id="locNextText">Add source text and choose a target language.</small></span></div>
   </div>
 
-  <div class="localize-command loc-primary-actions">
-    <button class="primary" id="localize" type="button" disabled><span id="localizeRunLabel">Run</span><b id="localizeActionText">Localize with selected Skill</b></button>
-    <button class="secondary" id="exportLocalized" type="button" disabled>Export result</button>
-  </div>
 
   <div id="localizeNote" class="loc-message" aria-live="polite"></div>
 </section>
