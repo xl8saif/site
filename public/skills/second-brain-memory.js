@@ -64,13 +64,22 @@
     return load();
   }
   function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+  function brainCopy(){
+    const l=document.documentElement.lang||"en";
+    return {
+      ar:{mem:"ذاكرة",dec:"قرارات",local:"محلي فقط",empty:"ابحث في المعرفة والقرارات والمصطلحات والمشاريع المحفوظة.",none:"لا توجد ذاكرة مطابقة لهذا البحث."},
+      en:{mem:"memories",dec:"decisions",local:"local only",empty:"Search stored knowledge, decisions, terminology or projects.",none:"No stored memory matched this query."},
+      ur:{mem:"یادداشتیں",dec:"فیصلے",local:"مقامی",empty:"محفوظ علم، فیصلوں، اصطلاحات یا منصوبوں میں تلاش کریں۔",none:"اس تلاش سے کوئی محفوظ یادداشت نہیں ملی۔"},
+      fa:{mem:"خاطرات",dec:"تصمیم‌ها",local:"محلی",empty:"در دانش، تصمیم‌ها، اصطلاحات یا پروژه‌های ذخیره‌شده جست‌وجو کنید.",none:"هیچ حافظه ذخیره‌شده‌ای با این جست‌وجو مطابقت ندارد."}
+    }[l]||arguments[0];
+  }
   function render(){
     const root=document.getElementById("secondBrain");if(!root)return;
     const db=load(), q=root.querySelector("#brainSearch").value.trim(), results=q?search(q):[];
-    root.querySelector("#brainStats").textContent=db.memories.length+" memories · "+db.decisions.length+" decisions · local only";
+    const bc=brainCopy(); root.querySelector("#brainStats").textContent=db.memories.length+" "+bc.mem+" · "+db.decisions.length+" "+bc.dec+" · "+bc.local;
     const out=root.querySelector("#brainResults");
-    if(!q){out.innerHTML='<div class="brain-empty">Search your stored knowledge, decisions, terminology, projects or preferences.</div>';return;}
-    if(!results.length){out.innerHTML='<div class="brain-empty">No stored memory matched this query.</div>';return;}
+    if(!q){out.innerHTML='<div class="brain-empty">'+bc.empty+'</div>';return;}
+    if(!results.length){out.innerHTML='<div class="brain-empty">'+bc.none+'</div>';return;}
     out.innerHTML=results.map(x=>{
       const title=x._kind==="decision"?x.question:x.summary||x.content;
       const body=x._kind==="decision"?x.decision:x.content;
@@ -91,6 +100,6 @@
     root.querySelector("#brainClear").onclick=()=>{if(confirm("Clear this browser's private Second Brain?")){localStorage.removeItem(KEY);render();}};
     render();
   }
-  window.SaifSecondBrain={load,save,addMemory,addDecision,search,exportVault,importVault};
+  window.SaifSecondBrain={load,save,addMemory,addDecision,search,exportVault,importVault,render};\n  window.addEventListener("saif-skills-language",render);
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
