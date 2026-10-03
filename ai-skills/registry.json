@@ -169,7 +169,7 @@
     },
     {
       "id": "second-brain",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "personal-knowledge-management",
         "agent-memory",
@@ -204,7 +204,7 @@
     },
     {
       "id": "jules-agent-workflow",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "agent-engineering",
         "coding-agents",
@@ -232,7 +232,7 @@
     },
     {
       "id": "stitch-design-system",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "design-systems",
         "design-tooling",
@@ -262,7 +262,7 @@
     },
     {
       "id": "stitch-screen-generation",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "design-tooling",
         "stitch",
@@ -292,7 +292,7 @@
     },
     {
       "id": "stitch-code-to-design",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "design-tooling",
         "frontend-analysis",
@@ -322,7 +322,7 @@
     },
     {
       "id": "stitch-build-loop",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "design-tooling",
         "stitch",
@@ -352,7 +352,7 @@
     },
     {
       "id": "jules-verification-gate",
-      "status": "experimental",
+      "status": "draft",
       "domain": [
         "agent-engineering",
         "verification",
@@ -361,10 +361,7 @@
       ],
       "path": "jules-verification-gate",
       "entrypoint": "jules-verification-gate/SKILL.md",
-      "deterministic_tools": [
-        "ai-skills/core/scripts/skill_security_gate.py",
-        "ai-skills/run.py"
-      ],
+      "deterministic_tools": [],
       "protected_work": [
         "verification evidence",
         "private data boundaries",
@@ -464,7 +461,7 @@
   },
   "second_brain": {
     "path": "SECOND_BRAIN.md",
-    "status": "experimental",
+    "status": "draft",
     "storage": "private-by-default",
     "mcp_target": "brain_search,brain_get,brain_remember,brain_update,brain_forget,brain_decisions,brain_conflicts,brain_sources"
   }
