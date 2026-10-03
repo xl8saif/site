@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Saif Localization Workbench — multilingual translation, localization, terminology and structural quality checks.">
+<link rel="canonical" href="https://xl8saif.github.io/site/localization/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/mehr/mehr-font.css">
+<link rel="stylesheet" href="../skills/styles.css?v=1.51.0">
+<link rel="stylesheet" href="../skills/ux-premium.css?v=1.50.0">
+<link rel="stylesheet" href="../skills/apple-glass-dark.css?v=1.0.0">
+<title>Saif Localization Workbench</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../"><span class="ui-symbol ui-symbol-spark" aria-hidden="true">✦</span><span>Saif AI</span></a>
+  <div class="top-actions">
+    <div class="language-switcher" role="group" aria-label="Interface language">
+      <button type="button" class="lang-choice" data-lang="en">English</button>
+      <button type="button" class="lang-choice" data-lang="ar">العربية</button>
+      <button type="button" class="lang-choice" data-lang="ur">اردو</button>
+      <button type="button" class="lang-choice" data-lang="fa">فارسی</button>
+    </div>
+    <a href="../skills/">AI Skills</a>
+    <a href="../">Portfolio</a>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="intro">
+    <div>
+      <span class="kicker" id="consoleKicker">LOCALIZATION WORKBENCH</span>
+      <h1 id="intro-title">Localization, translation and structural quality checks in one workspace</h1>
+      <p id="intro-text">Paste source text or attach a supported document, choose the target language, and let the localization engine select the most relevant Skill. Results remain editable and can be exported for review.</p>
+    </div>
+  </section>
+
+  <section class="panel localization-workbench" aria-labelledby="localize-workbench-title">
+    <div class="loc-workbench-head">
+      <div>
+        <span class="kicker" id="localize-kicker">LOCALIZATION WORKBENCH</span>
+        <h2 id="localize-workbench-title">Paste or attach your source, choose the target, then run</h2>
+        <p id="localize-workbench-intro">Paste text or attach a document, choose the target language, and the system will automatically select the most relevant Skill from the actual input and context.</p>
+      </div>
+      <div class="loc-readiness" id="locReadiness" aria-live="polite"><span class="readiness-dot"></span><span id="locReadinessText">Waiting for source text</span></div>
+    </div>
+
+    <div class="loc-options-row">
+      <div class="loc-option">
+        <label for="targetLanguage" id="targetLanguage-label">Target language</label>
+        <select id="targetLanguage">
+          <option value="ur">Urdu / اردو</option>
+          <option value="ar">Arabic / العربية</option>
+          <option value="en">English</option>
+          <option value="fa">Persian / فارسی</option>
+        </select>
+      </div>
+      <div class="smart-skill compact" id="smartSkill">
+        <span id="smartSkillLabel">Selected Skill</span>
+        <strong id="smartSkillName">Auto-detect from input</strong>
+        <small id="smartSkillId">Waiting for source + target</small>
+      </div>
+    </div>
+
+    <div class="loc-input-grid">
+      <div class="loc-source-card">
+        <div class="loc-card-head"><div><span class="loc-step">01</span><strong id="loc-source-title">Source</strong></div><span id="sourceCount">0 chars</span></div>
+        <label class="paste-zone" for="sourceText">
+          <span class="paste-icon ui-symbol" aria-hidden="true">＋</span>
+          <span><b id="paste-title">Paste text here</b><small id="paste-hint">Paste directly from CAT tools, spreadsheets, documents or chat.</small></span>
+        </label>
+        <textarea id="sourceText" rows="10" placeholder="Paste source text here…"></textarea>
+        <div class="source-actions">
+          <span id="sourceName">No attachment</span>
+          <label class="attach-btn" for="source"><input id="source" type="file" accept=".txt,.csv,.xlsx,.json,.xml,.xliff,.pdf"><span id="attach-source-label">Attach document</span></label>
+        </div>
+      </div>
+
+      <div class="loc-target-card">
+        <div class="loc-card-head"><div><span class="loc-step">02</span><strong id="loc-target-title">Target / Result</strong></div><span id="targetContext">Smart Skill Routing</span></div>
+        <div class="target-attachment-row">
+          <span id="targetName">No target attachment</span>
+          <label class="attach-btn" for="target"><input id="target" type="file" accept=".txt,.csv,.xlsx,.docx,.json,.xml,.xliff,.pdf"><span id="attach-target-label">Attach existing target</span></label>
+        </div>
+        <div class="loc-result" id="locResult">
+          <div class="loc-result-head"><label for="localizedOutput" id="localizedOutput-label">Result</label><span id="resultMeta">Ready for review</span></div>
+          <textarea id="localizedOutput" rows="12" placeholder="Your localized result will appear here…" hidden></textarea>
+          <div class="target-preview" id="targetPreviewBox" hidden>
+            <div class="target-preview-head"><strong id="targetPreviewLabel">Target Preview</strong><span id="targetPreviewMeta">Live preview</span></div>
+            <pre id="targetPreview" aria-label="Target result preview"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="localize-command loc-primary-actions">
+      <button class="primary" id="localize" type="button" disabled><span class="ui-symbol" aria-hidden="true">↗</span><b id="localizeActionText">Localize with selected Skill</b></button>
+      <button class="secondary" id="exportLocalized" type="button" disabled><span class="ui-symbol" aria-hidden="true">↓</span>Export result</button>
+      <button class="secondary" id="clear" type="button"><span class="ui-symbol" aria-hidden="true">×</span>Clear</button>
+    </div>
+
+    <div class="loc-context-row">
+      <label class="knowledge-compact" for="knowledge"><input id="knowledge" type="file"><span><b id="knowledge-label">Knowledge / research</b><small id="knowledgeName">Optional terminology, reference or context file</small></span></label>
+      <div class="loc-next" id="locNext"><span class="loc-step">03</span><span><b id="loc-next-title">Next</b><small id="locNextText">Add source text and choose a target language.</small></span></div>
+    </div>
+    <div id="localizeNote" class="loc-message" aria-live="polite"></div>
+  </section>
+
+  <section class="pipeline panel" id="pipeline" hidden>
+    <h2 id="pipeline-title">Execution Pipeline</h2>
+    <div class="pipeline-grid">
+      <div data-stage="router"><b>01</b><strong>Router</strong><span data-stage-label="router">Select Agent</span></div>
+      <div data-stage="planner"><b>02</b><strong>Planner</strong><span data-stage-label="planner">Select Skill</span></div>
+      <div data-stage="execution"><b>03</b><strong>Execution</strong><span data-stage-label="execution">Run Validator</span></div>
+      <div data-stage="review"><b>04</b><strong>Review Gate</strong><span data-stage-label="review">Review Decision</span></div>
+    </div>
+  </section>
+
+  <section class="result panel" id="result" hidden>
+    <div class="result-head"><div><span class="kicker" id="evidence-label">EVIDENCE</span><h2 id="resultTitle">Result</h2></div><span id="badge" class="badge"></span></div>
+    <div id="summary" class="summary"></div><div id="findings"></div>
+  </section>
+
+  <section id="ocr-panel" class="panel" style="margin-top:16px">
+    <div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">Scanned PDF</span></div>
+    <p id="ocr-text">Scanned PDF text is extracted locally in the browser. After extraction, it can be used directly as source or target content.</p>
+    <div class="controls">
+      <button id="ocr-source-btn" type="button"><span class="ui-symbol" aria-hidden="true">□</span>OCR Source PDF</button>
+      <button id="ocr-target-btn" type="button"><span class="ui-symbol" aria-hidden="true">□</span>OCR Target PDF</button>
+    </div>
+    <pre id="ocr-status" hidden></pre>
+  </section>
+
+  <div class="localization-page-note">
+    <span class="kicker">SEPARATE MODULE</span>
+    <p>This is the dedicated localization workspace. The Second Brain is intentionally not embedded in this page.</p>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="../skills/runtime-fixed.js?v=1.41.0"></script>
+<script src="../skills/openhands-skill-library.js?v=1.41.0"></script>
+<script src="../skills/dify-skill-library.js?v=1.41.0"></script>
+<script src="../skills/localization-memory.js?v=1.41.0"></script>
+<script src="../skills/app.js?v=1.51.0"></script>
+<script type="module" src="../skills/localize-runtime.js?v=2.3.0"></script>
+</body>
+</html>
