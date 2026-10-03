@@ -22,8 +22,7 @@ def text_from_message(message: dict) -> str:
             out.append(part)
         elif isinstance(part, dict) and isinstance(part.get("text"), str):
             out.append(part["text"])
-    return "
-".join(x for x in out if x).strip()
+    return "\n".join(x for x in out if x).strip()
 
 
 def flatten_mapping(mapping: dict) -> list[dict]:
@@ -69,8 +68,7 @@ def main() -> int:
                 "source": {"kind": "conversation", "locator": conv.get("conversation_id") or conv.get("id") or "unknown"},
                 "messages": rows,
             }
-            fh.write(json.dumps(record, ensure_ascii=False) + "
-")
+            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
             count += 1
 
     print(f"PASS: normalized {count} conversations -> {out}")
