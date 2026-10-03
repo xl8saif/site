@@ -31,7 +31,7 @@ async function extractScannedPdf(file, label) {
 
     if (status) {
       status.hidden = false;
-      status.textContent = label + " — " + (uiLang==="ur" ? "صفحہ دکھایا جا رہا ہے " : uiLang==="ar" ? "عرض الصفحة " : "rendering page ") + i + "/" + pdf.numPages;
+      status.textContent = label + " — " + (uiLang==="ur" ? "صفحہ دکھایا جا رہا ہے " : uiLang==="ar" ? "عرض الصفحة " : uiLang==="fa" ? "نمایش صفحه " : "rendering page ") + i + "/" + pdf.numPages;
     }
 
     const result = await window.Tesseract.recognize(
@@ -42,7 +42,7 @@ async function extractScannedPdf(file, label) {
           if (!status) return;
           const pct = Math.round((m.progress || 0) * 100);
           status.hidden = false;
-          status.textContent = label + " — OCR " + pct + "% — " + (uiLang==="ur" ? "صفحہ " : uiLang==="ar" ? "الصفحة " : "page ") + i + "/" + pdf.numPages;
+          status.textContent = label + " — OCR " + pct + "% — " + (uiLang==="ur" ? "صفحہ " : uiLang==="ar" ? "الصفحة " : uiLang==="fa" ? "صفحه " : "page ") + i + "/" + pdf.numPages;
         }
       }
     );
@@ -54,6 +54,7 @@ async function extractScannedPdf(file, label) {
   return text.trim();
 }
 
+function localizedFileLabel(kind){return uiLang==="ar"?(kind==="source"?"المصدر":"الهدف"):uiLang==="ur"?(kind==="source"?"ماخذ":"ہدف"):uiLang==="fa"?(kind==="source"?"مبدأ":"مقصد"):(kind==="source"?"Source":"Target");}
 function makeOcrFile(original, text) {
   return new File(
     [text],
@@ -71,7 +72,7 @@ async function runOcr(kind) {
   if (!file) {
     if (status) {
       status.hidden = false;
-      status.textContent = tr("selectPdf").replace("{label}", kind === "source" ? "Source" : "Target");
+      status.textContent = tr("selectPdf").replace("{label}", localizedFileLabel(kind));
     }
     return;
   }
@@ -480,8 +481,7 @@ $("run").onclick = async () => {
       summary: { critical: 0, major: 0, minor: 0, query: 1 },
       findings: [{
         severity: "query",
-        issue: "الملف " + oversized.name +
-          " أكبر من الحد المسموح (4 MB). قلّل حجم الملف ثم أعد المحاولة."
+        issue: tr("fileTooLarge").replace("{name}", oversized.name)
       }]
     });
     return;
