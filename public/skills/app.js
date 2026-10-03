@@ -168,6 +168,7 @@ function stages(state) {
     const e = document.querySelector('[data-stage="' + x + '"]');
     if (e) e.className = "stage " + (state[x] || "pending");
   });
+  window.dispatchEvent(new CustomEvent("saif-pipeline-stage-change", { detail: state }));
 }
 
 let currentResult={};
@@ -398,6 +399,8 @@ $("localize").onclick = async () => {
   $("localizedOutput").hidden = true;
   $("localizeNote").className = "loc-message";
   $("localizeNote").textContent = tr("localizeLoading");
+  stages({router:"active",planner:"pending",execution:"pending",review:"pending"});
+  window.dispatchEvent(new CustomEvent("saif-localization-state", { detail: { state: "started", skillId: detectedSkill, targetLanguage: language } }));
   try {
     const result = await window.SaifLocalizer.localizeFile(source, {
       targetLanguage: language,
@@ -423,12 +426,16 @@ $("localize").onclick = async () => {
       }
     }
     if(window.SaifLocalizationMemory?.renderSuggestion && ctx.pasted) window.SaifLocalizationMemory.renderSuggestion(ctx.pasted,"en",language,detectedSkill);
+    stages({router:"done",planner:"done",execution:"done",review:"active"});
+    window.dispatchEvent(new CustomEvent("saif-localization-state", { detail: { state: "review", skillId: detectedSkill, targetLanguage: language } }));
     $("localizeNote").className = "loc-message ok";
     $("localizeNote").textContent = tr("localizeReady") + " " + result.name;
     task.value = "Localize source content into " + label + " with terminology, placeholders, tags, punctuation and line-break QA";
     detect(task.value);
     task.focus();
   } catch (e) {
+    stages({router:"done",planner:"done",execution:"error",review:"pending"});
+    window.dispatchEvent(new CustomEvent("saif-localization-state", { detail: { state: "error", message: e.message || String(e) } }));
     $("localizeNote").className = "loc-message warn";
     $("localizeNote").textContent = tr("localizeError") + " " + (e.message || e);
   } finally {
