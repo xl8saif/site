@@ -293,3 +293,7 @@ html[lang="fa"] body,html[lang="fa"] button,html[lang="fa"] input,html[lang="fa"
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
+
+/* Concise product surface: hide internal identifiers that are not useful to end users. */
+.task-skills-head>span,.skill>span{display:none!important}
+.skill{min-height:54px}
