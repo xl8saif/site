@@ -297,3 +297,15 @@ html[lang="fa"] body,html[lang="fa"] button,html[lang="fa"] input,html[lang="fa"
 /* Concise product surface: hide internal identifiers that are not useful to end users. */
 .task-skills-head>span,.skill>span{display:none!important}
 .skill{min-height:54px}
+
+/* Direct interface language switcher */
+.language-switcher{display:flex;align-items:center;gap:4px;padding:3px;border:1px solid var(--line,#d9dce3);border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lang-choice{border:0;background:transparent;border-radius:999px;padding:6px 10px;font:inherit;font-size:.78rem;font-weight:600;color:var(--muted,#6b7280);cursor:pointer;white-space:nowrap;transition:all .18s ease}
+.lang-choice:hover{background:rgba(0,122,255,.08);color:var(--saif-blue,#007aff)}
+.lang-choice.active{background:var(--saif-blue,#007aff);color:#fff;box-shadow:0 2px 8px rgba(0,122,255,.2)}
+.lang-choice:focus-visible{outline:2px solid var(--saif-blue,#007aff);outline-offset:2px}
+@media(max-width:720px){
+  .language-switcher{width:100%;justify-content:space-between}
+  .lang-choice{flex:1;padding:6px 7px;font-size:.72rem}
+  .top-actions{flex-wrap:wrap}
+}
