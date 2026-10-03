@@ -35,3 +35,17 @@ Then verify:
 `python ai-skills/scripts/sync_paperclip_skills.py --check`
 
 Do not edit the mirrored skill manually when the corresponding canonical skill exists under `ai-skills/`.
+
+
+## Stitch design tooling
+
+The repository integrates a focused subset of the official `google-labs-code/stitch-skills` concepts through four project-local Agent Skills:
+
+- `stitch-design-system` — visual source-of-truth management
+- `stitch-screen-generation` — structured screen generation/editing
+- `stitch-code-to-design` — existing frontend → Stitch design preparation
+- `stitch-build-loop` — controlled iterative design/build/verification loop
+
+The integration intentionally remains provider-neutral until a Stitch MCP connection is configured. `.stitch/DESIGN.md`, `.stitch/SITE.md`, and `.stitch/metadata.json` are the local contract and state boundary. External Stitch uploads require explicit confirmation and must never contain private Second Brain data, archives, secrets, credentials, or local filesystem paths.
+
+Reference: `google-labs-code/stitch-skills` (Agent Skills-compatible Stitch workflows). This project treats the upstream repository as an external capability source, not as a dependency to blindly copy into production.
