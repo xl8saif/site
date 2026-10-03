@@ -120,7 +120,8 @@ const skills = [
   ["dify-frontend-verification","Dify Frontend Verification","التحقق من واجهة المستخدم","Dify فرنٹ اینڈ ویریفکیشن","frontend testing|browser testing|ui test|visual regression|rtl qa|localization qa|frontend verification"],
   ["dify-evidence-verification","Dify Evidence Verification","التحقق القائم على الأدلة","Dify شواہد کی جانچ","verify evidence|evidence check|prove behavior|verification|audit implementation|source verification"],
   ["dify-skill-packaging","Dify Skill Packaging","تغليف مهارات الوكلاء","Dify اسکل پیکیجنگ","skill package|portable skill|skill.md|import skill|export skill|skill archive|package skill"],
-  ["localization-structure-preservation","Localization Structure Preservation","الحفاظ على بنية الترجمة","ترجمہ کی ساخت برقرار رکھنا","structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization qa|xml localization|html localization|structure QA"]
+  ["localization-structure-preservation","Localization Structure Preservation","الحفاظ على بنية الترجمة","ترجمہ کی ساخت برقرار رکھنا","structure preservation|tag preservation|placeholder preservation|line break preservation|structural localization qa|xml localization|html localization|structure QA"],
+  ["jules-agent-workflow","Jules Agent Workflow","سير عمل Jules الهندسي","Jules انجینئرنگ ورک فلو","jules|coding agent|agent workflow|plan implement verify|pull request|verification|async coding|engineering workflow"]
 ];
 const $ = selector => /^[A-Za-z][A-Za-z0-9_-]*$/.test(selector) ? document.getElementById(selector) : document.querySelector(selector);
 
