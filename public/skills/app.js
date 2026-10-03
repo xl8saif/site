@@ -86,7 +86,7 @@ async function runOcr(kind) {
 
   btn.disabled = true;
   try {
-    const text = await extractScannedPdf(file, kind === "source" ? "Source" : "Target");
+    const text = await extractScannedPdf(file, localizedFileLabel(kind));
     if (!text) throw new Error(tr("ocrFailed"));
     const ocrFile = makeOcrFile(file, text);
     if (kind === "source") ocrSourceFile = ocrFile;
