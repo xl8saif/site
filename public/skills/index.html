@@ -85,7 +85,66 @@
 <div class="progress" id="progress" hidden><span></span><p>جاري تنفيذ المسار الموحد…</p></div>
 </div>
 </section>
-<section class="pipeline panel" id="pipeline" hidden><h2 id="pipeline-title">مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span data-stage-label="router">تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span data-stage-label="planner">اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span data-stage-label="execution">تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span data-stage-label="review">قرار المراجعة</span></div></div></section><section id="secondBrain" class="panel second-brain-panel" aria-labelledby="secondBrainTitle"><div class="brain-head"><div><span class="kicker">SECOND BRAIN · LOCAL-FIRST</span><h2 id="secondBrainTitle">Saif Knowledge Brain</h2><p>Store durable knowledge and decisions in this browser. No network calls are made by this memory layer. Export the vault before changing devices.</p></div><span id="brainStats" class="brain-stats">0 memories · 0 decisions · local only</span></div><div class="brain-grid"><textarea id="brainMemory" rows="3" placeholder="Remember something durable…"></textarea><select id="brainStatus" aria-label="Memory status"><option value="tentative">Tentative</option><option value="established">Established</option><option value="verified">Verified</option></select><select id="brainConfidence" aria-label="Memory confidence"><option value="0.5">50%</option><option value="0.8">80%</option><option value="1">100%</option></select><input id="brainProject" type="text" placeholder="Project / domain"></div><div class="brain-actions"><button class="primary" id="brainRemember" type="button">Remember</button><button class="secondary" id="brainExport" type="button">Export vault</button><label class="attach-btn">Import vault<input id="brainImport" type="file" accept=".json,.jsonl" hidden></label><button class="secondary" id="brainClear" type="button">Clear local brain</button></div><div class="brain-search"><input id="brainSearch" type="search" placeholder="Search your stored knowledge, decisions, terminology or projects…"></div><div id="brainResults" class="brain-results" aria-live="polite"><div class="brain-empty">Search your stored knowledge, decisions, terminology, projects or preferences.</div></div></section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker" id="evidence-label">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary id="trace-label">Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary id="raw-label">Raw JSON</summary><pre id="raw"></pre></details></section>
+<section class="pipeline panel" id="pipeline" hidden><h2 id="pipeline-title">مسار التنفيذ</h2><div class="pipeline-grid"><div data-stage="router"><b>01</b><strong>Router</strong><span data-stage-label="router">تحديد Agent</span></div><div data-stage="planner"><b>02</b><strong>Planner</strong><span data-stage-label="planner">اختيار Skill</span></div><div data-stage="execution"><b>03</b><strong>Execution</strong><span data-stage-label="execution">تشغيل Validator</span></div><div data-stage="review"><b>04</b><strong>Review Gate</strong><span data-stage-label="review">قرار المراجعة</span></div></div></section><section id="secondBrain" class="panel second-brain-panel" aria-labelledby="secondBrainTitle">
+  <div class="brain-head">
+    <div>
+      <span class="kicker" id="brainKicker">SECOND BRAIN · LOCAL-FIRST</span>
+      <h2 id="secondBrainTitle">Saif Knowledge Brain</h2>
+      <p id="brainIntro">A private browser vault for durable knowledge, terminology, decisions and project context. Nothing in this memory layer is sent to a server.</p>
+    </div>
+    <div class="brain-head-side">
+      <span id="brainStats" class="brain-stats">0 memories · 0 decisions · local only</span>
+      <span class="brain-privacy" id="brainPrivacy">PRIVATE · BROWSER ONLY</span>
+    </div>
+  </div>
+  <div class="brain-capture">
+    <div class="brain-capture-head">
+      <div><span class="brain-section-label" id="brainCaptureLabel">Capture durable knowledge</span><small id="brainCaptureHint">Save only information you want the system to remember across sessions.</small></div>
+      <div class="brain-type-switch" role="group" aria-label="Knowledge type">
+        <button type="button" class="brain-type active" data-brain-type="memory" id="brainTypeMemory">Knowledge</button>
+        <button type="button" class="brain-type" data-brain-type="decision" id="brainTypeDecision">Decision</button>
+      </div>
+    </div>
+    <div class="brain-form">
+      <div class="brain-primary-field" id="brainMemoryField">
+        <label for="brainMemory" id="brainMemoryLabel">Knowledge</label>
+        <textarea id="brainMemory" rows="4" placeholder="Write a durable fact, terminology choice, workflow rule or project detail…"></textarea>
+      </div>
+      <div class="brain-primary-field" id="brainDecisionField" hidden>
+        <label for="brainQuestion" id="brainQuestionLabel">Decision question</label>
+        <input id="brainQuestion" type="text" placeholder="What did we decide?">
+        <label for="brainDecision" id="brainDecisionLabel">Decision</label>
+        <textarea id="brainDecision" rows="3" placeholder="Record the accepted decision and its scope…"></textarea>
+      </div>
+      <div class="brain-form-row">
+        <div><label for="brainStatus" id="brainStatusLabel">Status</label><select id="brainStatus"><option value="tentative">Tentative</option><option value="established">Established</option><option value="verified">Verified</option></select></div>
+        <div><label for="brainConfidence" id="brainConfidenceLabel">Confidence</label><select id="brainConfidence"><option value="0.5">50%</option><option value="0.8">80%</option><option value="1">100%</option></select></div>
+        <div><label for="brainProject" id="brainProjectLabel">Project / domain</label><input id="brainProject" type="text" placeholder="Project, domain or topic"></div>
+      </div>
+      <div class="brain-form-row brain-form-row-wide">
+        <div><label for="brainTags" id="brainTagsLabel">Tags</label><input id="brainTags" type="text" placeholder="terminology, localization, decision"></div>
+        <div><label for="brainSource" id="brainSourceLabel">Source / provenance</label><input id="brainSource" type="text" placeholder="Human decision, project note, source file…"></div>
+      </div>
+    </div>
+    <div class="brain-actions">
+      <button class="primary" id="brainRemember" type="button">Save to Brain</button>
+      <button class="secondary" id="brainExport" type="button">Export vault</button>
+      <label class="attach-btn" id="brainImportLabel">Import vault<input id="brainImport" type="file" accept=".json,.jsonl" hidden></label>
+      <button class="secondary brain-danger" id="brainClear" type="button">Clear local brain</button>
+    </div>
+    <div id="brainMessage" class="brain-message" aria-live="polite"></div>
+  </div>
+  <div class="brain-library-head">
+    <div><span class="brain-section-label" id="brainLibraryLabel">Knowledge library</span><small id="brainLibraryHint">Search by content, project, terminology, status or provenance.</small></div>
+    <span id="brainResultCount" class="brain-result-count"></span>
+  </div>
+  <div class="brain-search-row">
+    <input id="brainSearch" type="search" placeholder="Search your stored knowledge, decisions, terminology or projects…">
+    <select id="brainFilterType" aria-label="Filter by type"><option value="">All types</option><option value="memory">Knowledge</option><option value="decision">Decisions</option></select>
+    <select id="brainFilterStatus" aria-label="Filter by status"><option value="">All statuses</option><option value="tentative">Tentative</option><option value="established">Established</option><option value="verified">Verified</option><option value="active">Active</option></select>
+  </div>
+  <div id="brainResults" class="brain-results" aria-live="polite"><div class="brain-empty">Your private knowledge library is ready. Search or save a durable item above.</div></div>
+</section><section class="result panel" id="result" hidden><div class="result-head"><div><span class="kicker" id="evidence-label">EVIDENCE</span><h2 id="resultTitle">النتيجة</h2></div><span id="badge" class="badge"></span></div><div id="summary" class="summary"></div><div id="findings"></div><details><summary id="trace-label">Traceability / التتبع</summary><pre id="trace"></pre></details><details><summary id="raw-label">Raw JSON</summary><pre id="raw"></pre></details></section>
 </main>
 <section id="ocr-panel" class="panel" style="margin-top:16px"><div class="panel-title"><span id="ocr-title">OCR</span><span id="ocr-type">PDF ممسوح</span></div><p id="ocr-text">استخراج النص من PDF الممسوح ضوئياً يتم محلياً في المتصفح. بعد الاستخراج يصبح النص جاهزاً مباشرةً عند الضغط على تشغيل المهمة.</p><div class="controls"><button id="ocr-source-btn" type="button">OCR Source PDF</button><button id="ocr-target-btn" type="button">OCR Target PDF</button></div><pre id="ocr-status" hidden></pre></section><footer class="site-footer" aria-label="Site footer">
   <div class="footer-project">
