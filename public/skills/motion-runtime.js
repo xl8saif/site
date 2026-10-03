@@ -4,10 +4,8 @@
  */
 import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@13.4.5/+esm";
 
-const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
 function setup() {
-  if (reduced) return;
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
   const intro = document.querySelector(".intro");
   const workbench = document.querySelector(".localization-workbench");
@@ -16,6 +14,7 @@ function setup() {
   const buttons = document.querySelectorAll(".primary, .secondary, .attach-btn, .lang-choice");
 
   if (intro) {
+    intro.style.opacity = "0";
     animate(intro, { opacity: [0, 1], y: [-10, 0] }, {
       duration: 0.45,
       ease: "easeOut"
@@ -24,8 +23,11 @@ function setup() {
 
   [workbench, brain, pipeline].forEach((section, index) => {
     if (!section) return;
-    section.style.opacity = "0";
-    section.style.transform = "translateY(14px)";
+    if (!reduced) {
+      section.style.opacity = "0";
+      section.style.transform = "translateY(14px)";
+    }
+    if (reduced) return;
     inView(section, (element) => {
       animate(element, { opacity: 1, y: 0 }, {
         duration: 0.45,
