@@ -229,6 +229,126 @@
         "json": false
       },
       "ecosystem": true
+    },
+    {
+      "id": "stitch-design-system",
+      "status": "experimental",
+      "domain": [
+        "design-systems",
+        "design-tooling",
+        "visual-design",
+        "multilingual-ui"
+      ],
+      "path": "stitch-design-system",
+      "entrypoint": "stitch-design-system/SKILL.md",
+      "deterministic_tools": [],
+      "protected_work": [
+        "visual design contract",
+        "multilingual UI",
+        "responsive behavior",
+        "private data boundaries"
+      ],
+      "execution": {
+        "inputs": [
+          "design_task"
+        ],
+        "args": {
+          "design_task": "--design-task"
+        },
+        "json": false
+      },
+      "ecosystem": true,
+      "source": "google-labs-code/stitch-skills"
+    },
+    {
+      "id": "stitch-screen-generation",
+      "status": "experimental",
+      "domain": [
+        "design-tooling",
+        "stitch",
+        "ui-ux",
+        "prototyping"
+      ],
+      "path": "stitch-screen-generation",
+      "entrypoint": "stitch-screen-generation/SKILL.md",
+      "deterministic_tools": [],
+      "protected_work": [
+        "visual design contract",
+        "multilingual UI",
+        "responsive behavior",
+        "private data boundaries"
+      ],
+      "execution": {
+        "inputs": [
+          "design_task"
+        ],
+        "args": {
+          "design_task": "--design-task"
+        },
+        "json": false
+      },
+      "ecosystem": true,
+      "source": "google-labs-code/stitch-skills"
+    },
+    {
+      "id": "stitch-code-to-design",
+      "status": "experimental",
+      "domain": [
+        "design-tooling",
+        "frontend-analysis",
+        "stitch",
+        "design-extraction"
+      ],
+      "path": "stitch-code-to-design",
+      "entrypoint": "stitch-code-to-design/SKILL.md",
+      "deterministic_tools": [],
+      "protected_work": [
+        "visual design contract",
+        "multilingual UI",
+        "responsive behavior",
+        "private data boundaries"
+      ],
+      "execution": {
+        "inputs": [
+          "design_task"
+        ],
+        "args": {
+          "design_task": "--design-task"
+        },
+        "json": false
+      },
+      "ecosystem": true,
+      "source": "google-labs-code/stitch-skills"
+    },
+    {
+      "id": "stitch-build-loop",
+      "status": "experimental",
+      "domain": [
+        "design-tooling",
+        "stitch",
+        "iteration",
+        "verification"
+      ],
+      "path": "stitch-build-loop",
+      "entrypoint": "stitch-build-loop/SKILL.md",
+      "deterministic_tools": [],
+      "protected_work": [
+        "visual design contract",
+        "multilingual UI",
+        "responsive behavior",
+        "private data boundaries"
+      ],
+      "execution": {
+        "inputs": [
+          "design_task"
+        ],
+        "args": {
+          "design_task": "--design-task"
+        },
+        "json": false
+      },
+      "ecosystem": true,
+      "source": "google-labs-code/stitch-skills"
     }
   ],
   "core": {
@@ -262,7 +382,7 @@
       "risk-score-over-50"
     ]
   },
-  "version": "1.20.0",
+  "version": "1.24.0",
   "factory": {
     "template": "templates/skill",
     "generator": "scripts/create_skill.py",
