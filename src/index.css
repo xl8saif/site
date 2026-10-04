@@ -1274,3 +1274,131 @@ body::before{
   .development-card-new h3{font-size:28px!important}
   .development-card-new .development-icon{width:56px!important;height:56px!important}
 }
+
+
+/* Obsidian Glass Theme — portfolio visual system inspired by the Apple-style dashboard reference.
+   Deliberately overrides the legacy light neumorphic surfaces while preserving layout/content. */
+:root{
+  --glass-bg:#050608;
+  --glass-surface:rgba(20,23,29,.62);
+  --glass-surface-strong:rgba(18,21,27,.78);
+  --glass-border:rgba(255,255,255,.12);
+  --glass-border-strong:rgba(255,255,255,.18);
+  --glass-text:#f5f7fa;
+  --glass-muted:#a7afb9;
+  --glass-accent:#4f9cff;
+  --glass-shadow:0 24px 70px rgba(0,0,0,.42);
+}
+html{background:var(--glass-bg)!important;color:var(--glass-text)!important}
+body{
+  background:
+    radial-gradient(900px 620px at 12% -8%,rgba(69,111,173,.18),transparent 68%),
+    radial-gradient(820px 600px at 92% 14%,rgba(80,88,110,.13),transparent 70%),
+    radial-gradient(700px 520px at 50% 100%,rgba(38,48,67,.14),transparent 72%),
+    #050608!important;
+  color:var(--glass-text)!important;
+}
+body::before{
+  background:linear-gradient(120deg,rgba(255,255,255,.025),transparent 35%,rgba(255,255,255,.015) 70%,transparent)!important;
+}
+.site-shell{background:transparent!important;color:var(--glass-text)!important}
+.site-header{
+  background:rgba(7,9,13,.58)!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
+  box-shadow:0 12px 45px rgba(0,0,0,.28)!important;
+  backdrop-filter:saturate(180%) blur(24px)!important;
+  -webkit-backdrop-filter:saturate(180%) blur(24px)!important;
+}
+.brand,.navigation button,.nav-contact{color:#e9edf2!important}
+.navigation button:hover,.navigation button:focus-visible{color:#fff!important}
+.nav-contact{
+  background:rgba(255,255,255,.075)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+.hero-section{background:#050608!important}
+.hero-background img{filter:brightness(.34) saturate(.72)!important}
+.hero-background-overlay{
+  background:
+    linear-gradient(180deg,rgba(5,6,8,.20),rgba(5,6,8,.72) 86%),
+    radial-gradient(circle at 50% 45%,transparent 0,rgba(5,6,8,.34) 72%)!important;
+}
+.glass-panel,
+.about-grid>div,
+.expertise-card,
+.experience-item,
+.project-card,
+.development-card,
+.language-card,
+.keyboard-card,
+.contact-panel,
+.contact-social,
+.profile-caption,
+.profile-frame{
+  background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.045))!important;
+  border:1px solid var(--glass-border)!important;
+  box-shadow:var(--glass-shadow),inset 0 1px rgba(255,255,255,.075)!important;
+  backdrop-filter:saturate(170%) blur(24px)!important;
+  -webkit-backdrop-filter:saturate(170%) blur(24px)!important;
+  color:var(--glass-text)!important;
+}
+.glass-panel::before,.expertise-card::before,.project-card::before,.development-card::before{
+  background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 28%,transparent 72%,rgba(255,255,255,.025))!important;
+  opacity:.55!important;
+}
+.content-section,.experience-section,.development-section{background:transparent!important}
+.section-muted{
+  background:
+    radial-gradient(700px 500px at 12% 50%,rgba(63,101,155,.10),transparent 70%),
+    rgba(255,255,255,.012)!important;
+}
+.section-label,.eyebrow,.project-card>p:first-of-type,.development-card-top b{color:#8fbfff!important}
+.section-heading h2,.development-heading h2,.experience-content h3,.project-card h3,.development-card h3,.about-grid h3{color:#f5f7fa!important}
+.section-heading p,.hero-description,.about-grid p,.experience-content p,.project-card p,.development-card p,.development-heading>p,.experience-content span{color:var(--glass-muted)!important}
+.hero-content h1{color:#fff!important;text-shadow:0 8px 35px rgba(0,0,0,.42)}
+.hero-content h1 span{color:#b7c0cb!important}
+.button-secondary{
+  color:#eef2f7!important;
+  background:rgba(255,255,255,.07)!important;
+  border-color:rgba(255,255,255,.14)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+}
+.button-secondary:hover{background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.22)!important;color:#fff!important;transform:translateY(-2px)}
+.button-primary{
+  background:linear-gradient(145deg,#5aa6ff,#2876d7)!important;
+  border-color:rgba(160,205,255,.34)!important;
+  box-shadow:0 14px 32px rgba(20,87,170,.35),inset 0 1px rgba(255,255,255,.3)!important;
+}
+.expertise-card:hover,.project-card:hover,.development-card:hover,.about-grid>div:hover,.experience-item:hover{
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.055))!important;
+  border-color:rgba(255,255,255,.22)!important;
+  box-shadow:0 30px 80px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.10)!important;
+}
+.expertise-card img,.project-image{filter:brightness(.72) saturate(.78)!important}
+.profile-frame{background:rgba(255,255,255,.055)!important}
+.profile-image{filter:saturate(.88) brightness(.88)!important}
+.project-line{background:rgba(255,255,255,.16)!important}
+.development-tags span,.contact-social-icon,.cv-download-button{
+  background:rgba(255,255,255,.075)!important;
+  border-color:rgba(255,255,255,.13)!important;
+  color:#dce3eb!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.05)!important;
+}
+.development-tags span{box-shadow:none!important}
+.project-link,.development-card a,.contact-social-label{color:#9cc7ff!important}
+.footer,.site-footer{background:rgba(5,6,8,.72)!important;color:#8f99a6!important;border-top-color:rgba(255,255,255,.10)!important}
+a{color:#9cc7ff}
+a:hover{color:#c4ddff}
+.menu-button span{background:#e9edf2!important}
+::selection{background:rgba(92,155,255,.30)!important;color:#fff!important}
+@media(max-width:620px){
+  .site-header{background:rgba(7,9,13,.72)!important}
+  .navigation{background:rgba(10,13,18,.92)!important;border-color:rgba(255,255,255,.13)!important;box-shadow:0 24px 55px rgba(0,0,0,.45)!important;backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  .glass-panel,.about-grid>div,.expertise-card,.experience-item,.project-card,.development-card,.language-card,.keyboard-card,.contact-panel,.contact-social,.profile-caption,.profile-frame,.site-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#11161e!important}
+}
